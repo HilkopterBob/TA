@@ -1,5 +1,4 @@
-from Utils import pr, prin, pra
-
+import Utils
 
 class Player():
 

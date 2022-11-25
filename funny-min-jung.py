@@ -20,9 +20,9 @@
 #
 from pystyle import Write, Box, Center, Colors
 from time import sleep
-from Player import Player
+from Entities import Player
 from Level import Level
-from Utils import pr, pra, prin
+import Utils
 
 
 
@@ -74,8 +74,7 @@ lvl1_umgesehen = False
 
 
 if __name__ == "__main__":
-    Player()
-    Player.get_name(self=Player)
+    myPlayer = Player("Blankoname")
 
 
 
