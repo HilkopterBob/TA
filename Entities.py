@@ -26,14 +26,7 @@ class Player():
             if action == "y":
                 break
     
-    def change_health(self, set=False, add=True, subt=False, value=0):
-        if set == True:
-            self.health = value
-
-        if add == True:
-            self.healt = self.health + value
-
-        if subt == True:
-            self.health = self.health - value
+    def change_health(self, value=0):
+        self.health += value
         
 
