@@ -1,3 +1,6 @@
+from Utils import pr, prin, pra
+
+
 class Player():
 
     #name = "Blankoname"
@@ -18,9 +21,9 @@ class Player():
     def set_name(self):
         while True:
             global name
-            self.name = pri("Wie soll der Held deiner Geschichte heißen?")
+            self.name = prin("Wie soll der Held deiner Geschichte heißen?")
             pr(f"Möchtest du deinen Helden wirklich {self.name} nennen?")
-            action = pri("[DIESE EINSTELLUNG KANNST DU NICHT RÜCKGÄNGIG MACHEN!](y/n)")
+            action = prin("[DIESE EINSTELLUNG KANNST DU NICHT RÜCKGÄNGIG MACHEN!](y/n)")
             if action == "y":
                 break
 
