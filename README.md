@@ -17,6 +17,8 @@ Open the Docs.md
 
 - Levelklasse erweitern
 
+- Docs erweitern
+
 - Testwelt erstellen:
     - effect & noeffect level
     - gegner
