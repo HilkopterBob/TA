@@ -20,12 +20,15 @@
 #
 from pystyle import Write, Box, Center, Colors
 from time import sleep
-from Entities import Player
+from Entities import Player, item
 from Level import Level
 import Utils
 
 
-
+##################
+##Debug Variable##
+dbg = True
+##################
 
 lvl = 0
 action = ""
@@ -74,11 +77,5 @@ lvl1_umgesehen = False
 
 
 if __name__ == "__main__":
-    myPlayer = Player("Blankoname")
-
-
-
-
-
-
-
+    mPlayer = Player("Blankoname", 100,100,0,[item("Item1","weapon"),item("item2","misc")])
+    mPlayer.set_name()
