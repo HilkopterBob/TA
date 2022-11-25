@@ -1,4 +1,4 @@
-import Utils
+import Utils as pr
 
 class Player():
 
@@ -19,12 +19,8 @@ class Player():
 
     def set_name(self):
         while True:
-            global name
-            self.name = prin("Wie soll der Held deiner Geschichte heißen?")
+            self.name = pr.inp("Wie soll der Held deiner Geschichte heißen?")
             pr(f"Möchtest du deinen Helden wirklich {self.name} nennen?")
-            action = prin("[DIESE EINSTELLUNG KANNST DU NICHT RÜCKGÄNGIG MACHEN!](y/n)")
+            action = pr.inp("[DIESE EINSTELLUNG KANNST DU NICHT RÜCKGÄNGIG MACHEN!](y/n)")
             if action == "y":
                 break
-
-    
-        
