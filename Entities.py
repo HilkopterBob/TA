@@ -1,4 +1,5 @@
 import Utils as pr
+import Effect 
 
 class Player():
 
@@ -82,10 +83,50 @@ class Player():
             return True
         except:
             return False
-                
+
+    def add_effect(self, effect):
+        """
+            appends effect to coresponding list
+
+            :effect: OBJECT! 
+
+            =return= Returns True if successfull otherwise returns false
+        """
+        try:
+            self.effects.append(effect)
+            return True
+        except:
+            return False
+        
+    def show_effects(self, names=True):
+        """
+            prints element.name of effects[]
+
+            :names: shows only the effect.name if True, false shows var(effect)
+
+            only for debug!
+        """
+        try:
+            if names==True:
+                try:
+                    for e in self.effects:
+                        print(e.name)
+                    return True
+                except e:
+                    print(e)
+                    return False
+            else:
+                try:
+                    for e in self.effects:
+                        print(vars(e))
+                    return True
+                except:
+                    return False
+        except:                                     #Python: *unterstützt fehlerabfragen*, Nick: "Hold my Beer!"
+            return False
     
 class item():
-    def __init__(self,name="placeholder", itype="misc"):
+    def __init__(self, name="placeholder", itype="misc"):
         self.name = name
         self.itype = itype
         
