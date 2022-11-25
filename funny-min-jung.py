@@ -22,22 +22,14 @@ from pystyle import Write, Box, Center, Colors
 from time import sleep
 from Player import Player
 from Level import Level
+from Utils import pr, pra, prin
+
 
 
 
 lvl = 0
 action = ""
 
-def pr(text):
-    Write.Print(text + "\n", Colors.red_to_purple, interval=0.0025)
-
-#verinfachte Printanweisung in roter farbe für alerts
-def pra(text):
-    Write.Print(text + "\n", Colors.red, interval=0.0025)
-
-def pri(text):
-    Input = Write.Input(text + "\n→ ", Colors.red_to_purple, interval=0.0025)
-    return Input
 
 
 
