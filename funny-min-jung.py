@@ -18,7 +18,7 @@
 #
 #
 #
-from Entities import Player, item
+from Entities import Entity, item
 from Level import Level
 from Effect import Effect
 
@@ -75,7 +75,7 @@ lvl1_umgesehen = False
 
 
 if __name__ == "__main__":
-    mPlayer = Player("Blankoname", 100,100,0,[item("Item1","weapon"),item("item2","misc")])
+    mPlayer = Entity("Blankoname", 100,100,0,[item("Item1","weapon"),item("item2","misc")])
     #mPlayer.set_name()
     vergiftung = Effect("Vergiftung","Nö","bad", -2, "hp")
     print(vars(vergiftung))

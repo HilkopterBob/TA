@@ -1,7 +1,7 @@
 import Utils as pr
 import Effect 
 
-class Player():
+class Entity():
 
     #name = "Blankoname"
     #health = 100
