@@ -1,10 +1,14 @@
+import Utils as pr
+
 class Level():
 
-    def __init__(self, text, choices, name="Levelnameplatzhalter", inv=[], ltype="Testtype"):
+    def __init__(self, text=[], choices=[], name="Levelnameplatzhalter", inv=[], ltype="Testtype", descr="Standartdescription du Sohn einer Dirne"):
         self.name = name
+        self.descr = descr
+        self.choices = choices 
         self.inv = inv
         self.ltype = ltype
-        self.texts
 
-    def show_content():
-        pass
+    #lvltype gibt an ob level feindlich, wild, zivilisiert
+
+

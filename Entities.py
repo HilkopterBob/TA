@@ -85,7 +85,7 @@ class Player():
                 
     
 class item():
-    def __init__(self,name="placeholder", itype="weapon"):
+    def __init__(self,name="placeholder", itype="misc"):
         self.name = name
         self.itype = itype
         
