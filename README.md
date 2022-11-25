@@ -1,2 +1,5 @@
 # TA
-Textadventure
+gay
+
+
+Mache gleich requirements.txt
