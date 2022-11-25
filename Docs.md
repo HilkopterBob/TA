@@ -38,7 +38,7 @@ writes: self.name
 
 ##### usage:
 ```py
-Hero = Player()
+Hero = Entity()
 Hero.set_name()
 ```    
 </br>
@@ -61,11 +61,11 @@ Hero.change_health(-10)
 #### add_item
 Adds item to inventory by using the item class.
 
-reads: self, iname, itype
-writes: self.inv
+reads: self, iname, itype  
+writes: self.inv  
 ##### usage:
 ```py
-Hero = Player()
+Hero = Entity()
 Hero.add_item("item name","item type")
 ```
 </br>
@@ -73,21 +73,28 @@ Hero.add_item("item name","item type")
 
 
 #### remove_item_by_name
-Removes item by name from inventory of the entity.
-
-reads: self, iname
-writes: self.inv
-
+Removes item from entity inventory by given name     
+reads: self, iname  
+writes: self.inv  
 ##### usage:
 ```py
-Hero = Player()
-
+Hero = Entity()
+Hero.remove_item_by_name("Sword")
 ```
 </br>
 </br>
 
 
 #### remove_item_by_index
+Removes item from entity inventory by given index   
+reads: self, iname  
+writes: self.inv  
+##### usage:
+```py
+Hero = Entity()
+Hero.remove_item_by_index(0)    #removes first item from inventory
+                                #if no index given → deletes last item from inventory
+```
 </br>
 </br>
 
