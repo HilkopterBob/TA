@@ -18,11 +18,9 @@
 #
 #
 #
-from pystyle import Write, Box, Center, Colors
-from time import sleep
 from Entities import Player, item
 from Level import Level
-import Utils
+from Effect import Effect
 
 
 ##################
@@ -78,4 +76,8 @@ lvl1_umgesehen = False
 
 if __name__ == "__main__":
     mPlayer = Player("Blankoname", 100,100,0,[item("Item1","weapon"),item("item2","misc")])
-    mPlayer.set_name()
+    #mPlayer.set_name()
+    vergiftung = Effect("Vergiftung","Nö","bad", -2, "hp")
+    print(vars(vergiftung))
+    mPlayer.add_effect(vergiftung)
+    mPlayer.show_effects()
