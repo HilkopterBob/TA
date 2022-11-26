@@ -94,12 +94,12 @@ if __name__ == "__main__":
     menu = Level(["Textadventure","Hauptmenü","spiel wird geladen"],["Spiel laden","Spiel starten","Spiel beenden"],"Hauptmenü",[],"zivilisiert","Mainmanu descr")
     def gameloop(player, level):
 
-        print("*"*10 + "player" + "*"*10 + "\n")
-        print(vars(player))
-        print("*"*10 + "level" + "*"*10 + "\n")
-        print(vars(level))
-        print("*"*26 + "\n")
+        pr.dbg("*"*10 + "player" + "*"*10 + "\n")
+        pr.dbg(vars(player))
+        pr.dbg("*"*10 + "level" + "*"*10 + "\n")
+        pr.dbg(vars(level))
+        pr.dbg("*"*26 + "\n")
         pr.n()
-
+        
     gameloop(mPlayer, menu)
 
