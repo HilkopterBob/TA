@@ -192,9 +192,6 @@ class itemInit():
             Return a single item Object from Json by given Name
             
             :json_file (File): Json File to load Item from
-        self.usable = usable
-        self.equipable= equipable
-        self.questitem = questitem
 
             =return= Item object
         """
