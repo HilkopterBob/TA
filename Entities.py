@@ -154,7 +154,10 @@ class Entity():
             return False
 
 class item():
-    def __init__(self, name="placeholder", itype="misc"):
+    def __init__(self, name="placeholder", itype="misc", usable=False, equipable=False, questitem=False):
         self.name = name
         self.itype = itype
+        self.usable = usable
+        self.equipable= equipable
+        self.questitem = questitem
         
