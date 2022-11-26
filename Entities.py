@@ -125,6 +125,34 @@ class Entity():
         except:                                     #Python: *unterstützt fehlerabfragen*, Nick: "Hold my Beer!"
             return False
     
+    def remove_effect_by_name(self, ename=""):
+        """
+            removes effect from entity by given name
+
+            :ename: effect.name as string
+        
+            =return= returns true if successfull, else false
+        """
+        try:
+            self.effects = list (filter(lambda e: e.name != ename, self.effects))
+            return True
+        except:
+            return False
+
+    def reomove_effect_by_index(self, index=-1):
+        """
+            removes effect by given index
+        
+            :index: index of effect that should be removed
+        
+            =return= true if successfull else false
+        """
+        try:
+            self.effects.pop(index)
+            return True
+        except:
+            return False
+
 class item():
     def __init__(self, name="placeholder", itype="misc"):
         self.name = name
