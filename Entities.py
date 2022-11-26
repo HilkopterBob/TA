@@ -160,7 +160,10 @@ class item():
         self.dmg = dmg
         self.condition = condition
         self.effects = effects
-    
+        self.usable = useable
+        self.equipable = equipable
+        self.questitem = questitem
+        
     @staticmethod   #Generate Object from Json
     def from_json(json_dct, iname):
       return item(iname, json_dct['type'], json_dct['dmg'], json_dct['condition'], json_dct['effects'], json_dct['useable'],json_dct['equipable'],json_dct['questitem'])
@@ -189,12 +192,16 @@ class itemInit():
             Return a single item Object from Json by given Name
             
             :json_file (File): Json File to load Item from
+        self.usable = usable
+        self.equipable= equipable
+        self.questitem = questitem
 
             =return= Item object
         """
         with open('items.json') as json_data:
             data = json.load(json_data)
             
+
         for iname in data.keys():
             if iname == name:
                 return item.from_json(data[iname], iname)
