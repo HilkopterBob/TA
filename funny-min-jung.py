@@ -21,6 +21,7 @@
 from Entities import Entity, item
 from Level import Level
 from Effect import Effect
+import Utils as pr 
 
 
 ##################
@@ -75,9 +76,21 @@ lvl1_umgesehen = False
 
 
 if __name__ == "__main__":
-    mPlayer = Entity("Blankoname", 100,100,0,[item("Item1","weapon"),item("item2","misc")])
-    #mPlayer.set_name()
-    vergiftung = Effect("Vergiftung","Nö","bad", -2, "hp")
-    print(vars(vergiftung))
-    mPlayer.add_effect(vergiftung)
-    mPlayer.show_effects()
+    Hero = Entity("Blankoname", 100,100,0,[item("Item1","weapon"),item("item2","misc")])
+    #Hero.set_name()
+    #vergiftung = Effect("Vergiftung","Nö","bad", -2, "hp")
+    #print(vars(vergiftung))
+    #Hero.add_effect(vergiftung)
+    #hero.show_effects()
+    menu = Level(["Textadventure","Hauptmenü","spiel wird geladen"],["Spiel laden","Spiel starten","Spiel beenden"],"Hauptmenü",[],"zivilisiert","Mainmanu descr")
+    def gameloop(player, level):
+
+        print("*"*10 + "player" + "*"*10 + "\n")
+        print(vars(player))
+        print("*"*10 + "level" + "*"*10 + "\n")
+        print(vars(level))
+        print("*"*26 + "\n")
+
+        pr.n()
+
+    gameloop(Hero, menu)
