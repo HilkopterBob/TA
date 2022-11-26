@@ -32,4 +32,3 @@ def showcase():
     g("Good")
     q("Quest(ion)")
 
-showcase()
