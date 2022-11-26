@@ -99,8 +99,7 @@ if __name__ == "__main__":
         print("*"*10 + "level" + "*"*10 + "\n")
         print(vars(level))
         print("*"*26 + "\n")
-
         pr.n()
 
-    gameloop(Hero, menu)
+    gameloop(mPlayer, menu)
 
