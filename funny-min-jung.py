@@ -21,12 +21,8 @@
 from Entities import Entity, item, itemInit
 from Level import Level
 from Effect import Effect
-<<<<<<< HEAD
 import Utils as pr 
-
-=======
 import json
->>>>>>> 94db7e381d07af93d933e60adb03668f26c87f4e
 
 ##################
 ##Debug Variable##
@@ -86,15 +82,6 @@ lvl1_umgesehen = False
 
 
 if __name__ == "__main__":
-<<<<<<< HEAD
-    Hero = Entity("Blankoname", 100,100,0,[item("Item1","weapon"),item("item2","misc")])
-    #Hero.set_name()
-    #vergiftung = Effect("Vergiftung","Nö","bad", -2, "hp")
-    #print(vars(vergiftung))
-    #Hero.add_effect(vergiftung)
-    #hero.show_effects()
-    
-=======
     mPlayer = Entity("Blankoname", 100,100,0,[item("Item1","weapon"),item("item2","misc")])
     #mPlayer.set_name()
     vergiftung = Effect("Vergiftung","Nö","bad", -2, "hp")
@@ -116,4 +103,4 @@ if __name__ == "__main__":
         pr.n()
 
     gameloop(Hero, menu)
->>>>>>> 94db7e381d07af93d933e60adb03668f26c87f4e
+
