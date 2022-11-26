@@ -1,5 +1,6 @@
 import Utils as pr
 import Effect 
+import json
 
 class Entity():
 
@@ -124,11 +125,10 @@ class Entity():
                     return False
         except:                                     #Python: *unterstützt fehlerabfragen*, Nick: "Hold my Beer!"
             return False
-    
+        
     def remove_effect_by_name(self, ename=""):
         """
             removes effect from entity by given name
-
             :ename: effect.name as string
         
             =return= returns true if successfull, else false
@@ -152,12 +152,55 @@ class Entity():
             return True
         except:
             return False
-
+        
 class item():
-    def __init__(self, name="placeholder", itype="misc", usable=False, equipable=False, questitem=False):
+    def __init__(self, name="placeholder", itype="misc", dmg=0, condition=0, effects = [],useable=False, equipable=False, questitem=False, ):
         self.name = name
         self.itype = itype
-        self.usable = usable
-        self.equipable= equipable
+        self.dmg = dmg
+        self.condition = condition
+        self.effects = effects
+        self.usable = useable
+        self.equipable = equipable
         self.questitem = questitem
         
+    @staticmethod   #Generate Object from Json
+    def from_json(json_dct, iname):
+      return item(iname, json_dct['type'], json_dct['dmg'], json_dct['condition'], json_dct['effects'], json_dct['useable'],json_dct['equipable'],json_dct['questitem'])
+
+
+
+class itemInit():
+    def load_all_items_from_json(json_file):
+        """
+            Return alls Items from Json file
+            
+            :json_file (File): Json file to load Items from
+
+            =return= List of all Items loaded from Json
+        """
+        curItems = []
+        with open(json_file) as json_data:
+            data = json.load(json_data)
+            
+        for iname in data.keys():
+            curItems.append(item.from_json(data[iname], iname))
+        return curItems
+
+    def load_item_by_name_from_json(json_file, name):
+        """
+            Return a single item Object from Json by given Name
+            
+            :json_file (File): Json File to load Item from
+
+            =return= Item object
+        """
+        with open(json_file) as json_data:
+            data = json.load(json_data)
+            
+
+        for iname in data.keys():
+            if iname == name:
+                return item.from_json(data[iname], iname)
+            else: 
+                return False
