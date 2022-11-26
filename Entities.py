@@ -180,7 +180,7 @@ class itemInit():
             =return= List of all Items loaded from Json
         """
         curItems = []
-        with open('items.json') as json_data:
+        with open(json_file) as json_data:
             data = json.load(json_data)
             
         for iname in data.keys():
@@ -195,7 +195,7 @@ class itemInit():
 
             =return= Item object
         """
-        with open('items.json') as json_data:
+        with open(json_file) as json_data:
             data = json.load(json_data)
             
 
