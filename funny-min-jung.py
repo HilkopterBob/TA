@@ -18,15 +18,21 @@
 #
 #
 #
-from Entities import Entity, item
+from Entities import Entity, item, itemInit
 from Level import Level
 from Effect import Effect
-
+import json
 
 ##################
 ##Debug Variable##
 dbg = True
 ##################
+
+###################
+###ENV Variables###
+items_file = "config/items.json"
+###################
+
 
 lvl = 0
 action = ""
@@ -81,3 +87,6 @@ if __name__ == "__main__":
     print(vars(vergiftung))
     mPlayer.add_effect(vergiftung)
     mPlayer.show_effects()
+    allItems = itemInit.load_all_items_from_json(items_file)
+    print(vars(itemInit.load_item_by_name_from_json(items_file, "Sword")))
+    print()
