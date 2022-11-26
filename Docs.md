@@ -52,7 +52,7 @@ writes: self.health
 
 ##### usage:
 ```py
-Hero = Player
+Hero = Entity()
 Hero.change_health(-10)
 ```
 </br>
