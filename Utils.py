@@ -1,4 +1,4 @@
-from pystyle import Write, Colors
+from pystyle import Write, Colors, Colorate
 from huepy import *
 
 def n(text=""):
@@ -23,6 +23,18 @@ def g(text=""):
 def q(text=""):
     print(que(text))
 
+def dbg(text="", errlvl=0):
+    """
+        Prints Debug Information into Console
+    Args:
+        text (str): Text to be Displayed. Defaults to "".
+        errlvl (int): Errorlevel 0=Inf, 1=Err. Defaults to 0.
+    """
+    if errlvl == 0:
+        print(info(Colorate.Color(Colors.yellow, 'DEBUG: ', True)) + str(text))
+    else:
+        print(bad(Colorate.Color(Colors.red, 'DEBUG: ', True)) + str(text))
+    
 def showcase():
     n("Das ist die standard Printanweisung")
     a("Allerts!")
@@ -31,4 +43,6 @@ def showcase():
     i("Information")
     g("Good")
     q("Quest(ion)")
+    dbg("InfoLevel Debug")
+    dbg("ErrorLevel Debug", 1)
 

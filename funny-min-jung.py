@@ -64,6 +64,7 @@ if __name__ == "__main__":
     print(vars(itemInit.load_item_by_name_from_json(items_file, "Sword")))
     print()
     menu = Level(["Textadventure","Hauptmenü","spiel wird geladen"],["Spiel laden","Spiel starten","Spiel beenden"],"Hauptmenü",[],"zivilisiert","Mainmanu descr")
+
     
 
     gameloop(mPlayer, menu)
