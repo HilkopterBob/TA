@@ -171,7 +171,7 @@ class Entity():
         match effect.infl:
             case "hp":
                 try:
-                    self.health += effect.value
+                    self.hp += effect.value
                     return True
                 except:
                     return False
@@ -181,6 +181,10 @@ class Entity():
                     return True
                 except:
                     return False
+            case _:
+                print(f"change_stat: WILDCARD AUSGELÖST! debuginfo:")
+                print(vars(self))
+                print(vars(effect))
 
 
         
