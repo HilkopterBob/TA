@@ -1,26 +1,26 @@
 from pystyle import Write, Colors
 from huepy import *
 
-def n(text):
+def n(text=""):
     Write.Print(text + "\n", Colors.white, interval=0.0025)
 
-def a(text):
+def a(text=""):
     Write.Print(text + "\n", Colors.white, interval=0.0025)
     
-def inp(text):
+def inp(text=""):
     Input = Write.Input(text + "\n→ ", Colors.white, interval=0.0025)
     return Input
 
-def b(text):
+def b(text=""):
     print(bad(text))
 
-def i(text):
+def i(text=""):
     print(info(text))
 
-def g(text):
+def g(text=""):
     print(good(text))
 
-def q(text):
+def q(text=""):
     print(que(text))
 
 def showcase():

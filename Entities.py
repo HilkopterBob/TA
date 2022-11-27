@@ -4,13 +4,6 @@ import json
 
 class Entity():
 
-    #name = "Blankoname"
-    #health = 100
-    #wealth = 100
-    #xp = 0
-    #inv = [["Waffen"],["Rüstung"],["Usables"],["Questitems"],["Misc"]]
-    #type = Tank, Thief, Elf, Ork, Dwarf, Hurensohn etc.
-
     def __init__(self, name="Blanko", health=100, wealth=100, xp=0, inv=[], ptype="", effects=[]):
         self.name = name
         self.health = health
@@ -166,7 +159,7 @@ class item():
         
     @staticmethod   #Generate Object from Json
     def from_json(json_dct, iname):
-      return item(iname, json_dct['type'], json_dct['dmg'], json_dct['condition'], json_dct['effects'], json_dct['useable'],json_dct['equipable'],json_dct['questitem'])
+        return item(iname, json_dct['type'], json_dct['dmg'], json_dct['condition'], json_dct['effects'], json_dct['useable'],json_dct['equipable'],json_dct['questitem'])
 
 
 
