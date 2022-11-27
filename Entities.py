@@ -6,7 +6,7 @@ class Entity():
 
     def __init__(self, name="Blanko", health=100, wealth=100, xp=0, inv=[], ptype="", effects=[]):
         self.name = name
-        self.health = health
+        self.hp = health
         self.wealth = wealth
         self.xp = xp
         self.inv = inv
@@ -145,6 +145,24 @@ class Entity():
             return True
         except:
             return False
+
+    def change_stat(self, effect):
+        match effect.infl:
+            case "hp":
+                try:
+                    self.health += effect.value
+                    return True
+                except:
+                    return False
+            case "xp":
+                try:
+                    self.xp += effect.value
+                    return True
+                except:
+                    return False
+
+
+        
         
 class item():
     def __init__(self, name="placeholder", itype="misc", dmg=0, condition=0, effects = [],useable=False, equipable=False, questitem=False, ):
