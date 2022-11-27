@@ -48,15 +48,18 @@ def gameloop(player, level=""):
         #Effects:
         for e in player.eeffects:
             player.change_stat(e)
-        print("[XP]: " + str(player.xp))
+        if dbg:
+            print("[XP]: " + str(player.xp))
 
         for e in player.geffects:
             player.change_stat(e)
-        print("[HP]: " + str(player.hp))
+        if dbg:
+            print("[HP]: " + str(player.hp))
         
         for e in player.beffects:
             player.change_stat(e)
-        print("[HP]: " + str(player.hp))
+        if dbg:
+            print("[HP]: " + str(player.hp))
 
 
 
