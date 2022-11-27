@@ -4,14 +4,17 @@ import json
 
 class Entity():
 
-    def __init__(self, name="Blanko", health=100, wealth=100, xp=0, inv=[], ptype="", effects=[]):
+    def __init__(self, name="Blanko", health=100, wealth=100, xp=0, inv=[], ptype="", geffects=[], beffects=[], eeffects=[]):
         self.name = name
         self.hp = health
         self.wealth = wealth
         self.xp = xp
         self.inv = inv
         self.ptype = ptype
-        self.effects = effects
+        self.geffects = geffects    #good effects
+        self.beffects = beffects    #bad effects
+        self.eeffects = eeffects    #evil effects
+        self.effects = [[self.geffects],[self.beffects],[self.eeffects]]
 
     def set_name(self):
         while True:
@@ -86,11 +89,25 @@ class Entity():
 
             =return= Returns True if successfull otherwise returns false
         """
-        try:
-            self.effects.append(effect)
-            return True
-        except:
-            return False
+        match effect.etype:
+            case "good":
+                try:
+                    self.geffects.append(effect)
+                    return True
+                except:
+                    return False
+            case "bad":
+                try:
+                    self.beffects.append(effect)
+                    return True
+                except:
+                    return False
+            case "evil":
+                try:
+                    self.eeffects.append(effect)
+                    return True
+                except:
+                    return False
         
     def show_effects(self, names=True):
         """
@@ -103,7 +120,11 @@ class Entity():
         try:
             if names==True:
                 try:
-                    for e in self.effects:
+                    for e in self.effects[0][0]:
+                        print(e.name)
+                    for e in self.effects[1][0]:
+                        print(e.name)
+                    for e in self.effects[2][0]:
                         print(e.name)
                     return True
                 except e:

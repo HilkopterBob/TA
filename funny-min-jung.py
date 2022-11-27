@@ -53,19 +53,26 @@ def gameloop(player, level):
 
 
 
+
 if __name__ == "__main__":
     mPlayer = Entity("Blankoname", 100,100,0,[item("Item1","weapon"),item("item2","misc")])
     #mPlayer.set_name()
-    vergiftung = Effect("Vergiftung","Nö","bad", -2, "health")
-    print(vars(vergiftung))
+    vergiftung = Effect("Vergiftung","Nö","bad", -10, "hp")
+    heilung = Effect("heilung","Nö","good", 5, "hp")
+    heilung2 = Effect("heilung2","Nö","good", 5, "hp")
+    heilung3 = Effect("heilung 3","Nö","good", 5, "hp")
+    terror = Effect("Terror","Nö","evil", -100, "xp")
+    #print(vars(vergiftung))
     mPlayer.add_effect(vergiftung)
+    mPlayer.add_effect(heilung)
+    mPlayer.add_effect(heilung2)
+    mPlayer.add_effect(heilung3)
+    mPlayer.add_effect(terror)
     mPlayer.show_effects()
-    allItems = itemInit.load_all_items_from_json(items_file)
-    print(vars(itemInit.load_item_by_name_from_json(items_file, "Sword")))
-    print()
-    menu = Level(["Textadventure","Hauptmenü","spiel wird geladen"],["Spiel laden","Spiel starten","Spiel beenden"],"Hauptmenü",[],"zivilisiert","Mainmanu descr")
-
-    
-
-    gameloop(mPlayer, menu)
+    #print(mPlayer.effects)
+    #allItems = itemInit.load_all_items_from_json(items_file)
+    #print(vars(itemInit.load_item_by_name_from_json(items_file, "Sword")))
+    #print()
+    #menu = Level(["Textadventure","Hauptmenü","spiel wird geladen"],["Spiel laden","Spiel starten","Spiel beenden"],"Hauptmenü",[],"zivilisiert","Mainmanu descr")
+    #gameloop(mPlayer, menu)
 
