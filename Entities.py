@@ -10,7 +10,7 @@ class Entity():
         self.wealth = wealth
         self.xp = xp
         self.inv = inv
-        self.ptype = ptype
+        self.ptype = ptype          #Was ist ein ptype?
         self.geffects = geffects    #good effects
         self.beffects = beffects    #bad effects
         self.eeffects = eeffects    #evil effects
@@ -168,6 +168,13 @@ class Entity():
             return False
 
     def change_stat(self, effect):
+        """
+            changes stat (effect.infl) by effect.value
+        
+            :effect(obj): effect object
+
+            =return= true if sucessfull, else false
+        """
         match effect.infl:
             case "hp":
                 try:
@@ -185,6 +192,32 @@ class Entity():
                 print(f"change_stat: WILDCARD AUSGELÖST! debuginfo:")
                 print(vars(self))
                 print(vars(effect))
+                return False
+
+    def let_effects_take_effect(self, dbg):
+        """
+            used in gameloop to let effects take effect onto entety
+        
+            :: no vars except self-obj
+        
+            =return= true if succesfull else False
+        """
+        try:
+            for e in self.eeffects:
+                self.change_stat(e)
+                if dbg:
+                    print(self.xp)
+            for e in self.geffects:
+                self.change_stat(e)
+                if dbg:
+                    print(self.hp)
+            for e in self.beffects:
+                self.change_stat(e)
+                if dbg:
+                    print(self.hp)
+            return True
+        except:
+            return False
 
 
         

@@ -26,6 +26,7 @@ import json
 
 ##################
 ##Debug Variable##
+global dbg
 dbg = True
 ##################
 
@@ -46,20 +47,7 @@ def gameloop(player, level=""):
         ##### ##### ##### #####
 
         #Effects:
-        for e in player.eeffects:
-            player.change_stat(e)
-        if dbg:
-            print("[XP]: " + str(player.xp))
-
-        for e in player.geffects:
-            player.change_stat(e)
-        if dbg:
-            print("[HP]: " + str(player.hp))
-        
-        for e in player.beffects:
-            player.change_stat(e)
-        if dbg:
-            print("[HP]: " + str(player.hp))
+        player.let_effects_take_effect(dbg)
 
 
 
