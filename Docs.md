@@ -27,6 +27,8 @@ Used to create entities like the player and npcs.
 - [remove item by index](#remove_item_by_index)
 - [add effect](#add_effect)
 - [show effects](#show_effects)
+- [remove effect by name](#remove_effect_by_name)
+- [remove effect by index](#remove_effect_by_index)
 - ! all methods return False on failure
 </br>
 </br>
@@ -100,14 +102,65 @@ Hero.remove_item_by_index(0)    #removes first item from inventory
 
 
 #### add_effect
+Appends effect to corresponding list of effects.  
+reads: self(obj), effect(obj)  
+writes: entity(oby) → {geffects, beffects, eeffects} → obj.effects  
+##### usage:  
+```py
+Hero = Entity()
+poisoning = Effect()
+Hero.add_effect(poisoning)
+```
+
 </br>
 </br>
 
 
 #### show_effects
+Prints element.name of entity.effects[]  
+reads: self(obj), names(bool → default True)  
+writes: self(obj)  
+##### usage:
+```py
+Hero = Entity()
+poisoning = Effect()
+Hero.add_effect(poisoning)
+Hero.show_effects()         #shows name for every effect
+Hero.show_effects(False)    #shows vars(effect) for every effect
+```
 </br>
 </br>
 
+
+#### remove_effect_by_name
+Removes effect from entity by given name.  
+reads: self(obj), ename(str)  
+writes: self(obj)  
+##### usage:
+```py
+Hero = Entity()
+poisoning = Effect()
+Hero.add_effect(poisoning)
+Hero.remove_effect_by_name(poisoning.name)
+```
+
+#### remove_effect_by_index
+
+##### usage:
+</br>  
+</br>  
+
+#### change_stat
+
+##### usage:
+</br>  
+</br>  
+
+#### let_effects_take_effect
+
+##### usage:
+</br>  
+</br>  
 
 
 ## Levels
