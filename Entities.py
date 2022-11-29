@@ -1,6 +1,7 @@
 import Utils as pr
 import Effect 
 import json
+from queue import Queue 
 
 class Entity():
 
@@ -15,6 +16,7 @@ class Entity():
         self.beffects = beffects    #bad effects
         self.eeffects = eeffects    #evil effects
         self.effects = [[self.geffects],[self.beffects],[self.eeffects]]
+        self.actionstack = Queue()  ###Actionstack for Gameloop (Only populate at runtime!)
 
     def set_name(self):
         while True:
@@ -102,7 +104,7 @@ class Entity():
                     return True
                 except:
                     return False
-            case "evil":
+            case "evil":   
                 try:
                     self.eeffects.append(effect)
                     return True
