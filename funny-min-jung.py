@@ -1,23 +1,3 @@
-#ToDo's:
-#Spielerklasse
-#Levelklasse
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
 from Entities import Entity, item, itemInit
 from Level import Level
 from Effect import Effect
@@ -57,7 +37,7 @@ def gameloop(player, level=[]):
                 pr.dbg(a)
         ###Todo Action parser for actionstack (pass entity to which the action applies, pass the action, process action on entity, return successfull or error)
         ##############################################
-        
+
         nirvana.change_entity_list("-", mPlayer)
         newnewLevel.change_entity_list("+", mPlayer)
         mPlayer.change_location("")
