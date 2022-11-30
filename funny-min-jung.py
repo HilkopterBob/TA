@@ -41,26 +41,32 @@ action = ""
 
 
 
-def gameloop(player, level=""):
+def gameloop(player, level=[]):
     
     #print("*"*10 + "player" + "*"*10 + "\n")
     #print(vars(player))
     
+    level_index = 0             #Index that corresponds to level from level[]
     
-    
-    ####Work Actionstack for each Entity in Level
-    for e in level.entitylist:
-        for a in list(e.actionstack.queue):
-            pr.dbg(a)
-    ###Todo Action parser for actionstack (pass entity to which the action applies, pass the action, process action on entity, return successfull or error)
-    ##############################################
-    
+    while True:
+
+        current_level = level[level_index]
+
+        for e in current_level.entitylist:
+            for a in list(e.actionstack.queue):
+                pr.dbg(a)
+        ###Todo Action parser for actionstack (pass entity to which the action applies, pass the action, process action on entity, return successfull or error)
+        ##############################################
+        
+        nirvana.change_entity_list("-", mPlayer)
+        newnewLevel.change_entity_list("+", mPlayer)
+        mPlayer.change_location("")
     
     
     ##### ##### ##### #####
 
     #Effects:
-    player.let_effects_take_effect(dbg)
+        player.let_effects_take_effect(dbg)
 
 
 
@@ -69,7 +75,8 @@ def gameloop(player, level=""):
 
 
 if __name__ == "__main__":
-    mPlayer = Entity("Blankoname", 100,100,0,[item("Item1","weapon"),item("item2","misc")])
+    mPlayer = Entity("Player", 100,100,0,[item("Item1","weapon"),item("item2","misc")])
+    h = Entity()
     #mPlayer.set_name()
     vergiftung = Effect("Vergiftung","Nö","bad", -10, "hp")
     heilung = Effect("heilung","Nö","good", 5, "hp")
@@ -98,9 +105,10 @@ if __name__ == "__main__":
     mPlayer.actionstack.put("let_effects_take_effect")
     
     ####Create a New Level with Player as only Entity in Level
-    newLevel = Level([], [],"NewLevel", [], "Testtype", "NewLevel",[mPlayer])
-    
-    ####Run Gameloop with newLevel as Level
-    gameloop(mPlayer, newLevel)
+    nirvana = Level(["Möchtest du ins NewNewLevel?"], ["Yes","No"],"nirvana", [], "Testtype", "nirvana",[mPlayer])                  #hier chillen entitys die existieren ohne in einem level eingesetzt zu werden
+    nowhere = Level([], [],"nowhere", [], "Testtype", "nowhere",[])                         #Hommage für alte Textadventures
+    newnewLevel = Level([], [],"NewNewLevel", [], "Testtype", "NewNewLevel",[])
+    ####Run Gameloop with nirvana as Level
+    gameloop(mPlayer, [nirvana, newnewLevel])
     
     

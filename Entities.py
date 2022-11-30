@@ -5,18 +5,19 @@ from queue import Queue
 
 class Entity():
 
-    def __init__(self, name="Blanko", health=100, wealth=100, xp=0, inv=[], ptype="", geffects=[], beffects=[], eeffects=[]):
+    def __init__(self, name="Blanko", health=100, wealth=100, xp=0, inv=[], ptype="", geffects=[], beffects=[], eeffects=[], location="nirvana"):
+        self.location = location                                                        
         self.name = name
         self.hp = health
         self.wealth = wealth
         self.xp = xp
         self.inv = inv
-        self.ptype = ptype          #Was ist ein ptype?
-        self.geffects = geffects    #good effects
-        self.beffects = beffects    #bad effects
-        self.eeffects = eeffects    #evil effects
+        self.ptype = ptype                                                              #Was ist ein ptype?
+        self.geffects = geffects                                                        #good effects
+        self.beffects = beffects                                                        #bad effects
+        self.eeffects = eeffects                                                        #evil effects
         self.effects = [[self.geffects],[self.beffects],[self.eeffects]]
-        self.actionstack = Queue()  ###Actionstack for Gameloop (Only populate at runtime!)
+        self.actionstack = Queue()                                                      #Actionstack for Gameloop (Only populate at runtime!)
 
     def set_name(self):
         while True:
@@ -217,6 +218,13 @@ class Entity():
                 self.change_stat(e)
                 if dbg:
                     pr.dbg(f"EFFECT: {e.name}, {e.etype} affected OBJECT: {self.name}. Value: {e.value} influenced: {e.infl}")
+            return True
+        except:
+            return False
+
+    def change_location(self, new_location="nirvana"):
+        try:
+            self.location = new_location
             return True
         except:
             return False

@@ -12,3 +12,37 @@ class Level():
         self.entitylist = entitylist    #List of child entities in level
     
 
+    def change_entity_list(self, ctype, entity, dbg=True):
+        """
+            Changes the list of entities for specific level
+
+            :ctype: + for adding, - for subtracting entity from list
+
+            :entity: the entity obj
+
+            :dbg: debug, default = True
+
+            =return= returns True if seccessfull, else false
+        """
+        match ctype:
+            case "+":
+                try:
+                    for e in self.entitylist:
+                        if e.name == entity.name:
+                            raise Exception(f"Entity: {entity.name} is already in entitielist of Level {self.name} and such cannot be added.")
+                    self.entitylist.append(entity)
+                    return True
+                except Exception as e:
+                    if dbg == True: 
+                        pr.dbg(e, 1)
+                    else:
+                        pr.stop_game_on_exception(e)
+                    return False
+            case "-":
+                try:
+                    self.entitylist = list (filter(lambda e: e.name != entity.name, self.entitylist))
+                    return True
+                except:
+                    return False
+            case _:
+                return pr.dbg("Change_entity_list got no right ctype. choose between + and -",1)
