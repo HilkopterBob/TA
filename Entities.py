@@ -208,15 +208,15 @@ class Entity():
             for e in self.eeffects:
                 self.change_stat(e)
                 if dbg:
-                    print(self.xp)
+                    pr.dbg(f"EFFECT: {e.name}, {e.etype} affected OBJECT: {self.name}. Value: {e.value} influenced: {e.infl}")
             for e in self.geffects:
                 self.change_stat(e)
                 if dbg:
-                    print(self.hp)
+                    pr.dbg(f"EFFECT: {e.name}, {e.etype} affected OBJECT: {self.name}. Value: {e.value} influenced: {e.infl}")
             for e in self.beffects:
                 self.change_stat(e)
                 if dbg:
-                    print(self.hp)
+                    pr.dbg(f"EFFECT: {e.name}, {e.etype} affected OBJECT: {self.name}. Value: {e.value} influenced: {e.infl}")
             return True
         except:
             return False

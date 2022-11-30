@@ -43,8 +43,8 @@ action = ""
 
 def gameloop(player, level=""):
     
-    print("*"*10 + "player" + "*"*10 + "\n")
-    print(vars(player))
+    #print("*"*10 + "player" + "*"*10 + "\n")
+    #print(vars(player))
     
     
     
@@ -95,6 +95,7 @@ if __name__ == "__main__":
     mPlayer.actionstack.put("Some Action from Actionstack")
     mPlayer.actionstack.put("Another Action from Actionstack")
     mPlayer.actionstack.put("And Another Action from Actionstack")
+    mPlayer.actionstack.put("let_effects_take_effect")
     
     ####Create a New Level with Player as only Entity in Level
     newLevel = Level([], [],"NewLevel", [], "Testtype", "NewLevel",[mPlayer])
