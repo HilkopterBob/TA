@@ -17,8 +17,9 @@ lvl = 0
 action = ""
 ###################
 
-
-
+def hud(player, level):
+    pr.n(f"Du befindest dich in: {level.name}")
+    #hudfunction
 
 
 def gameloop(player, level=[]):
@@ -27,7 +28,7 @@ def gameloop(player, level=[]):
     #print(vars(player))
     
     level_index = 0             #Index that corresponds to level from level[]
-    
+    lap = 0
     while True:
 
         current_level = level[level_index]
@@ -43,10 +44,8 @@ def gameloop(player, level=[]):
         mPlayer.change_location("")
     
     
-    ##### ##### ##### #####
-
-    #Effects:
         player.let_effects_take_effect(dbg)
+        lap += 1
 
 
 
@@ -85,9 +84,9 @@ if __name__ == "__main__":
     mPlayer.actionstack.put("let_effects_take_effect")
     
     ####Create a New Level with Player as only Entity in Level
-    nirvana = Level(["Möchtest du ins NewNewLevel?"], ["Yes","No"],"nirvana", [], "Testtype", "nirvana",[mPlayer])                  #hier chillen entitys die existieren ohne in einem level eingesetzt zu werden
-    nowhere = Level([], [],"nowhere", [], "Testtype", "nowhere",[])                         #Hommage für alte Textadventures
-    newnewLevel = Level([], [],"NewNewLevel", [], "Testtype", "NewNewLevel",[])
+    nirvana = Level(["Du siehst einen Weg.",], ["Atmen", "Den Wen entlanggehen"],"Nirvana", [], "Testtype", "nirvana",[mPlayer])                  #hier chillen entitys die existieren ohne in einem level eingesetzt zu werden
+    nowhere = Level([""], [],"nowhere", [], "Testtype", "nowhere",[])                         #Hommage für alte Textadventures
+    newnewLevel = Level(["Du siehst einen Weg, der ins Nirvana führt."], ["Nachdenken","Ins Nirvana gehen"],"NewNewLevel", [], "Testtype", "NewNewLevel",[])
     ####Run Gameloop with nirvana as Level
     gameloop(mPlayer, [nirvana, newnewLevel])
     
