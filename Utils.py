@@ -57,3 +57,7 @@ def stop_game_on_exception(exception):
         case "n":
             exit()
 
+def pause():
+    programPause = input("Press the <ENTER> key to continue...")
+
+

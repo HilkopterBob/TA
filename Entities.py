@@ -5,11 +5,12 @@ from queue import Queue
 
 class Entity():
 
-    def __init__(self, name="Blanko", health=100, wealth=100, xp=0, inv=[], ptype="", geffects=[], beffects=[], eeffects=[], location="nirvana"):
+    def __init__(self, name="Blanko", health=100, wealth=100, xp=0, inv=[], ptype="", geffects=[], beffects=[], eeffects=[], location="nirvana", level=1):
         self.location = location                                                        
         self.name = name
         self.hp = health
         self.wealth = wealth
+        self.level = level
         self.xp = xp
         self.inv = inv
         self.ptype = ptype                                                              #Was ist ein ptype?
@@ -222,12 +223,48 @@ class Entity():
         except:
             return False
 
-    def change_location(self, new_location="nirvana"):
-        try:
-            self.location = new_location
-            return True
-        except:
-            return False
+    def change_location(self, old_level, new_level):
+        self.location = new_level.name
+        new_level.change_entity_list("+", self)
+        old_level.change_entity_list("-", self)
+        returns = "gar"
+
+    
+    def check_level_up(self):
+        level_ups = 0
+        old_level = self.level
+        if self.level == 0:
+            self.level == 1
+        while True:
+            if self.level < 10:
+                needed_xp = ((self.level + 1 )/0.4) ** 1.79
+                if self.xp > needed_xp:
+                    self.level += 1
+                    self.xp = self.xp - int(needed_xp)
+                    level_ups += 1
+                else:
+                    check_level_up_list = [level_ups, old_level]
+                    return check_level_up_list
+            if self.level >= 10 and self.level < 30:
+                needed_xp = ((self.level + 1 )/0.37) ** 1.86
+                if self.xp > needed_xp:
+                    self.level += 1
+                    self.xp -= needed_xp
+                    level_ups += 1
+                else:
+                    check_level_up_list = [level_ups, old_level]
+                    return check_level_up_list
+            if self.level >= 30:
+                needed_xp = ((self.level + 1 )/0.2) ** 2.175
+                if self.xp > needed_xp:
+                    self.level += 1
+                    self.xp -= needed_xp
+                    level_ups += 1
+                else:
+                    check_level_up_list = [level_ups, old_level]
+                    return check_level_up_list
+
+
 
 
         
