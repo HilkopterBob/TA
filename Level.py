@@ -3,12 +3,13 @@ from pystyle import Write, Colors, Colorate
 
 class Level():
 
-    def __init__(self, text=[], choices=[], name="Levelnameplatzhalter", inv=[], ltype="Testtype", descr="Standartdescription du Sohn einer Dirne", entitylist = []):
+    def __init__(self, text=[], choices=[], name="Levelnameplatzhalter", inv=[], ltype="Testtype", descr="Standartdescription du Sohn einer Dirne", entitylist = [], triggers=[]):
         self.name = name
         self.descr = descr
-        self.text = text
-        self.choices = choices 
+        self.text = text                #
+        self.choices = choices          #[["erste option"],["zweite option"],["dritte option",{trigger03:True}]]
         self.inv = inv
+        self.triggers = triggers        #stores dicts in form: {searched_room?:True} → show new options
         self.ltype = ltype              #zivilisiert, Wald, Wild, feindlich, höllisch, idyllisch etc. → leveleffekte (zivilisiert: human race atk+, wald: elben atk+, wild: animal spawn rate+ etc.)
         self.entitylist = entitylist    #List of child entities in level
     

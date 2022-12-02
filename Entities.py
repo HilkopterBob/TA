@@ -237,7 +237,6 @@ class Entity():
         new_level.change_entity_list("+", self)
         old_level.change_entity_list("-", self)
 
-    
     def check_level_up(self):
         """
             checks if entity has enough xp to level up, will level up the entity UNTIL there are not enough xp

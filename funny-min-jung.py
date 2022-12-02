@@ -18,6 +18,46 @@ action = ""
 ###################
 
 
+def interact_with_level(player, level):
+    printed = False
+    i = 1
+    pr.n(level.descr)
+    for llist in level.choices:
+        if len(llist) == 1:
+            pr.n(f"{i}. {llist[0]}")
+            printed = True
+            i = i + 1
+        elif len(llist) > 1:
+            for ddict in level.triggers:
+                if llist[1] == ddict:
+                    pr.n(f"{i}. {llist[0]}")
+                    printed = True
+                    i = i + 1
+    if printed == True:
+        action = pr.inp()
+        
+        pr.n(level.text[int(action) - 1][0])
+    
+        if len(level.text[int(action) - 1]) > 1:
+            key = list(level.text[int(action) - 1][1].keys())
+            #print(key)
+            for ddict in level.triggers:
+                if ddict.keys() == level.text[int(action) - 1][1].keys():
+                    #level.triggers.keys == level.text[int(action) - 1][1]
+                    #level.triggers = list (filter(lambda d: d[key[0]] != level.text[int(action) - 1][1], level.triggers))
+                    triggered_dict = list(filter(lambda dict: dict[key[0]] != level.text[int(action) - 1][1][key[0]], level.triggers))
+                    
+                    triggered_dict_index = level.triggers.index(triggered_dict[0])
+                    level.triggers[triggered_dict_index] = level.text[int(action) - 1][1]
+                    print(level.text[int(action) - 1][1])
+                    print(level.triggers)
+                    #überarbeite des value accsess im dict
+                    #
+                    #FUNKTIONIERT!!! refactor incoming...
+                    #
+    
+        #pr.b("Deine Eingabe war falsch.")
+
 
 
 def hud(player):
@@ -44,7 +84,9 @@ def gameloop(player, level_list=[]):
         hud(player)                                         #basic hud
         player.let_effects_take_effect(dbg)                 #effects 
         player.check_level_up()                             #check for levelups and level up if enough xp
-        player.change_location(level_list[0],level_list[1]) #changes the entity location, deletes entity from old level and adds to the new one
+        interact_with_level(player, current_level)
+        if player.location != "Wiese":
+            player.change_location(level_list[0],level_list[2]) #changes the entity location, deletes entity from old level and adds to the new one
         
 
 
@@ -91,7 +133,8 @@ if __name__ == "__main__":
     nirvana = Level(["Du siehst einen Weg.",], ["Atmen", "Den Wen entlanggehen"],"Nirvana", [], "Testtype", "nirvana",[mPlayer])                  #hier chillen entitys die existieren ohne in einem level eingesetzt zu werden
     nowhere = Level([""], [],"nowhere", [], "Testtype", "nowhere",[])                         #Hommage für alte Textadventures
     newnewLevel = Level(["Du siehst einen Weg, der ins Nirvana führt."], ["Nachdenken","Ins Nirvana gehen"],"NewNewLevel", [], "Testtype", "NewNewLevel",[])
+    wiese = Level([["die erste option zeigt diesen text"],[ "die zweite option zeigt diesen text",{"trigger03":True}],["dritte option"]],[["erste option"],["zweite option"],["dritte option",{"trigger03":True}]],"Wiese",descr="Das ist die Beschreibung einer Wiese.", triggers=[{"trigger03":False}])
     ####Run Gameloop with nirvana as Level
-    gameloop(mPlayer, [nirvana, newnewLevel])
+    gameloop(mPlayer, [nirvana, newnewLevel,wiese])
     
     
