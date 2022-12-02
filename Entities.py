@@ -224,12 +224,26 @@ class Entity():
             return False
 
     def change_location(self, old_level, new_level):
+        """
+            changes entty location by edditing onwn location, deletes itself from old and adds to new entity.list
+        
+            :old_level: old level object, old_level.entity_list will get eddited
+
+            :new_level: new level object, new_level.entity_list will get eddited
+        
+            =return= returns nothing, yet
+        """
         self.location = new_level.name
         new_level.change_entity_list("+", self)
         old_level.change_entity_list("-", self)
 
     
     def check_level_up(self):
+        """
+            checks if entity has enough xp to level up, will level up the entity UNTIL there are not enough xp
+        
+            =return= returns nothing, yet
+        """
         level_ups = 0
         old_level = self.level
         if self.level == 0:

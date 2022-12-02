@@ -41,9 +41,6 @@ def gameloop(player, level_list=[]):
         ###Todo Action parser for actionstack (pass entity to which the action applies, pass the action, process action on entity, return successfull or error)
         ##############################################
 
-
-
-
         hud(player)                                         #basic hud
         player.let_effects_take_effect(dbg)                 #effects 
         player.check_level_up()                             #check for levelups and level up if enough xp
@@ -52,7 +49,6 @@ def gameloop(player, level_list=[]):
 
 
         lap = lap + 1
-
         pr.pause()
 
 
