@@ -51,7 +51,7 @@ def gameloop(player, level=[]):
 
         nirvana.change_entity_list("-", mPlayer)
         newnewLevel.change_entity_list("+", mPlayer)
-        mPlayer.change_location("")
+        mPlayer.change_location(nirvana, newnewLevel)
         level_index = 1
         player.let_effects_take_effect(dbg)
         lap += 1
@@ -59,7 +59,7 @@ def gameloop(player, level=[]):
         level_ups = player.check_level_up()
         if level_ups[0] > 0:
             mPlayer.actionstack.put(f"Level_Up: {level_ups[0]}")
-            print(mPlayer.actionstack)
+            pr.dbg(mPlayer.actionstack.queue)
             pr.n(f"Du bist {level_ups[0]} Level aufgestiegen!")
         pr.pause()
 

@@ -1,4 +1,5 @@
 import Utils as pr
+from pystyle import Write, Colors, Colorate
 
 class Level():
 
@@ -29,7 +30,7 @@ class Level():
                 try:
                     for e in self.entitylist:
                         if e.name == entity.name:
-                            raise Exception(f"Entity: {entity.name} is already in entitielist of Level {self.name} and such cannot be added.")
+                            raise Exception(f"{pr.cyan(entity.name)} is already in entitielist of Level {pr.cyan(self.name)} and such cannot be added.")
                     self.entitylist.append(entity)
                     return True
                 except Exception as e:
@@ -45,4 +46,4 @@ class Level():
                 except:
                     return False
             case _:
-                return pr.dbg("Change_entity_list got no right ctype. choose between + and -",1)
+                return pr.dbg("got no right ctype. choose between + and -",1)

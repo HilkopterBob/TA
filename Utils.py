@@ -1,5 +1,6 @@
 from pystyle import Write, Colors, Colorate
 from huepy import *
+import inspect
 
 def n(text=""):
     Write.Print(text + "\n", Colors.white, interval=0.0025)
@@ -30,22 +31,36 @@ def dbg(text="", errlvl=0):
         text (str): Text to be Displayed. Defaults to "".
         errlvl (int): Errorlevel 0=Inf, 1=Err. Defaults to 0.
     """
-    if errlvl == 0:
-        print(good(Colorate.Color(Colors.green, 'DEBUG: ', True)) + str(text))
-    else:
-        print(bad(Colorate.Color(Colors.red, 'DEBUG: ', True)) + str(text))
     
+    module = inspect.currentframe().f_back.f_globals['__name__']
+    function = inspect.stack()[1].function
+    
+    if errlvl == 0:
+        print(f'{good("")} {str(yellow(f"DBG - {module} - {function}: "))} {str(text)}')
+    else:
+        print(f'{bad("")} {str(yellow(f"DBG - {module} - {function}: "))} {str(text)}')
+
+
+
 def showcase():
     n("Das ist die standard Printanweisung")
     a("Allerts!")
-    print(inp("Inputs!"))
+    print(inp("Inputs! >_"))
     b("Bad shit")
     i("Information")
     g("Good")
     q("Quest(ion)")
     dbg("InfoLevel Debug")
     dbg("ErrorLevel Debug", 1)
+    green("Green Text")
+    yellow("Yellow Text")
+    red("Red Text")
+    blue("Blue Text")
+    cyan("Cyan Text")
 
+
+
+###Action Definitions
 def stop_game_on_exception(exception):
     b((Colorate.Color(Colors.red, f"The following error occured:", True)))
     b((Colorate.Color(Colors.red, f"{exception}", True)))
@@ -60,4 +75,22 @@ def stop_game_on_exception(exception):
 def pause():
     programPause = input("Press the <ENTER> key to continue...")
 
+
+
+
+####Color Definitions
+def green(text):
+    return Colorate.Color(Colors.green, f"{text}", True)
+
+def yellow(text):
+    return Colorate.Color(Colors.yellow, f"{text}", True)
+
+def red(text):
+    return Colorate.Color(Colors.red, f"{text}", True)
+
+def blue(text):
+    return Colorate.Color(Colors.blue, f"{text}", True)
+
+def cyan(text):
+    return Colorate.Color(Colors.cyan, f"{text}", True)
 

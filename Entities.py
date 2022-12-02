@@ -210,15 +210,15 @@ class Entity():
             for e in self.eeffects:
                 self.change_stat(e)
                 if dbg:
-                    pr.dbg(f"EFFECT: {e.name}, {e.etype} affected OBJECT: {self.name}. Value: {e.value} influenced: {e.infl}")
+                    pr.dbg(f"{pr.cyan(e.name)}, {pr.cyan(e.etype)} : affected OBJECT: {pr.cyan(self.name)}. Value: {pr.cyan(e.value)} influenced: {pr.cyan(e.infl)}")
             for e in self.geffects:
                 self.change_stat(e)
                 if dbg:
-                    pr.dbg(f"EFFECT: {e.name}, {e.etype} affected OBJECT: {self.name}. Value: {e.value} influenced: {e.infl}")
+                    pr.dbg(f"{pr.cyan(e.name)}, {pr.cyan(e.etype)} : affected OBJECT: {pr.cyan(self.name)}. Value: {pr.cyan(e.value)} influenced: {pr.cyan(e.infl)}")
             for e in self.beffects:
                 self.change_stat(e)
                 if dbg:
-                    pr.dbg(f"EFFECT: {e.name}, {e.etype} affected OBJECT: {self.name}. Value: {e.value} influenced: {e.infl}")
+                    pr.dbg(f"{pr.cyan(e.name)}, {pr.cyan(e.etype)} : affected OBJECT: {pr.cyan(self.name)}. Value: {pr.cyan(e.value)} influenced: {pr.cyan(e.infl)}")
             return True
         except:
             return False
