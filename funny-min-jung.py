@@ -35,7 +35,7 @@ def interact_with_level(player, level):
                     i = i + 1
     if printed == True:
         action = pr.inp()
-        
+        #try:
         pr.n(level.text[int(action) - 1][0])
     
         if len(level.text[int(action) - 1]) > 1:
@@ -45,18 +45,18 @@ def interact_with_level(player, level):
                 if ddict.keys() == level.text[int(action) - 1][1].keys():
                     #level.triggers.keys == level.text[int(action) - 1][1]
                     #level.triggers = list (filter(lambda d: d[key[0]] != level.text[int(action) - 1][1], level.triggers))
-                    triggered_dict = list(filter(lambda dict: dict[key[0]] != level.text[int(action) - 1][1][key[0]], level.triggers))
-                    
-                    triggered_dict_index = level.triggers.index(triggered_dict[0])
-                    level.triggers[triggered_dict_index] = level.text[int(action) - 1][1]
+                    try:
+                        triggered_dict = list(filter(lambda dict: dict[key[0]] != level.text[int(action) - 1][1][key[0]], level.triggers))
+                        triggered_dict_index = level.triggers.index(triggered_dict[0])
+                        level.triggers[triggered_dict_index] = level.text[int(action) - 1][1]
+                    except IndexError as e:
+                        if dbg:
+                            pr.dbg(e)
                     print(level.text[int(action) - 1][1])
                     print(level.triggers)
-                    #überarbeite des value accsess im dict
-                    #
                     #FUNKTIONIERT!!! refactor incoming...
-                    #
-    
-        #pr.b("Deine Eingabe war falsch.")
+        # except:
+        #     pr.b("Deine Eingabe war falsch.")
 
 
 
