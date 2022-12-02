@@ -52,6 +52,7 @@ def gameloop(player, level_list=[]):
 
 
         lap = lap + 1
+
         pr.pause()
 
 
