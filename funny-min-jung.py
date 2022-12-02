@@ -17,50 +17,41 @@ lvl = 0
 action = ""
 ###################
 
-def change_location(level, entity, level_index, old_level, new_level):
-
-    entity.change_location(old_level, new_level)
-    #theo mit reh und tisch müsste hier jetzt eine umwandlung vom alten zum neuen level_index kommen
-    #da ich aber grade selbst den durchblisck verloren habe, mache ich kurz pause und gucke später ob diese 
-    #mönströsität von kontrollstruktur sinnhaftig ist
 
 
-def hud(player, level):
-    pr.n(f"Du befindest dich in: {level.name}")
+
+def hud(player):
+    pr.n(f"Du befindest dich in: {player.location}")
     pr.n(f"Gold: {player.wealth}")
     pr.n(F"Level: {player.level} XP: {player.xp}")
-    #hudfunction
 
 
-def gameloop(player, level=[]):
-    
-    #print("*"*10 + "player" + "*"*10 + "\n")
-    #print(vars(player))
-    
-    level_index = 0             #Index that corresponds to level from level[]
-    lap = 0
-    while True:
-        current_level = level[level_index]
+def gameloop(player, level_list=[]):
         
-        hud(player, level[level_index])
+    lap = 0                                             #rundenanzahl
+    while True:
+        for level in level_list:
+            if level.name == player.location:
+                current_level = level
+
+        
         for e in current_level.entitylist:
             for a in list(e.actionstack.queue):
                 pr.dbg(a)
         ###Todo Action parser for actionstack (pass entity to which the action applies, pass the action, process action on entity, return successfull or error)
         ##############################################
 
-        nirvana.change_entity_list("-", mPlayer)
-        newnewLevel.change_entity_list("+", mPlayer)
-        mPlayer.change_location("")
-        level_index = 1
-        player.let_effects_take_effect(dbg)
-        lap += 1
-        player.xp += 100
-        level_ups = player.check_level_up()
-        if level_ups[0] > 0:
-            mPlayer.actionstack.put(f"Level_Up: {level_ups[0]}")
-            print(mPlayer.actionstack)
-            pr.n(f"Du bist {level_ups[0]} Level aufgestiegen!")
+
+
+
+        hud(player)                                         #basic hud
+        player.let_effects_take_effect(dbg)                 #effects 
+        player.check_level_up()                             #check for levelups and level up if enough xp
+        player.change_location(level_list[0],level_list[1]) #changes the entity location, deletes entity from old level and adds to the new one
+        
+
+
+        lap = lap + 1
         pr.pause()
 
 

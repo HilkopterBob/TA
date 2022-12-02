@@ -5,7 +5,7 @@ from queue import Queue
 
 class Entity():
 
-    def __init__(self, name="Blanko", health=100, wealth=100, xp=0, inv=[], ptype="", geffects=[], beffects=[], eeffects=[], location="nirvana", level=1):
+    def __init__(self, name="Blanko", health=100, wealth=100, xp=0, inv=[], ptype="", geffects=[], beffects=[], eeffects=[], location="Nirvana", level=1):
         self.location = location                                                        
         self.name = name
         self.hp = health
@@ -227,7 +227,6 @@ class Entity():
         self.location = new_level.name
         new_level.change_entity_list("+", self)
         old_level.change_entity_list("-", self)
-        returns = "gar"
 
     
     def check_level_up(self):

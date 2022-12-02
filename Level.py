@@ -29,7 +29,7 @@ class Level():
                 try:
                     for e in self.entitylist:
                         if e.name == entity.name:
-                            raise Exception(f"Entity: {entity.name} is already in entitielist of Level {self.name} and such cannot be added.")
+                            raise Exception(f"Entity: {entity.name} is already in entitielist of Level {self.name} and thus cannot be added.")
                     self.entitylist.append(entity)
                     return True
                 except Exception as e:
