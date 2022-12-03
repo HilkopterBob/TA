@@ -36,9 +36,9 @@ def dbg(text="", errlvl=0):
     function = inspect.stack()[1].function
     
     if errlvl == 0:
-        print(f'{good("")} {str(yellow(f"DBG - {module} - {function}: "))} {str(text)}')
+        print(f'{info("")} {good("")} {str(yellow(f"DBG - {module} - {function}: "))} {str(text)}')
     else:
-        print(f'{bad("")} {str(yellow(f"DBG - {module} - {function}: "))} {str(text)}')
+        print(f'{info("")} {bad("")} {str(yellow(f"DBG - {module} - {function}: "))} {str(text)}')
 
 
 
