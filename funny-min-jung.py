@@ -4,6 +4,7 @@ from Effect import Effect
 import Utils as pr 
 import json
 
+
 ##################
 ##Debug Variable##
 global dbg
@@ -18,7 +19,7 @@ action = ""
 ###################
 
 
-def interact_with_level(player, level):
+def interact_with_level(player, level, level_list):
     ##### ##### prints out choices and gets user input if choices got printed ##### #####
     printed = False
     i = 1
@@ -54,18 +55,24 @@ def interact_with_level(player, level):
                         except IndexError as e:
                             if dbg:
                                 pr.dbg(e)
-                        print(level.text[int(action) - 1][1])
-                        print(level.triggers)
+                        if dbg:
+                            pr.dbg(level.text[int(action) - 1][1])
+                            pr.dbg(level.triggers)
                         #FUNKTIONIERT!!! refactor incoming...
             elif "action" in str(key[0]):
                 ##### ##### reads and uses action calls (action parser)##### #####
-                print(key)
-                print(level.text[int(action) - 1][1][key[0]])
-                print(level.text[int(action) - 1][1][key[1]])
+                if dbg:
+                    pr.dbg(key)
+                    pr.dbg(level.text[int(action) - 1][1][key[0]])
+                    pr.dbg(level.text[int(action) - 1][1][key[1]])
                 match level.text[int(action) - 1][1][key[0]]:
                     case "remove_effect_by_name":
-                        print(player.remove_effect_by_name(str(level.text[int(action) - 1][1][key[1]])))
+                        player.remove_effect_by_name(str(level.text[int(action) - 1][1][key[1]]))
                     case "change_location":
+                        for llevel in level_list:
+                            if llevel.name == str(level.text[int(action) - 1][1][key[1]]):
+                                new_level = llevel
+                                player.change_location(level, new_level)
         # except:
         #     pr.b("Deine Eingabe war falsch.")
 
@@ -73,6 +80,10 @@ def interact_with_level(player, level):
 
 def hud(player):
     pr.n(f"Du befindest dich in: {player.location}")
+    if player.hp > 25:
+        pr.g(f"HP: {player.hp}")
+    else:
+        pr.b(f"HP: {player.hp}")
     pr.n(f"Gold: {player.wealth}")
     pr.n(F"Level: {player.level} XP: {player.xp}")
 
@@ -96,7 +107,7 @@ def gameloop(player, level_list=[]):
         hud(player)                                         #basic hud
         player.let_effects_take_effect(dbg)                 #effects 
         player.check_level_up()                             #check for levelups and level up if enough xp
-        interact_with_level(player, current_level)
+        interact_with_level(player, current_level, level_list)
         #changes the entity location, deletes entity from old level and adds to the new one
         
 
@@ -121,7 +132,6 @@ if __name__ == "__main__":
     terror = Effect("Terror","Nö","evil", -100, "xp")
     #print(vars(vergiftung))
     mPlayer.add_effect(kopfschmerz)
-    print(kopfschmerz.name)
     # mPlayer.add_effect(heilung)
     # mPlayer.add_effect(heilung2)
     # mPlayer.add_effect(heilung3)
