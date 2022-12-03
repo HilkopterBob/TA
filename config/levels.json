@@ -1,0 +1,67 @@
+{
+    "Menu":{
+        "text": [
+            [""],
+            [""],
+            [""],
+            [""],
+            ["",{"action":"dbg_true"}]
+        ],
+        "choices": [
+            ["Spiel starten"],
+            ["Spiel laden"],
+            ["Optionen"],
+            ["Beenden"],
+            [""]
+        ],
+        "inv": [],
+        "ltype": "neutral",
+        "descr": "Hauptmenue",
+        "entitylist":[],
+        "triggers":[]
+    },
+
+    "Wiese":{
+        "text" : [
+            ["Du schuettelst deinen Kopf. Die kopfschmerzen verschwinden.", {"action":"remove_effect_by_name",
+                                                                            "effect.name":"Kopfschmerz"}],
+            [ "Du siehst dich um. Etwas entfernt scheint ein Weg zu sein.", {"umgesehen":true}],
+            ["Du gehst den Weg entlang.", {"action":"change_location",
+                                            "new_level_name":"Kreuzung"}]
+        ],
+        "choices": [
+            ["etwas gegen deine Kopfschmerzen machen"],
+            ["dich umsehen"],
+            ["den Weg entlang gehen",{"umgesehen":true}]
+        ],
+        "inv":[],
+        "ltype":"Testlevel",
+        "descr": "Du wachst auf einer Wiese auf. Du hast kopfschmerzen. \nIn der Ferne siehst du die Umrisse einer Stadt.",
+        "entitylist":[],
+        "triggers":[{"umgesehen":false}]
+    },
+
+    "Kreuzung":{
+        "text" : [
+        ["Du gehst in die Stadt.", {"action":"change_location",
+                                    "new_level_name":"Stadt"}],
+        ["Du gehst in den Wald.",  {"action":"change_location",
+                                    "new_level_name":"Wald"}],
+        ["Du gehst in die Miene.", {"action":"change_location",
+                                    "new_level_name":"Miene"}],
+        ["Du gehst zur Wiese", {"action":"change_location", 
+                                "new_level_name":"Wiese"}]
+    ],
+    "choices": [
+        ["In die Stadt gehen"],
+        ["In den Wald gehen"],
+        ["In die Miene gehen"],
+        ["Zur Wiese gehen"]
+    ],
+    "inv":[],
+    "ltype":"friedlich",
+    "descr":"Du folgst dem Weg bis zu einer Kreuzung.",
+    "entitylist":[],
+    "triggers":[]
+    }
+}

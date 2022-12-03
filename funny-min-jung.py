@@ -1,5 +1,5 @@
 from Entities import Entity, item, itemInit
-from Level import Level
+from Level import Level, LevelInit
 from Effect import Effect
 import Utils as pr 
 import json
@@ -14,6 +14,7 @@ dbg = True
 ###################
 ###ENV Variables###
 items_file = "config/items.json"
+levels_file = "config/levels.json"
 ###################
 
 
@@ -159,7 +160,11 @@ if __name__ == "__main__":
     # mPlayer.show_effects()
     #print(mPlayer.effects)
     #allItems = itemInit.load_all_items_from_json(items_file)
-    #print(vars(itemInit.load_item_by_name_from_json(items_file, "Sword")))
+    wieseLevel = LevelInit.load_level_by_name_from_json(levels_file, "Wiese")
+    kreuzungLevel = LevelInit.load_level_by_name_from_json(levels_file, "Kreuzung")
+    menuLevel = LevelInit.load_level_by_name_from_json(levels_file, "Menu")
+    #allLevels = LevelInit.load_all_levels_from_json(levels_file)
+    #print(vars(itemInit.load_item_by_name_from_json(items_file, "Bat")))
     #print()
     #menu = Level(["Textadventure","Hauptmenü","spiel wird geladen"],["Spiel laden","Spiel starten","Spiel beenden"],"Hauptmenü",[],"zivilisiert","Mainmanu descr")
     #gameloop(mPlayer, menu)
@@ -175,68 +180,7 @@ if __name__ == "__main__":
     #nirvana = Level(["Du siehst einen Weg.",], ["Atmen", "Den Wen entlanggehen"],"Nirvana", [], "Testtype", "nirvana",[])                  #hier chillen entitys die existieren ohne in einem level eingesetzt zu werden
     #nowhere = Level([""], [],"nowhere", [], "Testtype", "nowhere",[])                         #Hommage für alte Textadventures
     #newnewLevel = Level(["Du siehst einen Weg, der ins Nirvana führt."], ["Nachdenken","Ins Nirvana gehen"],"NewNewLevel", [], "Testtype", "NewNewLevel",[])
-    menu = Level(
-        [
-            [""],
-            [""],
-            [""],
-            [""],
-            ["",{"action":"dbg_true"}]
-        ],
-        [
-            ["Spiel starten"],
-            ["Spiel laden"],
-            ["Optionen"],
-            ["Beenden"],
-            [""]                #dev mode (sets dbg true)
-        ],
-        "Menu",
-        [],
-        "neutral",
 
-    )
-    wiese = Level(
-        [
-            ["Du schüttelst deinen Kopf. Die kopfschmerzen verschwinden.",  {"action":"remove_effect_by_name",
-                                                                            "effect.name":"Kopfschmerz"}],
-            [ "Du siehst dich um. Etwas entfernt scheint ein Weg zu sein.", {"umgesehen":True}],
-            ["Du gehst den Weg entlang.",  {"action":"change_location",
-                                            "new_level_name":"Kreuzung"}]
-        ],
-        [
-            ["etwas gegen deine Kopfschmerzen machen"],
-            ["dich umsehen"],
-            ["den Weg entlang gehen",{"umgesehen":True}]
-        ],
-        "Wiese",
-        descr="Du wachst auf einer Wiese auf. Du hst kopfschmerzen. \nIn der Ferne siehst du die Umrisse einer Stadt.",
-        entitylist=[],
-        triggers=[{"umgesehen":False}]
-    )
-    kreuzung = Level(
-        [
-            ["Du gehst in die Stadt.", {"action":"change_location",
-                                        "new_level_name":"Stadt"}],
-            ["Du gehst in den Wald.",  {"action":"change_location",
-                                        "new_level_name":"Wald"}],
-            ["Du gehst in die Miene.", {"action":"change_location",
-                                        "new_level_name":"Miene"}],
-            ["Du gehst zur Wiese", {"action":"change_location", 
-                                    "new_level_name":"Wiese"}]
-        ],
-        [
-            ["In die Stadt gehen"],
-            ["In den Wald gehen"],
-            ["In die Miene gehen"],
-            ["Zur Wiese gehen"]
-        ],
-        name="Kreuzung",
-        ltype="friedlich",
-        descr="Du folgst dem Weg bis zu einer Kreuzung.",
-        entitylist=[],
-        triggers=[]
-    )
     ####Run Gameloop with nirvana as Level
-    gameloop(mPlayer, [ wiese, kreuzung, menu])
-    
+    gameloop(mPlayer, [wieseLevel, kreuzungLevel, menuLevel])
     

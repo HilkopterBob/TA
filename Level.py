@@ -1,5 +1,6 @@
 import Utils as pr
 from pystyle import Write, Colors, Colorate
+import json
 
 class Level():
 
@@ -13,6 +14,10 @@ class Level():
         self.ltype = ltype              #zivilisiert, Wald, Wild, feindlich, höllisch, idyllisch etc. → leveleffekte (zivilisiert: human race atk+, wald: elben atk+, wild: animal spawn rate+ etc.)
         self.entitylist = entitylist    #List of child entities in level
     
+    @staticmethod   #Generate Level from Json
+    def from_json(json_dct, lname):
+        return Level(json_dct['text'], json_dct['choices'], lname, json_dct['inv'], json_dct['ltype'], json_dct['descr'], json_dct['entitylist'], json_dct['triggers'])
+
 
     def change_entity_list(self, ctype, entity, dbg=True):
         """
@@ -48,3 +53,41 @@ class Level():
                     return False
             case _:
                 return pr.dbg("got no right ctype. choose between + and -",1)
+
+
+
+class LevelInit():
+    def load_all_levels_from_json(json_file):
+        """
+            Return alls Levels from Json file
+            
+            :json_file (File): Json file to load Levels from
+
+            =return= List of all Levels loaded from Json
+        """
+        curLevels = []
+        with open(json_file) as json_data:
+            data = json.load(json_data)
+            
+        for lname in data.keys():
+            curLevels.append(Level.from_json(data[lname], lname))
+        return curLevels
+
+    def load_level_by_name_from_json(json_file, name):
+        """
+            Return a single Level Object from Json by given Name
+            
+            :json_file (File): Json File to load Item from
+
+            =return= Level object
+        """
+        with open(json_file) as json_data:
+            data = json.load(json_data)
+            
+
+        for lname in data.keys():
+            if lname == name:
+               return Level.from_json(data[lname], lname)
+        
+        pr.dbg(f"Levelname: {pr.cyan(lname)} not found!",1)
+        return False

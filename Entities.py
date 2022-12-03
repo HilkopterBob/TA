@@ -328,9 +328,9 @@ class itemInit():
         with open(json_file) as json_data:
             data = json.load(json_data)
             
-
         for iname in data.keys():
             if iname == name:
                 return item.from_json(data[iname], iname)
-            else: 
-                return False
+
+        pr.dbg(f"Itemname: {pr.cyan(iname)} not found!",1)
+        return False
