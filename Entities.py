@@ -152,7 +152,9 @@ class Entity():
             =return= returns true if successfull, else false
         """
         try:
-            self.effects = list (filter(lambda e: e.name != ename, self.effects))
+            self.geffects = list (filter(lambda e: e.name != ename, self.geffects))
+            self.beffects = list (filter(lambda e: e.name != ename, self.beffects))
+            self.eeffects = list (filter(lambda e: e.name != ename, self.eeffects))
             return True
         except:
             return False
