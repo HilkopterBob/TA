@@ -14,29 +14,45 @@ dbg = True
 ###################
 ###ENV Variables###
 items_file = "config/items.json"
-lvl = 0
-action = ""
 ###################
 
 
 def interact_with_level(player, level, level_list):
     ##### ##### prints out choices and gets user input if choices got printed ##### #####
-    printed = False
-    i = 1
-    pr.n(level.descr)
-    for llist in level.choices:
-        if len(llist) == 1:
-            pr.n(f"{i}. {llist[0]}")
-            printed = True
-            i = i + 1
-        elif len(llist) > 1:
-            for ddict in level.triggers:
-                if llist[1] == ddict:
-                    pr.n(f"{i}. {llist[0]}")
-                    printed = True
-                    i = i + 1
-    if printed == True:
-        action = pr.inp()
+    if level.name == "Menu":
+        printed = False
+        i = 1
+        pr.headline(level.descr)
+        for llist in level.choices:
+            if len(llist) == 1:
+                pr.n(f"{i}. {llist[0]}")
+                printed = True
+                i = i + 1
+            elif len(llist) > 1:
+                for ddict in level.triggers:
+                    if llist[1] == ddict:
+                        pr.n(f"{i}. {llist[0]}")
+                        printed = True
+                        i = i + 1
+        if printed == True:
+            action = pr.inp()
+    else:
+        printed = False
+        i = 1
+        pr.n(level.descr)
+        for llist in level.choices:
+            if len(llist) == 1:
+                pr.n(f"{i}. {llist[0]}")
+                printed = True
+                i = i + 1
+            elif len(llist) > 1:
+                for ddict in level.triggers:
+                    if llist[1] == ddict:
+                        pr.n(f"{i}. {llist[0]}")
+                        printed = True
+                        i = i + 1
+        if printed == True:
+            action = pr.inp()
 
         ##### ##### Reads triggers and action calls in level.text[dicts] ##### ##### 
         #try:
@@ -73,6 +89,10 @@ def interact_with_level(player, level, level_list):
                             if llevel.name == str(level.text[int(action) - 1][1][key[1]]):
                                 new_level = llevel
                                 player.change_location(level, new_level)
+                    case _:
+                        if dbg:
+                            pr.dbg("level.text[int(action) - 1][1][key[0]] is not defined in: [ACTIONPARSER]")
+                    
         # except:
         #     pr.b("Deine Eingabe war falsch.")
 
@@ -122,7 +142,7 @@ def gameloop(player, level_list=[]):
 
 
 if __name__ == "__main__":
-    mPlayer = Entity("Player", 100,100,0,[item("Item1","weapon"),item("item2","misc")], location="Wiese")
+    mPlayer = Entity("Player", 100,100,0,[item("Item1","weapon"),item("item2","misc")], location="Menu")
     h = Entity()
     #mPlayer.set_name()
     kopfschmerz = Effect("Kopfschmerz","Kopfschmerzen halt.","bad", -1, "hp")
@@ -152,9 +172,29 @@ if __name__ == "__main__":
     # mPlayer.actionstack.put("let_effects_take_effect")
     
     ####Create a New Level with Player as only Entity in Level
-    nirvana = Level(["Du siehst einen Weg.",], ["Atmen", "Den Wen entlanggehen"],"Nirvana", [], "Testtype", "nirvana",[])                  #hier chillen entitys die existieren ohne in einem level eingesetzt zu werden
-    nowhere = Level([""], [],"nowhere", [], "Testtype", "nowhere",[])                         #Hommage für alte Textadventures
-    newnewLevel = Level(["Du siehst einen Weg, der ins Nirvana führt."], ["Nachdenken","Ins Nirvana gehen"],"NewNewLevel", [], "Testtype", "NewNewLevel",[])
+    #nirvana = Level(["Du siehst einen Weg.",], ["Atmen", "Den Wen entlanggehen"],"Nirvana", [], "Testtype", "nirvana",[])                  #hier chillen entitys die existieren ohne in einem level eingesetzt zu werden
+    #nowhere = Level([""], [],"nowhere", [], "Testtype", "nowhere",[])                         #Hommage für alte Textadventures
+    #newnewLevel = Level(["Du siehst einen Weg, der ins Nirvana führt."], ["Nachdenken","Ins Nirvana gehen"],"NewNewLevel", [], "Testtype", "NewNewLevel",[])
+    menu = Level(
+        [
+            [""],
+            [""],
+            [""],
+            [""],
+            ["",{"action":"dbg_true"}]
+        ],
+        [
+            ["Spiel starten"],
+            ["Spiel laden"],
+            ["Optionen"],
+            ["Beenden"],
+            [""]                #dev mode (sets dbg true)
+        ],
+        "Menu",
+        [],
+        "neutral",
+
+    )
     wiese = Level(
         [
             ["Du schüttelst deinen Kopf. Die kopfschmerzen verschwinden.",  {"action":"remove_effect_by_name",
@@ -170,14 +210,17 @@ if __name__ == "__main__":
         ],
         "Wiese",
         descr="Du wachst auf einer Wiese auf. Du hst kopfschmerzen. \nIn der Ferne siehst du die Umrisse einer Stadt.",
-        entitylist=[mPlayer],
+        entitylist=[],
         triggers=[{"umgesehen":False}]
     )
     kreuzung = Level(
         [
-            ["Du gehst in die Stadt.", {"action":"change_location"}],
-            ["Du gehst in den Wald.", {"action":"change_location"}],
-            ["Du gehst in die Miene.", {"action":"change_location"}],
+            ["Du gehst in die Stadt.", {"action":"change_location",
+                                        "new_level_name":"Stadt"}],
+            ["Du gehst in den Wald.",  {"action":"change_location",
+                                        "new_level_name":"Wald"}],
+            ["Du gehst in die Miene.", {"action":"change_location",
+                                        "new_level_name":"Miene"}],
             ["Du gehst zur Wiese", {"action":"change_location", 
                                     "new_level_name":"Wiese"}]
         ],
@@ -194,6 +237,6 @@ if __name__ == "__main__":
         triggers=[]
     )
     ####Run Gameloop with nirvana as Level
-    gameloop(mPlayer, [nirvana, newnewLevel, wiese, kreuzung])
+    gameloop(mPlayer, [ wiese, kreuzung, menu])
     
     
