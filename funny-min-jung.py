@@ -91,7 +91,7 @@ def interact_with_level(player, level, level_list):
                                 player.change_location(level, new_level)
                     case _:
                         if dbg:
-                            pr.dbg("level.text[int(action) - 1][1][key[0]] is not defined in: [ACTIONPARSER]")
+                            pr.dbg(f"{level.text[int(action) - 1][1][key[0]]} is not defined in: [ACTIONPARSER]")
                     
         # except:
         #     pr.b("Deine Eingabe war falsch.")
