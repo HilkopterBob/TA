@@ -19,6 +19,7 @@ action = ""
 
 
 def interact_with_level(player, level):
+    ##### ##### prints out choices and gets user input if choices got printed ##### #####
     printed = False
     i = 1
     pr.n(level.descr)
@@ -35,23 +36,36 @@ def interact_with_level(player, level):
                     i = i + 1
     if printed == True:
         action = pr.inp()
+
+        ##### ##### Reads triggers and action calls in level.text[dicts] ##### ##### 
         #try:
         pr.n(level.text[int(action) - 1][0])
-    
         if len(level.text[int(action) - 1]) > 1:
             key = list(level.text[int(action) - 1][1].keys())
-            for ddict in level.triggers:
-                if ddict.keys() == level.text[int(action) - 1][1].keys():
-                    try:
-                        triggered_dict = list(filter(lambda dict: dict[key[0]] != level.text[int(action) - 1][1][key[0]], level.triggers))
-                        triggered_dict_index = level.triggers.index(triggered_dict[0])
-                        level.triggers[triggered_dict_index] = level.text[int(action) - 1][1]
-                    except IndexError as e:
-                        if dbg:
-                            pr.dbg(e)
-                    print(level.text[int(action) - 1][1])
-                    print(level.triggers)
-                    #FUNKTIONIERT!!! refactor incoming...
+
+            if "action" not in str(key[0]):
+                ##### ##### reads and changes triggers ##### #####
+                for ddict in level.triggers:
+                    if ddict.keys() == level.text[int(action) - 1][1].keys():
+                        try:
+                            triggered_dict = list(filter(lambda dict: dict[key[0]] != level.text[int(action) - 1][1][key[0]], level.triggers))
+                            triggered_dict_index = level.triggers.index(triggered_dict[0])
+                            level.triggers[triggered_dict_index] = level.text[int(action) - 1][1]
+                        except IndexError as e:
+                            if dbg:
+                                pr.dbg(e)
+                        print(level.text[int(action) - 1][1])
+                        print(level.triggers)
+                        #FUNKTIONIERT!!! refactor incoming...
+            elif "action" in str(key[0]):
+                ##### ##### reads and uses action calls (action parser)##### #####
+                print(key)
+                print(level.text[int(action) - 1][1][key[0]])
+                print(level.text[int(action) - 1][1][key[1]])
+                match level.text[int(action) - 1][1][key[0]]:
+                    case "remove_effect_by_name":
+                        print(player.remove_effect_by_name(str(level.text[int(action) - 1][1][key[1]])))
+                    case "change_location":
         # except:
         #     pr.b("Deine Eingabe war falsch.")
 
@@ -63,6 +77,8 @@ def hud(player):
     pr.n(F"Level: {player.level} XP: {player.xp}")
 
 
+
+
 def gameloop(player, level_list=[]):
         
     lap = 0                                             #rundenanzahl
@@ -71,7 +87,6 @@ def gameloop(player, level_list=[]):
             if level.name == player.location:
                 current_level = level
 
-        
         for e in current_level.entitylist:
             for a in list(e.actionstack.queue):
                 pr.dbg(a)
@@ -96,19 +111,20 @@ def gameloop(player, level_list=[]):
 
 
 if __name__ == "__main__":
-    mPlayer = Entity("Player", 100,100,0,[item("Item1","weapon"),item("item2","misc")])
+    mPlayer = Entity("Player", 100,100,0,[item("Item1","weapon"),item("item2","misc")], location="Wiese")
     h = Entity()
     #mPlayer.set_name()
-    vergiftung = Effect("Vergiftung","Nö","bad", -10, "hp")
+    kopfschmerz = Effect("Kopfschmerz","Kopfschmerzen halt.","bad", -1, "hp")
     heilung = Effect("heilung","Nö","good", 5, "hp")
     heilung2 = Effect("heilung2","Nö","good", 5, "hp")
     heilung3 = Effect("heilung 3","Nö","good", 5, "hp")
     terror = Effect("Terror","Nö","evil", -100, "xp")
     #print(vars(vergiftung))
-    mPlayer.add_effect(vergiftung)
-    mPlayer.add_effect(heilung)
-    mPlayer.add_effect(heilung2)
-    mPlayer.add_effect(heilung3)
+    mPlayer.add_effect(kopfschmerz)
+    print(kopfschmerz.name)
+    # mPlayer.add_effect(heilung)
+    # mPlayer.add_effect(heilung2)
+    # mPlayer.add_effect(heilung3)
     #mPlayer.add_effect(terror)
     # mPlayer.show_effects()
     #print(mPlayer.effects)
@@ -120,10 +136,10 @@ if __name__ == "__main__":
     
     
     ####Add actions to Player Actionstack
-    mPlayer.actionstack.put("Some Action from Actionstack")
-    mPlayer.actionstack.put("Another Action from Actionstack")
-    mPlayer.actionstack.put("And Another Action from Actionstack")
-    mPlayer.actionstack.put("let_effects_take_effect")
+    # mPlayer.actionstack.put("Some Action from Actionstack")
+    # mPlayer.actionstack.put("Another Action from Actionstack")
+    # mPlayer.actionstack.put("And Another Action from Actionstack")
+    # mPlayer.actionstack.put("let_effects_take_effect")
     
     ####Create a New Level with Player as only Entity in Level
     nirvana = Level(["Du siehst einen Weg.",], ["Atmen", "Den Wen entlanggehen"],"Nirvana", [], "Testtype", "nirvana",[])                  #hier chillen entitys die existieren ohne in einem level eingesetzt zu werden
@@ -131,9 +147,11 @@ if __name__ == "__main__":
     newnewLevel = Level(["Du siehst einen Weg, der ins Nirvana führt."], ["Nachdenken","Ins Nirvana gehen"],"NewNewLevel", [], "Testtype", "NewNewLevel",[])
     wiese = Level(
         [
-            ["Du schüttelst deinen Kopf. Die kopfschmerzen verschwinden."],
+            ["Du schüttelst deinen Kopf. Die kopfschmerzen verschwinden.",  {"action":"remove_effect_by_name",
+                                                                            "effect.name":"Kopfschmerz"}],
             [ "Du siehst dich um. Etwas entfernt scheint ein Weg zu sein.", {"umgesehen":True}],
-            ["Den Weg entlang gehen."]
+            ["Du gehst den Weg entlang.",  {"action":"change_location",
+                                            "new_level_name":"Kreuzung"}]
         ],
         [
             ["etwas gegen deine Kopfschmerzen machen"],
@@ -142,9 +160,9 @@ if __name__ == "__main__":
         ],
         "Wiese",
         descr="Du wachst auf einer Wiese auf. Du hst kopfschmerzen. \nIn der Ferne siehst du die Umrisse einer Stadt.",
+        entitylist=[mPlayer],
         triggers=[{"umgesehen":False}]
     )
-
     kreuzung = Level(
         [
             ["Du gehst in die Stadt.", {"action":"change_location"}],
@@ -166,6 +184,6 @@ if __name__ == "__main__":
         triggers=[]
     )
     ####Run Gameloop with nirvana as Level
-    gameloop(mPlayer, [nirvana, newnewLevel, wiese])
+    gameloop(mPlayer, [nirvana, newnewLevel, wiese, kreuzung])
     
     
