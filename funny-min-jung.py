@@ -40,11 +40,8 @@ def interact_with_level(player, level):
     
         if len(level.text[int(action) - 1]) > 1:
             key = list(level.text[int(action) - 1][1].keys())
-            #print(key)
             for ddict in level.triggers:
                 if ddict.keys() == level.text[int(action) - 1][1].keys():
-                    #level.triggers.keys == level.text[int(action) - 1][1]
-                    #level.triggers = list (filter(lambda d: d[key[0]] != level.text[int(action) - 1][1], level.triggers))
                     try:
                         triggered_dict = list(filter(lambda dict: dict[key[0]] != level.text[int(action) - 1][1][key[0]], level.triggers))
                         triggered_dict_index = level.triggers.index(triggered_dict[0])
@@ -85,8 +82,7 @@ def gameloop(player, level_list=[]):
         player.let_effects_take_effect(dbg)                 #effects 
         player.check_level_up()                             #check for levelups and level up if enough xp
         interact_with_level(player, current_level)
-        if player.location != "Wiese":
-            player.change_location(level_list[0],level_list[2]) #changes the entity location, deletes entity from old level and adds to the new one
+        #changes the entity location, deletes entity from old level and adds to the new one
         
 
 
@@ -130,11 +126,46 @@ if __name__ == "__main__":
     mPlayer.actionstack.put("let_effects_take_effect")
     
     ####Create a New Level with Player as only Entity in Level
-    nirvana = Level(["Du siehst einen Weg.",], ["Atmen", "Den Wen entlanggehen"],"Nirvana", [], "Testtype", "nirvana",[mPlayer])                  #hier chillen entitys die existieren ohne in einem level eingesetzt zu werden
+    nirvana = Level(["Du siehst einen Weg.",], ["Atmen", "Den Wen entlanggehen"],"Nirvana", [], "Testtype", "nirvana",[])                  #hier chillen entitys die existieren ohne in einem level eingesetzt zu werden
     nowhere = Level([""], [],"nowhere", [], "Testtype", "nowhere",[])                         #Hommage für alte Textadventures
     newnewLevel = Level(["Du siehst einen Weg, der ins Nirvana führt."], ["Nachdenken","Ins Nirvana gehen"],"NewNewLevel", [], "Testtype", "NewNewLevel",[])
-    wiese = Level([["die erste option zeigt diesen text"],[ "die zweite option zeigt diesen text",{"trigger03":True}],["dritte option"]],[["erste option"],["zweite option"],["dritte option",{"trigger03":True}]],"Wiese",descr="Das ist die Beschreibung einer Wiese.", triggers=[{"trigger03":False}])
+    wiese = Level(
+        [
+            ["Du schüttelst deinen Kopf. Die kopfschmerzen verschwinden."],
+            [ "Du siehst dich um. Etwas entfernt scheint ein Weg zu sein.", {"umgesehen":True}],
+            ["Den Weg entlang gehen."]
+        ],
+        [
+            ["etwas gegen deine Kopfschmerzen machen"],
+            ["dich umsehen"],
+            ["den Weg entlang gehen",{"umgesehen":True}]
+        ],
+        "Wiese",
+        descr="Du wachst auf einer Wiese auf. Du hst kopfschmerzen. \nIn der Ferne siehst du die Umrisse einer Stadt.",
+        triggers=[{"umgesehen":False}]
+    )
+
+    kreuzung = Level(
+        [
+            ["Du gehst in die Stadt.", {"action":"change_location"}],
+            ["Du gehst in den Wald.", {"action":"change_location"}],
+            ["Du gehst in die Miene.", {"action":"change_location"}],
+            ["Du gehst zur Wiese", {"action":"change_location", 
+                                    "new_level_name":"Wiese"}]
+        ],
+        [
+            ["In die Stadt gehen"],
+            ["In den Wald gehen"],
+            ["In die Miene gehen"],
+            ["Zur Wiese gehen"]
+        ],
+        name="Kreuzung",
+        ltype="friedlich",
+        descr="Du folgst dem Weg bis zu einer Kreuzung.",
+        entitylist=[],
+        triggers=[]
+    )
     ####Run Gameloop with nirvana as Level
-    gameloop(mPlayer, [nirvana, newnewLevel,wiese])
+    gameloop(mPlayer, [nirvana, newnewLevel, wiese])
     
     
