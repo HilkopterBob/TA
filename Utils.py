@@ -1,4 +1,4 @@
-from pystyle import Write, Colors, Colorate
+from pystyle import Write, Colors, Colorate, Box, Center
 from huepy import *
 import inspect
 
@@ -40,8 +40,6 @@ def dbg(text="", errlvl=0):
     else:
         print(f'{info("")} {bad("")} {str(yellow(f"DBG - {module} - {function}: "))} {str(text)}')
 
-
-
 def showcase():
     n("Das ist die standard Printanweisung")
     a("Allerts!")
@@ -74,6 +72,9 @@ def stop_game_on_exception(exception):
 
 def pause():
     programPause = input("Press the <ENTER> key to continue...")
+
+def headline(text=""):
+    print(Center.XCenter(Box.Lines(text)))
 
 
 
