@@ -1,24 +1,26 @@
 from Entities import Entity, item, itemInit
 from Level import Level, LevelInit
-from Effect import Effect
+from Effect import Effect, EffectInit
 import Utils as pr 
 import json
 import hunter 
+import sys
 
-
-#hunter.trace(module="__main__")
 
 
 ##################
 ##Debug Variable##
 global dbg
 dbg = True
+sys.stdout.reconfigure(encoding='utf-8')
+hunter.trace(module="__main__")
 ##################
 
 ###################
 ###ENV Variables###
 items_file = "config/items.json"
 levels_file = "config/levels.json"
+effects_file = "config/effects.json"
 ###################
 
 
@@ -28,7 +30,9 @@ def interact_with_level(player, level, level_list):
     printed = False
     i = 1
     if level.name == "Menu":
+        pr.n("\n"*5)
         pr.headline(level.descr)
+        pr.n("\n"*2)
     else:
         pr.n(level.descr)
     for llist in level.choices:
@@ -50,60 +54,70 @@ def interact_with_level(player, level, level_list):
 
     pr.n(level.text[int(action) - 1][0])
     if len(level.text[int(action) - 1]) > 1:
-        key = list(level.text[int(action) - 1][1].keys())
-
-        if "action" not in str(key[0]):
-            ##### ##### reads and changes triggers ##### #####
-            for ddict in level.triggers:
-                if ddict.keys() == level.text[int(action) - 1][1].keys():
-                    try:
-                        triggered_dict = list(filter(lambda dict: dict[key[0]] != level.text[int(action) - 1][1][key[0]], level.triggers))
-                        triggered_dict_index = level.triggers.index(triggered_dict[0])
-                        level.triggers[triggered_dict_index] = level.text[int(action) - 1][1]
-                    except IndexError as e:
+        i = 1
+        while i < len(level.text[int(action) - 1]):
+            key = list(level.text[int(action) - 1][i].keys())
+            if "action" not in str(key[0]):
+                ##### ##### reads and changes triggers ##### #####
+                for ddict in level.triggers:
+                    if ddict.keys() == level.text[int(action) - 1][i].keys():
+                        pr.b(ddict)
+                        pr.b(level.text[int(action) - 1][i])
+                        pr.b(i)
+                        pr.b(key[0])
+                        pr.b(level.text[int(action) - 1][i][str(key[0])])
+                        pr.b("Kopfschmerzen" == key[0])
+                        triggered_dict = list(filter(lambda dict: dict[key[0]] != level.text[int(action) - 1][i][key[0]], level.triggers))
+                        triggered_dict_index = level.triggers.index(triggered_dict[i - 2])
+                        level.triggers[triggered_dict_index] = level.text[int(action) - 1][i]
+                        
                         if dbg:
-                            pr.dbg(e)
-                    if dbg:
-                        pr.dbg(level.text[int(action) - 1][1])
-                        pr.dbg(level.triggers)
-                    #FUNKTIONIERT!!! refactor incoming...
-        elif "action" in str(key[0]):
-            ##### ##### reads and uses action calls (action parser)##### #####
-            if dbg:
-                try:
-                    pr.dbg(key)
-                    pr.dbg(level.text[int(action) - 1][1][key[0]])
-                    pr.dbg(level.text[int(action) - 1][1][key[1]])
-                except Exception as e:
-                    pr.dbg(Exception)
-            match level.text[int(action) - 1][1][key[0]]:
-                case "remove_effect_by_name":
-                    player.remove_effect_by_name(str(level.text[int(action) - 1][1][key[1]]))
-                case "change_location":
-                    for llevel in level_list:
-                        if llevel.name == str(level.text[int(action) - 1][1][key[1]]):
-                            new_level = llevel
-                            player.change_location(level, new_level)
-                case "dbg_true":
-                    if dbg:
-                        pr.b(pr.dbg("UNBEDINGT DEBUG ACTIVIEREN WENN AUF PROD GEPUSHT WIRD!!!"))
-                case _:
-                    if dbg:
-                        pr.dbg(f"{level.text[int(action) - 1][1][key[0]]} is not defined : [ACTIONPARSER]")
-                
+                            pr.dbg(level.text[int(action) - 1][i])
+                            pr.dbg(level.triggers)
+                        #FUNKTIONIERT!!! refactor incoming...
+            elif "action" in str(key[0]):
+                ##### ##### reads and uses action calls (action parser)##### #####
+                if dbg:
+                    try:
+                        pr.dbg(key)
+                        pr.dbg(level.text[int(action) - 1][i][key[0]])
+                        pr.dbg(level.text[int(action) - 1][i][key[1]])
+                    except Exception as e:
+                        pr.dbg(Exception)
+                match level.text[int(action) - 1][i][key[0]]:
+                    case "remove_effect_by_name":
+                        player.remove_effect_by_name(str(level.text[int(action) - 1][i][key[1]]))
+                    case "change_location":
+                        for llevel in level_list:
+                            if llevel.name == str(level.text[int(action) - 1][i][key[1]]):
+                                new_level = llevel
+                                player.change_location(level, new_level)
+                    case "dbg_true":
+                        if dbg:
+                            pr.b(pr.dbg("UNBEDINGT DEBUG ACTIVIEREN WENN AUF PROD GEPUSHT WIRD!!!"))
+                    case "add_effect":
+                        effect = EffectInit.load_effect_by_name_from_json(effects_file, str(level.text[int(action) - 1][i]["effect_name"]))
+                        player.add_effect(effect)
+                    case _:
+                        if dbg:
+                            pr.dbg(f"{level.text[int(action) - 1][i][key[0]]} is not defined : [ACTIONPARSER]")
+            i = i + 1
+                    
     # except:
     #     pr.b("Deine Eingabe war falsch.")
 
 
 
 def hud(player):
-    pr.n(f"Du befindest dich in: {player.location}")
-    if player.hp > 25:
-        pr.g(f"HP: {player.hp}")
-    else:
-        pr.b(f"HP: {player.hp}")
-    pr.n(f"Gold: {player.wealth}")
-    pr.n(F"Level: {player.level} XP: {player.xp}")
+    if player.location != "Menu" and player.location != "Options":
+        pr.n("+"*12+f" "+"+"*12)
+        pr.n(f"Du befindest dich in: {player.location}")
+        if player.hp > 25:
+            pr.g(f"HP: {player.hp}")
+        else:
+            pr.b(f"HP: {player.hp}")
+        pr.n(f"Gold: {player.wealth}")
+        pr.n(F"Level: {player.level} XP: {player.xp}")
 
 
 
@@ -115,7 +129,6 @@ def gameloop(player, level_list=[]):
         for level in level_list:
             if level.name == player.location:
                 current_level = level
-
         for e in current_level.entitylist:
             for a in list(e.actionstack.queue):
                 pr.dbg(a)
@@ -149,7 +162,7 @@ if __name__ == "__main__":
     heilung3 = Effect("heilung 3","Nö","good", 5, "hp")
     terror = Effect("Terror","Nö","evil", -100, "xp")
     #print(vars(vergiftung))
-    mPlayer.add_effect(kopfschmerz)
+    #mPlayer.add_effect(kopfschmerz)
     # mPlayer.add_effect(heilung)
     # mPlayer.add_effect(heilung2)
     # mPlayer.add_effect(heilung3)
