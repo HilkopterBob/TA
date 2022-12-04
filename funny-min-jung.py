@@ -107,7 +107,6 @@ def interact_with_level(player, level, level_list):
     #     pr.b("Deine Eingabe war falsch.")
 
 
-
 def hud(player):
     if player.location != "Menu" and player.location != "Options":
         pr.n("+"*12+f" "+"+"*12)
