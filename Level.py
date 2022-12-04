@@ -66,7 +66,7 @@ class LevelInit():
             =return= List of all Levels loaded from Json
         """
         curLevels = []
-        with open(json_file) as json_data:
+        with open(json_file, encoding="UTF-8") as json_data:
             data = json.load(json_data)
             
         for lname in data.keys():
@@ -81,7 +81,7 @@ class LevelInit():
 
             =return= Level object
         """
-        with open(json_file) as json_data:
+        with open(json_file, encoding="UTF-8") as json_data:
             data = json.load(json_data)
             
 
