@@ -87,7 +87,7 @@ class LevelInit():
 
         for lname in data.keys():
             if lname == name:
-               return Level.from_json(data[lname], lname)
+                return Level.from_json(data[lname], lname)
         
         pr.dbg(f"Levelname: {pr.cyan(lname)} not found!",1)
         return False
