@@ -1,10 +1,12 @@
 {
     "Menu":{
         "text": [
-            [""],
-            [""],
-            [""],
-            [""],
+            ["",   {"action":"change_location",
+                    "new_level_name":"Wiese"}],
+            [""],   
+            ["",  {"action":"change_location",
+                    "new_level_name":"Options"}],
+            ["",  {"action":"close_game"}],
             ["",{"action":"dbg_true"}]
         ],
         "choices": [
@@ -19,6 +21,21 @@
         "descr": "Hauptmenue",
         "entitylist":[],
         "triggers":[]
+    },
+
+    "Options":{
+        "text": [
+            ["",   {"action":"change_location",
+                    "new_level_name":"Menu"}],
+            [""]
+        ],
+        "choices": [
+            ["Zurück zum Menü"]
+        ],
+        "inv":[],
+        "ltype":"neutral",
+        "descr":"Optionen:",
+        "entitylist":[]
     },
 
     "Wiese":{

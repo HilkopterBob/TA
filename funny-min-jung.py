@@ -25,7 +25,7 @@ def interact_with_level(player, level, level_list):
         i = 1
         pr.headline(level.descr)
         for llist in level.choices:
-            if len(llist) == 1:
+            if len(llist) == 1 and llist[0] != "":
                 pr.n(f"{i}. {llist[0]}")
                 printed = True
                 i = i + 1
