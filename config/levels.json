@@ -2,7 +2,7 @@
     "Menu":{
         "text": [
             ["",   {"action":"change_location",
-                    "new_level_name":"Wiese"}],
+                    "new_level_name":"Kreuzung"}],
             [""],   
             ["",  {"action":"change_location",
                     "new_level_name":"Options"}],

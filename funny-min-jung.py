@@ -3,6 +3,10 @@ from Level import Level, LevelInit
 from Effect import Effect
 import Utils as pr 
 import json
+import hunter 
+
+
+hunter.trace(module="__main__")
 
 
 ##################
@@ -20,82 +24,66 @@ levels_file = "config/levels.json"
 
 def interact_with_level(player, level, level_list):
     ##### ##### prints out choices and gets user input if choices got printed ##### #####
-    if level.name == "Menu":
-        printed = False
-        i = 1
-        pr.headline(level.descr)
-        for llist in level.choices:
-            if len(llist) == 1 and llist[0] != "":
-                pr.n(f"{i}. {llist[0]}")
-                printed = True
-                i = i + 1
-            elif len(llist) > 1:
-                for ddict in level.triggers:
-                    if llist[1] == ddict:
-                        pr.n(f"{i}. {llist[0]}")
-                        printed = True
-                        i = i + 1
-        if printed == True:
-            action = pr.inp()
-    else:
-        printed = False
-        i = 1
-        pr.n(level.descr)
-        for llist in level.choices:
-            if len(llist) == 1:
-                pr.n(f"{i}. {llist[0]}")
-                printed = True
-                i = i + 1
-            elif len(llist) > 1:
-                for ddict in level.triggers:
-                    if llist[1] == ddict:
-                        pr.n(f"{i}. {llist[0]}")
-                        printed = True
-                        i = i + 1
-        if printed == True:
-            action = pr.inp()
 
-        ##### ##### Reads triggers and action calls in level.text[dicts] ##### ##### 
-        #try:
-        pr.n(level.text[int(action) - 1][0])
-        if len(level.text[int(action) - 1]) > 1:
-            key = list(level.text[int(action) - 1][1].keys())
+    printed = False
+    i = 1
+    pr.n(level.descr)
+    for llist in level.choices:
+        if len(llist) == 1:
+            pr.n(f"{i}. {llist[0]}")
+            printed = True
+            i = i + 1
+        elif len(llist) > 1:
+            for ddict in level.triggers:
+                if llist[1] == ddict:
+                    pr.n(f"{i}. {llist[0]}")
+                    printed = True
+                    i = i + 1
+    if printed == True:
+        action = pr.inp()
 
-            if "action" not in str(key[0]):
-                ##### ##### reads and changes triggers ##### #####
-                for ddict in level.triggers:
-                    if ddict.keys() == level.text[int(action) - 1][1].keys():
-                        try:
-                            triggered_dict = list(filter(lambda dict: dict[key[0]] != level.text[int(action) - 1][1][key[0]], level.triggers))
-                            triggered_dict_index = level.triggers.index(triggered_dict[0])
-                            level.triggers[triggered_dict_index] = level.text[int(action) - 1][1]
-                        except IndexError as e:
-                            if dbg:
-                                pr.dbg(e)
+    ##### ##### Reads triggers and action calls in level.text[dicts] ##### ##### 
+    #try:
+
+    pr.n(level.text[int(action) - 1][0])
+    if len(level.text[int(action) - 1]) > 1:
+        key = list(level.text[int(action) - 1][1].keys())
+
+        if "action" not in str(key[0]):
+            ##### ##### reads and changes triggers ##### #####
+            for ddict in level.triggers:
+                if ddict.keys() == level.text[int(action) - 1][1].keys():
+                    try:
+                        triggered_dict = list(filter(lambda dict: dict[key[0]] != level.text[int(action) - 1][1][key[0]], level.triggers))
+                        triggered_dict_index = level.triggers.index(triggered_dict[0])
+                        level.triggers[triggered_dict_index] = level.text[int(action) - 1][1]
+                    except IndexError as e:
                         if dbg:
-                            pr.dbg(level.text[int(action) - 1][1])
-                            pr.dbg(level.triggers)
-                        #FUNKTIONIERT!!! refactor incoming...
-            elif "action" in str(key[0]):
-                ##### ##### reads and uses action calls (action parser)##### #####
-                if dbg:
-                    pr.dbg(key)
-                    pr.dbg(level.text[int(action) - 1][1][key[0]])
-                    pr.dbg(level.text[int(action) - 1][1][key[1]])
-                match level.text[int(action) - 1][1][key[0]]:
-                    case "remove_effect_by_name":
-                        player.remove_effect_by_name(str(level.text[int(action) - 1][1][key[1]]))
-                    case "change_location":
-                        for llevel in level_list:
-                            if llevel.name == str(level.text[int(action) - 1][1][key[1]]):
-                                new_level = llevel
-                                player.change_location(level, new_level)
-                    case _:
-                        if dbg:
-                            pr.dbg(f"{level.text[int(action) - 1][1][key[0]]} is not defined in: [ACTIONPARSER]")
-                    
-        # except:
-        #     pr.b("Deine Eingabe war falsch.")
+                            pr.dbg(e)
+                    if dbg:
+                        pr.dbg(level.text[int(action) - 1][1])
+                        pr.dbg(level.triggers)
+                    #FUNKTIONIERT!!! refactor incoming...
+        elif "action" in str(key[0]):
+            ##### ##### reads and uses action calls (action parser)##### #####
+            if dbg:
+                pr.dbg(key)
+                pr.dbg(level.text[int(action) - 1][1][key[0]])
+                pr.dbg(level.text[int(action) - 1][1][key[1]])
+            match level.text[int(action) - 1][1][key[0]]:
+                case "remove_effect_by_name":
+                    player.remove_effect_by_name(str(level.text[int(action) - 1][1][key[1]]))
+                case "change_location":
+                    for llevel in level_list:
+                        if llevel.name == str(level.text[int(action) - 1][1][key[1]]):
+                            new_level = llevel
+                            player.change_location(level, new_level)
+                case _:
+                    if dbg:
+                        pr.dbg(f"{level.text[int(action) - 1][1][key[0]]} is not defined in: [ACTIONPARSER]")
+                
+    # except:
+    #     pr.b("Deine Eingabe war falsch.")
 
 
 
