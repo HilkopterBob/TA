@@ -1,0 +1,9 @@
+{
+    "Kopfschmerz":{
+        "name":"Kopfschmerz",
+        "descr":"Kopfschmerzen die aus dem hinteren deines Kopfes in die Stirn ziehen.\nZiemlich unangenehm.",
+        "etype":"bad",
+        "value":-2,
+        "infl":"hp"
+    }
+}
