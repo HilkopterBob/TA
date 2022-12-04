@@ -6,7 +6,7 @@ import json
 import hunter 
 
 
-hunter.trace(module="__main__")
+#hunter.trace(module="__main__")
 
 
 ##################
@@ -27,9 +27,12 @@ def interact_with_level(player, level, level_list):
 
     printed = False
     i = 1
-    pr.n(level.descr)
+    if level.name == "Menu":
+        pr.headline(level.descr)
+    else:
+        pr.n(level.descr)
     for llist in level.choices:
-        if len(llist) == 1:
+        if len(llist) == 1 and llist[0] != "":
             pr.n(f"{i}. {llist[0]}")
             printed = True
             i = i + 1
@@ -67,9 +70,12 @@ def interact_with_level(player, level, level_list):
         elif "action" in str(key[0]):
             ##### ##### reads and uses action calls (action parser)##### #####
             if dbg:
-                pr.dbg(key)
-                pr.dbg(level.text[int(action) - 1][1][key[0]])
-                pr.dbg(level.text[int(action) - 1][1][key[1]])
+                try:
+                    pr.dbg(key)
+                    pr.dbg(level.text[int(action) - 1][1][key[0]])
+                    pr.dbg(level.text[int(action) - 1][1][key[1]])
+                except Exception as e:
+                    pr.dbg(Exception)
             match level.text[int(action) - 1][1][key[0]]:
                 case "remove_effect_by_name":
                     player.remove_effect_by_name(str(level.text[int(action) - 1][1][key[1]]))
@@ -78,9 +84,12 @@ def interact_with_level(player, level, level_list):
                         if llevel.name == str(level.text[int(action) - 1][1][key[1]]):
                             new_level = llevel
                             player.change_location(level, new_level)
+                case "dbg_true":
+                    if dbg:
+                        pr.b(pr.dbg("UNBEDINGT DEBUG ACTIVIEREN WENN AUF PROD GEPUSHT WIRD!!!"))
                 case _:
                     if dbg:
-                        pr.dbg(f"{level.text[int(action) - 1][1][key[0]]} is not defined in: [ACTIONPARSER]")
+                        pr.dbg(f"{level.text[int(action) - 1][1][key[0]]} is not defined : [ACTIONPARSER]")
                 
     # except:
     #     pr.b("Deine Eingabe war falsch.")

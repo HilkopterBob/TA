@@ -7,7 +7,7 @@
             ["",  {"action":"change_location",
                     "new_level_name":"Options"}],
             ["",  {"action":"close_game"}],
-            ["",{"action":"dbg_true"}]
+            ["",{"action":"dbg_true", "action":"change_location","new_level_name":"Wiese"}]
         ],
         "choices": [
             ["Spiel starten"],
