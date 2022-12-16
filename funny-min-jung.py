@@ -13,7 +13,7 @@ import sys
 global dbg
 dbg = True
 sys.stdout.reconfigure(encoding='utf-8')
-hunter.trace(module="__main__")
+#hunter.trace(module="__main__")
 ##################
 
 ###################
@@ -67,7 +67,12 @@ def interact_with_level(player, level, level_list):
                         pr.b(key[0])
                         pr.b(level.text[int(action) - 1][i][str(key[0])])
                         pr.b("Kopfschmerzen" == key[0])
-                        triggered_dict = list(filter(lambda dict: dict[key[0]] != level.text[int(action) - 1][i][key[0]], level.triggers))
+                        try:
+                            triggered_dict = list(filter(lambda dict: dict[key[0]] != level.text[int(action) - 1][i][key[0]], level.triggers))
+                        except KeyError as e:
+                            if dbg:
+                                pr.dbg(e)
+                            continue
                         triggered_dict_index = level.triggers.index(triggered_dict[i - 2])
                         level.triggers[triggered_dict_index] = level.text[int(action) - 1][i]
                         
@@ -75,6 +80,9 @@ def interact_with_level(player, level, level_list):
                             pr.dbg(level.text[int(action) - 1][i])
                             pr.dbg(level.triggers)
                         #FUNKTIONIERT!!! refactor incoming...
+                        #Das kopfschmerzen:FAlse dict wird nicht gespeichert bug!!!
+                        #
+                        #
             elif "action" in str(key[0]):
                 ##### ##### reads and uses action calls (action parser)##### #####
                 if dbg:
