@@ -57,30 +57,48 @@ def interact_with_level(player, level, level_list):
         i = 1
         while i < len(level.text[int(action) - 1]):
             key = list(level.text[int(action) - 1][i].keys())
+            # if "action" not in str(key[0]):
+            #     ##### ##### reads and changes triggers ##### #####
+            #     for ddict in level.triggers:
+            #         if ddict.keys() == level.text[int(action) - 1][i].keys():
+            #             pr.b(ddict)
+            #             pr.b(level.text[int(action) - 1][i])
+            #             pr.b(i)
+            #             pr.b(key[0])
+            #             pr.b(level.text[int(action) - 1][i][str(key[0])])
+            #             pr.b("Kopfschmerzen" == key[0])
+            #             try:
+            #                 triggered_dict = list(filter(lambda dict: dict[key[0]] != level.text[int(action) - 1][i][key[0]], level.triggers))
+            #                 triggered_dict_index = level.triggers.index(triggered_dict[i - 2])
+            #                 level.triggers[triggered_dict_index] = level.text[int(action) - 1][i]
+                            
+            #             except KeyError as e:
+            #                 if dbg:
+            #                     pr.dbg(e)
+            #                 continue
+            #             if dbg:
+            #                 pr.dbg(level.text[int(action) - 1][i])
+            #                 pr.dbg(level.triggers)
             if "action" not in str(key[0]):
-                ##### ##### reads and changes triggers ##### #####
+                """
+                    alte Version des actionparsers, ca. 5 commits alt
+                """
                 for ddict in level.triggers:
-                    if ddict.keys() == level.text[int(action) - 1][i].keys():
-                        pr.b(ddict)
-                        pr.b(level.text[int(action) - 1][i])
-                        pr.b(i)
-                        pr.b(key[0])
-                        pr.b(level.text[int(action) - 1][i][str(key[0])])
-                        pr.b("Kopfschmerzen" == key[0])
+                    if ddict.keys() == level.text[int(action) - 1][1].keys():
                         try:
-                            triggered_dict = list(filter(lambda dict: dict[key[0]] != level.text[int(action) - 1][i][key[0]], level.triggers))
-                        except KeyError as e:
+                            #Enumerate als refactor nutzen
+                            triggered_dict = list(filter(lambda dict: dict[key[0]] != level.text[int(action) - 1][1][key[0]], level.triggers))
+                            triggered_dict_index = level.triggers.index(triggered_dict[0])
+                            level.triggers[triggered_dict_index] = level.text[int(action) - 1][1]
+                        except IndexError as e:
                             if dbg:
                                 pr.dbg(e)
-                            continue
-                        triggered_dict_index = level.triggers.index(triggered_dict[i - 2])
-                        level.triggers[triggered_dict_index] = level.text[int(action) - 1][i]
-                        
                         if dbg:
-                            pr.dbg(level.text[int(action) - 1][i])
+                            pr.dbg(level.text[int(action) - 1][1])
                             pr.dbg(level.triggers)
                         #FUNKTIONIERT!!! refactor incoming...
-                        #Das kopfschmerzen:FAlse dict wird nicht gespeichert bug!!!
+                        #FUNKTIONIERT NICHT!!! refactor incoming...
+                        #Das Trigger:Value dict wird nicht gespeichert bug!!!
                         #
                         #
             elif "action" in str(key[0]):
@@ -102,7 +120,7 @@ def interact_with_level(player, level, level_list):
                                 player.change_location(level, new_level)
                     case "dbg_true":
                         if dbg:
-                            pr.b(pr.dbg("UNBEDINGT DEBUG ACTIVIEREN WENN AUF PROD GEPUSHT WIRD!!!"))
+                            pr.b(pr.dbg("UNBEDINGT DEBUG DEAKTIVIEREN WENN AUF PROD GEPUSHT WIRD!!!"))
                     case "add_effect":
                         effect = EffectInit.load_effect_by_name_from_json(effects_file, str(level.text[int(action) - 1][i]["effect_name"]))
                         player.add_effect(effect)
