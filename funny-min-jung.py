@@ -176,8 +176,8 @@ def gameloop(player, level_list=[]):
 
 
 
-if True:
-#if __name__ == "__main__":
+
+if __name__ == "__main__":
     mPlayer = Entity("Player", 100,100,0,[item("Item1","weapon"),item("item2","misc")], location="Menu")
     h = Entity()
     #mPlayer.set_name()
