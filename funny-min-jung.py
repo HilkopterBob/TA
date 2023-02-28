@@ -80,9 +80,6 @@ def interact_with_level(player, level, level_list):
             #                 pr.dbg(level.text[int(action) - 1][i])
             #                 pr.dbg(level.triggers)
             if "action" not in str(key[0]):
-                """
-                    alte Version des actionparsers, ca. 5 commits alt
-                """
                 for ddict in level.triggers:
                     if ddict.keys() == level.text[int(action) - 1][1].keys():
                         try:
@@ -96,11 +93,6 @@ def interact_with_level(player, level, level_list):
                         if dbg:
                             pr.dbg(level.text[int(action) - 1][1])
                             pr.dbg(level.triggers)
-                        #FUNKTIONIERT!!! refactor incoming...
-                        #FUNKTIONIERT NICHT!!! refactor incoming...
-                        #Das Trigger:Value dict wird nicht gespeichert bug!!!
-                        #
-                        #
             elif "action" in str(key[0]):
                 ##### ##### reads and uses action calls (action parser)##### #####
                 if dbg:
@@ -126,7 +118,7 @@ def interact_with_level(player, level, level_list):
                         player.add_effect(effect)
                     case _:
                         if dbg:
-                            pr.dbg(f"{level.text[int(action) - 1][i][key[0]]} is not defined : [ACTIONPARSER]")
+                            pr.dbg(f"{level.text[int(action) - 1][i][key[0]]} is not defined ")
             i = i + 1
                     
     # except:
@@ -144,9 +136,6 @@ def hud(player):
         pr.n(f"Gold: {player.wealth}")
         pr.n(F"Level: {player.level} XP: {player.xp}")
 
-
-
-
 def gameloop(player, level_list=[]):
         
     lap = 0                                             #rundenanzahl
@@ -155,10 +144,12 @@ def gameloop(player, level_list=[]):
             if level.name == player.location:
                 current_level = level
         for e in current_level.entitylist:
+            """
+            Todo Action parser for actionstack (pass entity to which the action applies, 
+            pass the action, process action on entity, return successfull or error)
+            """
             for a in list(e.actionstack.queue):
                 pr.dbg(a)
-        ###Todo Action parser for actionstack (pass entity to which the action applies, pass the action, process action on entity, return successfull or error)
-        ##############################################
 
 
         player.let_effects_take_effect(dbg)                 #effects 
@@ -170,11 +161,6 @@ def gameloop(player, level_list=[]):
 
         lap = lap + 1
         pr.pause()
-
-
-
-
-
 
 
 if __name__ == "__main__":
