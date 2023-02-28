@@ -33,6 +33,7 @@ def interact_with_level(player, level, level_list):
         pr.headline(level.descr)
         pr.n("\n"*2)
     else:
+        hud(player)                                         #basic hud
         pr.n(level.descr)
     for llist in level.choices:
         if len(llist) == 1 and llist[0] != "":
@@ -159,7 +160,7 @@ def gameloop(player, level_list=[]):
         ###Todo Action parser for actionstack (pass entity to which the action applies, pass the action, process action on entity, return successfull or error)
         ##############################################
 
-        hud(player)                                         #basic hud
+
         player.let_effects_take_effect(dbg)                 #effects 
         player.check_level_up()                             #check for levelups and level up if enough xp
         interact_with_level(player, current_level, level_list)
@@ -197,6 +198,13 @@ if True:
     wieseLevel = LevelInit.load_level_by_name_from_json(levels_file, "Wiese")
     kreuzungLevel = LevelInit.load_level_by_name_from_json(levels_file, "Kreuzung")
     menuLevel = LevelInit.load_level_by_name_from_json(levels_file, "Menu")
+    
+
+
+
+
+
+    
     #allLevels = LevelInit.load_all_levels_from_json(levels_file)
     #print(vars(itemInit.load_item_by_name_from_json(items_file, "Bat")))
     #print()

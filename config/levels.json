@@ -67,7 +67,7 @@
         ],
         "inv":[],
         "ltype":"Testlevel",
-        "descr": "Du wachst auf einer Wiese auf. Du hast kopfschmerzen. \nIn der Ferne siehst du die Umrisse einer Stadt.",
+        "descr": "Du wachst auf einer Wiese auf. Du hast kopfschmerzen.\n In der Ferne siehst du die Umrisse einer Stadt.",
         "entitylist":[],
         "triggers":[{"umgesehen":false},{"Kopfschmerzen":true}]
     },
