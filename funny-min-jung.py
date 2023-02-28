@@ -18,15 +18,14 @@ sys.stdout.reconfigure(encoding='utf-8')
 
 ###################
 ###ENV Variables###
-items_file = "config/items.json"
-levels_file = "config/levels.json"
-effects_file = "config/effects.json"
+items_file = r"C:\Users\npodewils\Desktop\p\Python\TA\config\items.json"
+levels_file = r"C:\Users\npodewils\Desktop\p\Python\TA\config\levels.json"
+effects_file = r"C:\Users\npodewils\Desktop\p\Python\TA\config\effects.json"
 ###################
 
 
 def interact_with_level(player, level, level_list):
     ##### ##### prints out choices and gets user input if choices got printed ##### #####
-
     printed = False
     i = 1
     if level.name == "Menu":
@@ -87,7 +86,7 @@ def interact_with_level(player, level, level_list):
                     if ddict.keys() == level.text[int(action) - 1][1].keys():
                         try:
                             #Enumerate als refactor nutzen
-                            triggered_dict = list(filter(lambda dict: dict[key[0]] != level.text[int(action) - 1][1][key[0]], level.triggers))
+                            triggered_dict = list(filter(lambda dict: dict.keys() != level.text[int(action) - 1][1][key[0]], level.triggers))
                             triggered_dict_index = level.triggers.index(triggered_dict[0])
                             level.triggers[triggered_dict_index] = level.text[int(action) - 1][1]
                         except IndexError as e:
@@ -176,8 +175,8 @@ def gameloop(player, level_list=[]):
 
 
 
-
-if __name__ == "__main__":
+if True:
+#if __name__ == "__main__":
     mPlayer = Entity("Player", 100,100,0,[item("Item1","weapon"),item("item2","misc")], location="Menu")
     h = Entity()
     #mPlayer.set_name()
