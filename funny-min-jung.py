@@ -33,7 +33,7 @@ def interact_with_level(player, level, level_list):
         pr.headline(level.descr)
         pr.n("\n"*2)
     else:
-        hud(player)                                         #basic hud
+        hud(player)
         pr.n(level.descr)
     for llist in level.choices:
         if len(llist) == 1 and llist[0] != "":
@@ -50,8 +50,6 @@ def interact_with_level(player, level, level_list):
         action = pr.inp()
 
     ##### ##### Reads triggers and action calls in level.text[dicts] ##### ##### 
-    #try:
-
     pr.n(level.text[int(action) - 1][0])
     if len(level.text[int(action) - 1]) > 1:
         i = 1
@@ -102,9 +100,6 @@ def interact_with_level(player, level, level_list):
                         if dbg:
                             pr.dbg(f"{level.text[int(action) - 1][i][key[0]]} is not defined ")
             i = i + 1
-                    
-    # except:
-    #     pr.b("Deine Eingabe war falsch.")
 
 
 def hud(player):
@@ -126,12 +121,14 @@ def gameloop(player, level_list=[]):
             if level.name == player.location:
                 current_level = level
         for e in current_level.entitylist:
+            pr.dbg(e)
             """
             Todo Action parser for actionstack (pass entity to which the action applies, 
             pass the action, process action on entity, return successfull or error)
             """
-            for a in list(e.actionstack.queue):
-                pr.dbg(a)
+            for thing in list(e.actionstack.queue):
+                pr.dbg(thing)
+                e.add_effect(thing)
 
 
         player.let_effects_take_effect(dbg)                 #effects 
@@ -147,7 +144,7 @@ def gameloop(player, level_list=[]):
 
 if __name__ == "__main__":
     mPlayer = Entity("Player", 100,100,0,[item("Item1","weapon"),item("item2","misc")], location="Menu")
-    h = Entity()
+    hurensohn = Entity("Hurensohn", 100,100,0,[item("Item1","weapon"),item("item2","misc")], location="Wiese")
     #mPlayer.set_name()
     kopfschmerz = Effect("Kopfschmerz","Kopfschmerzen halt.","bad", -1, "hp")
     heilung = Effect("heilung","Nö","good", 5, "hp")
@@ -165,5 +162,8 @@ if __name__ == "__main__":
     # mPlayer.actionstack.put("Another Action from Actionstack")
     # mPlayer.actionstack.put("And Another Action from Actionstack")
     # mPlayer.actionstack.put("let_effects_take_effect")
+    hurensohn.actionstack.put("Kopfschmerzen")
     gameloop(mPlayer, [wieseLevel, kreuzungLevel, menuLevel])
     
+    
+
