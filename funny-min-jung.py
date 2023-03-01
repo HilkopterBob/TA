@@ -18,9 +18,9 @@ sys.stdout.reconfigure(encoding='utf-8')
 
 ###################
 ###ENV Variables###
-items_file = r"C:\Users\npodewils\Desktop\p\Python\TA\config\items.json"
-levels_file = r"C:\Users\npodewils\Desktop\p\Python\TA\config\levels.json"
-effects_file = r"C:\Users\npodewils\Desktop\p\Python\TA\config\effects.json"
+items_file = "config/items.json"
+levels_file = "config/levels.json"
+effects_file = "config/effects.json"
 ###################
 
 
@@ -57,28 +57,10 @@ def interact_with_level(player, level, level_list):
         i = 1
         while i < len(level.text[int(action) - 1]):
             key = list(level.text[int(action) - 1][i].keys())
-            # if "action" not in str(key[0]):
-            #     ##### ##### reads and changes triggers ##### #####
-            #     for ddict in level.triggers:
-            #         if ddict.keys() == level.text[int(action) - 1][i].keys():
-            #             pr.b(ddict)
-            #             pr.b(level.text[int(action) - 1][i])
-            #             pr.b(i)
-            #             pr.b(key[0])
-            #             pr.b(level.text[int(action) - 1][i][str(key[0])])
-            #             pr.b("Kopfschmerzen" == key[0])
-            #             try:
-            #                 triggered_dict = list(filter(lambda dict: dict[key[0]] != level.text[int(action) - 1][i][key[0]], level.triggers))
-            #                 triggered_dict_index = level.triggers.index(triggered_dict[i - 2])
-            #                 level.triggers[triggered_dict_index] = level.text[int(action) - 1][i]
-                            
-            #             except KeyError as e:
-            #                 if dbg:
-            #                     pr.dbg(e)
-            #                 continue
-            #             if dbg:
-            #                 pr.dbg(level.text[int(action) - 1][i])
-            #                 pr.dbg(level.triggers)
+
+
+
+
             if "action" not in str(key[0]):
                 for ddict in level.triggers:
                     if ddict.keys() == level.text[int(action) - 1][1].keys():
@@ -198,6 +180,9 @@ if __name__ == "__main__":
     #gameloop(mPlayer, menu)
     
     
+    ###########################################
+    #######___HOW TO USE ACTIONSTACK___########
+    ###########################################
     ####Add actions to Player Actionstack
     # mPlayer.actionstack.put("Some Action from Actionstack")
     # mPlayer.actionstack.put("Another Action from Actionstack")
