@@ -98,6 +98,27 @@
 
     "Stadt":{
         "text": [
+            ["Du gehst zurück zur Kreuzung", {"action":"change_location", "new_level_name":"Kreuzung"}],
+            [ "Du siehst dich um. Etwas entfernt scheint ein PUB und eine Markthalle zu sein.", {"umgesehen":true}],
+            ["Du betritst das PUB.", {"action":"change_location",
+                                            "new_level_name":"PUB"}],
+            ["Du gehst in die Markhalle", {"action":"change_location","new_level_name":"Markt"}]
+        ],
+        "choices": [
+            ["zurück zur Kreuzung gehen"],
+            ["dich umsehen"],
+            ["Den PUB betreten",{"umgesehen":true}],
+            ["Die Markthalle besuchen", {"umgesehen":true}]
+        ],
+        "inv": [],
+        "ltype": "friedlich",
+        "descr": "Du Folgst den Weg bis zu einer Großen Stadt",
+        "entitylist":[],
+        "triggers":[{"umgesehen":false}]
+    },
+
+    "PUB":{
+        "text": [
             []
         ],
         "choices": [
@@ -108,5 +129,21 @@
         "descr": "",
         "entitylist":[],
         "triggers":[]
+    },
+
+    "Markt":{
+        "text": [
+            []
+        ],
+        "choices": [
+            []
+        ],
+        "inv": [],
+        "ltype": "friedlich",
+        "descr": "Du betritst die Markhalle im inneren hersch ein reges Gewimmel",
+        "entitylist":[],
+        "triggers":[]
     }
+
+    
 }
