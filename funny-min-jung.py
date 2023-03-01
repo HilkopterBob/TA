@@ -154,32 +154,9 @@ if __name__ == "__main__":
     heilung2 = Effect("heilung2","Nö","good", 5, "hp")
     heilung3 = Effect("heilung 3","Nö","good", 5, "hp")
     terror = Effect("Terror","Nö","evil", -100, "xp")
-    #print(vars(vergiftung))
-    #mPlayer.add_effect(kopfschmerz)
-    # mPlayer.add_effect(heilung)
-    # mPlayer.add_effect(heilung2)
-    # mPlayer.add_effect(heilung3)
-    #mPlayer.add_effect(terror)
-    # mPlayer.show_effects()
-    #print(mPlayer.effects)
-    #allItems = itemInit.load_all_items_from_json(items_file)
     wieseLevel = LevelInit.load_level_by_name_from_json(levels_file, "Wiese")
     kreuzungLevel = LevelInit.load_level_by_name_from_json(levels_file, "Kreuzung")
     menuLevel = LevelInit.load_level_by_name_from_json(levels_file, "Menu")
-    
-
-
-
-
-
-    
-    #allLevels = LevelInit.load_all_levels_from_json(levels_file)
-    #print(vars(itemInit.load_item_by_name_from_json(items_file, "Bat")))
-    #print()
-    #menu = Level(["Textadventure","Hauptmenü","spiel wird geladen"],["Spiel laden","Spiel starten","Spiel beenden"],"Hauptmenü",[],"zivilisiert","Mainmanu descr")
-    #gameloop(mPlayer, menu)
-    
-    
     ###########################################
     #######___HOW TO USE ACTIONSTACK___########
     ###########################################
@@ -188,12 +165,5 @@ if __name__ == "__main__":
     # mPlayer.actionstack.put("Another Action from Actionstack")
     # mPlayer.actionstack.put("And Another Action from Actionstack")
     # mPlayer.actionstack.put("let_effects_take_effect")
-    
-    ####Create a New Level with Player as only Entity in Level
-    #nirvana = Level(["Du siehst einen Weg.",], ["Atmen", "Den Wen entlanggehen"],"Nirvana", [], "Testtype", "nirvana",[])                  #hier chillen entitys die existieren ohne in einem level eingesetzt zu werden
-    #nowhere = Level([""], [],"nowhere", [], "Testtype", "nowhere",[])                         #Hommage für alte Textadventures
-    #newnewLevel = Level(["Du siehst einen Weg, der ins Nirvana führt."], ["Nachdenken","Ins Nirvana gehen"],"NewNewLevel", [], "Testtype", "NewNewLevel",[])
-
-    ####Run Gameloop with nirvana as Level
     gameloop(mPlayer, [wieseLevel, kreuzungLevel, menuLevel])
     
