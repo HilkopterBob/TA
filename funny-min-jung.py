@@ -117,29 +117,34 @@ def hud(player):
 def gameloop(player, level_list=[]):
         
     lap = 0                                             #rundenanzahl
+    #start of loop
     while True:
+        #Loop through all Levels and check if Player is inside level   ---  TODO: FIX because unperformant
         for level in level_list:
             if level.name == player.location:
                 current_level = level
+        #Loop through all Entities in CurrentLevel and Apply Actionstack
         for e in current_level.entitylist:
-            pr.dbg(e)
             """
             Todo Action parser for actionstack (pass entity to which the action applies, 
             pass the action, process action on entity, return successfull or error)
             """
-            for thing in list(e.actionstack.queue):
-                pr.dbg(thing)
+
+            #Apply Effects from Actionstack of Entity
+            for thing in e.actionstack.queue:
                 e.add_effect(thing)
 
-
+        #Let the Effects take the Effect
         player.let_effects_take_effect(dbg)                 #effects 
         player.check_level_up()                             #check for levelups and level up if enough xp
         interact_with_level(player, current_level, level_list)
         #changes the entity location, deletes entity from old level and adds to the new one
         
 
-
+        #Increase Lap Counter by i
         lap = lap + 1
+
+        #Wait for Player Input
         pr.pause()
 
 
@@ -156,7 +161,7 @@ if __name__ == "__main__":
     #Load all existing Levels
     allLevels = LevelInit.load_all_levels_from_json(levels_file)
 
-    #List all Available Levels wiht theire Names
+    #List all Available Levels wiht theire Names when DBG is enabled
     if dbg:
         def printLevels():
             _curlevels = []
@@ -174,7 +179,10 @@ if __name__ == "__main__":
     # mPlayer.actionstack.put("Another Action from Actionstack")
     # mPlayer.actionstack.put("And Another Action from Actionstack")
     # mPlayer.actionstack.put("let_effects_take_effect")
-    hurensohn.actionstack.put("Kopfschmerzen")
+
+    #put Kopfschmerz Effect in Actionstack
+    mPlayer.actionstack.put(kopfschmerz)
+
     gameloop(mPlayer, allLevels)
     
     
