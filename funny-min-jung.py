@@ -33,7 +33,7 @@ def interact_with_level(player, level, level_list):
         pr.headline(level.descr)
         pr.n("\n"*2)
     else:
-        hud(player)                                         #basic hud
+        hud(player)
         pr.n(level.descr)
     for llist in level.choices:
         if len(llist) == 1 and llist[0] != "":
@@ -50,39 +50,17 @@ def interact_with_level(player, level, level_list):
         action = pr.inp()
 
     ##### ##### Reads triggers and action calls in level.text[dicts] ##### ##### 
-    #try:
 
     pr.n(level.text[int(action) - 1][0])
     if len(level.text[int(action) - 1]) > 1:
         i = 1
         while i < len(level.text[int(action) - 1]):
             key = list(level.text[int(action) - 1][i].keys())
-            # if "action" not in str(key[0]):
-            #     ##### ##### reads and changes triggers ##### #####
-            #     for ddict in level.triggers:
-            #         if ddict.keys() == level.text[int(action) - 1][i].keys():
-            #             pr.b(ddict)
-            #             pr.b(level.text[int(action) - 1][i])
-            #             pr.b(i)
-            #             pr.b(key[0])
-            #             pr.b(level.text[int(action) - 1][i][str(key[0])])
-            #             pr.b("Kopfschmerzen" == key[0])
-            #             try:
-            #                 triggered_dict = list(filter(lambda dict: dict[key[0]] != level.text[int(action) - 1][i][key[0]], level.triggers))
-            #                 triggered_dict_index = level.triggers.index(triggered_dict[i - 2])
-            #                 level.triggers[triggered_dict_index] = level.text[int(action) - 1][i]
-                            
-            #             except KeyError as e:
-            #                 if dbg:
-            #                     pr.dbg(e)
-            #                 continue
-            #             if dbg:
-            #                 pr.dbg(level.text[int(action) - 1][i])
-            #                 pr.dbg(level.triggers)
+
+
+
+
             if "action" not in str(key[0]):
-                """
-                    alte Version des actionparsers, ca. 5 commits alt
-                """
                 for ddict in level.triggers:
                     if ddict.keys() == level.text[int(action) - 1][1].keys():
                         try:
@@ -96,11 +74,6 @@ def interact_with_level(player, level, level_list):
                         if dbg:
                             pr.dbg(level.text[int(action) - 1][1])
                             pr.dbg(level.triggers)
-                        #FUNKTIONIERT!!! refactor incoming...
-                        #FUNKTIONIERT NICHT!!! refactor incoming...
-                        #Das Trigger:Value dict wird nicht gespeichert bug!!!
-                        #
-                        #
             elif "action" in str(key[0]):
                 ##### ##### reads and uses action calls (action parser)##### #####
                 if dbg:
@@ -126,11 +99,8 @@ def interact_with_level(player, level, level_list):
                         player.add_effect(effect)
                     case _:
                         if dbg:
-                            pr.dbg(f"{level.text[int(action) - 1][i][key[0]]} is not defined : [ACTIONPARSER]")
+                            pr.dbg(f"{level.text[int(action) - 1][i][key[0]]} is not defined ")
             i = i + 1
-                    
-    # except:
-    #     pr.b("Deine Eingabe war falsch.")
 
 
 def hud(player):
@@ -144,9 +114,6 @@ def hud(player):
         pr.n(f"Gold: {player.wealth}")
         pr.n(F"Level: {player.level} XP: {player.xp}")
 
-
-
-
 def gameloop(player, level_list=[]):
         
     lap = 0                                             #rundenanzahl
@@ -155,10 +122,14 @@ def gameloop(player, level_list=[]):
             if level.name == player.location:
                 current_level = level
         for e in current_level.entitylist:
-            for a in list(e.actionstack.queue):
-                pr.dbg(a)
-        ###Todo Action parser for actionstack (pass entity to which the action applies, pass the action, process action on entity, return successfull or error)
-        ##############################################
+            pr.dbg(e)
+            """
+            Todo Action parser for actionstack (pass entity to which the action applies, 
+            pass the action, process action on entity, return successfull or error)
+            """
+            for thing in list(e.actionstack.queue):
+                pr.dbg(thing)
+                e.add_effect(thing)
 
 
         player.let_effects_take_effect(dbg)                 #effects 
@@ -172,57 +143,39 @@ def gameloop(player, level_list=[]):
         pr.pause()
 
 
-
-
-
-
-
 if __name__ == "__main__":
     mPlayer = Entity("Player", 100,100,0,[item("Item1","weapon"),item("item2","misc")], location="Menu")
-    h = Entity()
+    hurensohn = Entity("Hurensohn", 100,100,0,[item("Item1","weapon"),item("item2","misc")], location="Wiese")
     #mPlayer.set_name()
     kopfschmerz = Effect("Kopfschmerz","Kopfschmerzen halt.","bad", -1, "hp")
     heilung = Effect("heilung","Nö","good", 5, "hp")
     heilung2 = Effect("heilung2","Nö","good", 5, "hp")
     heilung3 = Effect("heilung 3","Nö","good", 5, "hp")
     terror = Effect("Terror","Nö","evil", -100, "xp")
-    #print(vars(vergiftung))
-    #mPlayer.add_effect(kopfschmerz)
-    # mPlayer.add_effect(heilung)
-    # mPlayer.add_effect(heilung2)
-    # mPlayer.add_effect(heilung3)
-    #mPlayer.add_effect(terror)
-    # mPlayer.show_effects()
-    #print(mPlayer.effects)
-    #allItems = itemInit.load_all_items_from_json(items_file)
-    wieseLevel = LevelInit.load_level_by_name_from_json(levels_file, "Wiese")
-    kreuzungLevel = LevelInit.load_level_by_name_from_json(levels_file, "Kreuzung")
-    menuLevel = LevelInit.load_level_by_name_from_json(levels_file, "Menu")
-    stadtLevel = LevelInit.load_level_by_name_from_json(levels_file, "Stadt")
+
+    #Load all existing Levels
+    allLevels = LevelInit.load_all_levels_from_json(levels_file)
+
+    #List all Available Levels wiht theire Names
+    if dbg:
+        def printLevels():
+            _curlevels = []
+            for _level in allLevels:
+                _curlevels.append(_level.name)
+            return _curlevels
+        pr.dbg(F"Loaded Levels: {printLevels()}")
 
 
-
-
-
-    
-    #allLevels = LevelInit.load_all_levels_from_json(levels_file)
-    #print(vars(itemInit.load_item_by_name_from_json(items_file, "Bat")))
-    #print()
-    #menu = Level(["Textadventure","Hauptmenü","spiel wird geladen"],["Spiel laden","Spiel starten","Spiel beenden"],"Hauptmenü",[],"zivilisiert","Mainmanu descr")
-    #gameloop(mPlayer, menu)
-    
-    
+    ###########################################
+    #######___HOW TO USE ACTIONSTACK___########
+    ###########################################
     ####Add actions to Player Actionstack
     # mPlayer.actionstack.put("Some Action from Actionstack")
     # mPlayer.actionstack.put("Another Action from Actionstack")
     # mPlayer.actionstack.put("And Another Action from Actionstack")
     # mPlayer.actionstack.put("let_effects_take_effect")
+    hurensohn.actionstack.put("Kopfschmerzen")
+    gameloop(mPlayer, allLevels)
     
-    ####Create a New Level with Player as only Entity in Level
-    #nirvana = Level(["Du siehst einen Weg.",], ["Atmen", "Den Wen entlanggehen"],"Nirvana", [], "Testtype", "nirvana",[])                  #hier chillen entitys die existieren ohne in einem level eingesetzt zu werden
-    #nowhere = Level([""], [],"nowhere", [], "Testtype", "nowhere",[])                         #Hommage für alte Textadventures
-    #newnewLevel = Level(["Du siehst einen Weg, der ins Nirvana führt."], ["Nachdenken","Ins Nirvana gehen"],"NewNewLevel", [], "Testtype", "NewNewLevel",[])
+    
 
-    ####Run Gameloop with nirvana as Level
-    gameloop(mPlayer, [wieseLevel, kreuzungLevel, menuLevel, stadtLevel])
-    

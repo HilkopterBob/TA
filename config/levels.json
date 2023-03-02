@@ -49,7 +49,8 @@
         "inv":[],
         "ltype":"neutral",
         "descr":"Optionen:",
-        "entitylist":[]
+        "entitylist":[],
+        "triggers":[]
     },
 
     "Wiese":{
