@@ -50,6 +50,7 @@ def interact_with_level(player, level, level_list):
         action = pr.inp()
 
     ##### ##### Reads triggers and action calls in level.text[dicts] ##### ##### 
+
     pr.n(level.text[int(action) - 1][0])
     if len(level.text[int(action) - 1]) > 1:
         i = 1
@@ -151,9 +152,20 @@ if __name__ == "__main__":
     heilung2 = Effect("heilung2","Nö","good", 5, "hp")
     heilung3 = Effect("heilung 3","Nö","good", 5, "hp")
     terror = Effect("Terror","Nö","evil", -100, "xp")
-    wieseLevel = LevelInit.load_level_by_name_from_json(levels_file, "Wiese")
-    kreuzungLevel = LevelInit.load_level_by_name_from_json(levels_file, "Kreuzung")
-    menuLevel = LevelInit.load_level_by_name_from_json(levels_file, "Menu")
+
+    #Load all existing Levels
+    allLevels = LevelInit.load_all_levels_from_json(levels_file)
+
+    #List all Available Levels wiht theire Names
+    if dbg:
+        def getLevels():
+            _curlevels = []
+            for _level in allLevels:
+                _curlevels.append(_level.name)
+            return _curlevels
+        pr.dbg(F"Loaded Levels: {getLevels()}")
+
+
     ###########################################
     #######___HOW TO USE ACTIONSTACK___########
     ###########################################
@@ -163,7 +175,7 @@ if __name__ == "__main__":
     # mPlayer.actionstack.put("And Another Action from Actionstack")
     # mPlayer.actionstack.put("let_effects_take_effect")
     hurensohn.actionstack.put("Kopfschmerzen")
-    gameloop(mPlayer, [wieseLevel, kreuzungLevel, menuLevel])
+    gameloop(mPlayer, allLevels)
     
     
 
