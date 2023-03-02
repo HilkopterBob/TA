@@ -27,5 +27,10 @@
             -   wdh. bis alle Slots bearbeitet
 </br>
 
-- ## 
+- ## Ideen
+
+- Statsystm:
+  - Strength
+  - Agility
+  - etc
 
