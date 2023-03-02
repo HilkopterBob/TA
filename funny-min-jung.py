@@ -158,12 +158,12 @@ if __name__ == "__main__":
 
     #List all Available Levels wiht theire Names
     if dbg:
-        def getLevels():
+        def printLevels():
             _curlevels = []
             for _level in allLevels:
                 _curlevels.append(_level.name)
             return _curlevels
-        pr.dbg(F"Loaded Levels: {getLevels()}")
+        pr.dbg(F"Loaded Levels: {printLevels()}")
 
 
     ###########################################
