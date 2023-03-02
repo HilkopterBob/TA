@@ -18,9 +18,9 @@ sys.stdout.reconfigure(encoding='utf-8')
 
 ###################
 ###ENV Variables###
-items_file = r"C:\Users\npodewils\Desktop\p\Python\TA\config\items.json"
-levels_file = r"C:\Users\npodewils\Desktop\p\Python\TA\config\levels.json"
-effects_file = r"C:\Users\npodewils\Desktop\p\Python\TA\config\effects.json"
+items_file = "config/items.json"
+levels_file = "config/levels.json"
+effects_file = "config/effects.json"
 ###################
 
 
@@ -198,7 +198,7 @@ if __name__ == "__main__":
     wieseLevel = LevelInit.load_level_by_name_from_json(levels_file, "Wiese")
     kreuzungLevel = LevelInit.load_level_by_name_from_json(levels_file, "Kreuzung")
     menuLevel = LevelInit.load_level_by_name_from_json(levels_file, "Menu")
-    
+    stadtLevel = LevelInit.load_level_by_name_from_json(levels_file, "Stadt")
 
 
 
@@ -224,5 +224,5 @@ if __name__ == "__main__":
     #newnewLevel = Level(["Du siehst einen Weg, der ins Nirvana führt."], ["Nachdenken","Ins Nirvana gehen"],"NewNewLevel", [], "Testtype", "NewNewLevel",[])
 
     ####Run Gameloop with nirvana as Level
-    gameloop(mPlayer, [wieseLevel, kreuzungLevel, menuLevel])
+    gameloop(mPlayer, [wieseLevel, kreuzungLevel, menuLevel, stadtLevel])
     
