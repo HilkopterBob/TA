@@ -5,5 +5,13 @@
         "etype":"bad",
         "value":-2,
         "infl":"hp"
+    },
+
+    "Ermüdung":{
+        "name":"Ermüdung",
+        "descr":"Du bist ziemlich müde und solltest dich bald ausruhen.",
+        "etype":"bad",
+        "value":-2,
+        "infl":"strenght"
     }
 }
