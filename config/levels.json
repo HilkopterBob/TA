@@ -55,11 +55,9 @@
 
     "Wiese":{
         "text" : [
-            ["Du schuettelst deinen Kopf. Die kopfschmerzen verschwinden.", {"action":"remove_effect_by_name",
-                                                                            "effect.name":"Kopfschmerz"}, {"Kopfschmerzen":false}],
+            ["Du schuettelst deinen Kopf. Die kopfschmerzen verschwinden.", {"action":"remove_effect_by_name",  "effect.name":"Kopfschmerz"}, {"Kopfschmerzen":false}],
             [ "Du siehst dich um. Etwas entfernt scheint ein Weg zu sein.", {"umgesehen":true}],
-            ["Du gehst den Weg entlang.", {"action":"change_location",
-                                            "new_level_name":"Kreuzung"}]
+            ["Du gehst den Weg entlang.", {"action":"change_location",  "new_level_name":"Kreuzung"}]
         ],
         "choices": [
             ["etwas gegen deine Kopfschmerzen machen", {"Kopfschmerzen":true}],
@@ -100,25 +98,61 @@
     "Stadt":{
         "text": [
             ["Du gehst zurück zur Kreuzung", {"action":"change_location", "new_level_name":"Kreuzung"}],
-            [ "Du siehst dich um. Etwas entfernt scheint ein PUB und eine Markthalle zu sein.", {"umgesehen":true}],
-            ["Du betritst das PUB.", {"action":"change_location",
-                                            "new_level_name":"PUB"}],
-            ["Du gehst in die Markhalle", {"action":"change_location","new_level_name":"Markt"}]
+            [ "Du siehst dich um. Etwas entfernt scheint ein Pub und eine Markthalle zu sein.", {"umgesehen":true}],
+            ["Du betritst das Pub.", {"action":"change_location", "new_level_name":"Pub"}],
+            ["Du gehst in die Markhalle", {"action":"change_location","new_level_name":"Markthalle"}]
         ],
         "choices": [
             ["zurück zur Kreuzung gehen"],
             ["dich umsehen"],
-            ["Den PUB betreten",{"umgesehen":true}],
+            ["Den Pub betreten",{"umgesehen":true}],
             ["Die Markthalle besuchen", {"umgesehen":true}]
         ],
         "inv": [],
         "ltype": "friedlich",
-        "descr": "Du Folgst den Weg bis zu einer Großen Stadt",
+        "descr": "Du Folgst den Weg bis zu einer großen Stadt",
         "entitylist":[],
         "triggers":[{"umgesehen":false}]
     },
 
-    "PUB":{
+    "Pub":{
+        "text": [
+            ["Du verlässt den Pub", {"action":"change_location", "new_level_name":"Stadt"}],
+            []
+        ],
+        "choices": [
+            ["Den Pub verlassen"]
+        ],
+        "inv": [],
+        "ltype": "friedlich",
+        "descr": "",
+        "entitylist":[],
+        "triggers":[]
+    },
+
+    "Markthalle":{
+        "text": [
+            ["Du verlässt die Markthalle", {"action":"change_location", "new_level_name":"Stadt"}],
+            [ "Du schaust dich um und siehst einige Marktstände.", {"umgesehen":true}],
+            ["Du gehst an den Marktstand des Kreuterhändlers", {"action":"change_location", "new_level_name":"Kräuterhändler"}],
+            ["Du gehst an den Marktstand des Schmieds", {"action":"change_location", "new_level_name":"Schmied"}]
+
+        ],
+        "choices": [
+            ["Die Markthalle verlassen"],
+            ["dich umsehen"],
+            ["Den Kräuterhändler besuchen", {"umgesehen":true}],
+            ["Den Schmied besuchen", {"umgesehen":true}],
+            []
+        ],
+        "inv": [],
+        "ltype": "friedlich",
+        "descr": "Du betritst die Markhalle im inneren hersch ein reges Gewimmel",
+        "entitylist":[],
+        "triggers":[{"umgesehen":false}]
+    },
+
+    "Kräuterhändler":{
         "text": [
             []
         ],
@@ -132,7 +166,7 @@
         "triggers":[]
     },
 
-    "Markt":{
+    "Schmied":{
         "text": [
             []
         ],
@@ -141,7 +175,21 @@
         ],
         "inv": [],
         "ltype": "friedlich",
-        "descr": "Du betritst die Markhalle im inneren hersch ein reges Gewimmel",
+        "descr": "",
+        "entitylist":[],
+        "triggers":[]
+    },
+
+    "placeholder":{
+        "text": [
+            []
+        ],
+        "choices": [
+            []
+        ],
+        "inv": [],
+        "ltype": "friedlich",
+        "descr": "",
         "entitylist":[],
         "triggers":[]
     }
