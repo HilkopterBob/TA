@@ -1,12 +1,11 @@
 name: checkjson
-run-name: Commit to ${{ inputs.deploy_target }} by @${{ github.actor }}
+run-name: Committed by @${{ github.actor }}
 on: [push]
 jobs:
   check-json-formatting:
     runs-on: ubuntu-latest
+
     steps:
       - uses: actions/checkout@v6
-      with: 
-        path: './config/'
       - run: |
         echo Hello from Workflow
