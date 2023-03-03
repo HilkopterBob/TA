@@ -20,6 +20,10 @@ class Entity():
         self.effects = [[self.geffects],[self.beffects],[self.eeffects]]
         self.actionstack = Queue()                                                      #Actionstack for Gameloop (Only populate at runtime!)
 
+    @staticmethod   #Generate Object from Json
+    def from_json(json_dct, ename):
+        return Entity(json_dct['name'], json_dct['hp'], json_dct['wealth'],json_dct['xp'],json_dct['inv'],json_dct['ptype'],json_dct['geffects'],json_dct['beffects'],json_dct['eeffects'],json_dct['location'],json_dct['level'])
+    
     def set_name(self):
         while True:
             self.name = pr.inp("Wie soll der Held deiner Geschichte heißen?")
@@ -278,8 +282,41 @@ class Entity():
                     check_level_up_list = [level_ups, old_level]
                     return check_level_up_list
 
+class EntityInit():
+    def load_entities_fromjson(json_file):
+        """
+            Return alls Entities from Json file
+            
+            :json_file (File): Json file to load Entities from
 
+            =return= List of all Entities loaded from Json
+        """
+        curEntities = []
+        with open(json_file) as json_data:
+            data = json.load(json_data)
 
+        for ename in data.keys():
+            curEntities.append(Entity.from_json(data[ename], ename))
+        return curEntities
+    
+    def load_entities_by_name_from_json(json_file, name):
+        """
+            Return a single Entitiy Object from Json by given Name
+            
+            :json_file (File): Json File to load Entity from
+
+            =return= Entity object
+        """
+        with open(json_file) as json_data:
+            data = json.load(json_data)
+            pr.dbg(data)
+
+        for ename in data.keys():
+            if ename == name:
+                return Entity.from_json(data[ename], ename)
+
+        pr.dbg(f"Itemname: {pr.cyan(ename)} not found!",1)
+        return False
 
         
         

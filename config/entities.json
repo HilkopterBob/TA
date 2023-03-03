@@ -1,0 +1,28 @@
+{
+    "Player":{
+        "name": "Player",                                                     
+        "hp": 0,
+        "wealth": 0,
+        "inv": [],
+        "xp": 0,
+        "ptype":0, 
+        "geffects": [],                                                        
+        "beffects": [],                                                        
+        "eeffects": [],                                                        
+        "location": "",
+        "level": 0
+    },
+    "Goblin":{
+        "name": "",                                                     
+        "hp": 10,
+        "wealth": 10,
+        "inv": [],
+        "xp": 0,
+        "ptype":0, 
+        "geffects": [],                                                        
+        "beffects": [],                                                        
+        "eeffects": [],                                                        
+        "location": "",
+        "level": 0
+    }
+}

@@ -1,4 +1,4 @@
-from Entities import Entity, item, itemInit
+from Entities import Entity, EntityInit, item, itemInit
 from Level import Level, LevelInit
 from Effect import Effect, EffectInit
 import Utils as pr 
@@ -21,6 +21,7 @@ sys.stdout.reconfigure(encoding='utf-8')
 items_file = "config/items.json"
 levels_file = "config/levels.json"
 effects_file = "config/effects.json"
+entity_file = "config/entities.json"
 ##################
 
 
@@ -160,17 +161,13 @@ if __name__ == "__main__":
 
     #Load all existing Levels
     allLevels = LevelInit.load_all_levels_from_json(levels_file)
+    pr.objlist(allLevels, "Levels")
 
-    #List all Available Levels wiht theire Names when DBG is enabled
-    if dbg:
-        def printLevels():
-            _curlevels = []
-            for _level in allLevels:
-                _curlevels.append(_level.name)
-            return _curlevels
-        pr.dbg(F"Loaded Levels: {printLevels()}")
+    #Load all existing Entities
+    allEntities = EntityInit.load_entities_fromjson(entity_file)
+    pr.objlist(allEntities,"Entities")
 
-
+    
     ###########################################
     #######___HOW TO USE ACTIONSTACK___########
     ###########################################
