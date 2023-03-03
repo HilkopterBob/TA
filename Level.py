@@ -68,14 +68,11 @@ class LevelInit():
         curLevels = []
         with open(json_file, encoding="UTF-8") as json_data:
             data = json.load(json_data)
-        
-
 
         for lname in data.keys():
-            if lname["child_levels"] in lname:
-                for child_level in data.keys():
-                    for lname in data.keys():
-                        curLevels.append(Level.from_json(data[lname], lname))
+            if "child_levels" in data[lname].keys():
+                for clname in data[lname]["child_levels"].keys():
+                    curLevels.append(Level.from_json(data[lname]["child_levels"][clname], clname))
             curLevels.append(Level.from_json(data[lname], lname))
         return curLevels
 
