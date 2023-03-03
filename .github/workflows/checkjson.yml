@@ -7,5 +7,4 @@ jobs:
 
     steps:
       - uses: actions/checkout@v6
-      - run: |
-        echo Hello from Workflow
+      - run: echo Hello from Workflow
