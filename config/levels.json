@@ -130,94 +130,90 @@
                 "ltype": "friedlich",
                 "descr": "Ein gemütliches Pub mit einer aufmerksammen Bedienung",
                 "entitylist":[],
-                "triggers":[]
-            } 
+                "triggers":[],
+                "child_levels":{
+                    "Tisch":{
+                        "text": [
+                            []
+                        ],
+                        "choices": [
+                            []
+                        ],
+                        "inv": [],
+                        "ltype": "friedlich",
+                        "descr": "",
+                        "entitylist":[],
+                        "triggers":[]
+                    },
+                    "Zimmer":{
+                        "text": [
+                            []
+                        ],
+                        "choices": [
+                            []
+                        ],
+                        "inv": [],
+                        "ltype": "friedlich",
+                        "descr": "",
+                        "entitylist":[],
+                        "triggers":[]
+                    }
+                }
+            },
+            "Markthalle":{
+                "text": [
+                    [ "Du schaust dich um und siehst einige Marktstände.", {"umgesehen":true}],
+                    ["Du gehst an den Marktstand des Kreuterhändlers", {"action":"change_location", "new_level_name":"Kräuterhändler"}],
+                    ["Du gehst an den Marktstand des Schmieds", {"action":"change_location", "new_level_name":"Schmied"}],
+                    ["Du verlässt die Markthalle", {"action":"change_location", "new_level_name":"Stadt"}]
+        
+                ],
+                "choices": [
+                    ["dich umsehen"],
+                    ["Den Kräuterhändler besuchen", {"umgesehen":true}],
+                    ["Den Schmied besuchen", {"umgesehen":true}],
+                    ["Die Markthalle verlassen"],
+                    []
+                ],
+                "inv": [],
+                "ltype": "friedlich",
+                "descr": "Du betritst die Markhalle im inneren hersch ein reges Gewimmel",
+                "entitylist":[],
+                "triggers":[{"umgesehen":false}],
+                "child_levels":{
+                    "Kräuterhändler":{
+                        "text": [
+                            [],
+                            ["Du verlässt den Stand des Kräuterhändlers", {"action":"change_location", "new_level_name":"Markthalle"}]
+                        ],
+                        "choices": [
+                            [],
+                            ["Zurück zur Markthalle"]
+                        ],
+                        "inv": [],
+                        "ltype": "friedlich",
+                        "descr": "Ein Kräuterstand mit vielen verschiedenen Artikeln",
+                        "entitylist":[],
+                        "triggers":[]
+                    },
+                    "Schmied":{
+                        "text": [
+                            [],
+                            ["Du verlässt den Schmiedestand", {"action":"change_location", "new_level_name":"Markthalle"}]
+                        ],
+                        "choices": [
+                            [],
+                            ["Zurück zur Markthalle"]
+                        ],
+                        "inv": [],
+                        "ltype": "friedlich",
+                        "descr": "Der Schmied bietet viele verschiedene Waffen und Rüstungen",
+                        "entitylist":[],
+                        "triggers":[]
+                    }
+                }
+            }
         }
-    },
-
-
-
-    "Tisch":{
-        "text": [
-            []
-        ],
-        "choices": [
-            []
-        ],
-        "inv": [],
-        "ltype": "friedlich",
-        "descr": "",
-        "entitylist":[],
-        "triggers":[]
-    },
-
-    "Zimmer":{
-        "text": [
-            []
-        ],
-        "choices": [
-            []
-        ],
-        "inv": [],
-        "ltype": "friedlich",
-        "descr": "",
-        "entitylist":[],
-        "triggers":[]
-    },
-
-    "Markthalle":{
-        "text": [
-            [ "Du schaust dich um und siehst einige Marktstände.", {"umgesehen":true}],
-            ["Du gehst an den Marktstand des Kreuterhändlers", {"action":"change_location", "new_level_name":"Kräuterhändler"}],
-            ["Du gehst an den Marktstand des Schmieds", {"action":"change_location", "new_level_name":"Schmied"}],
-            ["Du verlässt die Markthalle", {"action":"change_location", "new_level_name":"Stadt"}]
-
-        ],
-        "choices": [
-            ["dich umsehen"],
-            ["Den Kräuterhändler besuchen", {"umgesehen":true}],
-            ["Den Schmied besuchen", {"umgesehen":true}],
-            ["Die Markthalle verlassen"],
-            []
-        ],
-        "inv": [],
-        "ltype": "friedlich",
-        "descr": "Du betritst die Markhalle im inneren hersch ein reges Gewimmel",
-        "entitylist":[],
-        "triggers":[{"umgesehen":false}]
-    },
-
-    "Kräuterhändler":{
-        "text": [
-            [],
-            ["Du verlässt den Stand des Kräuterhändlers", {"action":"change_location", "new_level_name":"Markthalle"}]
-
-        ],
-        "choices": [
-            [],
-            ["Zurück zur Markthalle"]
-        ],
-        "inv": [],
-        "ltype": "friedlich",
-        "descr": "Ein Kräuterstand mit vielen verschiedenen Artikeln",
-        "entitylist":[],
-        "triggers":[]
-    },
-
-    "Schmied":{
-        "text": [
-            [],
-            ["Du verlässt den Schmiedestand", {"action":"change_location", "new_level_name":"Markthalle"}]
-        ],
-        "choices": [
-            [],
-            ["Zurück zur Markthalle"]
-        ],
-        "inv": [],
-        "ltype": "friedlich",
-        "descr": "Der Schmied bietet viele verschiedene Waffen und Rüstungen",
-        "entitylist":[],
-        "triggers":[]
     },
 
     "placeholder":{
@@ -231,8 +227,7 @@
         "ltype": "friedlich",
         "descr": "",
         "entitylist":[],
-        "triggers":[]
+        "triggers":[],
+        "child_levels":{}
     }
-
-    
 }

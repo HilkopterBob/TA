@@ -1,0 +1,10 @@
+{
+    "name": "CheckJSON",
+    "description": "Checks if valid JSON is given",
+    "categories": [
+        "Go"
+    ],
+    "filePatterns": [
+        ".json"
+    ]
+}
