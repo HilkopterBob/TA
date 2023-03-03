@@ -9,9 +9,17 @@
 
     "Ermüdung":{
         "name":"Ermüdung",
-        "descr":"Du bist ziemlich müde und solltest dich bald ausruhen.",
+        "descr":"Du bist etwas müde und solltest dich bald ausruhen.",
         "etype":"bad",
         "value":-2,
-        "infl":"strenght"
+        "infl":"strength"
+    },
+
+    "Ermüdung2":{
+        "name":"Ermüdung2",
+        "descr":"Du bist sehr müde und solltest dich ausruhen.",
+        "etype":"bad",
+        "value":-3,
+        "infl":"strength"
     }
 }
