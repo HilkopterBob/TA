@@ -112,27 +112,30 @@
         "ltype": "friedlich",
         "descr": "Du Folgst den Weg bis zu einer großen Stadt",
         "entitylist":[],
-        "triggers":[{"umgesehen":false}]
+        "triggers":[{"umgesehen":false}],
+        "child_levels":{   
+            "Pub":{
+                "text": [
+                    ["Du setzt dich an einen Tisch eine Bedihnung kommt zu dir.", {"action":"change_location", "new_level_name":"Tisch"}],
+                    ["Du nimmst dir ein Zimmer und betritst dieses.", {"action":"change_location", "new_level_name":"Zimmer"}],
+                    ["Du verlässt den Pub", {"action":"change_location", "new_level_name":"Stadt"}]
+                    
+                ],
+                "choices": [
+                    ["An einen Tisch setzen"],
+                    ["Ein Zimmer nehmen"],          
+                    ["Den Pub verlassen"]
+                ],
+                "inv": [],
+                "ltype": "friedlich",
+                "descr": "Ein gemütliches Pub mit einer aufmerksammen Bedienung",
+                "entitylist":[],
+                "triggers":[]
+            } 
+        }
     },
 
-    "Pub":{
-        "text": [
-            ["Du setzt dich an einen Tisch eine Bedihnung kommt zu dir.", {"action":"change_location", "new_level_name":"Tisch"}],
-            ["Du nimmst dir ein Zimmer und betritst dieses.", {"action":"change_location", "new_level_name":"Zimmer"}],
-            ["Du verlässt den Pub", {"action":"change_location", "new_level_name":"Stadt"}]
-            
-        ],
-        "choices": [
-            ["An einen Tisch setzen"],
-            ["Ein Zimmer nehmen"],          
-            ["Den Pub verlassen"]
-        ],
-        "inv": [],
-        "ltype": "friedlich",
-        "descr": "Ein gemütliches Pub mit einer aufmerksammen Bedienung",
-        "entitylist":[],
-        "triggers":[]
-    },
+
 
     "Tisch":{
         "text": [

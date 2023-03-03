@@ -1,12 +1,17 @@
 # Notes
 
-## Table of Contents
-[Gameloop](#gameloop)
+- [Notes](#notes)
+  - [Gameloop](#gameloop)
+      - [Effects:](#effects)
+      - [Spawn:](#spawn)
+  - [Ideen](#ideen)
+  - [Stat-/Levelsystem](#stat-levelsystem)
 
 
-# Gameloop
 
-- ## Effects:
+## Gameloop
+
+#### Effects:
     -   evil effects  player → player      *(Bosseffekte, schwere vergiftung, flüche)*
     -   good effects  player → player      *(Healing, speed)*
     -   bad effects   player → player      *(Poisoning)*   
@@ -14,7 +19,7 @@
     -   bad effects   player → level       *("Lockmittel" → erhöht Chance auf Enemy encounter)*
 </br>
 
-- ## Spawn:
+#### Spawn:
     -   Spawn chance:
         -   Level spawn chance  *(eg. 10%)*
         -   Level effects       *(eg. "Lockmittel" → + 15%)*
@@ -27,5 +32,13 @@
             -   wdh. bis alle Slots bearbeitet
 </br>
 
-- ## 
+## Ideen
 
+- Statsystm:
+  - Strength
+  - Agility
+  - etc
+
+
+## Stat-/Levelsystem
+guckt discord
