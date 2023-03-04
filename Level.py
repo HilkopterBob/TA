@@ -57,40 +57,63 @@ class Level():
 
 
 class LevelInit():
-    def load_all_levels_from_json(json_file):
+    def load_all_levels_from_json(json_file, _curLevels = []):
         """
             Return alls Levels from Json file
             
             :json_file (File): Json file to load Levels from
+            :_curLevels (List): Internally used for recursion
 
             =return= List of all Levels loaded from Json
         """
-        curLevels = []
-        with open(json_file, encoding="UTF-8") as json_data:
-            data = json.load(json_data)
+        #Populate curLevels for recursion
+        curLevels = _curLevels
+        
+        #if json_file is not empty
+        if json_file:
+            #and if json file is actually a file
+            if (type(json_file) != dict):
+                #open the file
+                with open(json_file, encoding="UTF-8") as json_data:
+                    #and load its content
+                    data = json.load(json_data)
+            #if json file is already json data
+            else:
+                #read json data
+                data = json_file
 
+        #for each level in data
         for lname in data.keys():
-            if "child_levels" in data[lname].keys():
-                for clname in data[lname]["child_levels"].keys():
-                    curLevels.append(Level.from_json(data[lname]["child_levels"][clname], clname))
+            #check if child levels exist
+            if data[lname].get("child_levels"):
+                #populate childlevel array
+                childlevels = data[lname].get("child_levels")
+                #run this function recursively for all childlevels in given level
+                LevelInit.load_all_levels_from_json(childlevels, curLevels)
+            #if there are no more Child levels create the Level and append it to curLevels list for Output
             curLevels.append(Level.from_json(data[lname], lname))
+        #return Current Levels
         return curLevels
+
+
 
     def load_level_by_name_from_json(json_file, name):
         """
-            Return a single Level Object from Json by given Name
+            Return a single Level Object from Json/File by given Name
             
-            :json_file (File): Json File to load Item from
+            :json_file (File): Json File to load Level from
 
             =return= Level object
         """
-        with open(json_file, encoding="UTF-8") as json_data:
-            data = json.load(json_data)
-            
+        if json_file:
+            if (type(json_file) != dict):
+                with open(json_file, encoding="UTF-8") as json_data:
+                    data = json.load(json_data)
+            else:
+                data = json_file
 
-        for lname in data.keys():
-            if lname == name:
-                return Level.from_json(data[lname], lname)
-        
-        pr.dbg(f"Levelname: {pr.cyan(lname)} not found!",1)
+            for lname in data.keys():
+                if name == lname:
+                    return Level.from_json(data[lname], lname)
+            pr.dbg(f"Levelname: {pr.cyan(name)} not found!",1)
         return False
