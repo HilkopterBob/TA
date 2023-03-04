@@ -64,7 +64,7 @@
                 "descr":{
                     "type":"string",
                     "description": "Die Beschreibung des Levels",
-                    "minLength": 5,
+                    "minLength": 0,
                     "maxLength": 200
                 },
                 "entitylist":{
