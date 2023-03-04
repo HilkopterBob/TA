@@ -6,16 +6,23 @@
         "Menu":{
             "type": "object",
             "required": ["text","choices","inv","ltype","descr","entitylist","triggers"],
-            "description": "Hauptmenülevel"
+            "description": "Hauptmenülevel",
+            "$ref": "#/definitions/Level"
         },
         "Options":{
             "type": "object",
             "required": ["text","choices","inv","ltype","descr","entitylist","triggers"],
-            "description": "Optionsmenülevel"
+            "description": "Optionsmenülevel",
+            "$ref": "#/definitions/Level"
         }
     },
     "patternProperties": {
         "^[A-Z].[a-z]{1,}":{
+            "$ref": "#/definitions/Level"
+        }
+    },
+    "definitions": {
+        "Level":{
             "type":"object",
             "description": "Levelname",
             "properties": {
@@ -28,7 +35,7 @@
                             "anyOf": [
                                 {"type": "string"},
                                 {"type": "object"}
-                              ]
+                                ]
                         }
                     }
                 },
@@ -41,7 +48,7 @@
                             "anyOf": [
                                 {"type": "string"},
                                 {"type": "object"}
-                              ]
+                                ]
                         }
                     }
                 },
@@ -73,7 +80,7 @@
                     "description": "Eine Liste aller Level die sich innerhalb eines Levels befinden können",
                     "patternProperties": {
                         "^[A-Z].[a-z]{1,}":{
-
+                            "$ref": "#/definitions/Level"
                         }
                     }
                 }
