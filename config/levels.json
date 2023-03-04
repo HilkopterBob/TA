@@ -1,4 +1,5 @@
 {
+    "$schema": "../.github/workflows/schema.json",
     "Menu":{
         "text": [
             [
