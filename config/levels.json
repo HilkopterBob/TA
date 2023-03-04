@@ -142,7 +142,7 @@
                         ],
                         "inv": [],
                         "ltype": "friedlich",
-                        "descr": "",
+                        "descr": "Ein Tisch",
                         "entitylist":[],
                         "triggers":[]
                     },
@@ -155,7 +155,7 @@
                         ],
                         "inv": [],
                         "ltype": "friedlich",
-                        "descr": "",
+                        "descr": "Ein Zimmer",
                         "entitylist":[],
                         "triggers":[]
                     }
