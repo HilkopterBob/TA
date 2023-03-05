@@ -51,5 +51,5 @@ class EffectInit():
             if ename == name:
                 return Effect.from_json(data[ename], ename)
         
-        pr.dbg(f"Levelname: {pr.cyan(ename)} not found!", 1)
+        pr.dbg(f"Effect: {pr.cyan(name)} not found!", 1)
         return False

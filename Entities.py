@@ -18,7 +18,7 @@ class Entity():
         self.beffects = beffects                                                        #bad effects
         self.eeffects = eeffects                                                        #evil effects
         self.effects = [[self.geffects],[self.beffects],[self.eeffects]]
-        self.actionstack = Queue()                                                      #Actionstack for Gameloop (Only populate at runtime!)
+        self.actionstack = []#Queue()                                                      #Actionstack for Gameloop (Only populate at runtime!)
 
     @staticmethod   #Generate Object from Json
     def from_json(json_dct, ename):

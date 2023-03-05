@@ -4,25 +4,10 @@ from Effect import Effect, EffectInit
 import Utils as pr 
 import json
 import hunter 
-import sys
+from actionparser import Actionparser
+from config import config
 
 
-
-##################
-##Debug Variable##
-global dbg
-dbg = True
-sys.stdout.reconfigure(encoding='utf-8')
-#hunter.trace(module="__main__")
-##################
-
-##################
-###ENV Variables##
-items_file = "config/items.json"
-levels_file = "config/levels.json"
-effects_file = "config/effects.json"
-entity_file = "config/entities.json"
-##################
 
 
 def interact_with_level(player, level, level_list):
@@ -70,14 +55,14 @@ def interact_with_level(player, level, level_list):
                             triggered_dict_index = level.triggers.index(triggered_dict[0])
                             level.triggers[triggered_dict_index] = level.text[int(action) - 1][1]
                         except IndexError as e:
-                            if dbg:
+                            if config.dbg:
                                 pr.dbg(e)
-                        if dbg:
+                        if config.dbg:
                             pr.dbg(level.text[int(action) - 1][1])
                             pr.dbg(level.triggers)
             elif "action" in str(key[0]):
                 ##### ##### reads and uses action calls (action parser)##### #####
-                if dbg:
+                if config.dbg:
                     try:
                         pr.dbg(key)
                         pr.dbg(level.text[int(action) - 1][i][key[0]])
@@ -93,13 +78,13 @@ def interact_with_level(player, level, level_list):
                                 new_level = llevel
                                 player.change_location(level, new_level)
                     case "dbg_true":
-                        if dbg:
+                        if config.dbg:
                             pr.b(pr.dbg("UNBEDINGT DEBUG DEAKTIVIEREN WENN AUF PROD GEPUSHT WIRD!!!"))
                     case "add_effect":
-                        effect = EffectInit.load_effect_by_name_from_json(effects_file, str(level.text[int(action) - 1][i]["effect_name"]))
+                        effect = EffectInit.load_effect_by_name_from_json(config.effects_file, str(level.text[int(action) - 1][i]["effect_name"]))
                         player.add_effect(effect)
                     case _:
-                        if dbg:
+                        if config.dbg:
                             pr.dbg(f"{level.text[int(action) - 1][i][key[0]]} is not defined ")
             i = i + 1
 
@@ -124,19 +109,19 @@ def gameloop(player, level_list=[]):
         for level in level_list:
             if level.name == player.location:
                 current_level = level
+        
         #Loop through all Entities in CurrentLevel and Apply Actionstack
         for e in current_level.entitylist:
             """
             Todo Action parser for actionstack (pass entity to which the action applies, 
             pass the action, process action on entity, return successfull or error)
             """
-
-            #Apply Effects from Actionstack of Entity
-            for thing in e.actionstack.queue:
-                e.add_effect(thing)
-
-        #Let the Effects take the Effect
-        player.let_effects_take_effect(dbg)                 #effects 
+            #Work through actionstack of Entity and process actions
+            for action in e.actionstack:
+                pr.dbg(action)
+                Actionparser.callfunction(action)
+                e.actionstack.remove(action)
+                
         player.check_level_up()                             #check for levelups and level up if enough xp
         interact_with_level(player, current_level, level_list)
         #changes the entity location, deletes entity from old level and adds to the new one
@@ -160,11 +145,12 @@ if __name__ == "__main__":
     terror = Effect("Terror","Nö","evil", -100, "xp")
 
     #Load all existing Levels
-    allLevels = LevelInit.load_all_levels_from_json(levels_file)
+    print(config.levels_file)
+    allLevels = LevelInit.load_all_levels_from_json(config.levels_file)
     pr.objlist(allLevels, "Levels")
 
     #Load all existing Entities
-    allEntities = EntityInit.load_entities_fromjson(entity_file)
+    allEntities = EntityInit.load_entities_fromjson(config.entity_file)
     pr.objlist(allEntities,"Entities")
 
     
@@ -178,7 +164,8 @@ if __name__ == "__main__":
     # mPlayer.actionstack.put("let_effects_take_effect")
 
     #put Kopfschmerz Effect in Actionstack
-    mPlayer.actionstack.put(kopfschmerz)
+    mPlayer.actionstack.append(["applyeffect",[mPlayer,"Kopfschmerz"]])
+    mPlayer.actionstack.append(["takeeffects",[mPlayer,True]])
 
     gameloop(mPlayer, allLevels)
     
