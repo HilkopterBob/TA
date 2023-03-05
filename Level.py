@@ -84,14 +84,16 @@ class LevelInit():
 
         #for each level in data
         for lname in data.keys():
-            #check if child levels exist
-            if data[lname].get("child_levels"):
-                #populate childlevel array
-                childlevels = data[lname].get("child_levels")
-                #run this function recursively for all childlevels in given level
-                LevelInit.load_all_levels_from_json(childlevels, curLevels)
-            #if there are no more Child levels create the Level and append it to curLevels list for Output
-            curLevels.append(Level.from_json(data[lname], lname))
+            #Check needed to Exclude Schema
+            if (lname[0] != "$"):
+                #check if child levels exist
+                if data[lname].get("child_levels"):
+                    #populate childlevel array
+                    childlevels = data[lname].get("child_levels")
+                    #run this function recursively for all childlevels in given level
+                    LevelInit.load_all_levels_from_json(childlevels, curLevels)
+                #if there are no more Child levels create the Level and append it to curLevels list for Output
+                curLevels.append(Level.from_json(data[lname], lname))
         #return Current Levels
         return curLevels
 
