@@ -40,6 +40,7 @@ class EffectInit():
             Return a single Level Object from Json by given Name
             
             :json_file (File): Json File to load Item from
+            :name (String): Name of Effect to be loaded
 
             =return= Level object
         """
@@ -48,7 +49,7 @@ class EffectInit():
             
 
         for ename in data.keys():
-            if ename == name:
+            if name == ename:
                 return Effect.from_json(data[ename], ename)
         
         pr.dbg(f"Effect: {pr.cyan(name)} not found!", 1)
