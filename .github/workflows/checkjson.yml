@@ -4,28 +4,30 @@ on: [push]
 
 jobs:
   validate-jsons:
-    runs-on: ubuntu-latest
     strategy:
       matrix:
         schema: [effectschema.json, entityschema.json, levelschema.json, itemschema.json]
-      max-parallel: 4
+        json: [effects.json, entities.json, levels.json, items.json]
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Cache Docker layers
+
+      - name: Cache ajv-cli
         uses: actions/cache@v2
         with:
-          path: /usr/local/bin/docker
-          key: ${{ runner.os }}-docker-${{ github.sha }}
-      - name: Restore cached dependencies
-        uses: actions/cache@v2
-        with:
-          path: /path/to/dependencies
-          key: ${{ runner.os }}-dependencies-${{ matrix.schema }}
-      - name: Install AJV
-        run: npm install ajv-cli -g
+          path: ${{ env.HOME }}/.npm-global/bin/ajv
+          key: ${{ runner.os }}-ajv-${{ env.IMAGE_VERSION }}
+          restore-keys: ${{ runner.os }}-ajv-
+
+      - name: Install Ajv-cli
+        run: |
+          if ! command -v ajv &> /dev/null; then
+            npm install -g ajv-cli
+          fi
+          
       - name: Validate JSON
-        run: ajv -s /.github/workflows/${{ matrix.schema }} -d /config/${{ matrix.schema }}.json --all-errors
-        shell: bash
         env:
-          PATH: ${{ env.PATH }}:/usr/local/bin
+          AJV_PATH: ${{ env.HOME }}/.npm-global/bin/ajv
+        run: ajv validate -s "/path/to/schema/${{ matrix.schema }}" -d "/path/to/json/${{ matrix.json }}" --all-errors
+
 
