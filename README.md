@@ -1,3 +1,5 @@
+[![Validate JSONs](https://github.com/HilkopterBob/TA/actions/workflows/checkjson.yml/badge.svg)](https://github.com/HilkopterBob/TA/actions/workflows/checkjson.yml)
+
 
 # Textadventure
 
