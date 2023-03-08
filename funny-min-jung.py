@@ -20,7 +20,20 @@ def interact_with_level(player, level, level_list):
         pr.n("\n"*2)
     else:
         hud(player)
-        pr.n(level.descr)
+        #pr.n(level.descr)
+        for entry in level.descr:
+            if len(entry) > 1:
+                if type(entry) == str:
+                    pr.n(f"{str(entry)}")
+                    continue
+                else:
+                    if entry[1] in level.triggers:
+                        pr.n(f"{str(entry[0])}")
+                    continue
+
+
+
+
     for llist in level.choices:
         if len(llist) == 1 and llist[0] != "":
             pr.n(f"{i}. {llist[0]}")
