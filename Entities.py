@@ -258,8 +258,6 @@ class Entity():
         """
         level_ups = 0
         old_level = self.level
-        if self.level == 0:
-            self.level == 1
         while True:
             if self.level < 10:
                 needed_xp = ((self.level + 1 )/0.4) ** 1.79
@@ -267,27 +265,39 @@ class Entity():
                     self.level += 1
                     self.xp = self.xp - int(needed_xp)
                     level_ups += 1
-                else:
-                    check_level_up_list = [level_ups, old_level]
-                    return check_level_up_list
+
+                if level_ups > 0:
+                    pr.n(f"Du bist {level_ups} Level aufgestiegen!")
+                    pr.n("Du bekommst: nichts.")
+
+
             if self.level >= 10 and self.level < 30:
                 needed_xp = ((self.level + 1 )/0.37) ** 1.86
                 if self.xp > needed_xp:
                     self.level += 1
                     self.xp -= needed_xp
                     level_ups += 1
-                else:
-                    check_level_up_list = [level_ups, old_level]
-                    return check_level_up_list
+
+                if level_ups > 0:
+                    pr.n(f"Du bist {level_ups} Level aufgestiegen!")
+                    pr.n("Du bekommst: nichts.")
+
+
             if self.level >= 30:
                 needed_xp = ((self.level + 1 )/0.2) ** 2.175
                 if self.xp > needed_xp:
                     self.level += 1
                     self.xp -= needed_xp
                     level_ups += 1
-                else:
-                    check_level_up_list = [level_ups, old_level]
-                    return check_level_up_list
+
+                if level_ups > 0:
+                    pr.n(f"Du bist {level_ups} Level aufgestiegen!")
+                    pr.n("Du bekommst: nichts.")
+
+
+            break
+        return True
+    
 
 class EntityInit():
     def load_entities_fromjson(json_file):
