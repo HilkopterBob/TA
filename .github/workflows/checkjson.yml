@@ -6,26 +6,7 @@ on:
       - main
 
 jobs:
-  setup-image:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - name: Download image
-        run: docker pull orrosenblatt/validate-json-action:latest
-      - name: Save image to cache
-        uses: docker/build-push-action@v2
-        with:
-          name: orrosenblatt/validate-json-action:latest
-          path: /tmp/image.tar
-      - name: Cache image
-        uses: actions/cache@v2
-        with:
-          key: docker-image
-          path: /tmp/image.tar
-          restore-keys: docker-image
-          
   validate-jsons:
-    needs: [setup-image]
     strategy:
       matrix:
           json: ['effects', 'entities', 'levels', 'items']
@@ -35,14 +16,8 @@ jobs:
         with:
           persist-credentials: true
           fetch-depth: 0
-      - name: Load Docker image from cache
-        uses: docker/load-action@v1
-        with:
-          load: ${{ runner.workspace }}/image.tar
       - name: Validate JSON
-        uses: docker://localhost/orrosenblatt/validate-json-action:latest
-        with:
-          image: orrosenblatt/validate-json-action:latest
+        uses: docker://orrosenblatt/validate-json-action:latest
         env:
           INPUT_SCHEMA: /.github/workflows/${{matrix.json}}chema.json
           INPUT_JSONS: /config/${{matrix.json}}.json
