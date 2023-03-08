@@ -9,7 +9,6 @@ jobs:
   validate-jsons:
     strategy:
       matrix:
-          schema: ['effects', 'entities', 'levels', 'items']
           json: ['effects', 'entities', 'levels', 'items']
     runs-on: ubuntu-latest
     steps:
@@ -31,4 +30,4 @@ jobs:
       - name: Validate JSON
         env:
           AJV_PATH: ${{ env.HOME }}/.npm-global/bin/ajv
-        run: ajv validate -s "/.github/workflows/${{ matrix.schema }}.json" -d "/config/${{ matrix.json }}.json" --all-errors
+        run: ajv validate -s "/.github/workflows/${{matrix.json}}schema.json" -d "/config/${{matrix.json}}.json" --all-errors
