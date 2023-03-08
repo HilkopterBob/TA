@@ -62,7 +62,10 @@
                     "enum": ["friedlich","neutral","harmful","Testlevel"]
                 },
                 "descr":{
-                    "type":"string",
+                    "anyOf": [
+                        {"type":"string"},
+                        {"type":"array"}
+                    ],
                     "description": "Die Beschreibung des Levels",
                     "minLength": 0,
                     "maxLength": 200
