@@ -1,20 +1,17 @@
 name: Validate JSONs
 
-on: [push]
+on:
+  push:
+    branches:
+      - main
 
 jobs:
   validate-jsons:
     strategy:
-        matrix:
-          schema:
-            - effects
-            - entities
-            - levels
-            - items
-          json: ${{ env.JSON_FILES }}
+      matrix:
+          schema: ['effects', 'entities', 'levels', 'items']
+          json: ['effects', 'entities', 'levels', 'items']
     runs-on: ubuntu-latest
-    env:
-      JSON_FILES: 'effects.json entities.json levels.json items.json'
     steps:
       - uses: actions/checkout@v2
 
@@ -30,7 +27,7 @@ jobs:
           if ! command -v ajv &> /dev/null; then
             npm install -g ajv-cli
           fi
-          
+
       - name: Validate JSON
         env:
           AJV_PATH: ${{ env.HOME }}/.npm-global/bin/ajv
