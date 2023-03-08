@@ -4,15 +4,27 @@ on: [push]
 
 jobs:
   validate-jsons:
+    runs-on: ubuntu-latest
     strategy:
       matrix:
         schema: [effectschema.json, entityschema.json, levelschema.json, itemschema.json]
-        json: [effects.json, entities.json, levels.json, items.json]
-    runs-on: ubuntu-latest
+      max-parallel: 4
     steps:
       - uses: actions/checkout@v2
+      - name: Cache Docker layers
+        uses: actions/cache@v2
+        with:
+          path: /usr/local/bin/docker
+          key: ${{ runner.os }}-docker-${{ github.sha }}
+      - name: Restore cached dependencies
+        uses: actions/cache@v2
+        with:
+          path: /path/to/dependencies
+          key: ${{ runner.os }}-dependencies-${{ matrix.schema }}
+      - name: Install AJV
+        run: npm install ajv-cli -g
       - name: Validate JSON
-        uses: docker://orrosenblatt/validate-json-action:latest
+        run: ajv -s /.github/workflows/${{ matrix.schema }} -d /config/${{ matrix.schema | replace('schema.json', '') }}.json --all-errors
+        shell: bash
         env:
-          INPUT_SCHEMA: /.github/workflows/${{ matrix.schema }}
-          INPUT_JSONS: /config/${{ matrix.json }}
+          PATH: ${{ env.PATH }}:/usr/local/bin
