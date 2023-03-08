@@ -1,0 +1,75 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "type": "object",
+    "required": ["Player"],
+    "properties": {
+        "Player":{
+            "$ref": "#/definitions/Entity"
+        }
+    },
+    "patternProperties": {
+        "^[A-Z].[a-z]{1,}":{
+            "$ref": "#/definitions/Entity"
+        }
+    },
+    "definitions": {
+        "Entity":{
+            "type":"object",
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "description": "Der Name der Entität ingame",
+                    "minLength": 0,
+                    "maxLength": 30
+                },
+                "hp":{
+                    "type": "integer",
+                    "description": "Die Lebenspunkte der Entität",
+                    "minimum": 0,
+                    "maximum": 100
+                },
+                "wealth":{
+                    "type":"integer",
+                    "description": "Der Wohlstandswert der Entität",
+                    "minimum": 0,
+                    "maximum": 100
+                },
+                "inv":{
+                    "type":"array",
+                    "description": "Eine Liste aller Inventargegenstände der Entität"
+                },
+                "xp":{
+                    "type":"integer",
+                    "description": "Die Erfahrungspunkte der Entität",
+                    "minimum": 0,
+                    "maximum": 100
+                },
+                "ptype":{
+                    "type":"integer",
+                    "description": "Der Typ der Entität (Friendly/Harmfull)"
+                },
+                "geffects":{
+                    "type":"array",
+                    "description": "Eine Liste aller positiven Effekte(Buffs) auf der Entität"
+                },
+                "beffects":{
+                    "type":"array",
+                    "description": "Eine Liste aller negativen Effekte(debuffs) auf der Entität"
+                },
+                "eeffects":{
+                    "type":"array",
+                    "description": "Eine Liste aller negativen Boss Effekte(debuffs) auf der Entität"
+                },
+                "location":{
+                    "type":"string",
+                    "description": "An welchem Ort Befindet sich die Entität grade"
+                },
+                "level":{
+                    "type":"integer",
+                    "description": "Welche Stufe hat die Entität"
+                }
+            },
+            "required": ["name","hp","wealth","inv","xp","ptype","geffects","beffects","eeffects","location","level"]
+        }   
+    }   
+}   

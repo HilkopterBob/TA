@@ -1,0 +1,38 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "type": "object",
+    "patternProperties": {
+        "^[A-Z].[a-z][0-9]{1,}":{
+            "$ref": "#/definitions/Effect"
+        }
+    },
+    "definitions": {
+        "Effect":{
+            "type":"object",
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "description": "Der Name des Effektes"
+                },
+                "descr":{
+                    "type": "string",
+                    "description": "Die Beschreibung des Effektes"
+                },
+                "etype":{
+                    "type":"string",
+                    "description": "Der Effekttyp",
+                    "enum": ["good","bad","evil"]    
+                },
+                "value":{
+                    "type":"integer",
+                    "description": "Die Menge die ein Wert durch diesen Effekt beeinfluss wird"
+                },
+                "infl":{
+                    "type":"string",
+                    "description": "Der Wert der durch diesen Effekt beeinflusst wird"
+                }
+            },   
+            "required": ["name","descr","etype","value","infl"]
+        }   
+    }
+}   

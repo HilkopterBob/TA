@@ -3,12 +3,39 @@ name: Validate JSONs
 on: [push]
 
 jobs:
-  verify-json-validation:
+  verify-effects-validation:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
-      - name: Validate JSON
+      - name: Validate Effects JSON
         uses: docker://orrosenblatt/validate-json-action:latest
         env:
-          INPUT_SCHEMA: /.github/workflows/schema.json
+          INPUT_SCHEMA: /.github/workflows/effectsschema.json
+          INPUT_JSONS: /config/effects.json
+  verify-entities-validation:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - name: Validate Entity JSON
+        uses: docker://orrosenblatt/validate-json-action:latest
+        env:
+          INPUT_SCHEMA: /.github/workflows/entityschema.json
+          INPUT_JSONS: /config/entities.json
+  verify-levels-validation:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - name: Validate Levels JSON
+        uses: docker://orrosenblatt/validate-json-action:latest
+        env:
+          INPUT_SCHEMA: /.github/workflows/levelsschema.json
           INPUT_JSONS: /config/levels.json
+  verify-items-validation:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - name: Validate Items JSON
+        uses: docker://orrosenblatt/validate-json-action:latest
+        env:
+          INPUT_SCHEMA: /.github/workflows/itemsschema.json
+          INPUT_JSONS: /config/items.json
