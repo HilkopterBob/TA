@@ -295,9 +295,12 @@ class EntityInit():
         with open(json_file) as json_data:
             data = json.load(json_data)
 
+        
         for ename in data.keys():
-            curEntities.append(Entity.from_json(data[ename], ename))
+            if (ename[0] != "$"):
+                curEntities.append(Entity.from_json(data[ename], ename))
         return curEntities
+                
     
     def load_entities_by_name_from_json(json_file, name):
         """

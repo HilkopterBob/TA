@@ -30,9 +30,11 @@ class EffectInit():
         effects_master_list = []
         with open(json_file, encoding="UTF-8") as json_data:
             data = json.load(json_data)
-            
+
+        
         for ename in data.keys():
-            effects_master_list.append(Effect.from_json(data[ename], ename))
+            if (ename[0] != "$"):
+                effects_master_list.append(Effect.from_json(data[ename], ename))
         return effects_master_list
 
     def load_effect_by_name_from_json(json_file, name):
