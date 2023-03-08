@@ -1,0 +1,50 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "type": "object",
+    "patternProperties": {
+        "^[A-Z].[a-z]{1,}":{
+            "$ref": "#/definitions/Item"
+        }
+    },
+    "definitions": {
+        "Item":{
+            "type":"object",
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "description": "Der Itemtyp",
+                    "enum": ["weapon","tool","potion","misc"]
+                },
+                "dmg":{
+                    "type": "integer",
+                    "description": "Der Schaden des Items",
+                    "minimum": 0,
+                    "maximum": 100
+                },
+                "condition":{
+                    "type":"integer",
+                    "description": "Der Zustand des Items",
+                    "minimum": 0,
+                    "maximum": 100
+                },
+                "effects":{
+                    "type":"array",
+                    "description": "Eine Liste aller Special Effekte auf dem Item"
+                },
+                "useable":{
+                    "type":"boolean",
+                    "description": "Ist das Item benutzbar?"
+                },
+                "equipable":{
+                    "type":"boolean",
+                    "description": "Ist das Item ausrüstbar?"
+                },
+                "questitem":{
+                    "type":"boolean",
+                    "description": "Ist das Item ein Questitem"
+                }
+            },   
+            "required": ["type","dmg","condition","effects","useable","equipable","questitem"]
+        }   
+    }
+}   

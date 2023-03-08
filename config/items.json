@@ -1,4 +1,5 @@
 {
+    "$schema": "../.github/workflows/itemschema.json",
     "Sword" : {
         "type": "weapon", 
         "dmg": 10, 

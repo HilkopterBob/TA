@@ -1,4 +1,5 @@
 {
+    "$schema": "../.github/workflows/entityschema.json",
     "Player":{
         "name": "Player",                                                     
         "hp": 0,
