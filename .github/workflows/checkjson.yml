@@ -9,6 +9,7 @@ jobs:
   setup-image:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v2
       - name: Download image
         run: docker pull orrosenblatt/validate-json-action:latest
       - name: Save image to cache
