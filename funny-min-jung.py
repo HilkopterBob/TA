@@ -31,9 +31,6 @@ def interact_with_level(player, level, level_list):
                         pr.n(f"{str(entry[0])}")
                     continue
 
-
-
-
     for llist in level.choices:
         if len(llist) == 1 and llist[0] != "":
             pr.n(f"{i}. {llist[0]}")
