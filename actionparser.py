@@ -19,6 +19,7 @@ class Actionparser:
             _entity = attributes[0]
             _effectname = attributes[1]
             _effect = EffectInit.load_effect_by_name_from_json(config.effects_file,_effectname)
+            _entity.add_effect(_effect)
             pr.dbg(f"{pr.cyan(f'{_effect.name}')} applied to {pr.cyan(f'{_entity.name}')}")
             return 0
         
