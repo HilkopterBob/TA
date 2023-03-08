@@ -170,7 +170,7 @@ class Entity():
         except:
             return False
 
-    def reomove_effect_by_index(self, index=-1):
+    def remove_effect_by_index(self, index=-1):
         """
             removes effect by given index
         
