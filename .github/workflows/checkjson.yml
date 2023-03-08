@@ -29,5 +29,4 @@ jobs:
         env:
           AJV_PATH: ${{ env.HOME }}/.npm-global/bin/ajv
         run: |
-          dir
-          ajv validate -s "../.github/workflows/${{matrix.json}}chema.json" -d "../config/${{matrix.json}}.json" --all-errors
+          ajv validate -s "${{ github.workspace }}/.github/workflows/${{matrix.json}}chema.json" -d "${{ github.workspace }}/config/${{matrix.json}}.json" --all-errors
