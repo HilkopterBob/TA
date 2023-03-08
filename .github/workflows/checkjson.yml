@@ -3,39 +3,16 @@ name: Validate JSONs
 on: [push]
 
 jobs:
-  verify-effects-validation:
+  validate-jsons:
+    strategy:
+      matrix:
+        schema: [effectschema.json, entityschema.json, levelschema.json, itemschema.json]
+        json: [effects.json, entities.json, levels.json, items.json]
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
-      - name: Validate Effects JSON
+      - uses: actions/checkout@v2
+      - name: Validate JSON
         uses: docker://orrosenblatt/validate-json-action:latest
         env:
-          INPUT_SCHEMA: /.github/workflows/effectschema.json
-          INPUT_JSONS: /config/effects.json
-  verify-entities-validation:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v1
-      - name: Validate Entity JSON
-        uses: docker://orrosenblatt/validate-json-action:latest
-        env:
-          INPUT_SCHEMA: /.github/workflows/entityschema.json
-          INPUT_JSONS: /config/entities.json
-  verify-levels-validation:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v1
-      - name: Validate Levels JSON
-        uses: docker://orrosenblatt/validate-json-action:latest
-        env:
-          INPUT_SCHEMA: /.github/workflows/levelschema.json
-          INPUT_JSONS: /config/levels.json
-  verify-items-validation:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v1
-      - name: Validate Items JSON
-        uses: docker://orrosenblatt/validate-json-action:latest
-        env:
-          INPUT_SCHEMA: /.github/workflows/itemschema.json
-          INPUT_JSONS: /config/items.json
+          INPUT_SCHEMA: /.github/workflows/${{ matrix.schema }}
+          INPUT_JSONS: /config/${{ matrix.json }}
