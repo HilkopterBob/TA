@@ -10,7 +10,7 @@ jobs:
       - name: Validate Effects JSON
         uses: docker://orrosenblatt/validate-json-action:latest
         env:
-          INPUT_SCHEMA: /.github/workflows/effectsschema.json
+          INPUT_SCHEMA: /.github/workflows/effectschema.json
           INPUT_JSONS: /config/effects.json
   verify-entities-validation:
     runs-on: ubuntu-latest
@@ -28,7 +28,7 @@ jobs:
       - name: Validate Levels JSON
         uses: docker://orrosenblatt/validate-json-action:latest
         env:
-          INPUT_SCHEMA: /.github/workflows/levelsschema.json
+          INPUT_SCHEMA: /.github/workflows/levelschema.json
           INPUT_JSONS: /config/levels.json
   verify-items-validation:
     runs-on: ubuntu-latest
@@ -37,5 +37,5 @@ jobs:
       - name: Validate Items JSON
         uses: docker://orrosenblatt/validate-json-action:latest
         env:
-          INPUT_SCHEMA: /.github/workflows/itemsschema.json
+          INPUT_SCHEMA: /.github/workflows/itemschema.json
           INPUT_JSONS: /config/items.json
