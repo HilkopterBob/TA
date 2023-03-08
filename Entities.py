@@ -78,7 +78,7 @@ class Entity():
         except:
             return False
         
-    def remove_item_by_index(self, index=-1):
+    def remove_item_by_index(self, index=-1, quest=False):
         """
             Removes Item by given Index, if no Index is given the last Item in Inventory will be removed.
 
@@ -86,8 +86,12 @@ class Entity():
             
             =return= Returns True if successfull otherwise returns false
         """ 
+
         try:
-            self.inv.pop(index)
+            if self.inv[index].questitem == False:
+                self.inv.pop(index)
+            elif quest==True:
+                self.inv.pop(index)
             return True
         except:
             return False
