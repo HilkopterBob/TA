@@ -31,6 +31,9 @@ class Entity():
             action = pr.inp("[DIESE EINSTELLUNG KANNST DU NICHT RÜCKGÄNGIG MACHEN!](y/n)")
             if action == "y":
                 break
+            """
+            Legende ↑
+            """
     
     def change_health(self, value=0):
         """
@@ -46,7 +49,7 @@ class Entity():
         except:
             return False
         
-    def add_item(self, iname="", itype=""):
+    def add_item(self, item):
         """
             Adds Item to Inventory
 
@@ -56,7 +59,7 @@ class Entity():
             =return= Returns True if successfull otherwise returns false
         """ 
         try:
-            self.inv.append(item(iname, itype))
+            self.inv.append(item)
             return True
         except:
             return False
@@ -117,7 +120,7 @@ class Entity():
                 except:
                     return False
         
-    def show_effects(self, names=True):
+    def show_effects(self, names=False):
         """
             prints element.name of effects[]
 
@@ -204,7 +207,7 @@ class Entity():
                 print(vars(effect))
                 return False
 
-    def let_effects_take_effect(self, dbg):
+    def take_effects(self, dbg):
         """
             used in gameloop to let effects take effect onto entety
         
