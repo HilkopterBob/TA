@@ -24,7 +24,8 @@ jobs:
       - name: Install AJV
         run: npm install ajv-cli -g
       - name: Validate JSON
-        run: ajv -s /.github/workflows/${{ matrix.schema }} -d /config/${{ matrix.schema | replace('schema.json', '') }}.json --all-errors
+        run: ajv -s /.github/workflows/${{ matrix.schema }} -d /config/${{ matrix.schema }}.json --all-errors
         shell: bash
         env:
           PATH: ${{ env.PATH }}:/usr/local/bin
+
