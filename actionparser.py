@@ -61,6 +61,7 @@ class Actionparser:
         def remove_item_by_index(attributes = []):
             _entity = attributes[0]
             _index = attributes[1]
+            _quest = attributes[2]
             _entity.remove_items_by_index(_index)
             return 0
         
