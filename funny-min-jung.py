@@ -33,59 +33,59 @@ def interact_with_level(player, level, level_list):
                     printed = True
                     i = i + 1
     if printed == True:
-        action = pr.inp()
+        action = int(pr.inp()) - 1
 
     ##### ##### Reads triggers and action calls in level.text[dicts] ##### ##### 
 
-    pr.n(level.text[int(action) - 1][0])
-    if len(level.text[int(action) - 1]) > 1:
+    pr.n(level.text[action][0])
+    if len(level.text[action]) > 1:
         i = 1
-        while i < len(level.text[int(action) - 1]):
-            key = list(level.text[int(action) - 1][i].keys())
+        while i < len(level.text[action]):
+            key = list(level.text[action][i].keys())
 
 
 
 
             if "action" not in str(key[0]):
                 for ddict in level.triggers:
-                    if ddict.keys() == level.text[int(action) - 1][1].keys():
+                    if ddict.keys() == level.text[action][1].keys():
                         try:
                             #Enumerate als refactor nutzen
-                            triggered_dict = list(filter(lambda dict: dict.keys() != level.text[int(action) - 1][1][key[0]], level.triggers))
+                            triggered_dict = list(filter(lambda dict: dict.keys() != level.text[action][1][key[0]], level.triggers))
                             triggered_dict_index = level.triggers.index(triggered_dict[0])
-                            level.triggers[triggered_dict_index] = level.text[int(action) - 1][1]
+                            level.triggers[triggered_dict_index] = level.text[action][1]
                         except IndexError as e:
                             if config.dbg:
                                 pr.dbg(e)
                         if config.dbg:
-                            pr.dbg(level.text[int(action) - 1][1])
+                            pr.dbg(level.text[action][1])
                             pr.dbg(level.triggers)
             elif "action" in str(key[0]):
                 ##### ##### reads and uses action calls (action parser)##### #####
                 if config.dbg:
                     try:
                         pr.dbg(key)
-                        pr.dbg(level.text[int(action) - 1][i][key[0]])
-                        pr.dbg(level.text[int(action) - 1][i][key[1]])
+                        pr.dbg(level.text[action][i][key[0]])
+                        pr.dbg(level.text[action][i][key[1]])
                     except Exception as e:
                         pr.dbg(Exception)
-                match level.text[int(action) - 1][i][key[0]]:
+                match level.text[action][i][key[0]]:
                     case "remove_effect_by_name":
-                        player.remove_effect_by_name(str(level.text[int(action) - 1][i][key[1]]))
+                        player.remove_effect_by_name(str(level.text[action][i][key[1]]))
                     case "change_location":
                         for llevel in level_list:
-                            if llevel.name == str(level.text[int(action) - 1][i][key[1]]):
+                            if llevel.name == str(level.text[action][i][key[1]]):
                                 new_level = llevel
                                 player.change_location(level, new_level)
                     case "dbg_true":
                         if config.dbg:
                             pr.b(pr.dbg("UNBEDINGT DEBUG DEAKTIVIEREN WENN AUF PROD GEPUSHT WIRD!!!"))
                     case "add_effect":
-                        effect = EffectInit.load_effect_by_name_from_json(config.effects_file, str(level.text[int(action) - 1][i]["effect_name"]))
+                        effect = EffectInit.load_effect_by_name_from_json(config.effects_file, str(level.text[action][i]["effect_name"]))
                         player.add_effect(effect)
                     case _:
                         if config.dbg:
-                            pr.dbg(f"{level.text[int(action) - 1][i][key[0]]} is not defined ")
+                            pr.dbg(f"{level.text[action][i][key[0]]} is not defined ")
             i = i + 1
 
 
