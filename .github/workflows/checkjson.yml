@@ -7,9 +7,6 @@ on:
 
 jobs:
   setup-environment:
-    strategy:
-      matrix:
-          json: ['effects', 'entities', 'levels', 'items']
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -34,7 +31,19 @@ jobs:
           json: ['effects', 'entities', 'levels', 'items']
     runs-on: ubuntu-latest
     steps:
+      - name: Cache ajv-cli
+        uses: actions/cache@v2
+        with:
+          path: ${{ env.HOME }}/.npm-global/bin/ajv
+          key: ${{ runner.os }}-ajv-${{ env.IMAGE_VERSION }}
+          restore-keys: ${{ runner.os }}-ajv-
+
+      - name: Install Ajv-cli
+        run: |
+          if ! command -v ajv &> /dev/null; then
+            npm install -g ajv-cli
+          fi
       - name: Validate JSON
         env:
           AJV_PATH: ${{ env.HOME }}/.npm-global/bin/ajv
-        run: ajv validate -s "/.github/workflows/${{matrix.json}}chema.json" -d "/config/${{matrix.json}}.json" --all-errors
+        run: ajv validate -s ".github/workflows/${{matrix.json}}chema.json" -d "/config/${{matrix.json}}.json" --all-errors
