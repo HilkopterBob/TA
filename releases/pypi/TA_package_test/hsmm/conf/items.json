@@ -1,0 +1,27 @@
+{
+    "Sword" : {
+        "type": "weapon", 
+        "dmg": 10, 
+        "condition": 5, 
+        "effects": [
+            "1",
+            "2"
+        ],
+        "useable": false,
+        "equipable": true,
+        "questitem": false
+    },
+    "Bat" : {
+        "type": "weapon", 
+        "dmg": 5, 
+        "condition": 10, 
+        "effects": [
+            "1",
+            "2"
+        ],
+        "useable": false,
+        "equipable": true,
+        "questitem": false
+    }
+}
+

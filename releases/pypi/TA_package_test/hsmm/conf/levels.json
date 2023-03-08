@@ -1,0 +1,234 @@
+{
+    "$schema": "../.github/workflows/schema.json",
+    "Menu":{
+        "text": [
+            [
+                "",   
+                {"action":"change_location","new_level_name":"Wiese"},
+                {"action":"add_effect","effect_name":"Kopfschmerz"}
+            ],
+            [
+                ""
+            ],   
+            [
+                "",    
+                {"action":"change_location","new_level_name":"Options"}
+            ],
+            [
+                "",    
+                {"action":"close_game"}],
+            [
+                "",    
+                {"action":"dbg_true"}, 
+                {"action":"change_location","new_level_name":"Wiese"}, 
+                {"action": "add_effect", "effect_name":"Kopfschmerz"}
+            ]
+        ],
+        "choices": [
+            ["Spiel starten"],
+            ["Spiel laden"],
+            ["Optionen"],
+            ["Beenden"],
+            [""]
+        ],
+        "inv": [],
+        "ltype": "neutral",
+        "descr": "Hauptmenü",
+        "entitylist":[],
+        "triggers":[]
+    },
+
+    "Options":{
+        "text": [
+            ["",   {"action":"change_location",
+                    "new_level_name":"Menu"}],
+            [""]
+        ],
+        "choices": [
+            ["Zurück zum Menü"]
+        ],
+        "inv":[],
+        "ltype":"neutral",
+        "descr":"Optionen:",
+        "entitylist":[],
+        "triggers":[]
+    },
+
+    "Wiese":{
+        "text" : [
+            ["Du schuettelst deinen Kopf. Die kopfschmerzen verschwinden.", {"action":"remove_effect_by_name",  "effect.name":"Kopfschmerz"}, {"Kopfschmerzen":false}],
+            [ "Du siehst dich um. Etwas entfernt scheint ein Weg zu sein.", {"umgesehen":true}],
+            ["Du gehst den Weg entlang.", {"action":"change_location",  "new_level_name":"Kreuzung"}]
+        ],
+        "choices": [
+            ["etwas gegen deine Kopfschmerzen machen", {"Kopfschmerzen":true}],
+            ["dich umsehen"],
+            ["den Weg entlang gehen",{"umgesehen":true}]
+        ],
+        "inv":[],
+        "ltype":"Testlevel",
+        "descr": "Du wachst auf einer Wiese auf. Du hast kopfschmerzen.\n In der Ferne siehst du die Umrisse einer Stadt.",
+        "entitylist":[],
+        "triggers":[{"umgesehen":false},{"Kopfschmerzen":true}]
+    },
+
+    "Kreuzung":{
+        "text" : [
+        ["Du gehst in die Stadt.", {"action":"change_location",
+                                    "new_level_name":"Stadt"}],
+        ["Du gehst in den Wald.",  {"action":"change_location",
+                                    "new_level_name":"Wald"}],
+        ["Du gehst in die Miene.", {"action":"change_location",
+                                    "new_level_name":"Miene"}],
+        ["Du gehst zur Wiese", {"action":"change_location", 
+                                "new_level_name":"Wiese"}]
+    ],
+    "choices": [
+        ["In die Stadt gehen"],
+        ["In den Wald gehen"],
+        ["In die Miene gehen"],
+        ["Zur Wiese gehen"]
+    ],
+    "inv":[],
+    "ltype":"friedlich",
+    "descr":"Du folgst dem Weg bis zu einer Kreuzung.",
+    "entitylist":[],
+    "triggers":[]
+    },
+
+    "Stadt":{
+        "text": [
+            [ "Du siehst dich um. Etwas entfernt scheint ein Pub und eine Markthalle zu sein.", {"umgesehen":true}],
+            ["Du betritst das Pub.", {"action":"change_location", "new_level_name":"Pub"}],
+            ["Du gehst in die Markhalle", {"action":"change_location","new_level_name":"Markthalle"}],
+            ["Du gehst zurück zur Kreuzung", {"action":"change_location", "new_level_name":"Kreuzung"}]
+        ],
+        "choices": [
+            ["dich umsehen"],
+            ["Den Pub betreten",{"umgesehen":true}],
+            ["Die Markthalle besuchen", {"umgesehen":true}],
+            ["zurück zur Kreuzung gehen"]
+        ],
+        "inv": [],
+        "ltype": "friedlich",
+        "descr": "Du Folgst den Weg bis zu einer großen Stadt",
+        "entitylist":[],
+        "triggers":[{"umgesehen":false}],
+        "child_levels":{   
+            "Pub":{
+                "text": [
+                    ["Du setzt dich an einen Tisch eine Bedihnung kommt zu dir.", {"action":"change_location", "new_level_name":"Tisch"}],
+                    ["Du nimmst dir ein Zimmer und betritst dieses.", {"action":"change_location", "new_level_name":"Zimmer"}],
+                    ["Du verlässt den Pub", {"action":"change_location", "new_level_name":"Stadt"}]
+                    
+                ],
+                "choices": [
+                    ["An einen Tisch setzen"],
+                    ["Ein Zimmer nehmen"],          
+                    ["Den Pub verlassen"]
+                ],
+                "inv": [],
+                "ltype": "friedlich",
+                "descr": "Ein gemütliches Pub mit einer aufmerksammen Bedienung",
+                "entitylist":[],
+                "triggers":[],
+                "child_levels":{
+                    "Tisch":{
+                        "text": [
+                            []
+                        ],
+                        "choices": [
+                            []
+                        ],
+                        "inv": [],
+                        "ltype": "friedlich",
+                        "descr": "Ein Tisch",
+                        "entitylist":[],
+                        "triggers":[]
+                    },
+                    "Zimmer":{
+                        "text": [
+                            []
+                        ],
+                        "choices": [
+                            []
+                        ],
+                        "inv": [],
+                        "ltype": "friedlich",
+                        "descr": "Ein Zimmer",
+                        "entitylist":[],
+                        "triggers":[]
+                    }
+                }
+            },
+            "Markthalle":{
+                "text": [
+                    [ "Du schaust dich um und siehst einige Marktstände.", {"umgesehen":true}],
+                    ["Du gehst an den Marktstand des Kreuterhändlers", {"action":"change_location", "new_level_name":"Kräuterhändler"}],
+                    ["Du gehst an den Marktstand des Schmieds", {"action":"change_location", "new_level_name":"Schmied"}],
+                    ["Du verlässt die Markthalle", {"action":"change_location", "new_level_name":"Stadt"}]
+        
+                ],
+                "choices": [
+                    ["dich umsehen"],
+                    ["Den Kräuterhändler besuchen", {"umgesehen":true}],
+                    ["Den Schmied besuchen", {"umgesehen":true}],
+                    ["Die Markthalle verlassen"],
+                    []
+                ],
+                "inv": [],
+                "ltype": "friedlich",
+                "descr": "Du betritst die Markhalle im inneren hersch ein reges Gewimmel",
+                "entitylist":[],
+                "triggers":[{"umgesehen":false}],
+                "child_levels":{
+                    "Kräuterhändler":{
+                        "text": [
+                            [],
+                            ["Du verlässt den Stand des Kräuterhändlers", {"action":"change_location", "new_level_name":"Markthalle"}]
+                        ],
+                        "choices": [
+                            [],
+                            ["Zurück zur Markthalle"]
+                        ],
+                        "inv": [],
+                        "ltype": "friedlich",
+                        "descr": "Ein Kräuterstand mit vielen verschiedenen Artikeln",
+                        "entitylist":[],
+                        "triggers":[]
+                    },
+                    "Schmied":{
+                        "text": [
+                            [],
+                            ["Du verlässt den Schmiedestand", {"action":"change_location", "new_level_name":"Markthalle"}]
+                        ],
+                        "choices": [
+                            [],
+                            ["Zurück zur Markthalle"]
+                        ],
+                        "inv": [],
+                        "ltype": "friedlich",
+                        "descr": "Der Schmied bietet viele verschiedene Waffen und Rüstungen",
+                        "entitylist":[],
+                        "triggers":[]
+                    }
+                }
+            }
+        }
+    },
+
+    "placeholder":{
+        "text": [
+            []
+        ],
+        "choices": [
+            []
+        ],
+        "inv": [],
+        "ltype": "friedlich",
+        "descr": "",
+        "entitylist":[],
+        "triggers":[],
+        "child_levels":{}
+    }
+}

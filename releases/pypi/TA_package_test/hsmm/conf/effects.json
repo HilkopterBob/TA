@@ -1,0 +1,25 @@
+{
+    "Kopfschmerz":{
+        "name":"Kopfschmerz",
+        "descr":"Kopfschmerzen die aus dem hinteren deines Kopfes in die Stirn ziehen.\nZiemlich unangenehm.",
+        "etype":"bad",
+        "value":-2,
+        "infl":"hp"
+    },
+
+    "Ermüdung":{
+        "name":"Ermüdung",
+        "descr":"Du bist etwas müde und solltest dich bald ausruhen.",
+        "etype":"bad",
+        "value":-2,
+        "infl":"strength"
+    },
+
+    "Ermüdung2":{
+        "name":"Ermüdung2",
+        "descr":"Du bist sehr müde und solltest dich ausruhen.",
+        "etype":"bad",
+        "value":-3,
+        "infl":"strength"
+    }
+}

@@ -1,0 +1,20 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "hsmm"
+version = "0.0.1"
+authors = [
+  { name="Tim16_sys", email="author@example.com" },
+  { name="Kartoffel096", email="author@example.com" },
+  { name="HilkopterBob", email="author@example.com" }
+]
+description = "wer das liesst kann lesen"
+readme = "README.md"
+requires-python = ">=3.7"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Operating System :: OS Independent",
+]
+
