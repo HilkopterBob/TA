@@ -3,7 +3,7 @@
     "Player":{
         "name": "Player",                                                     
         "hp": 0,
-        "walth": 0,
+        "wealth": 0,
         "inv": [],
         "xp": 0,
         "ptype":0, 
