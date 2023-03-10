@@ -1,5 +1,7 @@
-from Utils import pr
+from pystyle import Write, Colors, Colorate, Box, Center
+from huepy import *
 
+from Utils import pr
 
 
 
@@ -23,3 +25,17 @@ class Debug():
         for _object in listOfObjects:
             _curObjects.append(_object.name)
         return pr.dbg(F"Loaded {definition}: {_curObjects}")
+    
+    def stop_game_on_exception(exception):
+        pr.b((Colorate.Color(Colors.red, f"The following error occured:", True)))
+        pr.b((Colorate.Color(Colors.red, f"{exception}", True)))
+        pr.q("Do you want to continue the game?")
+        action = inp("y/n")
+        match action:
+            case "y":
+                pass
+            case "n":
+                exit()
+
+    def pause():
+        programPause = input("Press the <ENTER> key to continue...")

@@ -36,8 +36,6 @@ class pr():
     def a(text=""):
         Write.Print(text + "\n", Colors.red, interval=0.0025)
         
-
-    
     def b(text=""):
         print(bad(text))
     
@@ -66,6 +64,9 @@ class pr():
         else:
             print(f'{info("")} {bad("")} {str(yellow(f"DBG - {module} - {function}: "))} {str(text)}')
     
+    def headline(text=""):
+        print(Center.XCenter(Box.Lines(text)))
+
     def showcase():
         pr.n("Das ist die standard Printanweisung")
         pr.a("Allerts!")
