@@ -30,7 +30,7 @@ class Debug():
         pr.b((Colorate.Color(Colors.red, f"The following error occured:", True)))
         pr.b((Colorate.Color(Colors.red, f"{exception}", True)))
         pr.q("Do you want to continue the game?")
-        action = inp("y/n")
+        action = pr.inp("y/n")
         match action:
             case "y":
                 pass
