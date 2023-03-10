@@ -1,3 +1,3 @@
-from .inp import inp
+from .inp import Inp
 from .pr import pr
 from .Debug import Debug
