@@ -65,6 +65,7 @@ class Actionparser:
             try:
                 _entity = attributes[0]
                 _item = attributes[1]
+                _entity.add_item(_item)
                 return 0
             except:
                 return 1
