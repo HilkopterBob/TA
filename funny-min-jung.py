@@ -5,7 +5,7 @@ from Utils import pr, Debug, Inp
 import json
 import hunter 
 from actionparser import Actionparser
-from config import config
+from config import *
 
 
 
@@ -65,14 +65,14 @@ def interact_with_level(player, level, level_list):
                             triggered_dict_index = level.triggers.index(triggered_dict[0])
                             level.triggers[triggered_dict_index] = level.text[action][1]
                         except IndexError as e:
-                            if config.dbg:
+                            if dbg:
                                 pr.dbg(e)
-                        if config.dbg:
+                        if dbg:
                             pr.dbg(level.text[action][1])
                             pr.dbg(level.triggers)
             elif "action" in str(key[0]):
                 ##### ##### reads and uses action calls (action parser)##### #####
-                if config.dbg:
+                if dbg:
                     try:
                         pr.dbg(key)
                         pr.dbg(level.text[action][i][key[0]])
@@ -88,13 +88,13 @@ def interact_with_level(player, level, level_list):
                                 new_level = llevel
                                 player.change_location(level, new_level)
                     case "dbg_true":
-                        if config.dbg:
+                        if dbg:
                             pr.b(pr.dbg("UNBEDINGT DEBUG DEAKTIVIEREN WENN AUF PROD GEPUSHT WIRD!!!"))
                     case "add_effect":
-                        effect = EffectInit.load_effect_by_name_from_json(config.effects_file, str(level.text[action][i]["effect_name"]))
+                        effect = EffectInit.load_effect_by_name_from_json(effects_file, str(level.text[action][i]["effect_name"]))
                         player.add_effect(effect)
                     case _:
-                        if config.dbg:
+                        if dbg:
                             pr.dbg(f"{level.text[action][i][key[0]]} is not defined ")
             i = i + 1
 
@@ -155,12 +155,12 @@ if __name__ == "__main__":
     terror = Effect("Terror","Nö","evil", -100, "xp")
 
     #Load all existing Levels
-    print(config.levels_file)
-    allLevels = LevelInit.load_all_levels_from_json(config.levels_file)
+    print(levels_file)
+    allLevels = LevelInit.load_all_levels_from_json(levels_file)
     Debug.objlist(allLevels, "Levels")
 
     #Load all existing Entities
-    allEntities = EntityInit.load_entities_fromjson(config.entity_file)
+    allEntities = EntityInit.load_entities_fromjson(entity_file)
     Debug.objlist(allEntities,"Entities")
 
     
@@ -175,7 +175,7 @@ if __name__ == "__main__":
 
     #put Kopfschmerz Effect in Actionstack
     mPlayer.actionstack.append(["add_effect",[mPlayer,"Kopfschmerz"]])
-    mPlayer.actionstack.append(["takeeffects",[mPlayer,True]])
+    mPlayer.actionstack.append(["take_effects",[mPlayer,True]])
 
     gameloop(mPlayer, allLevels)
     
