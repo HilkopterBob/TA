@@ -4,7 +4,7 @@ from huepy import *
 
 
 
-class inp():
+class Inp():
 
     """
     Utility Class for getting custom input prompts
