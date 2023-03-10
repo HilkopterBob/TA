@@ -4,7 +4,7 @@ from Utils import pr
 
 
 
-class Dbg():
+class Debug():
 
     """
     Utility class for custom debuging
