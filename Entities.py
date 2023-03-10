@@ -1,4 +1,4 @@
-import Utils as pr
+from Utils import pr, Inp
 import Effect 
 import json
 from queue import Queue 
@@ -26,9 +26,9 @@ class Entity():
     
     def set_name(self):
         while True:
-            self.name = pr.inp("Wie soll der Held deiner Geschichte heißen?")
+            self.name = Inp.inp("Wie soll der Held deiner Geschichte heißen?")
             pr.n(f"Möchtest du deinen Helden wirklich {self.name} nennen?")
-            action = pr.inp("[DIESE EINSTELLUNG KANNST DU NICHT RÜCKGÄNGIG MACHEN!](y/n)")
+            action = Inp.inp("[DIESE EINSTELLUNG KANNST DU NICHT RÜCKGÄNGIG MACHEN!](y/n)")
             if action == "y":
                 break
             """

@@ -1,7 +1,7 @@
 from Entities import Entity, EntityInit, item, itemInit
 from Level import Level, LevelInit
 from Effect import Effect, EffectInit
-import Utils as pr 
+from Utils import pr, Debug, Inp
 import json
 import hunter 
 from actionparser import Actionparser
@@ -43,7 +43,7 @@ def interact_with_level(player, level, level_list):
                     printed = True
                     i = i + 1
     if printed == True:
-        action = int(pr.inp()) - 1
+        action = int(Inp.inp()) - 1
 
     ##### ##### Reads triggers and action calls in level.text[dicts] ##### ##### 
 
@@ -141,7 +141,7 @@ def gameloop(player, level_list=[]):
         lap = lap + 1
 
         #Wait for Player Input
-        pr.pause()
+        Debug.pause()
 
 
 if __name__ == "__main__":
@@ -157,11 +157,11 @@ if __name__ == "__main__":
     #Load all existing Levels
     print(config.levels_file)
     allLevels = LevelInit.load_all_levels_from_json(config.levels_file)
-    pr.objlist(allLevels, "Levels")
+    Debug.objlist(allLevels, "Levels")
 
     #Load all existing Entities
     allEntities = EntityInit.load_entities_fromjson(config.entity_file)
-    pr.objlist(allEntities,"Entities")
+    Debug.objlist(allEntities,"Entities")
 
     
     ###########################################
@@ -174,7 +174,7 @@ if __name__ == "__main__":
     # mPlayer.actionstack.put("let_effects_take_effect")
 
     #put Kopfschmerz Effect in Actionstack
-    mPlayer.actionstack.append(["applyeffect",[mPlayer,"Kopfschmerz"]])
+    mPlayer.actionstack.append(["add_effect",[mPlayer,"Kopfschmerz"]])
     mPlayer.actionstack.append(["takeeffects",[mPlayer,True]])
 
     gameloop(mPlayer, allLevels)

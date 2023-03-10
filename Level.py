@@ -1,5 +1,4 @@
-import Utils as pr
-from pystyle import Write, Colors, Colorate
+from Utils import pr
 import json
 
 class Level():

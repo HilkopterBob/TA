@@ -1,6 +1,6 @@
 from Effect import Effect, EffectInit
 from config import config
-import Utils as pr
+from Utils import pr
 
 class Actionparser:
         

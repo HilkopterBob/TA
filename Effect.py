@@ -1,4 +1,4 @@
-import Utils as pr
+from Utils import pr
 import json
 
 
