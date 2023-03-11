@@ -65,20 +65,17 @@ def interact_with_level(player, level, level_list):
                             triggered_dict_index = level.triggers.index(triggered_dict[0])
                             level.triggers[triggered_dict_index] = level.text[action][1]
                         except IndexError as e:
-                            if dbg:
                                 pr.dbg(e)
-                        if dbg:
-                            pr.dbg(level.text[action][1])
-                            pr.dbg(level.triggers)
+                        pr.dbg(level.text[action][1])
+                        pr.dbg(level.triggers)
             elif "action" in str(key[0]):
                 ##### ##### reads and uses action calls (action parser)##### #####
-                if dbg:
-                    try:
-                        pr.dbg(key)
-                        pr.dbg(level.text[action][i][key[0]])
-                        pr.dbg(level.text[action][i][key[1]])
-                    except Exception as e:
-                        pr.dbg(Exception)
+                try:
+                    pr.dbg(key)
+                    pr.dbg(level.text[action][i][key[0]])
+                    pr.dbg(level.text[action][i][key[1]])
+                except Exception as e:
+                    pr.dbg(Exception)
                 match level.text[action][i][key[0]]:
                     case "remove_effect_by_name":
                         player.remove_effect_by_name(str(level.text[action][i][key[1]]))
@@ -87,15 +84,11 @@ def interact_with_level(player, level, level_list):
                             if llevel.name == str(level.text[action][i][key[1]]):
                                 new_level = llevel
                                 player.change_location(level, new_level)
-                    case "dbg_true":
-                        if dbg:
-                            pr.b(pr.dbg("UNBEDINGT DEBUG DEAKTIVIEREN WENN AUF PROD GEPUSHT WIRD!!!"))
                     case "add_effect":
                         effect = EffectInit.load_effect_by_name_from_json(effects_file, str(level.text[action][i]["effect_name"]))
                         player.add_effect(effect)
                     case _:
-                        if dbg:
-                            pr.dbg(f"{level.text[action][i][key[0]]} is not defined ")
+                        pr.dbg(f"{level.text[action][i][key[0]]} is not defined ")
             i = i + 1
 
 
@@ -162,7 +155,7 @@ if __name__ == "__main__":
     #Load all existing Entities
     allEntities = EntityInit.load_entities_fromjson(entity_file)
     Debug.objlist(allEntities,"Entities")
-
+    pr.dbg("Test",1)
     
     ###########################################
     #######___HOW TO USE ACTIONSTACK___########

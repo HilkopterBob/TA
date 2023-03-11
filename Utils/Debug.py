@@ -1,9 +1,6 @@
 from pystyle import Write, Colors, Colorate, Box, Center
 from huepy import *
-
 from Utils import pr
-
-
 
 
 class Debug():

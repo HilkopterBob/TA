@@ -1,7 +1,7 @@
 from pystyle import  Colors, Colorate, Box, Center, Write
 from huepy import *
 import inspect
-
+from config import *
 
 
 class pr():
@@ -55,14 +55,18 @@ class pr():
             text (str): Text to be Displayed. Defaults to "".
             errlvl (int): Errorlevel 0=Inf, 1=Err. Defaults to 0.
         """
+
+        if (not dbg):
+            return
         
         module = inspect.currentframe().f_back.f_globals['__name__']
         function = inspect.stack()[1].function
+        line_number = inspect.stack()[1].lineno
         
         if errlvl == 0:
-            print(f'{info("")} {good("")} {str(yellow(f"DBG - {module} - {function}: "))} {str(text)}')
+            print(f'{info("")} {good("")} {str(yellow(f"[{line_number}] DBG - {module} - {function}: "))} {str(text)}')
         else:
-            print(f'{info("")} {bad("")} {str(yellow(f"DBG - {module} - {function}: "))} {str(text)}')
+            print(f'{info("")} {bad("")} {str(yellow(f"[{line_number}] DBG - {module} - {function}: "))} {str(text)}')
     
     def headline(text=""):
         print(Center.XCenter(Box.Lines(text)))
@@ -82,4 +86,3 @@ class pr():
         pr.red("Red Text")
         pr.blue("Blue Text")
         pr.cyan("Cyan Text")
-    

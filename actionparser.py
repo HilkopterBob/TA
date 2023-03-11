@@ -27,6 +27,7 @@ class Actionparser:
         
         def take_effects(attributes = []):
             try:
+                pr.hello()
                 pr.dbg(attributes)
                 _entity = attributes[0]
                 _entity.let_effects_take_effect([attributes[1]])
