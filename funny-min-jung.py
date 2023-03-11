@@ -155,7 +155,6 @@ if __name__ == "__main__":
     #Load all existing Entities
     allEntities = EntityInit.load_entities_fromjson(entity_file)
     Debug.objlist(allEntities,"Entities")
-    pr.dbg("Test",1)
     
     ###########################################
     #######___HOW TO USE ACTIONSTACK___########
