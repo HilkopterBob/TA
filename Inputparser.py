@@ -2,7 +2,14 @@
 Inputparser Module which holds 1 Function
     inputparser()
 """
-def inputparser(user_input, minl=5, maxl=50):
+
+from Utils import Inp
+
+
+def inputparser(    min_len=0,
+                    max_len=150
+                    ):
+
     """Parses the User Inputs
 
     Args:
@@ -13,35 +20,40 @@ def inputparser(user_input, minl=5, maxl=50):
     Returns:
         String: user_input
     """
+    user_input = Inp.inp()
     befehlszeichen = "#"
 
-
     try:
-
         if not user_input.strip():
             raise ValueError("Leere Eingabe")
 
-        if len(user_input) < minl:
-            raise ValueError(f"Der Input muss mindestens {minl} Zeichen lang sein")
+        if len(user_input) < min_len:
+            raise ValueError(f"Der Input muss mindestens {min_len} Zeichen lang sein")
 
-        if len(user_input.strip()) > maxl:
-            raise ValueError(f"Der Input darf nicht länger als {maxl} Zeichen sein")
+        if len(user_input.strip()) > max_len:
+            raise ValueError(f"Der Input darf nicht länger als {max_len} Zeichen sein")
 
+        #alles kleinbuchstaben
+        user_input = user_input.lower()
         #Wenn Eingabe == Zahl dann
         if user_input.isdigit():
             user_input = int(user_input)
 
         #Wenn Eingabe == String dann
-        else:
-            user_input = str(user_input)
-            user_input = user_input.lower() #alles kleinbuchstaben
-
+        elif user_input[0]==befehlszeichen:
             #befehlserkennung
-            if user_input[0]==befehlszeichen:
-                return user_input[1:]
+            input_command = user_input[1:]
+            input_list = input_command.split()
+            match input_list[0]:
+                case "hallo":
+                    print("Hallo")
+                    for e in input_list:
+                        print(e)
 
-            print(f"Ich bin ein Text: {user_input}")
+                case _:
+                    pass
 
+            return inputparser()
         return user_input
 
     except ValueError as e:
@@ -52,9 +64,4 @@ def inputparser(user_input, minl=5, maxl=50):
         return None
 
 
-inputstr = input("Geben Sie eine Benutzereingabe ein: ")
-processed_input = inputparser(inputstr, minl=2, maxl=10)
-if processed_input is not None:
-    print(processed_input)
-    print(type(inputstr))
-    print(type(processed_input))
+inputparser()
