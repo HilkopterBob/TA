@@ -1,12 +1,17 @@
 """
-Levels Module for Level Classes
+Levels Module which holds 2 Classes
+    Level()
+    Levelinit()
 """
 import json
 from Utils import pr
 
 
 class Level():
-    """Class which holds a Level
+    """
+        Class which defines Levels
+        Contains Functions:
+        from_json : Creates Levels from JSON
     """
     def __init__(self,
                 text=None,
@@ -97,10 +102,11 @@ class Level():
 
 
 class LevelInit():
-    """Class for Initializing Levels
+    """
+        Class which Initializes Levels
         Contains Functions:
-        load_all_levels_from_json()
-        load_level_by_name_from_json()
+        load_all_levels_from_json : Loads all available Levels from a Json File
+        load_level_by_name_from_json : Loads an Level by it's Name from a Json File
 
     """
     def load_all_levels_from_json(json_file, _curLevels = None):

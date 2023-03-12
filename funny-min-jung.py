@@ -1,4 +1,4 @@
-from Entities import Entity, EntityInit, item, itemInit
+from Entities import Entity, EntityInit, gitem, itemInit
 from Level import Level, LevelInit
 from Effect import Effect, EffectInit
 from Utils import pr, Debug, Inp
@@ -138,8 +138,8 @@ def gameloop(player, level_list=[]):
 
 
 if __name__ == "__main__":
-    mPlayer = Entity("Player", 100,100,0,[item("Item1","weapon"),item("item2","misc")], location="Menu")
-    hurensohn = Entity("Hurensohn", 100,100,0,[item("Item1","weapon"),item("item2","misc")], location="Wiese")
+    mPlayer = Entity("Player", 100,100,0,[gitem("Item1","weapon"),gitem("item2","misc")], location="Menu")
+    hurensohn = Entity("Hurensohn", 100,100,0,[gitem("Item1","weapon"),gitem("item2","misc")], location="Wiese")
     #mPlayer.set_name()
     kopfschmerz = Effect("Kopfschmerz","Kopfschmerzen halt.","bad", -1, "hp")
     heilung = Effect("heilung","Nö","good", 5, "hp")

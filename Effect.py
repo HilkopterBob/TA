@@ -1,4 +1,5 @@
-"""Effects Module which holds 2 Classes
+"""
+Effects Module which holds 2 Classes
     Effect()
     EffectInit()
 """
