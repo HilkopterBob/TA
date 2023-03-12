@@ -13,18 +13,19 @@ class Entity():
         Contains Functions:
         from_json : Creates Entities from JSON
     """
-    def __init__(self,
-                 name="Blanko",
-                 health=100,
-                 wealth=100,
-                 xp=0,
-                 inv=None,
-                 ptype="",
-                 geffects=None,
-                 beffects=None,
-                 eeffects=None,
-                 location="Nirvana",
-                 level=1):
+    def __init__(   self,
+                    name="Blanko",
+                    health=100,
+                    wealth=100,
+                    xp=0,
+                    inv=None,
+                    ptype="",
+                    geffects=None,
+                    beffects=None,
+                    eeffects=None,
+                    location="Nirvana",
+                    level=1
+                    ):
 
         if inv is None:
             inv = []
