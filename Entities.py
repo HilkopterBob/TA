@@ -60,17 +60,18 @@ class Entity():
         Returns:
             Entity: Entity
         """
-        return Entity(json_dct['name'],
-                      json_dct['hp'],
-                      json_dct['wealth'],
-                      json_dct['xp'],
-                      json_dct['inv'],
-                      json_dct['ptype'],
-                      json_dct['geffects'],
-                      json_dct['beffects'],
-                      json_dct['eeffects'],
-                      json_dct['location'],
-                      json_dct['level'])
+        return Entity(  json_dct['name'],
+                        json_dct['hp'],
+                        json_dct['wealth'],
+                        json_dct['xp'],
+                        json_dct['inv'],
+                        json_dct['ptype'],
+                        json_dct['geffects'],
+                        json_dct['beffects'],
+                        json_dct['eeffects'],
+                        json_dct['location'],
+                        json_dct['level']
+                        )
 
     def set_name(self):
         """
@@ -271,25 +272,28 @@ class Entity():
         try:
             for e in self.eeffects:
                 self.change_stat(e)
-                pr.dbg(f"{pr.cyan(e.name)}, \
-                       {pr.cyan(e.etype)} : affected OBJECT: \
-                       {pr.cyan(self.name)}. Value: \
-                       {pr.cyan(e.value)} influenced: \
-                       {pr.cyan(e.infl)}")
+                pr.dbg( f"{pr.cyan(e.name)}, \
+                        {pr.cyan(e.etype)} : affected OBJECT: \
+                        {pr.cyan(self.name)}. Value: \
+                        {pr.cyan(e.value)} influenced: \
+                        {pr.cyan(e.infl)}"
+                        )
             for e in self.geffects:
                 self.change_stat(e)
-                pr.dbg(f"{pr.cyan(e.name)}, \
-                       {pr.cyan(e.etype)} : affected OBJECT: \
-                       {pr.cyan(self.name)}. Value: \
-                       {pr.cyan(e.value)} influenced: \
-                       {pr.cyan(e.infl)}")
+                pr.dbg( f"{pr.cyan(e.name)}, \
+                        {pr.cyan(e.etype)} : affected OBJECT: \
+                        {pr.cyan(self.name)}. Value: \
+                        {pr.cyan(e.value)} influenced: \
+                        {pr.cyan(e.infl)}"
+                        )
             for e in self.beffects:
                 self.change_stat(e)
-                pr.dbg(f"{pr.cyan(e.name)}, \
-                       {pr.cyan(e.etype)} : affected OBJECT: \
-                       {pr.cyan(self.name)}. Value: \
-                       {pr.cyan(e.value)} influenced: \
-                       {pr.cyan(e.infl)}")
+                pr.dbg( f"{pr.cyan(e.name)}, \
+                        {pr.cyan(e.etype)} : affected OBJECT: \
+                        {pr.cyan(self.name)}. Value: \
+                        {pr.cyan(e.value)} influenced: \
+                        {pr.cyan(e.infl)}"
+                        )
             return True
         except:
             return False
@@ -413,15 +417,16 @@ class gitem():
         Contains Functions:
         from_json : Creates Items from JSON
     """
-    def __init__(self,
-                 name="placeholder",
-                 itype="misc",
-                 dmg=0,
-                 condition=0,
-                 effects = None,
-                 useable=False,
-                 equipable=False,
-                 questitem=False):
+    def __init__(   self,
+                    name="placeholder",
+                    itype="misc",
+                    dmg=0,
+                    condition=0,
+                    effects = None,
+                    useable=False,
+                    equipable=False,
+                    questitem=False
+                    ):
 
         if effects is None:
             effects = []

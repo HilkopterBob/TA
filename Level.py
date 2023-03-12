@@ -13,15 +13,16 @@ class Level():
         Contains Functions:
         from_json : Creates Levels from JSON
     """
-    def __init__(self,
-                text=None,
-                choices=None,
-                name="Levelnameplatzhalter",
-                inv=None,
-                ltype="Testtype",
-                descr="Standartdescription du Sohn einer Dirne",
-                entitylist = None,
-                triggers=None):
+    def __init__(   self,
+                    text=None,
+                    choices=None,
+                    name="Levelnameplatzhalter",
+                    inv=None,
+                    ltype="Testtype",
+                    descr="Standartdescription du Sohn einer Dirne",
+                    entitylist = None,
+                    triggers=None
+                    ):
 
         if text is None:
             text = []
@@ -92,7 +93,7 @@ class Level():
             case "-":
                 try:
                     self.entitylist = list (filter(lambda e: e.name != entity.name,
-                                                   self.entitylist))
+                                            self.entitylist))
                     return True
                 except:
                     return False

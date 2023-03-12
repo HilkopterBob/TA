@@ -36,11 +36,12 @@ class Effect():
         Returns:
             Effect: Effect
         """
-        return Effect(ename,
-                      json_dct["descr"],
-                      json_dct["etype"],
-                      json_dct["value"],
-                      json_dct["infl"])
+        return Effect(  ename,
+                        json_dct["descr"],
+                        json_dct["etype"],
+                        json_dct["value"],
+                        json_dct["infl"]
+                        )
 
 
 class EffectInit():
