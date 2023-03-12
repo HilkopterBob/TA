@@ -1,4 +1,9 @@
-def inputphraser(user_input, min=5, max=50):
+import json
+
+with open('config/commands.json', 'r') as f:
+     data = json.load(f)
+
+def inputphraser(user_input, min_len=5, max_len=50):
     befehlszeichen = "#"
 
 
@@ -7,11 +12,11 @@ def inputphraser(user_input, min=5, max=50):
         if not user_input.strip():
             raise ValueError("Leere Eingabe")
         
-        if len(user_input) < min:
-            raise ValueError(f"Der Input muss mindestens {min} Zeichen lang sein")
+        if len(user_input) < min_len:
+            raise ValueError(f"Der Input muss mindestens {min_len} Zeichen lang sein")
         
-        if len(user_input.strip()) > max:
-            raise ValueError(f"Der Input darf nicht länger als {max} Zeichen sein")
+        if len(user_input.strip()) > max_len:
+            raise ValueError(f"Der Input darf nicht länger als {max_len} Zeichen sein")
         
         #Wenn Eingabe == Zahl dann
         if (user_input.isdigit()):
@@ -24,7 +29,19 @@ def inputphraser(user_input, min=5, max=50):
             
             #befehlserkennung
             if (user_input[0]==befehlszeichen): 
-                return user_input[1:]
+                input_command = user_input[1:]
+                for command in data['commands']:
+                    if input_command == command['name']:
+                        print("Processing " + command['name'] + " command...")
+                       # print(command['action'])
+                        exec(command['action'])
+                        return None
+                else:
+                   raise ValueError("Ungültiger Befehl")
+                    
+                
+                
+                
             
             print(f"Ich bin ein Text: {user_input}")
 
@@ -36,17 +53,16 @@ def inputphraser(user_input, min=5, max=50):
     except:
         print ("Unbekannter Fehler beim Input")
         return None
-        
-    
+
+
 user_input = input("Geben Sie eine Benutzereingabe ein: ")
-processed_input = inputphraser(user_input, min=2, max=10)
+processed_input = inputphraser(user_input, min_len=2, max_len=10)
 if processed_input is not None:
     print(processed_input)
-    print(type(user_input))
-    print(type(processed_input))
+   # print(type(user_input))
+   # print(type(processed_input))
 
-#befehlserkennung
-#nur zalen/text erlaubt
+
 
 
 

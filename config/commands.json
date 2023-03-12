@@ -1,0 +1,10 @@
+{
+    "commands": [
+      {
+        "name": "test",
+        "description": "test",
+        "action": "user_input = user_input"
+      }
+    ]
+  }
+  
