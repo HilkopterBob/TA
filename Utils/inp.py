@@ -1,7 +1,6 @@
+"""Defines Input Method for User
+"""
 from pystyle import  Colors, Write
-from huepy import *
-
-
 
 
 class Inp():
@@ -11,5 +10,7 @@ class Inp():
     """
 
     def inp(text=""):
+        """Method to get User Input
+        """
         Input = Write.Input(text + "\n >_ ", Colors.white, interval=0.0025)
         return Input
