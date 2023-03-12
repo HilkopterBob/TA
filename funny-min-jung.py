@@ -1,16 +1,18 @@
-from Entities import Entity, EntityInit, gitem, itemInit
-from Level import Level, LevelInit
+"""Main Module for Textadventure
+"""
+from Entities import Entity, EntityInit, gitem
+from Level import LevelInit
 from Effect import Effect, EffectInit
 from Utils import pr, Debug, Inp
-import json
-import hunter 
 from actionparser import Actionparser
-from config import *
+from config import levels_file,entity_file,effects_file
 
 
 
 
 def interact_with_level(player, level, level_list):
+    """Current Game Interaction Function
+    """
     ##### ##### prints out choices and gets user input if choices got printed ##### #####
     printed = False
     i = 1
@@ -23,13 +25,12 @@ def interact_with_level(player, level, level_list):
         #pr.n(level.descr)
         for entry in level.descr:
             if len(entry) > 1:
-                if type(entry) == str:
+                if isinstance(entry,str):
                     pr.n(f"{str(entry)}")
                     continue
-                else:
-                    if entry[1] in level.triggers:
-                        pr.n(f"{str(entry[0])}")
-                    continue
+                if entry[1] in level.triggers:
+                    pr.n(f"{str(entry[0])}")
+                continue
 
     for llist in level.choices:
         if len(llist) == 1 and llist[0] != "":
@@ -42,10 +43,10 @@ def interact_with_level(player, level, level_list):
                     pr.n(f"{i}. {llist[0]}")
                     printed = True
                     i = i + 1
-    if printed == True:
+    if printed:
         action = int(Inp.inp()) - 1
 
-    ##### ##### Reads triggers and action calls in level.text[dicts] ##### ##### 
+    ##### ##### Reads triggers and action calls in level.text[dicts] ##### #####
 
     pr.n(level.text[action][0])
     if len(level.text[action]) > 1:
@@ -61,11 +62,13 @@ def interact_with_level(player, level, level_list):
                     if ddict.keys() == level.text[action][1].keys():
                         try:
                             #Enumerate als refactor nutzen
-                            triggered_dict = list(filter(lambda dict: dict.keys() != level.text[action][1][key[0]], level.triggers))
+                            triggered_dict = list(filter(lambda dict: dict.keys()
+                                                        != level.text[action][1][key[0]],
+                                                        level.triggers))
                             triggered_dict_index = level.triggers.index(triggered_dict[0])
                             level.triggers[triggered_dict_index] = level.text[action][1]
                         except IndexError as e:
-                                pr.dbg(e)
+                            pr.dbg(e)
                         pr.dbg(level.text[action][1])
                         pr.dbg(level.triggers)
             elif "action" in str(key[0]):
@@ -85,7 +88,8 @@ def interact_with_level(player, level, level_list):
                                 new_level = llevel
                                 player.change_location(level, new_level)
                     case "add_effect":
-                        effect = EffectInit.load_effect_by_name_from_json(effects_file, str(level.text[action][i]["effect_name"]))
+                        effect = EffectInit.load_effect_by_name_from_json(effects_file,
+                                                        str(level.text[action][i]["effect_name"]))
                         player.add_effect(effect)
                     case _:
                         pr.dbg(f"{level.text[action][i][key[0]]} is not defined ")
@@ -93,8 +97,13 @@ def interact_with_level(player, level, level_list):
 
 
 def hud(player):
-    if player.location != "Menu" and player.location != "Options":
-        pr.n("+"*12+f" "+"+"*12)
+    """Player Hud
+
+    Args:
+        player (Entity): The Player to which the Hud should be displayed
+    """
+    if player.location not in ("Menu","Options"):
+        pr.n("+"*12+" "+"+"*12)
         pr.n(f"Du befindest dich in: {player.location}")
         if player.hp > 25:
             pr.g(f"HP: {player.hp}")
@@ -103,32 +112,31 @@ def hud(player):
         pr.n(f"Gold: {player.wealth}")
         pr.n(F"Level: {player.level} XP: {player.xp}")
 
-def gameloop(player, level_list=[]):
-        
-    lap = 0                                             #rundenanzahl
-    #start of loop
+def gameloop(player, level_list=None):
+    """
+        The Main Game Loop
+    """
+    if level_list is None:
+        level_list = []
+
+    lap = 0
     while True:
-        #Loop through all Levels and check if Player is inside level   ---  TODO: FIX because unperformant
         for level in level_list:
             if level.name == player.location:
                 current_level = level
-        
+
         #Loop through all Entities in CurrentLevel and Apply Actionstack
         for e in current_level.entitylist:
-            """
-            Todo Action parser for actionstack (pass entity to which the action applies, 
-            pass the action, process action on entity, return successfull or error)
-            """
             #Work through actionstack of Entity and process actions
             for action in e.actionstack:
                 pr.dbg(action)
                 Actionparser.callfunction(action)
                 e.actionstack.remove(action)
-                
-        player.check_level_up()                             #check for levelups and level up if enough xp
+
+        player.check_level_up()
         interact_with_level(player, current_level, level_list)
         #changes the entity location, deletes entity from old level and adds to the new one
-        
+
 
         #Increase Lap Counter by i
         lap = lap + 1
@@ -138,8 +146,10 @@ def gameloop(player, level_list=[]):
 
 
 if __name__ == "__main__":
-    mPlayer = Entity("Player", 100,100,0,[gitem("Item1","weapon"),gitem("item2","misc")], location="Menu")
-    hurensohn = Entity("Hurensohn", 100,100,0,[gitem("Item1","weapon"),gitem("item2","misc")], location="Wiese")
+    mPlayer = Entity("Player", 100,100,0,
+                    [gitem("Item1","weapon"),gitem("item2","misc")], location="Menu")
+    hurensohn = Entity("Hurensohn", 100,100,0,
+                    [gitem("Item1","weapon"),gitem("item2","misc")], location="Wiese")
     #mPlayer.set_name()
     kopfschmerz = Effect("Kopfschmerz","Kopfschmerzen halt.","bad", -1, "hp")
     heilung = Effect("heilung","Nö","good", 5, "hp")
@@ -155,7 +165,7 @@ if __name__ == "__main__":
     #Load all existing Entities
     allEntities = EntityInit.load_entities_fromjson(entity_file)
     Debug.objlist(allEntities,"Entities")
-    
+
     ###########################################
     #######___HOW TO USE ACTIONSTACK___########
     ###########################################
@@ -170,6 +180,3 @@ if __name__ == "__main__":
     mPlayer.actionstack.append(["take_effects",[mPlayer,True]])
 
     gameloop(mPlayer, allLevels)
-    
-    
-
