@@ -1,9 +1,9 @@
+"""Configuration for Textadventure
+"""
 import sys
-import json
 
 ##################
 ##Debug Variable##
-global dbg
 dbg = True
 sys.stdout.reconfigure(encoding='utf-8')
 #hunter.trace(module="__main__")
