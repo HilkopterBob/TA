@@ -1,25 +1,57 @@
-from Utils import pr
+"""Effects Module which holds 2 Classes
+    Effect()
+    EffectInit()
+"""
 import json
-
+from .Utils import pr
 
 
 class Effect():
-
-    def __init__(self, name="Effektnameplatzhalter", desrc="Effektbeschreibungsplatzhalter", etype="good", value=0, influenced="atk"):
+    """
+        Class which defines Effects
+        Contains Functions:
+        from_json : Creates Effects from JSON
+    """
+    def __init__(self,
+                name="Effectname",
+                desrc="Effectdescription",
+                etype="good",
+                value=0,
+                influenced="atk"):
         self.name = name
         self.descr = desrc
-        self.etype = etype                  #:Effekttyp, good|bad|evil → siehe Gameloop
+        self.etype = etype
         self.value = value
-        self.infl = influenced              #:Influenced Vale, welcher Wert beeinflusst wird (hp, xp, atk, def, speed etc)
+        self.infl = influenced
 
-    @staticmethod   #Generate Level from Json
+    @staticmethod
     def from_json(json_dct, ename):
-        return Effect(ename, json_dct["descr"], json_dct["etype"], json_dct["value"], json_dct["infl"])
+        """Creates an Effect from given JSON
+
+        Args:
+            json_dct (json): The Json Code to be parsed
+            ename (String): The Effect Name
+
+        Returns:
+            Effect: Effect
+        """
+        return Effect(ename,
+                      json_dct["descr"],
+                      json_dct["etype"],
+                      json_dct["value"],
+                      json_dct["infl"])
 
 
-    
 class EffectInit():
-    def load_all_effects_from_json(json_file):
+    """
+        Class which Initializes Effects
+        Contains Functions:
+        load_all_effects_from_json : Loads all available Effects from a Json File
+        load_effect_by_name_from_json : Loads an Effect by it's Name from a Json File
+
+    """
+
+    def load_all_effects_from_json(self,json_file):
         """
             Return alls Effects from Json file
             
@@ -31,13 +63,13 @@ class EffectInit():
         with open(json_file, encoding="UTF-8") as json_data:
             data = json.load(json_data)
 
-        
+
         for ename in data.keys():
-            if (ename[0] != "$"):
+            if ename[0] != "$":
                 effects_master_list.append(Effect.from_json(data[ename], ename))
         return effects_master_list
 
-    def load_effect_by_name_from_json(json_file, name):
+    def load_effect_by_name_from_json(self,json_file, name):
         """
             Return a single Level Object from Json by given Name
             
@@ -48,11 +80,11 @@ class EffectInit():
         """
         with open(json_file, encoding="UTF-8") as json_data:
             data = json.load(json_data)
-            
+
 
         for ename in data.keys():
             if name == ename:
                 return Effect.from_json(data[ename], ename)
-        
+
         pr.dbg(f"Effect: {pr.cyan(name)} not found!", 1)
         return False
