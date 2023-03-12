@@ -1,14 +1,23 @@
 name: Validate JSONs
 
-on: [push]
+on:
+  pull_request:
+    branches:
+      - main
 
 jobs:
-  verify-json-validation:
+  validate-jsons:
+    strategy:
+      matrix:
+          json: ['effects', 'entities', 'levels', 'items']
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v2
+        with:
+          persist-credentials: true
+          fetch-depth: 0
       - name: Validate JSON
         uses: docker://orrosenblatt/validate-json-action:latest
         env:
-          INPUT_SCHEMA: /.github/workflows/schema.json
-          INPUT_JSONS: /config/levels.json
+          INPUT_SCHEMA: /.github/workflows/${{matrix.json}}chema.json
+          INPUT_JSONS: /config/${{matrix.json}}.json

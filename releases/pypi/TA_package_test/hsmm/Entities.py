@@ -1,89 +1,36 @@
-"""
-Entities Module which holds 2 Classes
-    Entity()
-    Entityinit()
-"""
+from .Utils import *
 import json
-from Utils import pr, Inp
-
+from queue import Queue 
 
 class Entity():
-    """
-        Class which defines Entities
-        Contains Functions:
-        from_json : Creates Entities from JSON
-    """
-    def __init__(   self,
-                    name="Blanko",
-                    health=100,
-                    wealth=100,
-                    xp=0,
-                    inv=None,
-                    ptype="",
-                    geffects=None,
-                    beffects=None,
-                    eeffects=None,
-                    location="Nirvana",
-                    level=1
-                    ):
 
-        if inv is None:
-            inv = []
-        if geffects is None:
-            geffects = []
-        if beffects is None:
-            beffects = []
-        if eeffects is None:
-            eeffects = []
-
-        self.location = location
+    def __init__(self, name="Blanko", health=100, wealth=100, xp=0, inv=[], ptype="", geffects=[], beffects=[], eeffects=[], location="Nirvana", level=1):
+        self.location = location                                                        
         self.name = name
         self.hp = health
         self.wealth = wealth
         self.level = level
         self.xp = xp
         self.inv = inv
-        self.ptype = ptype
-        self.geffects = geffects
-        self.beffects = beffects
-        self.eeffects = eeffects
+        self.ptype = ptype                                                              #Was ist ein ptype?
+        self.geffects = geffects                                                        #good effects
+        self.beffects = beffects                                                        #bad effects
+        self.eeffects = eeffects                                                        #evil effects
         self.effects = [[self.geffects],[self.beffects],[self.eeffects]]
-        self.actionstack = []
+        self.actionstack = []#Queue()                                                      #Actionstack for Gameloop (Only populate at runtime!)
 
-    @staticmethod
-    def from_json(json_dct):
-        """Creates an Entiy from given JSON
-
-        Args:
-            json_dct (json): The Json Code to be parsed
-
-        Returns:
-            Entity: Entity
-        """
-        return Entity(  json_dct['name'],
-                        json_dct['hp'],
-                        json_dct['wealth'],
-                        json_dct['xp'],
-                        json_dct['inv'],
-                        json_dct['ptype'],
-                        json_dct['geffects'],
-                        json_dct['beffects'],
-                        json_dct['eeffects'],
-                        json_dct['location'],
-                        json_dct['level']
-                        )
-
+    @staticmethod   #Generate Object from Json
+    def from_json(json_dct, ename):
+        return Entity(json_dct['name'], json_dct['hp'], json_dct['wealth'],json_dct['xp'],json_dct['inv'],json_dct['ptype'],json_dct['geffects'],json_dct['beffects'],json_dct['eeffects'],json_dct['location'],json_dct['level'])
+    
     def set_name(self):
-        """
-            Sets the Name of an Entity Object
-        """
         while True:
-            self.name = Inp.inp("Wie soll der Held deiner Geschichte heißen?")
-            pr.n(f"Möchtest du deinen Helden wirklich {self.name} nennen?")
-            action = Inp.inp("[DIESE EINSTELLUNG KANNST DU NICHT RÜCKGÄNGIG MACHEN!](y/n)")
+            self.name = inp("Wie soll der Held deiner Geschichte heißen?")
+            n(f"Möchtest du deinen Helden wirklich {self.name} nennen?")
+            action = inp("[DIESE EINSTELLUNG KANNST DU NICHT RÜCKGÄNGIG MACHEN!](y/n)")
             if action == "y":
                 break
-
+    
     def change_health(self, value=0):
         """
             Changes the Player Health
@@ -91,14 +38,14 @@ class Entity():
             :value: Amount to Change
             
             =return= Returns True if successfull otherwise returns false
-        """
+        """ 
         try:
-            self.hp += value
+            self.health += value
             return True
         except:
             return False
-
-    def add_item(self, item):
+        
+    def add_item(self, iname="", itype=""):
         """
             Adds Item to Inventory
 
@@ -106,13 +53,13 @@ class Entity():
             :itype: Type of Item
             
             =return= Returns True if successfull otherwise returns false
-        """
+        """ 
         try:
-            self.inv.append(item)
+            self.inv.append(item(iname, itype))
             return True
         except:
             return False
-
+        
     def remove_item_by_name(self, iname=""):
         """
             Removes Item by given Itemname, if no Name is given no Item will be removed.
@@ -120,28 +67,23 @@ class Entity():
             :iname: Name of Item which should be removed
             
             =return= Returns True if successfull otherwise returns false
-        """
+        """ 
         try:
             self.inv = list (filter(lambda i: i.name != iname, self.inv))
             return True
         except:
             return False
-
-    def remove_item_by_index(self, index=-1, quest=False):
+        
+    def remove_item_by_index(self, index=-1):
         """
-            Removes Item by given Index, 
-            if no Index is given the last Item in Inventory will be removed.
+            Removes Item by given Index, if no Index is given the last Item in Inventory will be removed.
 
             :index: Index of Item which should be removed
             
             =return= Returns True if successfull otherwise returns false
-        """
-
+        """ 
         try:
-            if not self.inv[index].questitem:
-                self.inv.pop(index)
-            elif quest:
-                self.inv.pop(index)
+            self.inv.pop(index)
             return True
         except:
             return False
@@ -167,14 +109,14 @@ class Entity():
                     return True
                 except:
                     return False
-            case "evil":
+            case "evil":   
                 try:
                     self.eeffects.append(effect)
                     return True
                 except:
                     return False
-
-    def show_effects(self, names=False):
+        
+    def show_effects(self, names=True):
         """
             prints element.name of effects[]
 
@@ -183,7 +125,7 @@ class Entity():
             only for debug!
         """
         try:
-            if names:
+            if names==True:
                 try:
                     for e in self.effects[0][0]:
                         print(e.name)
@@ -202,9 +144,9 @@ class Entity():
                     return True
                 except:
                     return False
-        except:
+        except:                                     #Python: *unterstützt fehlerabfragen*, Nick: "Hold my Beer!"
             return False
-
+        
     def remove_effect_by_name(self, ename=""):
         """
             removes effect from entity by given name
@@ -220,7 +162,7 @@ class Entity():
         except:
             return False
 
-    def remove_effect_by_index(self, index=-1):
+    def reomove_effect_by_index(self, index=-1):
         """
             removes effect by given index
         
@@ -256,12 +198,12 @@ class Entity():
                 except:
                     return False
             case _:
-                print("change_stat: WILDCARD AUSGELÖST! debuginfo:")
+                print(f"change_stat: WILDCARD AUSGELÖST! debuginfo:")
                 print(vars(self))
                 print(vars(effect))
                 return False
 
-    def take_effects(self):
+    def let_effects_take_effect(self, dbg):
         """
             used in gameloop to let effects take effect onto entety
         
@@ -272,36 +214,23 @@ class Entity():
         try:
             for e in self.eeffects:
                 self.change_stat(e)
-                pr.dbg( f"{pr.cyan(e.name)}, \
-                        {pr.cyan(e.etype)} : affected OBJECT: \
-                        {pr.cyan(self.name)}. Value: \
-                        {pr.cyan(e.value)} influenced: \
-                        {pr.cyan(e.infl)}"
-                        )
+                if dbg:
+                    dbg(f"{cyan(e.name)}, {cyan(e.etype)} : affected OBJECT: {cyan(self.name)}. Value: {cyan(e.value)} influenced: {cyan(e.infl)}")
             for e in self.geffects:
                 self.change_stat(e)
-                pr.dbg( f"{pr.cyan(e.name)}, \
-                        {pr.cyan(e.etype)} : affected OBJECT: \
-                        {pr.cyan(self.name)}. Value: \
-                        {pr.cyan(e.value)} influenced: \
-                        {pr.cyan(e.infl)}"
-                        )
+                if dbg:
+                    dbg(f"{cyan(e.name)}, {cyan(e.etype)} : affected OBJECT: {cyan(self.name)}. Value: {cyan(e.value)} influenced: {cyan(e.infl)}")
             for e in self.beffects:
                 self.change_stat(e)
-                pr.dbg( f"{pr.cyan(e.name)}, \
-                        {pr.cyan(e.etype)} : affected OBJECT: \
-                        {pr.cyan(self.name)}. Value: \
-                        {pr.cyan(e.value)} influenced: \
-                        {pr.cyan(e.infl)}"
-                        )
+                if dbg:
+                    dbg(f"{cyan(e.name)}, {cyan(e.etype)} : affected OBJECT: {cyan(self.name)}. Value: {cyan(e.value)} influenced: {cyan(e.infl)}")
             return True
         except:
             return False
 
     def change_location(self, old_level, new_level):
         """
-            changes entty location by edditing onwn location, 
-            deletes itself from old and adds to new entity.list
+            changes entty location by edditing onwn location, deletes itself from old and adds to new entity.list
         
             :old_level: old level object, old_level.entity_list will get eddited
 
@@ -315,14 +244,14 @@ class Entity():
 
     def check_level_up(self):
         """
-            checks if entity has enough xp to level up, 
-            will level up the entity UNTIL there are not enough xp
+            checks if entity has enough xp to level up, will level up the entity UNTIL there are not enough xp
         
             =return= returns nothing, yet
         """
         level_ups = 0
         old_level = self.level
-        pr.dbg(f"Previous Level: {old_level}")
+        if self.level == 0:
+            self.level == 1
         while True:
             if self.level < 10:
                 needed_xp = ((self.level + 1 )/0.4) ** 1.79
@@ -330,48 +259,29 @@ class Entity():
                     self.level += 1
                     self.xp = self.xp - int(needed_xp)
                     level_ups += 1
-
-                if level_ups > 0:
-                    pr.n(f"Du bist {level_ups} Level aufgestiegen!")
-                    pr.n("Du bekommst: nichts.")
-
-
+                else:
+                    check_level_up_list = [level_ups, old_level]
+                    return check_level_up_list
             if self.level >= 10 and self.level < 30:
                 needed_xp = ((self.level + 1 )/0.37) ** 1.86
                 if self.xp > needed_xp:
                     self.level += 1
                     self.xp -= needed_xp
                     level_ups += 1
-
-                if level_ups > 0:
-                    pr.n(f"Du bist {level_ups} Level aufgestiegen!")
-                    pr.n("Du bekommst: nichts.")
-
-
+                else:
+                    check_level_up_list = [level_ups, old_level]
+                    return check_level_up_list
             if self.level >= 30:
                 needed_xp = ((self.level + 1 )/0.2) ** 2.175
                 if self.xp > needed_xp:
                     self.level += 1
                     self.xp -= needed_xp
                     level_ups += 1
-
-                if level_ups > 0:
-                    pr.n(f"Du bist {level_ups} Level aufgestiegen!")
-                    pr.n("Du bekommst: nichts.")
-
-
-            break
-        return True
-
+                else:
+                    check_level_up_list = [level_ups, old_level]
+                    return check_level_up_list
 
 class EntityInit():
-    """
-        Class which Initializes Entities
-        Contains Functions:
-        load_entities_from_json : Loads all available Entities from a Json File
-        load_entities_by_name_from_json : Loads an Entities by it's Name from a Json File
-
-    """
     def load_entities_fromjson(json_file):
         """
             Return alls Entities from Json file
@@ -381,16 +291,13 @@ class EntityInit():
             =return= List of all Entities loaded from Json
         """
         curEntities = []
-        with open(json_file, encoding="UTF-8") as json_data:
+        with open(json_file) as json_data:
             data = json.load(json_data)
 
-
         for ename in data.keys():
-            if ename[0] != "$":
-                curEntities.append(Entity.from_json(data[ename]))
+            curEntities.append(Entity.from_json(data[ename], ename))
         return curEntities
-
-
+    
     def load_entities_by_name_from_json(json_file, name):
         """
             Return a single Entitiy Object from Json by given Name
@@ -399,38 +306,21 @@ class EntityInit():
 
             =return= Entity object
         """
-        with open(json_file, encoding="UTF-8") as json_data:
+        with open(json_file) as json_data:
             data = json.load(json_data)
-            pr.dbg(data)
+            dbg(data)
 
         for ename in data.keys():
             if ename == name:
-                return Entity.from_json(data[ename])
+                return Entity.from_json(data[ename], ename)
 
-        pr.dbg(f"Itemname: {pr.cyan(name)} not found!",1)
+        dbg(f"Itemname: {cyan(ename)} not found!",1)
         return False
 
-
-class gitem():
-    """
-        Class which defines Items
-        Contains Functions:
-        from_json : Creates Items from JSON
-    """
-    def __init__(   self,
-                    name="placeholder",
-                    itype="misc",
-                    dmg=0,
-                    condition=0,
-                    effects = None,
-                    useable=False,
-                    equipable=False,
-                    questitem=False
-                    ):
-
-        if effects is None:
-            effects = []
-
+        
+        
+class item():
+    def __init__(self, name="placeholder", itype="misc", dmg=0, condition=0, effects = [],useable=False, equipable=False, questitem=False, ):
         self.name = name
         self.itype = itype
         self.dmg = dmg
@@ -439,36 +329,14 @@ class gitem():
         self.usable = useable
         self.equipable = equipable
         self.questitem = questitem
-
-    @staticmethod
+        
+    @staticmethod   #Generate Object from Json
     def from_json(json_dct, iname):
-        """Creates an Item from given JSON
-
-        Args:
-            json_dct (json): The Json Code to be parsed
-
-        Returns:
-            Item: Item
-        """
-        return gitem(iname,
-                    json_dct['type'],
-                    json_dct['dmg'],
-                    json_dct['condition'],
-                    json_dct['effects'],
-                    json_dct['useable'],
-                    json_dct['equipable'],
-                    json_dct['questitem'])
+        return item(iname, json_dct['type'], json_dct['dmg'], json_dct['condition'], json_dct['effects'], json_dct['useable'],json_dct['equipable'],json_dct['questitem'])
 
 
 
 class itemInit():
-    """
-        Class which Initializes Items
-        Contains Functions:
-        load_all_items_from_json : Loads all available Items from a Json File
-        load_item_by_name_from_json : Loads an item by it's Name from a Json File
-
-    """
     def load_all_items_from_json(json_file):
         """
             Return alls Items from Json file
@@ -478,11 +346,11 @@ class itemInit():
             =return= List of all Items loaded from Json
         """
         curItems = []
-        with open(json_file, encoding="UTF-8") as json_data:
+        with open(json_file) as json_data:
             data = json.load(json_data)
-
+            
         for iname in data.keys():
-            curItems.append(gitem.from_json(data[iname], iname))
+            curItems.append(item.from_json(data[iname], iname))
         return curItems
 
     def load_item_by_name_from_json(json_file, name):
@@ -493,12 +361,12 @@ class itemInit():
 
             =return= Item object
         """
-        with open(json_file,encoding="UTF-8") as json_data:
+        with open(json_file) as json_data:
             data = json.load(json_data)
-
+            
         for iname in data.keys():
             if iname == name:
-                return gitem.from_json(data[iname], iname)
+                return item.from_json(data[iname], iname)
 
-        pr.dbg(f"Itemname: {pr.cyan(name)} not found!",1)
+        dbg(f"Itemname: {cyan(iname)} not found!",1)
         return False
