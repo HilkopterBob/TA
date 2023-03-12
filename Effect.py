@@ -3,7 +3,7 @@
     EffectInit()
 """
 import json
-from .Utils import pr
+from Utils import pr
 
 
 class Effect():
@@ -51,7 +51,7 @@ class EffectInit():
 
     """
 
-    def load_all_effects_from_json(self,json_file):
+    def load_all_effects_from_json(json_file):
         """
             Return alls Effects from Json file
             
@@ -69,7 +69,7 @@ class EffectInit():
                 effects_master_list.append(Effect.from_json(data[ename], ename))
         return effects_master_list
 
-    def load_effect_by_name_from_json(self,json_file, name):
+    def load_effect_by_name_from_json(json_file, name):
         """
             Return a single Level Object from Json by given Name
             
