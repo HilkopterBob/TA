@@ -3,14 +3,13 @@ Inputparser Module which holds 1 Function
     inputparser()
 """
 
-from actionparser import Actionparser
 from Utils import Inp
 
 
-def inputparser(    min_len=0, 
+def inputparser(    min_len=0,
                     max_len=150
                     ):
-    
+
     """Parses the User Inputs
 
     Args:
@@ -35,7 +34,7 @@ def inputparser(    min_len=0,
             raise ValueError(f"Der Input darf nicht länger als {max_len} Zeichen sein")
 
         #alles kleinbuchstaben
-        user_input = user_input.lower() 
+        user_input = user_input.lower()
         #Wenn Eingabe == Zahl dann
         if user_input.isdigit():
             user_input = int(user_input)
