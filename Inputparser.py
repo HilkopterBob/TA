@@ -4,6 +4,7 @@ Inputparser Module which holds 1 Function
 """
 
 from Utils import Inp
+from config import dbg
 
 
 def inputparser(    min_len=0,
@@ -22,7 +23,9 @@ def inputparser(    min_len=0,
     """
     user_input = Inp.inp()
     befehlszeichen = "#"
-
+    userbefehl = [" inv: Öffnet das Inventar"," opt: Öffnet die Optioen"," men: Öffnet das Menü","save: Speichert das Spiel","exit: Schließt das Spiel"]
+    devbefehl = ["test: test","","","","","","",]
+    
     try:
         if not user_input.strip():
             raise ValueError("Leere Eingabe")
@@ -45,10 +48,48 @@ def inputparser(    min_len=0,
             input_command = user_input[1:]
             input_list = input_command.split()
             match input_list[0]:
+                
+                #dev Befehle
                 case "hallo":
                     print("Hallo")
                     for e in input_list:
                         print(e)
+                
+                
+                
+                
+                
+                #User Befehle
+                
+                case "help":
+                    if (dbg == False) :
+                        for einzelwert in userbefehl:
+                            print(einzelwert)
+                    else:
+                        print ("userbefehle")
+                        for einzelwert in userbefehl:
+                            print(einzelwert)
+                        print ("")
+                        print ("devbefehle")
+                        for einzelwert in devbefehl:
+                            print(einzelwert)
+                
+                    
+
+                case "opt":
+                    pass
+
+                case "inv":
+                    pass
+                
+                case "men":
+                    pass
+
+                case "save":
+                    pass
+
+                case "exit":
+                    pass
 
                 case _:
                     pass
