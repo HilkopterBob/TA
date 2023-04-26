@@ -100,6 +100,39 @@ class Level():
             case _:
                 return pr.dbg("got no right ctype. choose between + and -",1)
 
+    def printDesc(self):
+        for entry in self.descr:
+            if len(entry) > 1:
+                if isinstance(entry,str):
+                    pr.n(f"{str(entry)}")
+                    continue
+                if entry[1] in self.triggers:
+                    pr.n(f"{str(entry[0])}")
+                continue
+    
+    def getAvailableChoices(self):
+        achoices = []
+        for choice in self.choices:
+            if len(choice) == 1 and choice[0] !="":
+                achoices.append(choice[0])
+            elif len(choice) > 1:
+                for cdict in self.triggers:
+                    if choice[1] == cdict:
+                        achoices.append(choice[0])
+        return achoices
+                        
+    def printChoices(self):
+        i = 1
+        for llist in self.choices:
+            if len(llist) == 1 and llist[0] != "":
+                pr.n(f"{i}. {llist[0]}")
+                i = i + 1
+            elif len(llist) > 1:
+                for ddict in self.triggers:
+                    if llist[1] == ddict:
+                        pr.n(f"{i}. {llist[0]}")
+                        i = i + 1
+        return True
 
 
 class LevelInit():

@@ -1,6 +1,7 @@
 """Debug Module
 """
 import sys
+import inspect
 from pystyle import Colors, Colorate
 from Utils import pr
 
@@ -27,6 +28,9 @@ class Debug():
         for _object in listOfObjects:
             _curObjects.append(_object.name)
         return pr.dbg(F"Loaded {definition}: {_curObjects}")
+    
+    def objattrib(object):
+        return inspect.getmembers(object)
 
     def stop_game_on_exception(exception):
         """Halts the Game on Exception

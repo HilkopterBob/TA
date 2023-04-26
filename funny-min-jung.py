@@ -5,7 +5,7 @@ from Level import LevelInit
 from Effect import Effect, EffectInit
 from Utils import pr, Debug, Inp
 from actionparser import Actionparser
-from config import levels_file,entity_file,effects_file
+from config import levels_file,entity_file,effects_file,dbg
 
 
 
@@ -23,78 +23,125 @@ def interact_with_level(player, level, level_list):
     else:
         hud(player)
         #pr.n(level.descr)
-        for entry in level.descr:
-            if len(entry) > 1:
-                if isinstance(entry,str):
-                    pr.n(f"{str(entry)}")
-                    continue
-                if entry[1] in level.triggers:
-                    pr.n(f"{str(entry[0])}")
-                continue
 
-    for llist in level.choices:
-        if len(llist) == 1 and llist[0] != "":
-            pr.n(f"{i}. {llist[0]}")
-            printed = True
-            i = i + 1
-        elif len(llist) > 1:
-            for ddict in level.triggers:
-                if llist[1] == ddict:
-                    pr.n(f"{i}. {llist[0]}")
-                    printed = True
-                    i = i + 1
+
+        #Level Headers and Description
+        level.printDesc()
+
+    #Print Level Choices
+    availableChoices = level.getAvailableChoices()
+    for choice in availableChoices:
+        print(f"{availableChoices.index(choice)+1}. {choice}")
+    printed = True 
+
+    pr.dbg(level.choices)
+
     if printed:
         action = int(Inp.inp()) - 1
 
     ##### ##### Reads triggers and action calls in level.text[dicts] ##### #####
-
+    pr.dbg("*"*20)
     pr.n(level.text[action][0])
-    if len(level.text[action]) > 1:
+    pr.dbg("*"*20)
+    ####Is doing nothing ? 
+
+    #Selecting index from available Actions
+    if dbg:
+        pr.dbg(f"All Actions: {level.text[action]}")
+        pr.dbg(f"Available Actions: {level.getAvailableChoices()}")
+    availableChoicesDict = dict(zip(availableChoices, level.text))
+
+    if action < len(availableChoicesDict.keys()):
+        actions = availableChoicesDict[availableChoices[action]]
+        for i in actions:
+            if actions[actions.index(i)] != "":
+                if dbg:
+                    pr.dbg(f'Add {[actions[actions.index(i)].get("action"),[mPlayer,list(actions[actions.index(i)].values())[1]]]} to Actionstack for ')
+                mPlayer.actionstack.append([actions[actions.index(i)].get("action"),[mPlayer,list(actions[actions.index(i)].values())[1]]])
+
+
+'''
+            match actions[actions.index(i)]:
+                    case "remove_effect_by_name":
+                        if dbg:
+                            pr.dbg("Case 1 Triggered")
+                        player.remove_effect_by_name(str(availableChoices[action][i][keys[1]]))
+                    case "change_location":
+                        if dbg:
+                            pr.dbg("Case 2 Triggered")
+                        for llevel in level_list:
+                            if llevel.name == str(availableChoices[action][i][keys[1]]):
+                                new_level = llevel
+                                player.change_location(level, new_level)
+                    case "add_effect":
+                        if dbg:
+                            pr.dbg("Case 3 Triggered")
+                        effect = EffectInit.load_effect_by_name_from_json(effects_file,
+                                                        str(availableChoices[action][i]["effect_name"]))
+                        player.add_effect(effect)
+                    case _:
+                       pass
+                       # pr.dbg(f"{availableChoices[action][i][key[0]]} is not defined ")
+'''
+
+
+
+
+
+
+
+
+
+'''
+    if len(availableChoices[action]) > 1:
+        pr.dbg("Entering Loop")    
+        pr.dbg(f"{availableChoicesDict}")
+
+
         i = 1
-        while i < len(level.text[action]):
-            key = list(level.text[action][i].keys())
-
-
-
-
-            if "action" not in str(key[0]):
+        while i < len(availableChoices[action]):
+            keys = list(availableChoicesDict.keys())
+            values = list(availableChoicesDict.values())
+            pr.dbg(f"{keys}")
+            pr.dbg(f"{values}")
+            if "action" not in str(values[1]):
                 for ddict in level.triggers:
-                    if ddict.keys() == level.text[action][1].keys():
+                    if ddict.keys() == availableChoices[action][1].values():
                         try:
                             #Enumerate als refactor nutzen
                             triggered_dict = list(filter(lambda dict: dict.keys()
-                                                        != level.text[action][1][key[0]],
+                                                        != availableChoices[action][1][key[0]],
                                                         level.triggers))
                             triggered_dict_index = level.triggers.index(triggered_dict[0])
-                            level.triggers[triggered_dict_index] = level.text[action][1]
+                            level.triggers[triggered_dict_index] = availableChoices[action][1]
                         except IndexError as e:
                             pr.dbg(e)
-                        pr.dbg(level.text[action][1])
+                        pr.dbg(availableChoices[action][1])
                         pr.dbg(level.triggers)
-            elif "action" in str(key[0]):
+            elif "action" in str(values[0]):
                 ##### ##### reads and uses action calls (action parser)##### #####
                 try:
-                    pr.dbg(key)
-                    pr.dbg(level.text[action][i][key[0]])
-                    pr.dbg(level.text[action][i][key[1]])
+                    pr.dbg(keys)
+                    pr.dbg(availableChoices[action][i][keys[0]])
+                    pr.dbg(availableChoices[action][i][keys[1]])
                 except Exception as e:
                     pr.dbg(Exception)
-                match level.text[action][i][key[0]]:
+                match availableChoices[action][i][key[0]]:
                     case "remove_effect_by_name":
-                        player.remove_effect_by_name(str(level.text[action][i][key[1]]))
+                        player.remove_effect_by_name(str(availableChoices[action][i][keys[1]]))
                     case "change_location":
                         for llevel in level_list:
-                            if llevel.name == str(level.text[action][i][key[1]]):
+                            if llevel.name == str(availableChoices[action][i][keys[1]]):
                                 new_level = llevel
                                 player.change_location(level, new_level)
                     case "add_effect":
                         effect = EffectInit.load_effect_by_name_from_json(effects_file,
-                                                        str(level.text[action][i]["effect_name"]))
+                                                        str(availableChoices[action][i]["effect_name"]))
                         player.add_effect(effect)
                     case _:
-                        pr.dbg(f"{level.text[action][i][key[0]]} is not defined ")
+                        pr.dbg(f"{availableChoices[action][i][key[0]]} is not defined ")
             i = i + 1
-
+'''
 
 def hud(player):
     """Player Hud
@@ -123,13 +170,18 @@ def gameloop(player, level_list=None):
     while True:
         for level in level_list:
             if level.name == player.location:
+                pr.dbg(f"{level}, {player}")
+                if not player in level.entitylist:
+                    pr.dbg(f"{player.name} not in {level.name} - adding {player.name} to {level.name} entitylist",1)
+                    level.change_entity_list("+",player)
                 current_level = level
 
         #Loop through all Entities in CurrentLevel and Apply Actionstack
         for e in current_level.entitylist:
+            pr.dbg(f"Working Actionstack for {e.name}")
             #Work through actionstack of Entity and process actions
             for action in e.actionstack:
-                pr.dbg(action)
+                pr.dbg(f"{action}")
                 Actionparser.callfunction(action)
                 e.actionstack.remove(action)
 
