@@ -5,7 +5,7 @@ Entities Module which holds 2 Classes
 """
 import json
 from Utils import pr, Inp
-
+from Level import Level
 
 class Entity():
     """
@@ -309,7 +309,8 @@ class Entity():
         
             =return= returns nothing, yet
         """
-        self.location = new_level.name
+        pr.dbg(f"Changing Level for {self} from {old_level} to {new_level}")
+        self.location = new_level
         new_level.change_entity_list("+", self)
         old_level.change_entity_list("-", self)
 

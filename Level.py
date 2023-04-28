@@ -78,6 +78,8 @@ class Level():
         """
         match ctype:
             case "+":
+                pr.dbg(f"Entitylist of Level {Level.levelname(self)}: {self.entitylist}")
+                pr.dbg(f"Trying to add {entity.name} to {Level.levelname(self)}")
                 try:
                     for e in self.entitylist:
                         if e.name == entity.name:
@@ -86,14 +88,20 @@ class Level():
                                             {pr.cyan(self.name)} \
                                             and thus cannot be added.")
                     self.entitylist.append(entity)
+                    pr.dbg(f"{entity.name} got added to Level {Level.levelname(self)}")
+                    pr.dbg(f"Entitylist of Level {Level.levelname(self)}: {self.entitylist}")
                     return True
                 except Exception as e:
                     pr.dbg(e, 1)
                     return False
             case "-":
+                pr.dbg(f"Entitylist of Level {Level.levelname(self)}: {self.entitylist}")
+                pr.dbg(f"Trying to remove {entity.name} from {Level.levelname(self)}")
                 try:
                     self.entitylist = list (filter(lambda e: e.name != entity.name,
                                             self.entitylist))
+                    pr.dbg(f"{entity.name} got removed from Level {Level.levelname(self)}")
+                    pr.dbg(f"Entitylist of Level {Level.levelname(self)}: {self.entitylist}")
                     return True
                 except:
                     return False
@@ -134,6 +142,12 @@ class Level():
                         i = i + 1
         return True
 
+    def levelname(object):
+        try:
+            return object.name
+        except Exception as e:
+            pr.dbg(f"ERR: {e}")
+            return None
 
 class LevelInit():
     """

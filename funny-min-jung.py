@@ -1,12 +1,11 @@
 """Main Module for Textadventure
 """
 from Entities import Entity, EntityInit, gitem
-from Level import LevelInit
+from Level import Level,LevelInit
 from Effect import Effect, EffectInit
 from Utils import pr, Debug, Inp
 from actionparser import Actionparser
 from config import levels_file,entity_file,effects_file,dbg
-
 
 
 
@@ -16,11 +15,13 @@ def interact_with_level(player, level, level_list):
     ##### ##### prints out choices and gets user input if choices got printed ##### #####
     printed = False
     i = 1
+    pr.dbg(f"Player: {player.name}, in Level: {level.name}")
     if level.name == "Menu":
         pr.n("\n"*5)
         pr.headline(level.descr)
         pr.n("\n"*2)
     else:
+        pr.dbg(f"HUD")
         hud(player)
         #pr.n(level.descr)
 
@@ -55,9 +56,9 @@ def interact_with_level(player, level, level_list):
         actions = availableChoicesDict[availableChoices[action]]
         for i in actions:
             if actions[actions.index(i)] != "":
-                if dbg:
-                    pr.dbg(f'Add {[actions[actions.index(i)].get("action"),[mPlayer,list(actions[actions.index(i)].values())[1]]]} to Actionstack for ')
-                mPlayer.actionstack.append([actions[actions.index(i)].get("action"),[mPlayer,list(actions[actions.index(i)].values())[1]]])
+                actiontoadd = [actions[actions.index(i)].get("action"),[mPlayer,list(actions[actions.index(i)].values())[1]]]
+                pr.dbg(f'Add {actiontoadd} to Actionstack for entity: {mPlayer}')
+                mPlayer.actionstack.append(actiontoadd)
 
 
 '''
@@ -149,9 +150,9 @@ def hud(player):
     Args:
         player (Entity): The Player to which the Hud should be displayed
     """
-    if player.location not in ("Menu","Options"):
+    if Level.levelname(player.location) not in ("Menu","Options"):
         pr.n("+"*12+" "+"+"*12)
-        pr.n(f"Du befindest dich in: {player.location}")
+        pr.n(f"Du befindest dich in: {Level.levelname(player.location)}")
         if player.hp > 25:
             pr.g(f"HP: {player.hp}")
         else:
@@ -163,27 +164,42 @@ def gameloop(player, level_list=None):
     """
         The Main Game Loop
     """
+
     if level_list is None:
         level_list = []
 
     lap = 0
+    pr.dbg(f"Roundcount: {lap}")
     while True:
+        pr.dbg(f"-"*50)
         for level in level_list:
-            if level.name == player.location:
+            pr.dbg(f"Comparing Levelname: {level.name} to Player location: {Level.levelname(player.location)}")
+            if level.name == Level.levelname(player.location):
                 pr.dbg(f"{level}, {player}")
                 if not player in level.entitylist:
                     pr.dbg(f"{player.name} not in {level.name} - adding {player.name} to {level.name} entitylist",1)
                     level.change_entity_list("+",player)
                 current_level = level
-
+        pr.dbg(f"-"*50)
         #Loop through all Entities in CurrentLevel and Apply Actionstack
+        pr.dbg(f"Entitylist: {current_level.entitylist}")
         for e in current_level.entitylist:
             pr.dbg(f"Working Actionstack for {e.name}")
+            pr.dbg(f"Actionstack: {e.actionstack}")
             #Work through actionstack of Entity and process actions
-            for action in e.actionstack:
-                pr.dbg(f"{action}")
-                Actionparser.callfunction(action)
-                e.actionstack.remove(action)
+            for i in range(0,len(e.actionstack)):
+                pr.dbg(f"#"*50)
+                pr.dbg(f"Length of Actionstack: {len(e.actionstack)}")
+                pr.dbg(f"Current Actionstack: {e.actionstack}")
+                pr.dbg(f"Current Index: {i}")
+                cur_action = e.actionstack.pop(0)
+                Actionparser.callfunction(cur_action)
+                pr.dbg(f"Cur_Action: {cur_action}")
+                pr.dbg(f"Length of Actionstack after Action: {len(e.actionstack)}")
+                pr.dbg(f"Current Actionstack after Action: {e.actionstack}")
+                pr.dbg(f"#"*50)
+                
+        
 
         player.check_level_up()
         interact_with_level(player, current_level, level_list)
@@ -198,10 +214,6 @@ def gameloop(player, level_list=None):
 
 
 if __name__ == "__main__":
-    mPlayer = Entity("Player", 100,100,0,
-                    [gitem("Item1","weapon"),gitem("item2","misc")], location="Menu")
-    hurensohn = Entity("Hurensohn", 100,100,0,
-                    [gitem("Item1","weapon"),gitem("item2","misc")], location="Wiese")
     #mPlayer.set_name()
     kopfschmerz = Effect("Kopfschmerz","Kopfschmerzen halt.","bad", -1, "hp")
     heilung = Effect("heilung","Nö","good", 5, "hp")
@@ -218,14 +230,12 @@ if __name__ == "__main__":
     allEntities = EntityInit.load_entities_fromjson(entity_file)
     Debug.objlist(allEntities,"Entities")
 
-    ###########################################
-    #######___HOW TO USE ACTIONSTACK___########
-    ###########################################
-    ####Add actions to Player Actionstack
-    # mPlayer.actionstack.put("Some Action from Actionstack")
-    # mPlayer.actionstack.put("Another Action from Actionstack")
-    # mPlayer.actionstack.put("And Another Action from Actionstack")
-    # mPlayer.actionstack.put("let_effects_take_effect")
+    #Add Players
+    mPlayer = Entity("Player", 100,100,0,
+                    [gitem("Item1","weapon"),gitem("item2","misc")], location=allLevels[0])
+    hurensohn = Entity("Hurensohn", 100,100,0,
+                    [gitem("Item1","weapon"),gitem("item2","misc")], location=allLevels[2])
+
 
     #put Kopfschmerz Effect in Actionstack
     mPlayer.actionstack.append(["add_effect",[mPlayer,"Kopfschmerz"]])
