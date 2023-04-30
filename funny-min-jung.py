@@ -2,12 +2,12 @@
 """
 from Entities import Entity, EntityInit, gitem
 from Level import Level,LevelInit
-from Effect import Effect, EffectInit
+from Effect import Effect
 from Utils import pr, Debug, Inp
 from actionparser import Actionparser
-from config import levels_file,entity_file,effects_file,dbg
+from config import levels_file,entity_file,dbg
 
-global allLevels
+
 
 def interact_with_level(player, level, level_list):
     """Current Game Interaction Function
@@ -21,7 +21,7 @@ def interact_with_level(player, level, level_list):
         pr.headline(level.descr)
         pr.n("\n"*2)
     else:
-        pr.dbg(f"HUD")
+        pr.dbg("HUD")
         hud(player)
         #pr.n(level.descr)
 
@@ -33,7 +33,7 @@ def interact_with_level(player, level, level_list):
     availableChoices = level.getAvailableChoices()
     for choice in availableChoices:
         print(f"{availableChoices.index(choice)+1}. {choice}")
-    printed = True 
+    printed = True
 
     pr.dbg(level.choices)
 
@@ -41,10 +41,10 @@ def interact_with_level(player, level, level_list):
         action = int(Inp.inp()) - 1
 
     ##### ##### Reads triggers and action calls in level.text[dicts] ##### #####
-    pr.dbg("*"*20)
-    pr.n(level.text[action][0])
-    pr.dbg("*"*20)
-    ####Is doing nothing ? 
+    #pr.dbg("*"*20)
+    #pr.n(level.text[action][0])
+    #pr.dbg("*"*20)
+    ####Is doing nothing ?
 
     #Selecting index from available Actions
     if dbg:
@@ -55,94 +55,26 @@ def interact_with_level(player, level, level_list):
     if action < len(availableChoicesDict.keys()):
         actions = availableChoicesDict[availableChoices[action]]
         for i in actions:
-            if actions[actions.index(i)] != "":
-                actiontoadd = [actions[actions.index(i)].get("action"),[mPlayer,list(actions[actions.index(i)].values())[1]]]
-                pr.dbg(f'Add {actiontoadd} to Actionstack for entity: {mPlayer}')
-                mPlayer.actionstack.append(actiontoadd)
-
-
-'''
-            match actions[actions.index(i)]:
-                    case "remove_effect_by_name":
-                        if dbg:
-                            pr.dbg("Case 1 Triggered")
-                        player.remove_effect_by_name(str(availableChoices[action][i][keys[1]]))
-                    case "change_location":
-                        if dbg:
-                            pr.dbg("Case 2 Triggered")
-                        for llevel in level_list:
-                            if llevel.name == str(availableChoices[action][i][keys[1]]):
-                                new_level = llevel
-                                player.change_location(level, new_level)
-                    case "add_effect":
-                        if dbg:
-                            pr.dbg("Case 3 Triggered")
-                        effect = EffectInit.load_effect_by_name_from_json(effects_file,
-                                                        str(availableChoices[action][i]["effect_name"]))
-                        player.add_effect(effect)
-                    case _:
-                       pass
-                       # pr.dbg(f"{availableChoices[action][i][key[0]]} is not defined ")
-'''
-
-
-
-
-
-
-
-
-
-'''
-    if len(availableChoices[action]) > 1:
-        pr.dbg("Entering Loop")    
-        pr.dbg(f"{availableChoicesDict}")
-
-
-        i = 1
-        while i < len(availableChoices[action]):
-            keys = list(availableChoicesDict.keys())
-            values = list(availableChoicesDict.values())
-            pr.dbg(f"{keys}")
-            pr.dbg(f"{values}")
-            if "action" not in str(values[1]):
-                for ddict in level.triggers:
-                    if ddict.keys() == availableChoices[action][1].values():
-                        try:
-                            #Enumerate als refactor nutzen
-                            triggered_dict = list(filter(lambda dict: dict.keys()
-                                                        != availableChoices[action][1][key[0]],
-                                                        level.triggers))
-                            triggered_dict_index = level.triggers.index(triggered_dict[0])
-                            level.triggers[triggered_dict_index] = availableChoices[action][1]
-                        except IndexError as e:
-                            pr.dbg(e)
-                        pr.dbg(availableChoices[action][1])
-                        pr.dbg(level.triggers)
-            elif "action" in str(values[0]):
-                ##### ##### reads and uses action calls (action parser)##### #####
-                try:
-                    pr.dbg(keys)
-                    pr.dbg(availableChoices[action][i][keys[0]])
-                    pr.dbg(availableChoices[action][i][keys[1]])
-                except Exception as e:
-                    pr.dbg(Exception)
-                match availableChoices[action][i][key[0]]:
-                    case "remove_effect_by_name":
-                        player.remove_effect_by_name(str(availableChoices[action][i][keys[1]]))
-                    case "change_location":
-                        for llevel in level_list:
-                            if llevel.name == str(availableChoices[action][i][keys[1]]):
-                                new_level = llevel
-                                player.change_location(level, new_level)
-                    case "add_effect":
-                        effect = EffectInit.load_effect_by_name_from_json(effects_file,
-                                                        str(availableChoices[action][i]["effect_name"]))
-                        player.add_effect(effect)
-                    case _:
-                        pr.dbg(f"{availableChoices[action][i][key[0]]} is not defined ")
-            i = i + 1
-'''
+            _currentAction = actions[actions.index(i)]
+            if _currentAction != "":
+                pr.dbg(f"{_currentAction}")
+                if isinstance(_currentAction,str):
+                    pr.n(_currentAction)
+                else:
+                    try:
+                        pr.dbg(f"{_currentAction}")
+                        if _currentAction.get("action") == "change_location":
+                            for level in level_list:
+                                if level.name == list(_currentAction.values())[1]:
+                                    actiontoadd = [_currentAction.get("action"),
+                                                    [mPlayer,mPlayer.location,level]]
+                        else:
+                            actiontoadd = [_currentAction.get("action"),
+                                            [mPlayer,list(_currentAction.values())[1]]]
+                    except Exception as e:
+                        pr.dbg(f"ERR: {e}",1)
+                    pr.dbg(f'Add {actiontoadd} to Actionstack for entity: {mPlayer}')
+                    mPlayer.actionstack.append(actiontoadd)
 
 def hud(player):
     """Player Hud
@@ -160,62 +92,32 @@ def hud(player):
         pr.n(f"Gold: {player.wealth}")
         pr.n(F"Level: {player.level} XP: {player.xp}")
 
-def updatelevel(player, level_list):
-    for level in level_list:
-            pr.dbg(f"Comparing Levelname: {level.name} to Player location: {Level.levelname(player.location)}")
-            if level.name == Level.levelname(player.location):
-                pr.dbg(f"Player location ({Level.levelname(player.location)}) is equal to Level ({level.name})")
-                pr.dbg(f"Entitylist of Level {level.name}: {level.entitylist}")
-                if not player in level.entitylist:
-                    pr.dbg(f"{player.name} not in {level.name} - adding {player.name} to {level.name} entitylist",1)
-                    level.change_entity_list("+",player)
-                pr.dbg(f"Setting CurrentLevel to Level: {Level.levelname(level)}")
-                current_level = level
-    return current_level
-
 def gameloop(player, level_list=None):
     """
         The Main Game Loop
     """
-
+    current_level = Level
     if level_list is None:
         level_list = []
 
     lap = 0
     while True:
-        pr.dbg(f"######################Roundcount: {lap}")
-        pr.dbg(f"-"*50)
+
+        pr.dbg("-"*50)
         for level in level_list:
-            pr.dbg(f"Comparing Levelname: {level.name} to Player location: {Level.levelname(player.location)}")
+            pr.dbg(f"Comparing Levelname: {level.name} "
+                    f"to Player location: {Level.levelname(player.location)}")
             if str(level.name) == str(Level.levelname(player.location)):
-                pr.dbg(f"Player location ({Level.levelname(player.location)}) is equal to Level ({level.name}), ")
+                pr.dbg(f"Player location ({Level.levelname(player.location)}) "
+                        f"is equal to Level ({level.name}), ")
                 if not player in level.entitylist:
-                    pr.dbg(f"{player.name} not in {level.name} - adding {player.name} to {level.name} entitylist",1)
+                    pr.dbg(f"{player.name} not in {level.name} "
+                            f"- adding {player.name} to {level.name} entitylist",1)
                     level.change_entity_list("+",player)
                 pr.dbg(f"Setting CurrentLevel to Level: {Level.levelname(level)}")
                 current_level = level
-        pr.dbg(f"-"*50)
-        
-        #Loop through all Entities in CurrentLevel and Apply Actionstack
-        pr.dbg(f"Entitylist: {current_level.entitylist}")
-        for e in current_level.entitylist:
-            pr.dbg(f"Working Actionstack for {e.name}")
-            pr.dbg(f"Actionstack: {e.actionstack}")
-            #Work through actionstack of Entity and process actions
-            for i in range(0,len(e.actionstack)):
-                pr.dbg(f"#"*50)
-                pr.dbg(f"Length of Actionstack: {len(e.actionstack)}")
-                pr.dbg(f"Current Actionstack: {e.actionstack}")
-                pr.dbg(f"Current Index: {i}")
-                cur_action = e.actionstack.pop(0)
-                Actionparser.callfunction(cur_action)
-                pr.dbg(f"Cur_Action: {cur_action}")
-                pr.dbg(f"Length of Actionstack after Action: {len(e.actionstack)}")
-                pr.dbg(f"Current Actionstack after Action: {e.actionstack}")
-                pr.dbg(f"#"*50)
-        
-        updatelevel(player,level_list)
-        
+                pr.dbg(f"CurrentLevel: {current_level}")
+        pr.dbg("-"*50)
 
         player.check_level_up()
         interact_with_level(player, current_level, level_list)
@@ -227,6 +129,24 @@ def gameloop(player, level_list=None):
 
         #Wait for Player Input
         Debug.pause()
+
+        #Loop through all Entities in CurrentLevel and Apply Actionstack
+        pr.dbg(f"Entitylist: {current_level.entitylist}")
+        for e in current_level.entitylist:
+            pr.dbg(f"Working Actionstack for {e.name}")
+            pr.dbg(f"Actionstack: {e.actionstack}")
+            #Work through actionstack of Entity and process actions
+            for i in range(0,len(e.actionstack)):
+                pr.dbg("#"*50)
+                pr.dbg(f"Length of Actionstack: {len(e.actionstack)}")
+                pr.dbg(f"Current Actionstack: {e.actionstack}")
+                pr.dbg(f"Current Index: {i}")
+                cur_action = e.actionstack.pop(0)
+                Actionparser.callfunction(cur_action)
+                pr.dbg(f"Cur_Action: {cur_action}")
+                pr.dbg(f"Length of Actionstack after Action: {len(e.actionstack)}")
+                pr.dbg(f"Current Actionstack after Action: {e.actionstack}")
+                pr.dbg("#"*50)
 
 
 if __name__ == "__main__":

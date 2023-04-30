@@ -56,9 +56,19 @@
 
     "Wiese":{
         "text" : [
-            ["Du schuettelst deinen Kopf. Die kopfschmerzen verschwinden.", {"action":"remove_effect_by_name",  "effect.name":"Kopfschmerz"}, {"Kopfschmerzen":false}],
-            [ "Du siehst dich um. Etwas entfernt scheint ein Weg zu sein.", {"umgesehen":true}],
-            ["Du gehst den Weg entlang.", {"action":"change_location",  "new_level_name":"Kreuzung"}]
+            [
+                "Du schuettelst deinen Kopf. Die kopfschmerzen verschwinden.",
+                {"action":"remove_effect_by_name",  "effect_name":"Kopfschmerz"},
+                {"Kopfschmerzen":false}
+            ],
+            [
+                "Du siehst dich um. Etwas entfernt scheint ein Weg zu sein.",
+                {"umgesehen":true}
+            ],
+            [
+                "Du gehst den Weg entlang.",
+                {"action":"change_location", "new_level_name":"Kreuzung"}
+            ]
         ],
         "choices": [
             ["etwas gegen deine Kopfschmerzen machen", {"Kopfschmerzen":true}],

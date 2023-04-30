@@ -5,7 +5,6 @@ Levels Module which holds 2 Classes
 """
 import json
 from Utils import pr
-from config import levels_file
 
 class Level():
     """

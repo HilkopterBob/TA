@@ -309,6 +309,9 @@ class Entity():
         
             =return= returns nothing, yet
         """
+        if not isinstance(old_level, Level) or not isinstance(new_level, Level):
+            pr.dbg("Level not Level Object!",1)
+            pr.dbg(f"OldLevel: {old_level} | {type(old_level)}, New_Level: {new_level} | {type(new_level)}")
         pr.dbg(f"Changing Level for {self} from {old_level} to {new_level}")
         self.location = new_level
         new_level.change_entity_list("+", self)
