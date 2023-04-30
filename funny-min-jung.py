@@ -7,7 +7,7 @@ from Utils import pr, Debug, Inp
 from actionparser import Actionparser
 from config import levels_file,entity_file,effects_file,dbg
 
-
+global allLevels
 
 def interact_with_level(player, level, level_list):
     """Current Game Interaction Function
@@ -160,6 +160,19 @@ def hud(player):
         pr.n(f"Gold: {player.wealth}")
         pr.n(F"Level: {player.level} XP: {player.xp}")
 
+def updatelevel(player, level_list):
+    for level in level_list:
+            pr.dbg(f"Comparing Levelname: {level.name} to Player location: {Level.levelname(player.location)}")
+            if level.name == Level.levelname(player.location):
+                pr.dbg(f"Player location ({Level.levelname(player.location)}) is equal to Level ({level.name})")
+                pr.dbg(f"Entitylist of Level {level.name}: {level.entitylist}")
+                if not player in level.entitylist:
+                    pr.dbg(f"{player.name} not in {level.name} - adding {player.name} to {level.name} entitylist",1)
+                    level.change_entity_list("+",player)
+                pr.dbg(f"Setting CurrentLevel to Level: {Level.levelname(level)}")
+                current_level = level
+    return current_level
+
 def gameloop(player, level_list=None):
     """
         The Main Game Loop
@@ -169,18 +182,20 @@ def gameloop(player, level_list=None):
         level_list = []
 
     lap = 0
-    pr.dbg(f"Roundcount: {lap}")
     while True:
+        pr.dbg(f"######################Roundcount: {lap}")
         pr.dbg(f"-"*50)
         for level in level_list:
             pr.dbg(f"Comparing Levelname: {level.name} to Player location: {Level.levelname(player.location)}")
-            if level.name == Level.levelname(player.location):
-                pr.dbg(f"{level}, {player}")
+            if str(level.name) == str(Level.levelname(player.location)):
+                pr.dbg(f"Player location ({Level.levelname(player.location)}) is equal to Level ({level.name}), ")
                 if not player in level.entitylist:
                     pr.dbg(f"{player.name} not in {level.name} - adding {player.name} to {level.name} entitylist",1)
                     level.change_entity_list("+",player)
+                pr.dbg(f"Setting CurrentLevel to Level: {Level.levelname(level)}")
                 current_level = level
         pr.dbg(f"-"*50)
+        
         #Loop through all Entities in CurrentLevel and Apply Actionstack
         pr.dbg(f"Entitylist: {current_level.entitylist}")
         for e in current_level.entitylist:
@@ -198,7 +213,8 @@ def gameloop(player, level_list=None):
                 pr.dbg(f"Length of Actionstack after Action: {len(e.actionstack)}")
                 pr.dbg(f"Current Actionstack after Action: {e.actionstack}")
                 pr.dbg(f"#"*50)
-                
+        
+        updatelevel(player,level_list)
         
 
         player.check_level_up()
@@ -222,7 +238,7 @@ if __name__ == "__main__":
     terror = Effect("Terror","Nö","evil", -100, "xp")
 
     #Load all existing Levels
-    print(levels_file)
+    LevelInit()
     allLevels = LevelInit.load_all_levels_from_json(levels_file)
     Debug.objlist(allLevels, "Levels")
 

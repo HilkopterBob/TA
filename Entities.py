@@ -381,6 +381,9 @@ class EntityInit():
 
             =return= List of all Entities loaded from Json
         """
+
+        pr.dbg(f"Loading Entities from: {json_file}")
+
         curEntities = []
         with open(json_file, encoding="UTF-8") as json_data:
             data = json.load(json_data)

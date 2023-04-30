@@ -92,6 +92,7 @@ class Actionparser:
             return 1
 
     def change_location(attributes = None):
+        
         """Calls the change_location Function with arguments
 
         Args:
@@ -121,11 +122,9 @@ class Actionparser:
             try:
                 _entity = attributes[0]
                 _old_level = _entity.location
-                _new_level = LevelInit.load_level_by_name_from_json(levels_file, attributes[1])
+                _new_level = None ########ERR    TODO:Somehow get allLevels list to here 
                 pr.dbg(f"Trying to Change {_entity} location from {Level.levelname(_old_level)} to {Level.levelname(_new_level)}")
                 _entity.change_location(_old_level, _new_level)
-                #Garbage Collection
-                del _new_level
                 return 0    
             except Exception as e:
                 pr.dbg(f"ERR: {e}",1)
