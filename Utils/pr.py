@@ -149,7 +149,7 @@ class pr():
 
         if not dbg:
             return
-        
+
         module = inspect.currentframe().f_back.f_globals['__name__']
         function = inspect.stack()[1].function
         line_number = inspect.stack()[1].lineno
@@ -172,7 +172,7 @@ class pr():
                     logstr = f'{stack1}{message}'
                     print(f'{info("")} {info("")} \
                                 {str(yellow(stack1))} {message}')
-            
+
             case 2: #Err
                 if dbg_level >= 0:
                     logstr = f'{stack2}{message}'
