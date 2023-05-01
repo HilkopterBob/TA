@@ -5,7 +5,7 @@ from Level import Level,LevelInit
 from Effect import Effect
 from Utils import pr, Debug, Inp
 from actionparser import Actionparser
-from config import levels_file,entity_file,dbg
+from config import levels_file,entity_file
 
 
 
@@ -47,9 +47,8 @@ def interact_with_level(player, level, level_list):
     ####Is doing nothing ?
 
     #Selecting index from available Actions
-    if dbg:
-        pr.dbg(f"All Actions: {level.text[action]}")
-        pr.dbg(f"Available Actions: {level.getAvailableChoices()}")
+    pr.dbg(f"All Actions: {level.text[action]}")
+    pr.dbg(f"Available Actions: {level.getAvailableChoices()}")
     availableChoicesDict = dict(zip(availableChoices, level.text))
 
     if action < len(availableChoicesDict.keys()):
@@ -57,24 +56,29 @@ def interact_with_level(player, level, level_list):
         for i in actions:
             _currentAction = actions[actions.index(i)]
             if _currentAction != "":
-                pr.dbg(f"{_currentAction}")
                 if isinstance(_currentAction,str):
                     pr.n(_currentAction)
                 else:
                     try:
-                        pr.dbg(f"{_currentAction}")
-                        if _currentAction.get("action") == "change_location":
-                            for level in level_list:
-                                if level.name == list(_currentAction.values())[1]:
+                        try:
+                            if "action" in _currentAction.keys():
+                                if _currentAction.get("action") == "change_location":
+                                    for level in level_list:
+                                        if level.name == list(_currentAction.values())[1]:
+                                            actiontoadd = [_currentAction.get("action"),
+                                                            [mPlayer,mPlayer.location,level]]
+                                else:
                                     actiontoadd = [_currentAction.get("action"),
-                                                    [mPlayer,mPlayer.location,level]]
-                        else:
-                            actiontoadd = [_currentAction.get("action"),
-                                            [mPlayer,list(_currentAction.values())[1]]]
-                    except Exception as e:
-                        pr.dbg(f"ERR: {e}",1)
-                    pr.dbg(f'Add {actiontoadd} to Actionstack for entity: {mPlayer}')
-                    mPlayer.actionstack.append(actiontoadd)
+                                                    [mPlayer,list(_currentAction.values())[1]]]
+                            else:
+                                pr.dbg(f"No Action in Keys: {_currentAction}")
+                                #Do Trigger Stuff
+                        except Exception as e:
+                            pr.dbg(f"ERR: {e}",1)
+                        pr.dbg(f'Add {actiontoadd} to Actionstack for entity: {mPlayer}')
+                        mPlayer.actionstack.append(actiontoadd)
+                    except:
+                        pr.dbg(f"CurrentAction: {_currentAction}")
 
 def hud(player):
     """Player Hud
