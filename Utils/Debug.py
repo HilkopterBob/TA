@@ -3,7 +3,7 @@
 import sys
 import inspect
 from pystyle import Colors, Colorate
-from Utils import pr
+from Utils import pr, Inp
 
 
 class Debug():
@@ -38,7 +38,7 @@ class Debug():
         pr.b((Colorate.Color(Colors.red, "The following error occured:", True)))
         pr.b((Colorate.Color(Colors.red, f"{exception}", True)))
         pr.q("Do you want to continue the game?")
-        action = pr.inp("y/n")
+        action = Inp.inp("y/n")
         match action:
             case "y":
                 pass
