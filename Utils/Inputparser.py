@@ -3,12 +3,15 @@ Inputparser Module which holds 1 Function
     inputparser()
 """
 
-from Utils import Inp
+#from Utils import Inp
 from config import dbg
-
+from Utils import Debug
+from Utils import pr
+from Entities import Entity
 
 def inputparser(    min_len=0,
-                    max_len=150
+                    max_len=150,
+                    user_input=None
                     ):
 
     """Parses the User Inputs
@@ -21,7 +24,7 @@ def inputparser(    min_len=0,
     Returns:
         String: user_input
     """
-    user_input = Inp.inp()
+    #user_input = Inp.inp()
     befehlszeichen = "#"
     userbefehl = [" inv: Öffnet das Inventar"," opt: Öffnet die Optioen"," men: Öffnet das Menü","save: Speichert das Spiel","exit: Schließt das Spiel"]
     devbefehl = ["test: test","","","","","","",]
@@ -62,17 +65,14 @@ def inputparser(    min_len=0,
                 #User Befehle
                 
                 case "help":
-                    if (dbg == False) :
-                        for einzelwert in userbefehl:
-                            print(einzelwert)
-                    else:
-                        print ("userbefehle")
-                        for einzelwert in userbefehl:
-                            print(einzelwert)
-                        print ("")
-                        print ("devbefehle")
+                    pr.headline ("userbefehle")
+                    for einzelwert in userbefehl:
+                            pr.i(einzelwert)
+                    if (dbg == True) :
+                        pr.n ("")
+                        pr.headline ("devbefehle")
                         for einzelwert in devbefehl:
-                            print(einzelwert)
+                            pr.i(einzelwert)
                 
                     
 
@@ -83,26 +83,30 @@ def inputparser(    min_len=0,
                     pass
                 
                 case "men":
-                    pass
+                    Entity.change_location()
+                        
 
                 case "save":
-                    pass
+                    pr.i("Die Funktion ist noch nicht implementiert")
 
                 case "exit":
-                    pass
+                    Debug.stop_game()
 
                 case _:
                     pass
 
             return inputparser()
         return user_input
+        
 
     except ValueError as e:
-        print ("Fehler bei Eingabe:", e)
+        pr.a (f"Fehler bei Eingabe: {e}")
         return None
     except:
-        print ("Unbekannter Fehler beim Input")
+        pr.a ("Unbekannter Fehler beim Input")
         return None
+    
 
 
-inputparser()
+
+#inputparser()

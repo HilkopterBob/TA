@@ -3,6 +3,7 @@
 import sys
 from pystyle import Colors, Colorate
 from Utils import pr
+from Utils import Inp
 
 
 class Debug():
@@ -28,18 +29,28 @@ class Debug():
             _curObjects.append(_object.name)
         return pr.dbg(F"Loaded {definition}: {_curObjects}")
 
+    def stop_game():
+        pr.q("Do you want to continue the game?")
+        action = Inp.inp("y/n")
+        match action:
+            case "y":
+                pass
+            case "n":
+                sys.exit()   
+
     def stop_game_on_exception(exception):
         """Halts the Game on Exception
         """
         pr.b((Colorate.Color(Colors.red, "The following error occured:", True)))
         pr.b((Colorate.Color(Colors.red, f"{exception}", True)))
         pr.q("Do you want to continue the game?")
-        action = pr.inp("y/n")
+        action = Inp.inp("y/n")
         match action:
             case "y":
                 pass
             case "n":
                 sys.exit()
+    
 
     def pause():
         """Pauses the Game for User Input
