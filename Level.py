@@ -126,6 +126,10 @@ class Level():
                 for cdict in self.triggers:
                     if choice[1] == cdict:
                         achoices.append(choice[0])
+                        """
+                        TOP: double check falls trigger in choice sind, die nicht in 
+                        self.trigger sind wird nicht aufgenommen und geprinnted
+                        """
         return achoices
                         
     def printChoices(self):

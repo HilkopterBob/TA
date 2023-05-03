@@ -50,9 +50,12 @@ def interact_with_level(player, level, level_list):
     pr.dbg(f"All Actions: {level.text[action]}")
     pr.dbg(f"Available Actions: {level.getAvailableChoices()}")
     availableChoicesDict = dict(zip(availableChoices, level.text))
+    #Link Choices - result test
 
     if action < len(availableChoicesDict.keys()):
         actions = availableChoicesDict[availableChoices[action]]
+        pr.dbg(actions, 2)
+        pr.dbg(level.triggers, 2)
         for i in actions:
             _currentAction = actions[actions.index(i)]
             if _currentAction != "":
@@ -71,14 +74,34 @@ def interact_with_level(player, level, level_list):
                                     actiontoadd = [_currentAction.get("action"),
                                                     [mPlayer,list(_currentAction.values())[1]]]
                             else:
-                                pr.dbg(f"No Action in Keys: {_currentAction}")
+                                pr.dbg(f"No Action in Keys: {_currentAction}", 1)
                                 #Do Trigger Stuff
+                                """
+                                touched_triggers_list = GET touched trigger from choice
+                                level_triggers_list = GET Level trigger list
+                                for t_trigger in touched_triggers_list:
+                                    for l_trigger in level-triggers_list:
+                                        if t_trigger == l_trigger:
+                                            for trigger in Level.triggers:
+                                                if level.trigger == t_trigger:
+                                                    level.trigger == t_trigger
+                                """
+                                touched_trigger = actions[-1] # Letzter eintrag aus actions = immer Trigger. Supported nur einen Trigger!!!
+                                level_triggers_list = level.triggers
+                                pr.dbg(level_triggers_list, 2)
+                                for index, l_trigger in enumerate(level_triggers_list):
+                                    if l_trigger.keys() == touched_trigger.keys():
+                                        level_triggers_list[index] = touched_trigger
+                                pr.dbg(level.triggers, 2)
+
+                                
+
+                            pr.dbg(f'Add {actiontoadd} to Actionstack for entity: {mPlayer}')
+                            mPlayer.actionstack.append(actiontoadd)
                         except Exception as e:
-                            pr.dbg(f"ERR: {e}",1)
-                        pr.dbg(f'Add {actiontoadd} to Actionstack for entity: {mPlayer}')
-                        mPlayer.actionstack.append(actiontoadd)
+                            pr.dbg(f"ERR: {e}", 2)
                     except:
-                        pr.dbg(f"CurrentAction: {_currentAction}")
+                        pr.dbg(f"CurrentAction: {_currentAction}", 2)
 
 def hud(player):
     """Player Hud
