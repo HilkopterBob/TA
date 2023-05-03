@@ -31,6 +31,7 @@ def interact_with_level(player, level, level_list):
 
     #Print Level Choices
     availableChoices = level.getAvailableChoices()
+    pr.dbg(availableChoices, 2)
     for choice in availableChoices:
         print(f"{availableChoices.index(choice)+1}. {choice}")
     printed = True
@@ -47,15 +48,25 @@ def interact_with_level(player, level, level_list):
     ####Is doing nothing ?
 
     #Selecting index from available Actions
-    pr.dbg(f"All Actions: {level.text[action]}")
+    pr.dbg(availableChoices, 2)
+    pr.dbg(f"All Actions: {availableChoices[action]}")
     pr.dbg(f"Available Actions: {level.getAvailableChoices()}")
-    availableChoicesDict = dict(zip(availableChoices, level.text))
+    availableChoicesDict = dict(zip(availableChoices, level.text)) # Sehr falsch, Index Choice 2 wird text 1 zugeordnet
+    """
+    Theo mit reh und tisch: Index der choice herrausfinden, index nutzen um resultat zu kriegen, resultat in availablechoicesdict speichern
+    
+    available_choices_results = []
+    for index, choice in enumerate(level.choices):
+        for a_choice in availableChoices:
+            if choice == a_choice:
+                available_choices_results.append(level.text[index])
+    availableChoicesDict = dict(zip(availableChoices, available_choices_results))
+    """
+    pr.dbg(availableChoicesDict, 2)
     #Link Choices - result test
 
     if action < len(availableChoicesDict.keys()):
         actions = availableChoicesDict[availableChoices[action]]
-        pr.dbg(actions, 2)
-        pr.dbg(level.triggers, 2)
         for i in actions:
             _currentAction = actions[actions.index(i)]
             if _currentAction != "":
@@ -92,10 +103,6 @@ def interact_with_level(player, level, level_list):
                                 for index, l_trigger in enumerate(level_triggers_list):
                                     if l_trigger.keys() == touched_trigger.keys():
                                         level_triggers_list[index] = touched_trigger
-                                pr.dbg(level.triggers, 2)
-
-                                
-
                             pr.dbg(f'Add {actiontoadd} to Actionstack for entity: {mPlayer}')
                             mPlayer.actionstack.append(actiontoadd)
                         except Exception as e:
