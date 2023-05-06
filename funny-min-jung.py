@@ -1,31 +1,28 @@
 """Main Module for Textadventure
 """
-from Entities import Entity, EntityInit, gitem
-from Level import LevelInit
+from Entities import Entity, gitem
 from Effect import Effect, EffectInit
 from Utils import pr, Debug, Inp
 from actionparser import Actionparser
-from config import levels_file,entity_file,effects_file
-
-
+from config import effects_file
+from Assethandler import AssetHandler
 
 
 def interact_with_level(player, level, level_list):
-    """Current Game Interaction Function
-    """
+    """Current Game Interaction Function"""
     ##### ##### prints out choices and gets user input if choices got printed ##### #####
     printed = False
     i = 1
     if level.name == "Menu":
-        pr.n("\n"*5)
+        pr.n("\n" * 5)
         pr.headline(level.descr)
-        pr.n("\n"*2)
+        pr.n("\n" * 2)
     else:
         hud(player)
-        #pr.n(level.descr)
+        # pr.n(level.descr)
         for entry in level.descr:
             if len(entry) > 1:
-                if isinstance(entry,str):
+                if isinstance(entry, str):
                     pr.n(f"{str(entry)}")
                     continue
                 if entry[1] in level.triggers:
@@ -54,18 +51,21 @@ def interact_with_level(player, level, level_list):
         while i < len(level.text[action]):
             key = list(level.text[action][i].keys())
 
-
-
-
             if "action" not in str(key[0]):
                 for ddict in level.triggers:
                     if ddict.keys() == level.text[action][1].keys():
                         try:
-                            #Enumerate als refactor nutzen
-                            triggered_dict = list(filter(lambda dict: dict.keys()
-                                                        != level.text[action][1][key[0]],
-                                                        level.triggers))
-                            triggered_dict_index = level.triggers.index(triggered_dict[0])
+                            # Enumerate als refactor nutzen
+                            triggered_dict = list(
+                                filter(
+                                    lambda dict: dict.keys()
+                                    != level.text[action][1][key[0]],
+                                    level.triggers,
+                                )
+                            )
+                            triggered_dict_index = level.triggers.index(
+                                triggered_dict[0]
+                            )
                             level.triggers[triggered_dict_index] = level.text[action][1]
                         except IndexError as e:
                             pr.dbg(e)
@@ -88,8 +88,9 @@ def interact_with_level(player, level, level_list):
                                 new_level = llevel
                                 player.change_location(level, new_level)
                     case "add_effect":
-                        effect = EffectInit.load_effect_by_name_from_json(effects_file,
-                                                        str(level.text[action][i]["effect_name"]))
+                        effect = EffectInit.load_effect_by_name_from_json(
+                            effects_file, str(level.text[action][i]["effect_name"])
+                        )
                         player.add_effect(effect)
                     case _:
                         pr.dbg(f"{level.text[action][i][key[0]]} is not defined ")
@@ -102,19 +103,20 @@ def hud(player):
     Args:
         player (Entity): The Player to which the Hud should be displayed
     """
-    if player.location not in ("Menu","Options"):
-        pr.n("+"*12+" "+"+"*12)
+    if player.location not in ("Menu", "Options"):
+        pr.n("+" * 12 + " " + "+" * 12)
         pr.n(f"Du befindest dich in: {player.location}")
         if player.hp > 25:
             pr.g(f"HP: {player.hp}")
         else:
             pr.b(f"HP: {player.hp}")
         pr.n(f"Gold: {player.wealth}")
-        pr.n(F"Level: {player.level} XP: {player.xp}")
+        pr.n(f"Level: {player.level} XP: {player.xp}")
+
 
 def gameloop(player, level_list=None):
     """
-        The Main Game Loop
+    The Main Game Loop
     """
     if level_list is None:
         level_list = []
@@ -125,9 +127,9 @@ def gameloop(player, level_list=None):
             if level.name == player.location:
                 current_level = level
 
-        #Loop through all Entities in CurrentLevel and Apply Actionstack
+        # Loop through all Entities in CurrentLevel and Apply Actionstack
         for e in current_level.entitylist:
-            #Work through actionstack of Entity and process actions
+            # Work through actionstack of Entity and process actions
             for action in e.actionstack:
                 pr.dbg(action)
                 Actionparser.callfunction(action)
@@ -135,37 +137,54 @@ def gameloop(player, level_list=None):
 
         player.check_level_up()
         interact_with_level(player, current_level, level_list)
-        #changes the entity location, deletes entity from old level and adds to the new one
+        # changes the entity location, deletes entity from old level and adds to the new one
 
-
-        #Increase Lap Counter by i
+        # Increase Lap Counter by i
         lap = lap + 1
 
-        #Wait for Player Input
+        # Wait for Player Input
         Debug.pause()
 
 
 if __name__ == "__main__":
-    mPlayer = Entity("Player", 100,100,0,
-                    [gitem("Item1","weapon"),gitem("item2","misc")], location="Menu")
-    hurensohn = Entity("Hurensohn", 100,100,0,
-                    [gitem("Item1","weapon"),gitem("item2","misc")], location="Wiese")
-    #mPlayer.set_name()
-    kopfschmerz = Effect("Kopfschmerz","Kopfschmerzen halt.","bad", -1, "hp")
-    heilung = Effect("heilung","Nö","good", 5, "hp")
-    heilung2 = Effect("heilung2","Nö","good", 5, "hp")
-    heilung3 = Effect("heilung 3","Nö","good", 5, "hp")
-    terror = Effect("Terror","Nö","evil", -100, "xp")
+    # Checking Game File Integrity
+    AssetHandler.CheckGameIntegrity()
 
-    #Load all existing Levels
-    print(levels_file)
-    allLevels = LevelInit.load_all_levels_from_json(levels_file)
-    Debug.objlist(allLevels, "Levels")
+    mPlayer = Entity(
+        "Player",
+        100,
+        100,
+        0,
+        [gitem("Item1", "weapon"), gitem("item2", "misc")],
+        location="Menu",
+    )
+    hurensohn = Entity(
+        "Hurensohn",
+        100,
+        100,
+        0,
+        [gitem("Item1", "weapon"), gitem("item2", "misc")],
+        location="Wiese",
+    )
+    # mPlayer.set_name()
+    kopfschmerz = Effect("Kopfschmerz", "Kopfschmerzen halt.", "bad", -1, "hp")
+    heilung = Effect("heilung", "Nö", "good", 5, "hp")
+    heilung2 = Effect("heilung2", "Nö", "good", 5, "hp")
+    heilung3 = Effect("heilung 3", "Nö", "good", 5, "hp")
+    terror = Effect("Terror", "Nö", "evil", -100, "xp")
 
-    #Load all existing Entities
-    allEntities = EntityInit.load_entities_fromjson(entity_file)
-    Debug.objlist(allEntities,"Entities")
+    # Load all existing Levels
+    # allLevels = LevelInit.load_all_levels_from_json(levels_file)
+    # Debug.objlist(allLevels, "Levels")
 
+    # Load all existing Entities
+    # allEntities = EntityInit.load_entities_fromjson(entity_file)
+    # Debug.objlist(allEntities, "Entities")
+    AssetHandler.importLevels()
+    allLevels = AssetHandler.allLevels
+
+    AssetHandler.importEntities()
+    allEntities = AssetHandler.allEntities
     ###########################################
     #######___HOW TO USE ACTIONSTACK___########
     ###########################################
@@ -175,8 +194,10 @@ if __name__ == "__main__":
     # mPlayer.actionstack.put("And Another Action from Actionstack")
     # mPlayer.actionstack.put("let_effects_take_effect")
 
-    #put Kopfschmerz Effect in Actionstack
-    mPlayer.actionstack.append(["add_effect",[mPlayer,"Kopfschmerz"]])
-    mPlayer.actionstack.append(["take_effects",[mPlayer,True]])
+    # put Kopfschmerz Effect in Actionstack
+    mPlayer.actionstack.append(["add_effect", [mPlayer, "Kopfschmerz"]])
+    mPlayer.actionstack.append(["take_effects", [mPlayer, True]])
 
+    Debug.objlist(allLevels, "Levels")
+    Debug.objlist(allEntities, "Entities")
     gameloop(mPlayer, allLevels)
