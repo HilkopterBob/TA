@@ -69,6 +69,7 @@ class AssetHandler:
         pr.dbg(f"Importing Level(s) from: {_level_files}")
         for _level in _level_files:
             AssetHandler.allLevels.extend(LevelInit.load_all_levels_from_json(_level))
+        return None
 
     def importEntities():
         """Imports Entities from Assets
@@ -86,6 +87,7 @@ class AssetHandler:
 
         for _entity in _entity_files:
             AssetHandler.allEntities.extend(EntityInit.load_entities_fromjson(_entity))
+        return None
 
     def importEffects():
         """Imports Effects from Assets
@@ -105,6 +107,7 @@ class AssetHandler:
             AssetHandler.allEffects.extend(
                 EffectInit.load_all_effects_from_json(_effect)
             )
+        return None
 
     def check_integrity(file):
         """Checks File SHA256 Sum against Integrity File
