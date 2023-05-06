@@ -25,6 +25,7 @@ levels_folder = "Assets/Levels"
 entities_folder = "Assets/Entities"
 effects_folder = "Assets/Effects"
 log_file = f"logs/{today}.log"
+checksum_file = "config/integrity.md"
 ##################
 
 
