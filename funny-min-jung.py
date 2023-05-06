@@ -150,6 +150,15 @@ if __name__ == "__main__":
     # Checking Game File Integrity
     AssetHandler.CheckGameIntegrity()
 
+    # Importing Level Assets
+    AssetHandler.importLevels()
+    allLevels = AssetHandler.allLevels
+
+    # Importing Entity Assets
+    AssetHandler.importEntities()
+    allEntities = AssetHandler.allEntities
+
+    # Creating seperate Player Entitiies
     mPlayer = Entity(
         "Player",
         100,
@@ -166,38 +175,21 @@ if __name__ == "__main__":
         [gitem("Item1", "weapon"), gitem("item2", "misc")],
         location="Wiese",
     )
-    # mPlayer.set_name()
+
+    # Creating seperate Effects
     kopfschmerz = Effect("Kopfschmerz", "Kopfschmerzen halt.", "bad", -1, "hp")
     heilung = Effect("heilung", "Nö", "good", 5, "hp")
     heilung2 = Effect("heilung2", "Nö", "good", 5, "hp")
     heilung3 = Effect("heilung 3", "Nö", "good", 5, "hp")
     terror = Effect("Terror", "Nö", "evil", -100, "xp")
 
-    # Load all existing Levels
-    # allLevels = LevelInit.load_all_levels_from_json(levels_file)
-    # Debug.objlist(allLevels, "Levels")
-
-    # Load all existing Entities
-    # allEntities = EntityInit.load_entities_fromjson(entity_file)
-    # Debug.objlist(allEntities, "Entities")
-    AssetHandler.importLevels()
-    allLevels = AssetHandler.allLevels
-
-    AssetHandler.importEntities()
-    allEntities = AssetHandler.allEntities
-    ###########################################
-    #######___HOW TO USE ACTIONSTACK___########
-    ###########################################
-    ####Add actions to Player Actionstack
-    # mPlayer.actionstack.put("Some Action from Actionstack")
-    # mPlayer.actionstack.put("Another Action from Actionstack")
-    # mPlayer.actionstack.put("And Another Action from Actionstack")
-    # mPlayer.actionstack.put("let_effects_take_effect")
-
     # put Kopfschmerz Effect in Actionstack
     mPlayer.actionstack.append(["add_effect", [mPlayer, "Kopfschmerz"]])
     mPlayer.actionstack.append(["take_effects", [mPlayer, True]])
 
+    # List all Loaded Levels and Entities
     Debug.objlist(allLevels, "Levels")
     Debug.objlist(allEntities, "Entities")
+
+    # Run Game
     gameloop(mPlayer, allLevels)
