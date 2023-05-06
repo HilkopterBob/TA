@@ -147,6 +147,9 @@ def gameloop(player, level_list=None):
 
 
 if __name__ == "__main__":
+    # Checking Game File Integrity
+    AssetHandler.CheckGameIntegrity()
+
     mPlayer = Entity(
         "Player",
         100,

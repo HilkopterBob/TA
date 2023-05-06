@@ -10,6 +10,7 @@ from .config import (
     entities_folder,
     effects_folder,
     checksum_file,
+    root_folder,
 )
 
 __all__ = [
@@ -22,4 +23,5 @@ __all__ = [
     "entities_folder",
     "effects_folder",
     "checksum_file",
+    "root_folder",
 ]

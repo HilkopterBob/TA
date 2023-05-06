@@ -3,10 +3,26 @@
 import sys
 import os.path
 from datetime import date
+from pathlib import Path
+
 
 ##################
 #####Init Vars####
 today = date.today().strftime("%d-%m-%Y")
+##################
+
+
+##################
+##Init Functions##
+def get_project_root() -> Path:
+    """Returns Root path of Project
+
+    Returns:
+        Path: Path to Root Dir
+    """
+    return Path(__file__).parent.parent
+
+
 ##################
 
 ##################
@@ -26,6 +42,7 @@ entities_folder = "Assets/Entities"
 effects_folder = "Assets/Effects"
 log_file = f"logs/{today}.log"
 checksum_file = "config/integrity.md"
+root_folder = get_project_root()
 ##################
 
 

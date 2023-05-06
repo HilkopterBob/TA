@@ -2,10 +2,19 @@
 """
 import os
 from hashlib import sha256
+from time import sleep
+from progress.bar import Bar
 from Level import LevelInit
 from Entities import EntityInit
 from Effect import EffectInit
-from config import levels_folder, entities_folder, effects_folder, checksum_file, dbg
+from config import (
+    levels_folder,
+    entities_folder,
+    effects_folder,
+    checksum_file,
+    dbg,
+    root_folder,
+)
 from Utils import pr, Debug
 
 
@@ -132,3 +141,36 @@ class AssetHandler:
             pr.dbg(f"Checksum of File {file}: {checksum}")
             return False
         return True
+
+    def CheckGameIntegrity():
+        """Checks game Files for Integrity"""
+        _gameFiles = []
+        exclude = [
+            ".git",
+            ".github",
+            ".vscode",
+            "logs",
+            "__pycache__",
+            "pypi",
+            "Docs",
+            "releases",
+        ]
+        excludef = ["integrity.md"]
+        for root, dirs, files in os.walk(root_folder, topdown=True):
+            dirs[:] = [d for d in dirs if d not in exclude]
+            for name in files:
+                if name not in excludef:
+                    _gameFiles.append(os.path.join(root, name))
+
+        with Bar(
+            "Checking File integrity...",
+            suffix="%(percent).1f%% - %(eta)ds",
+            max=len(_gameFiles),
+        ) as progress:
+            for gfile in _gameFiles:
+                sleep(0.1)
+                if AssetHandler.check_integrity(gfile):
+                    progress.next()
+                else:
+                    # Go on or break
+                    Debug.stop_game_on_exception("File Integrity Check Failed")
