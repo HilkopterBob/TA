@@ -4,7 +4,7 @@ Actionparser Module which holds 1 Class
 """
 from Effect import EffectInit
 from config import config
-from Utils import pr
+from Utils import Pr
 
 class Actionparser:
     """
@@ -77,8 +77,8 @@ class Actionparser:
             attributes = []
 
         try:
-            pr.hello()
-            pr.dbg(attributes)
+            Pr.hello()
+            Pr.dbg(attributes)
             _entity = attributes[0]
             _entity.let_effects_take_effect([attributes[1]])
             return 0

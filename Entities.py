@@ -4,7 +4,7 @@ Entities Module which holds 2 Classes
     Entityinit()
 """
 import json
-from Utils import pr, Inp
+from Utils import Pr, Inp
 
 
 class Entity():
@@ -79,7 +79,7 @@ class Entity():
         """
         while True:
             self.name = Inp.inp("Wie soll der Held deiner Geschichte heißen?")
-            pr.n(f"Möchtest du deinen Helden wirklich {self.name} nennen?")
+            Pr.n(f"Möchtest du deinen Helden wirklich {self.name} nennen?")
             action = Inp.inp("[DIESE EINSTELLUNG KANNST DU NICHT RÜCKGÄNGIG MACHEN!](y/n)")
             if action == "y":
                 break
@@ -272,27 +272,27 @@ class Entity():
         try:
             for e in self.eeffects:
                 self.change_stat(e)
-                pr.dbg( f"{pr.cyan(e.name)}, \
-                        {pr.cyan(e.etype)} : affected OBJECT: \
-                        {pr.cyan(self.name)}. Value: \
-                        {pr.cyan(e.value)} influenced: \
-                        {pr.cyan(e.infl)}"
+                Pr.dbg( f"{Pr.cyan(e.name)}, \
+                        {Pr.cyan(e.etype)} : affected OBJECT: \
+                        {Pr.cyan(self.name)}. Value: \
+                        {Pr.cyan(e.value)} influenced: \
+                        {Pr.cyan(e.infl)}"
                         )
             for e in self.geffects:
                 self.change_stat(e)
-                pr.dbg( f"{pr.cyan(e.name)}, \
-                        {pr.cyan(e.etype)} : affected OBJECT: \
-                        {pr.cyan(self.name)}. Value: \
-                        {pr.cyan(e.value)} influenced: \
-                        {pr.cyan(e.infl)}"
+                Pr.dbg( f"{Pr.cyan(e.name)}, \
+                        {Pr.cyan(e.etype)} : affected OBJECT: \
+                        {Pr.cyan(self.name)}. Value: \
+                        {Pr.cyan(e.value)} influenced: \
+                        {Pr.cyan(e.infl)}"
                         )
             for e in self.beffects:
                 self.change_stat(e)
-                pr.dbg( f"{pr.cyan(e.name)}, \
-                        {pr.cyan(e.etype)} : affected OBJECT: \
-                        {pr.cyan(self.name)}. Value: \
-                        {pr.cyan(e.value)} influenced: \
-                        {pr.cyan(e.infl)}"
+                Pr.dbg( f"{Pr.cyan(e.name)}, \
+                        {Pr.cyan(e.etype)} : affected OBJECT: \
+                        {Pr.cyan(self.name)}. Value: \
+                        {Pr.cyan(e.value)} influenced: \
+                        {Pr.cyan(e.infl)}"
                         )
             return True
         except:
@@ -322,7 +322,7 @@ class Entity():
         """
         level_ups = 0
         old_level = self.level
-        pr.dbg(f"Previous Level: {old_level}")
+        Pr.dbg(f"Previous Level: {old_level}")
         while True:
             if self.level < 10:
                 needed_xp = ((self.level + 1 )/0.4) ** 1.79
@@ -332,8 +332,8 @@ class Entity():
                     level_ups += 1
 
                 if level_ups > 0:
-                    pr.n(f"Du bist {level_ups} Level aufgestiegen!")
-                    pr.n("Du bekommst: nichts.")
+                    Pr.n(f"Du bist {level_ups} Level aufgestiegen!")
+                    Pr.n("Du bekommst: nichts.")
 
 
             if self.level >= 10 and self.level < 30:
@@ -344,8 +344,8 @@ class Entity():
                     level_ups += 1
 
                 if level_ups > 0:
-                    pr.n(f"Du bist {level_ups} Level aufgestiegen!")
-                    pr.n("Du bekommst: nichts.")
+                    Pr.n(f"Du bist {level_ups} Level aufgestiegen!")
+                    Pr.n("Du bekommst: nichts.")
 
 
             if self.level >= 30:
@@ -356,8 +356,8 @@ class Entity():
                     level_ups += 1
 
                 if level_ups > 0:
-                    pr.n(f"Du bist {level_ups} Level aufgestiegen!")
-                    pr.n("Du bekommst: nichts.")
+                    Pr.n(f"Du bist {level_ups} Level aufgestiegen!")
+                    Pr.n("Du bekommst: nichts.")
 
 
             break
@@ -401,13 +401,13 @@ class EntityInit():
         """
         with open(json_file, encoding="UTF-8") as json_data:
             data = json.load(json_data)
-            pr.dbg(data)
+            Pr.dbg(data)
 
         for ename in data.keys():
             if ename == name:
                 return Entity.from_json(data[ename])
 
-        pr.dbg(f"Itemname: {pr.cyan(name)} not found!",1)
+        Pr.dbg(f"Itemname: {Pr.cyan(name)} not found!",1)
         return False
 
 
@@ -500,5 +500,5 @@ class itemInit():
             if iname == name:
                 return gitem.from_json(data[iname], iname)
 
-        pr.dbg(f"Itemname: {pr.cyan(name)} not found!",1)
+        Pr.dbg(f"Itemname: {Pr.cyan(name)} not found!",1)
         return False

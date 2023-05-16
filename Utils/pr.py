@@ -7,7 +7,7 @@ from pystyle import  Colors, Colorate, Box, Center, Write
 from huepy import *
 from config import dbg, log_file, dbg_level
 
-class pr():
+class Pr():
 
     """
     Utility Class for custom Prints, headlines, Inputs etc...
@@ -144,7 +144,7 @@ class pr():
             Prints Debug Information into Console
         Args:
             text (str): Text to be Displayed. Defaults to "".
-            errlvl (int): Errorlevel 0=Inf, 1=Warn, 2=Err. Defaults to 0.
+            errlvl (int): Errorlevel 0=Inf, 1=Warn, 2=Err, 3=Highlight. Defaults to 0.
         """
 
         if not dbg:
@@ -178,6 +178,12 @@ class pr():
                     logstr = f'{stack2}{message}'
                     print(f'{info("")} {bad("")} \
                                 {str(yellow(stack2))} {message}')
+                    
+            case 3: #Err
+                if dbg_level >= 0:
+                    logstr = f'{stack2}{message}'
+                    print(f'{info("")} {cyan("")} \
+                                {str(yellow(stack2))} {message}')
 
         timestamp = datetime.now().strftime("%H:%M:%S")
 
@@ -205,17 +211,17 @@ class pr():
         Returns:
             Print: String
         """
-        pr.n("Das ist die standard Printanweisung")
-        pr.a("Allerts!")
-        pr.b("Bad shit")
-        pr.i("Information")
-        pr.g("Good")
-        pr.q("Quest(ion)")
-        pr.dbg("InfoLevel Debug")
-        pr.dbg("WarningLevel Debug",1)
-        pr.dbg("ErrorLevel Debug",2)
-        pr.green("Green Text")
-        pr.yellow("Yellow Text")
-        pr.red("Red Text")
-        pr.blue("Blue Text")
-        pr.cyan("Cyan Text")
+        Pr.n("Das ist die standard Printanweisung")
+        Pr.a("Allerts!")
+        Pr.b("Bad shit")
+        Pr.i("Information")
+        Pr.g("Good")
+        Pr.q("Quest(ion)")
+        Pr.dbg("InfoLevel Debug")
+        Pr.dbg("WarningLevel Debug",1)
+        Pr.dbg("ErrorLevel Debug",2)
+        Pr.green("Green Text")
+        Pr.yellow("Yellow Text")
+        Pr.red("Red Text")
+        Pr.blue("Blue Text")
+        Pr.cyan("Cyan Text")
