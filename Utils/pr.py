@@ -2,12 +2,12 @@
 """
 # pylint: disable=W,E
 import inspect
+from datetime import datetime
 from pystyle import  Colors, Colorate, Box, Center, Write
 from huepy import *
-from config import dbg
+from config import dbg, log_file, dbg_level
 
-
-class pr():
+class Pr():
 
     """
     Utility Class for custom Prints, headlines, Inputs etc...
@@ -144,7 +144,7 @@ class pr():
             Prints Debug Information into Console
         Args:
             text (str): Text to be Displayed. Defaults to "".
-            errlvl (int): Errorlevel 0=Inf, 1=Err. Defaults to 0.
+            errlvl (int): Errorlevel 0=Inf, 1=Warn, 2=Err, 3=Highlight. Defaults to 0.
         """
 
         if not dbg:
@@ -154,12 +154,42 @@ class pr():
         function = inspect.stack()[1].function
         line_number = inspect.stack()[1].lineno
 
-        if errlvl == 0:
-            print(f'{info("")} {good("")} \
-                  {str(yellow(f"[{line_number}] DBG - {module} - {function}: "))} {str(text)}')
-        else:
-            print(f'{info("")} {bad("")} \
-                  {str(yellow(f"[{line_number}] DBG - {module} - {function}: "))} {str(text)}')
+        stack0 = f"[{line_number}] INFO - {module} - {function}: "
+        stack1 = f"[{line_number}] WARN - {module} - {function}: "
+        stack2 = f"[{line_number}] ERR - {module} - {function}: "
+
+        message = str(text)
+
+        match errlvl:
+            case 0: #Informational
+                if dbg_level >= 2:
+                    logstr = f'{stack0}{message}'
+                    print(f'{info("")} {good("")} \
+                                {str(yellow(stack0))} {message}')
+
+            case 1: #Warning
+                if dbg_level >= 1:
+                    logstr = f'{stack1}{message}'
+                    print(f'{info("")} {info("")} \
+                                {str(yellow(stack1))} {message}')
+
+            case 2: #Err
+                if dbg_level >= 0:
+                    logstr = f'{stack2}{message}'
+                    print(f'{info("")} {bad("")} \
+                                {str(yellow(stack2))} {message}')
+
+            case 3: #Err
+                if dbg_level >= 0:
+                    logstr = f'{stack2}{message}'
+                    print(f'{info("")} {cyan("")} \
+                                {str(yellow(stack2))} {message}')
+
+        timestamp = datetime.now().strftime("%H:%M:%S")
+
+        with open(log_file, "a") as log:
+            log.write(f'{timestamp} - {logstr}\n')
+
 
     def headline(text=""):
         """Prints Headlines
@@ -181,16 +211,17 @@ class pr():
         Returns:
             Print: String
         """
-        pr.n("Das ist die standard Printanweisung")
-        pr.a("Allerts!")
-        pr.b("Bad shit")
-        pr.i("Information")
-        pr.g("Good")
-        pr.q("Quest(ion)")
-        pr.dbg("InfoLevel Debug")
-        pr.dbg("ErrorLevel Debug", 1)
-        pr.green("Green Text")
-        pr.yellow("Yellow Text")
-        pr.red("Red Text")
-        pr.blue("Blue Text")
-        pr.cyan("Cyan Text")
+        Pr.n("Das ist die standard Printanweisung")
+        Pr.a("Allerts!")
+        Pr.b("Bad shit")
+        Pr.i("Information")
+        Pr.g("Good")
+        Pr.q("Quest(ion)")
+        Pr.dbg("InfoLevel Debug")
+        Pr.dbg("WarningLevel Debug",1)
+        Pr.dbg("ErrorLevel Debug",2)
+        Pr.green("Green Text")
+        Pr.yellow("Yellow Text")
+        Pr.red("Red Text")
+        Pr.blue("Blue Text")
+        Pr.cyan("Cyan Text")

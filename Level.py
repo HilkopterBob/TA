@@ -4,7 +4,7 @@ Levels Module which holds 2 Classes
     Levelinit()
 """
 import json
-from Utils import pr
+from Utils import Pr
 
 
 class Level():
@@ -81,14 +81,14 @@ class Level():
                 try:
                     for e in self.entitylist:
                         if e.name == entity.name:
-                            raise Exception(f"{pr.cyan(entity.name)} \
+                            raise Exception(f"{Pr.cyan(entity.name)} \
                                             is already in entitielist of Level \
-                                            {pr.cyan(self.name)} \
+                                            {Pr.cyan(self.name)} \
                                             and thus cannot be added.")
                     self.entitylist.append(entity)
                     return True
                 except Exception as e:
-                    pr.dbg(e, 1)
+                    Pr.dbg(e, 1)
                     return False
             case "-":
                 try:
@@ -98,7 +98,7 @@ class Level():
                 except:
                     return False
             case _:
-                return pr.dbg("got no right ctype. choose between + and -",1)
+                return Pr.dbg("got no right ctype. choose between + and -",1)
 
 
 
@@ -158,5 +158,5 @@ class LevelInit():
             for lname in data.keys():
                 if name == lname:
                     return Level.from_json(data[lname], lname)
-            pr.dbg(f"Levelname: {pr.cyan(name)} not found!",1)
+            Pr.dbg(f"Levelname: {Pr.cyan(name)} not found!",1)
         return False
