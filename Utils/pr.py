@@ -178,7 +178,7 @@ class Pr():
                     logstr = f'{stack2}{message}'
                     print(f'{info("")} {bad("")} \
                                 {str(yellow(stack2))} {message}')
-                    
+
             case 3: #Err
                 if dbg_level >= 0:
                     logstr = f'{stack2}{message}'
