@@ -29,7 +29,7 @@ class Debug():
         return Pr.dbg(F"Loaded {definition}: {_curObjects}")
 
     def stop_game():
-        pr.q("Do you want to continue the game?")
+        Pr.q("Do you want to continue the game?")
         action = Inp.inp("y/n")
         match action:
             case "y":

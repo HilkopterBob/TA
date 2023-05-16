@@ -15,7 +15,8 @@ from config import (
     dbg,
     root_folder,
 )
-from Utils import pr, Debug
+from Utils.pr import Pr
+from Utils import Debug
 
 
 class AssetHandler:
@@ -39,19 +40,19 @@ class AssetHandler:
         Returns:
             List: List of Paths to Files
         """
-        pr.dbg(f"Gathering Assets from: {folder}")
+        Pr.dbg(f"Gathering Assets from: {folder}")
         _file_list = []
         for file in os.listdir(folder):
             filename = os.fsdecode(file)
             if filename.endswith(".json"):
                 _asset = os.path.join(folder, filename)
                 if AssetHandler.check_integrity(_asset):
-                    pr.dbg(f"Found Asset: {_asset}")
+                    Pr.dbg(f"Found Asset: {_asset}")
                     _file_list.append(_asset)
                 else:
                     Debug.stop_game_on_exception("File Integrity Check Failed")
             else:
-                pr.dbg(f"{os.path.join(folder, filename)} is no valid Asset File", 1)
+                Pr.dbg(f"{os.path.join(folder, filename)} is no valid Asset File", 1)
         return _file_list
 
     def importLevels():
@@ -63,10 +64,10 @@ class AssetHandler:
         _level_files = AssetHandler.getFiles(levels_folder)
 
         if not _level_files:
-            pr.dbg(f"No Levels to import from {levels_folder}", 1)
+            Pr.dbg(f"No Levels to import from {levels_folder}", 1)
             return None
 
-        pr.dbg(f"Importing Level(s) from: {_level_files}")
+        Pr.dbg(f"Importing Level(s) from: {_level_files}")
         for _level in _level_files:
             AssetHandler.allLevels.extend(LevelInit.load_all_levels_from_json(_level))
         return None
@@ -80,10 +81,10 @@ class AssetHandler:
         _entity_files = AssetHandler.getFiles(entities_folder)
 
         if not _entity_files:
-            pr.dbg(f"No Entities to import from {entities_folder}", 1)
+            Pr.dbg(f"No Entities to import from {entities_folder}", 1)
             return None
 
-        pr.dbg(f"Importing Entities: {_entity_files}")
+        Pr.dbg(f"Importing Entities: {_entity_files}")
 
         for _entity in _entity_files:
             AssetHandler.allEntities.extend(EntityInit.load_entities_fromjson(_entity))
@@ -98,10 +99,10 @@ class AssetHandler:
         _effects_files = AssetHandler.getFiles(effects_folder)
 
         if not _effects_files:
-            pr.dbg(f"No Effects to import from {effects_folder}", 1)
+            Pr.dbg(f"No Effects to import from {effects_folder}", 1)
             return None
 
-        pr.dbg(f"Importing Effects: {_effects_files}")
+        Pr.dbg(f"Importing Effects: {_effects_files}")
 
         for _effect in _effects_files:
             AssetHandler.allEffects.extend(
@@ -140,8 +141,8 @@ class AssetHandler:
 
         # Checks if Calculated Checksum is in Checksums File
         if checksum not in checksums:
-            pr.dbg(f"Integrity Check Failed for File: {file}", 2)
-            pr.dbg(f"Checksum of File {file}: {checksum}")
+            Pr.dbg(f"Integrity Check Failed for File: {file}", 2)
+            Pr.dbg(f"Checksum of File {file}: {checksum}")
             return False
         return True
 
