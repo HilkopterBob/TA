@@ -1,6 +1,5 @@
 """Defines Input Method for User
 """
-import sys
 from pystyle import  Colors, Write
 from Utils.pr import Pr
 from config import dbg
@@ -72,7 +71,7 @@ class Inp():
                         Pr.i("Die Funktion ist noch nicht implementiert")
 
                     case "exit":
-                        Inp.stop_game()
+                        pass
 
                     case _:
                         pass
@@ -87,12 +86,3 @@ class Inp():
         except:
             Pr.a ("Unbekannter Fehler beim Input")
             return None
-
-    def stop_game():
-        #Pr.q("Do you want to continue the game?")
-        action = Inp.inp("y/n")
-        match action:
-            case "y":
-                pass
-            case "n":
-                sys.exit()
