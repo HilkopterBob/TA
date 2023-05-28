@@ -1,4 +1,4 @@
-"""Defines Input Method for User
+"""Defines Input Method for User - exact copy of Inputparser-Module
 """
 from pystyle import  Colors, Write
 from Utils.pr import Pr
