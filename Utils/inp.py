@@ -12,7 +12,8 @@ class Inp():
         """Method to get User Input
         """
         befehlszeichen = "#"
-        userbefehl = [" inv: Öffnet das Inventar"," opt: Öffnet die Optioen"," men: Öffnet das Menü","save: Speichert das Spiel","exit: Schließt das Spiel"]
+        userbefehl = [" inv: Öffnet das Inventar"," opt: Öffnet die Optioen",
+                      " men: Öffnet das Menü","save: Speichert das Spiel","exit: Schließt das Spiel"]
         devbefehl = ["test: test","","","","","","",]
         min_len = 0
         max_len = 150
@@ -53,7 +54,7 @@ class Inp():
                     case "help":
                         Pr.headline ("userbefehle")
                         for einzelwert in userbefehl:
-                                Pr.i(einzelwert)
+                            Pr.i(einzelwert)
                         if dbg:
                             Pr.n ("")
                             Pr.headline ("devbefehle")
