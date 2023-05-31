@@ -13,7 +13,8 @@ class Inp():
         """
         befehlszeichen = "#"
         userbefehl = [" inv: Öffnet das Inventar"," opt: Öffnet die Optioen",
-                      " men: Öffnet das Menü","save: Speichert das Spiel","exit: Schließt das Spiel"]
+                      " men: Öffnet das Menü","save: Speichert das Spiel",
+                      "exit: Schließt das Spiel"]
         devbefehl = ["test: test","","","","","","",]
         min_len = 0
         max_len = 150
