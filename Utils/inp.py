@@ -11,7 +11,6 @@ class Inp():
     def inp(text=""):
         """Method to get User Input
         """
-
         befehlszeichen = "#"
         userbefehl = [" inv: Öffnet das Inventar"," opt: Öffnet die Optioen"," men: Öffnet das Menü","save: Speichert das Spiel","exit: Schließt das Spiel"]
         devbefehl = ["test: test","","","","","","",]

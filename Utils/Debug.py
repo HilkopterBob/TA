@@ -29,13 +29,15 @@ class Debug():
         return Pr.dbg(F"Loaded {definition}: {_curObjects}")
 
     def stop_game():
+        """Pauses the Game and Asks for Continue or Stop
+        """
         Pr.q("Do you want to continue the game?")
         action = Inp.inp("y/n")
         match action:
             case "y":
                 pass
             case "n":
-                sys.exit()   
+                sys.exit()
 
     def stop_game_on_exception(exception):
         """Halts the Game on Exception
@@ -49,7 +51,6 @@ class Debug():
                 pass
             case "n":
                 sys.exit()
-    
 
     def pause():
         """Pauses the Game for User Input
