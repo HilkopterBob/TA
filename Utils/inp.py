@@ -16,4 +16,3 @@ class Inp():
         Input = Write.Input(text + "\n >_ ", Colors.white, interval=0.0025)
         inputparser.user_input = Input
         return inputparser.user_input
-        

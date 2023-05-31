@@ -26,9 +26,10 @@ def inputparser(    min_len=0,
     """
     #user_input = Inp.inp()
     befehlszeichen = "#"
-    userbefehl = [" inv: Öffnet das Inventar"," opt: Öffnet die Optioen"," men: Öffnet das Menü","save: Speichert das Spiel","exit: Schließt das Spiel"]
+    userbefehl = [" inv: Öffnet das Inventar"," opt: Öffnet die Optioen",
+                  " men: Öffnet das Menü","save: Speichert das Spiel","exit: Schließt das Spiel"]
     devbefehl = ["test: test","","","","","","",]
-    
+
     try:
         if not user_input.strip():
             raise ValueError("Leere Eingabe")
@@ -51,19 +52,15 @@ def inputparser(    min_len=0,
             input_command = user_input[1:]
             input_list = input_command.split()
             match input_list[0]:
-                
+
                 #dev Befehle
                 case "hallo":
                     print("Hallo")
                     for e in input_list:
                         print(e)
-                
-                
-                
-                
-                
+
                 #User Befehle
-                
+
                 case "help":
                     pr.headline ("userbefehle")
                     for einzelwert in userbefehl:
@@ -73,18 +70,16 @@ def inputparser(    min_len=0,
                         pr.headline ("devbefehle")
                         for einzelwert in devbefehl:
                             pr.i(einzelwert)
-                
-                    
 
                 case "opt":
                     pass
 
                 case "inv":
                     pass
-                
+
                 case "men":
                     Entity.change_location()
-                        
+
 
                 case "save":
                     pr.i("Die Funktion ist noch nicht implementiert")
@@ -97,7 +92,6 @@ def inputparser(    min_len=0,
 
             return inputparser()
         return user_input
-        
 
     except ValueError as e:
         pr.a (f"Fehler bei Eingabe: {e}")
@@ -105,8 +99,3 @@ def inputparser(    min_len=0,
     except:
         pr.a ("Unbekannter Fehler beim Input")
         return None
-    
-
-
-
-#inputparser()
