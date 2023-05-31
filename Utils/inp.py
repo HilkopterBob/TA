@@ -8,9 +8,10 @@ class Inp():
     """
     Utility Class for getting custom input prompts
     """
-    def inp(text=""):
+    def inp(player,text=""):
         """Method to get User Input
         """
+        Pr.dbg(f"{player}")
         befehlszeichen = "#"
         userbefehl = [" inv: Öffnet das Inventar"," opt: Öffnet die Optioen",
                       " men: Öffnet das Menü","save: Speichert das Spiel",
@@ -66,7 +67,9 @@ class Inp():
                         pass
 
                     case "inv":
-                        pass
+                        Pr.dbg(f"{player}")
+                        player.actionstack.insert(0,["change_gamestate",["inv"]])
+                        return 0
 
                     case "save":
                         Pr.i("Die Funktion ist noch nicht implementiert")
@@ -77,13 +80,13 @@ class Inp():
                     case _:
                         pass
 
-                return Inp.inp()
+                return Inp.inp(player)
             return user_input
 
 
         except ValueError as e:
             Pr.a (f"Fehler bei Eingabe: {e}")
-            return None
-        except:
-            Pr.a ("Unbekannter Fehler beim Input")
-            return None
+            return 1
+        except Exception as e:
+            Pr.a (f"Unbekannter Fehler beim Input: {e}")
+            return 1
