@@ -62,23 +62,25 @@ class Inp():
                             Pr.headline ("devbefehle")
                             for einzelwert in devbefehl:
                                 Pr.i(einzelwert)
-
+                        return 34
                     case "opt":
-                        pass
+                        return 34
 
                     case "inv":
                         Pr.dbg(f"{player}")
                         player.actionstack.insert(0,["change_gamestate",["inv"]])
-                        return 0
-
+                        return 34
+                    case "changegamestate":
+                        player.actionstack.insert(0,["change_gamestate",[input_list[1]]])
+                        return 34
                     case "save":
                         Pr.i("Die Funktion ist noch nicht implementiert")
-
+                        return 34
                     case "exit":
-                        pass
+                        return 34
 
                     case _:
-                        pass
+                        return 34
 
                 return Inp.inp(player)
             return user_input

@@ -133,7 +133,6 @@ def gameloop(player, level_list=None):
 
     #Entering Gameloop
     while True:
-        Pr.dbg(f"Current Gamestate: {Actionparser.gamestate}")
 
         for level in level_list:
             if level.name == player.location:
@@ -141,12 +140,20 @@ def gameloop(player, level_list=None):
 
         # Loop through all Entities in CurrentLevel and Apply Actionstack
         for e in current_level.entitylist:
-
-
             for action in e.actionstack:
                 Pr.dbg(action)
                 Actionparser.callfunction(action)
                 e.actionstack.remove(action)
+
+        Pr.dbg(f"Current Gamestate: {Actionparser.gamestate}")
+
+        match Actionparser.gamestate:
+            case "loading":
+                Pr.dbg("You are now in Loading")
+            case "game":
+                Pr.dbg("You are now in Game")
+            case "inv":
+                Pr.dbg("You are now in Inventory")
 
         player.check_level_up()
         interact_with_level(player, current_level, level_list)
