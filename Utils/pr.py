@@ -165,7 +165,7 @@ class Pr():
                 if dbg_level >= 2:
                     logstr = f'{stack0}{message}'
                     print(f'{info("")} {good("")} \
-                                {str(yellow(stack0))} {message}')
+                                {str(green(stack0))} {message}')
 
             case 1: #Warning
                 if dbg_level >= 1:
@@ -177,7 +177,7 @@ class Pr():
                 if dbg_level >= 0:
                     logstr = f'{stack2}{message}'
                     print(f'{info("")} {bad("")} \
-                                {str(yellow(stack2))} {message}')
+                                {str(red(stack2))} {message}')
 
             case 3: #Err
                 if dbg_level >= 0:
