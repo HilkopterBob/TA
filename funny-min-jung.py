@@ -54,7 +54,10 @@ def interact_with_level(player, level, level_list):
     Pr.dbg(availableChoices, 2)
     Pr.dbg(f"All Actions: {availableChoices[action]}")
     Pr.dbg(f"Available Actions: {level.getAvailableChoices()}")
-    availableChoicesDict = dict(zip(availableChoices, level.text)) # Sehr falsch, Index Choice 2 wird text 1 zugeordnet
+
+    # Sehr falsch, Index Choice 2 wird text 1 zugeordnet
+    availableChoicesDict = dict(zip(availableChoices, level.text)) 
+
     Pr.dbg(availableChoicesDict, 2)
     #Link Choices - result test
 
@@ -80,7 +83,9 @@ def interact_with_level(player, level, level_list):
                             else:
                                 Pr.dbg(f"No Action in Keys: {_currentAction}", 1)
                                 #Do Trigger Stuff
-                                touched_trigger = actions[-1] # Letzter eintrag aus actions = immer Trigger. Supported nur einen Trigger!!!
+                                # Letzter eintrag aus actions = immer Trigger.
+                                # Supported nur einen Trigger!!!
+                                touched_trigger = actions[-1]
                                 level_triggers_list = level.triggers
                                 Pr.dbg(level_triggers_list, 2)
                                 for index, l_trigger in enumerate(level_triggers_list):

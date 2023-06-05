@@ -108,6 +108,8 @@ class Level():
                 return Pr.dbg("got no right ctype. choose between + and -",1)
 
     def printDesc(self):
+        """Prints Level Description to User
+        """
         for entry in self.descr:
             if len(entry) > 1:
                 if isinstance(entry,str):
@@ -116,8 +118,13 @@ class Level():
                 if entry[1] in self.triggers:
                     Pr.n(f"{str(entry[0])}")
                 continue
-    
+
     def getAvailableChoices(self):
+        """Returns the Choices currently available to the User
+
+        Returns:
+            list: Choices
+        """
         achoices = []
         for choice in self.choices:
             if len(choice) == 1 and choice[0] !="":
@@ -126,10 +133,15 @@ class Level():
                 for cdict in self.triggers:
                     if choice[1] == cdict:
                         achoices.append(choice[0])
-                        
+
         return achoices
-                        
+
     def printChoices(self):
+        """Prints the Available Choices to the User
+
+        Returns:
+            Boolean: True
+        """
         i = 1
         for llist in self.choices:
             if len(llist) == 1 and llist[0] != "":
@@ -142,9 +154,17 @@ class Level():
                         i = i + 1
         return True
 
-    def levelname(object):
+    def levelname(lobject):
+        """Return the Name of an Levelobject
+
+        Args:
+            object (Level): Level from what you wan't the Objectname
+
+        Returns:
+            String: Levelname
+        """
         try:
-            return object.name
+            return lobject.name
         except Exception as e:
             Pr.dbg(f"ERR: {e}",2)
             return None
