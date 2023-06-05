@@ -365,9 +365,84 @@ class Entity():
                     Pr.n(f"Du bist {level_ups} Level aufgestiegen!")
                     Pr.n("Du bekommst: nichts.")
 
-
             break
         return True
+
+    def consume_item(self, item_name):
+        for item in self.inv:
+            if item.name == item_name:
+                consumable = item
+
+        if consumable.effects and consumable.type != "Food":
+            self.remove_item_by_name(consumable.name)
+            for effect in consumable.effects:
+                self.add_effect(effect)
+
+        if consumable.type == "Food":
+            self.change_health(consumable.dmg)
+
+    def equip_item(self, item_name):
+    
+        for item in self.inv:
+            if item.name == item_name:
+                cur_item = item
+        
+        match cur_item.equip_slot:
+            case "head":
+                if self.equip_slots[0]:
+                    self.inv.append(self.equip_slots[0])
+                self.equip_slot[0] = cur_item
+                self.inv.remove(cur_item)
+            case "torso":
+                if self.equip_slots[1]:
+                    self.inv.append(self.equip_slots[0])
+                self.equip_slot[1] = cur_item
+                self.inv.remove(cur_item)
+            case "underwear":
+                if self.equip_slots[2]:
+                    self.inv.append(self.equip_slots[0])
+                self.equip_slot[2] = cur_item
+                self.inv.remove(cur_item)
+            case "left_arm":
+                if self.equip_slots[3]:
+                    self.inv.append(self.equip_slots[0])
+                self.equip_slot[3] = cur_item
+                self.inv.remove(cur_item)
+            case "right_arm":
+                if self.equip_slots[4]:
+                    self.inv.append(self.equip_slots[0])
+                self.equip_slot[4] = cur_item
+                self.inv.remove(cur_item)
+            case "left_leg":
+                if self.equip_slots[5]:
+                    self.inv.append(self.equip_slots[0])
+                self.equip_slot[5] = cur_item
+                self.inv.remove(cur_item)
+            case "right_leg":
+                if self.equip_slots[6]:
+                    self.inv.append(self.equip_slots[0])
+                self.equip_slot[6] = cur_item
+                self.inv.remove(cur_item)
+            case "gloves":
+                if self.equip_slots[7]:
+                    self.inv.append(self.equip_slots[0])
+                self.equip_slot[7] = cur_item
+                self.inv.remove(cur_item)
+            case "meele":
+                if self.equip_slots[8]:
+                    self.inv.append(self.equip_slots[0])
+                self.equip_slot[8] = cur_item
+                self.inv.remove(cur_item)
+            case "ranged":
+                if self.equip_slots[9]:
+                    self.inv.append(self.equip_slots[0])
+                self.equip_slot[9] = cur_item
+                self.inv.remove(cur_item)
+            case "quick_draw_potion":
+                if self.equip_slots[10]:
+                    self.inv.append(self.equip_slots[0])
+                self.equip_slot[10] = cur_item
+                self.inv.remove(cur_item)
 
 class EntityInit():
     """
