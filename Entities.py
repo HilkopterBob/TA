@@ -439,7 +439,7 @@ class gitem():
         self.equipable = equipable
         self.questitem = questitem
 
-    def get(self, thing: str):
+    def get(self, thing: str, *args):
         """compatibility function for questify
         """
         return self.name
