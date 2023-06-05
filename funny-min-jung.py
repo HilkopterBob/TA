@@ -31,7 +31,7 @@ def interact_with_level(player, level, level_list):
 
     #Print Level Choices
     availableChoices = level.getAvailableChoices()
-    Pr.dbg(availableChoices, 2)
+    Pr.dbg(availableChoices, 1)
     for choice in availableChoices:
         print(f"{availableChoices.index(choice)+1}. {choice}")
     printed = True
@@ -183,7 +183,7 @@ if __name__ == "__main__":
         100,
         0,
         [gitem("Item1", "weapon"), gitem("item2", "misc")],
-        location="Menu",
+        location=allLevels[1],
     )
     hurensohn = Entity(
         "Hurensohn",
