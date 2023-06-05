@@ -1,0 +1,16 @@
+{
+  "$schema": "../../.github/workflows/entitieschema.json",
+  "Goblin": {
+    "name": "",
+    "hp": 10,
+    "wealth": 10,
+    "inv": [],
+    "xp": 0,
+    "ptype": 0,
+    "geffects": [],
+    "beffects": [],
+    "eeffects": [],
+    "location": "",
+    "level": 0
+  }
+}

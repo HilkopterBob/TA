@@ -4,8 +4,9 @@ Actionparser Module which holds 1 Class
 """
 from Effect import EffectInit
 from config import config
-from Utils import pr
 from Level import Level
+from Utils import Pr
+
 class Actionparser:
     """
         Class which defines function for Actionparsing
@@ -34,13 +35,13 @@ class Actionparser:
         Returns:
             Integer: 1 on Error, else 0
         """
-        pr.dbg(f"Call: {attr}")
+        Pr.dbg(f"Call: {attr}")
 
         if attr is None:
             attr = []
 
         _call = getattr(Actionparser,attr[0])
-        pr.dbg(f"{_call}")
+        Pr.dbg(f"{_call}")
         return _call(attr[1])
 
     def add_effect(attributes = None):
@@ -52,7 +53,7 @@ class Actionparser:
         Returns:
             Integer: 1 on Error, else 0
         """
-        pr.dbg(f"Call: {attributes}")
+        Pr.dbg(f"Call: {attributes}")
 
         if attributes is None:
             attributes = []
@@ -75,14 +76,14 @@ class Actionparser:
         Returns:
             Integer: 1 on Error, else 0
         """
-        pr.dbg(f"Call: {attributes}")
+        Pr.dbg(f"Call: {attributes}")
 
         if attributes is None:
             attributes = []
 
         try:
-            pr.hello()
-            pr.dbg(attributes)
+            Pr.hello()
+            Pr.dbg(attributes)
             _entity = attributes[0]
             _entity.let_effects_take_effect([attributes[1]])
             return 0
@@ -98,7 +99,7 @@ class Actionparser:
         Returns:
             Integer: 1 on Error, else 0
         """
-        pr.dbg(f"Call: {attributes}")
+        Pr.dbg(f"Call: {attributes}")
 
         if attributes is None:
             attributes = []
@@ -106,12 +107,12 @@ class Actionparser:
             _entity = attributes[0]
             _old_level = attributes[1]
             _new_level = attributes[2]
-            pr.dbg(f"Trying to Change {_entity} location "
+            Pr.dbg(f"Trying to Change {_entity} location "
                     f"from {Level.levelname(_old_level)} to {Level.levelname(_new_level)}")
             _entity.change_location(_old_level, _new_level)
             return 0
         except Exception as e:
-            pr.dbg(f"ERR: {e}",1)
+            Pr.dbg(f"ERR: {e}",1)
             return 1
 
     def set_name(attributes = None):
@@ -123,7 +124,7 @@ class Actionparser:
         Returns:
             Integer: 1 on Error, else 0
         """
-        pr.dbg(f"Call: {attributes}")
+        Pr.dbg(f"Call: {attributes}")
 
         if attributes is None:
             attributes = []
@@ -144,7 +145,7 @@ class Actionparser:
         Returns:
             Integer: 1 on Error, else 0
         """
-        pr.dbg(f"Call: {attributes}")
+        Pr.dbg(f"Call: {attributes}")
 
         if attributes is None:
             attributes = []
@@ -166,7 +167,7 @@ class Actionparser:
         Returns:
             Integer: 1 on Error, else 0
         """
-        pr.dbg(f"Call: {attributes}")
+        Pr.dbg(f"Call: {attributes}")
 
         if attributes is None:
             attributes = []
@@ -188,7 +189,7 @@ class Actionparser:
         Returns:
             Integer: 1 on Error, else 0
         """
-        pr.dbg(f"Call: {attributes}")
+        Pr.dbg(f"Call: {attributes}")
 
         if attributes is None:
             attributes = []
@@ -210,7 +211,7 @@ class Actionparser:
         Returns:
             Integer: 1 on Error, else 0
         """
-        pr.dbg(f"Call: {attributes}")
+        Pr.dbg(f"Call: {attributes}")
 
         if attributes is None:
             attributes = []
@@ -233,7 +234,7 @@ class Actionparser:
         Returns:
             Integer: 1 on Error, else 0
         """
-        pr.dbg(f"Call: {attributes}")
+        Pr.dbg(f"Call: {attributes}")
 
         if attributes is None:
             attributes = []
@@ -254,7 +255,7 @@ class Actionparser:
         Returns:
             Integer: 1 on Error, else 0
         """
-        pr.dbg(f"Call: {attributes}")
+        Pr.dbg(f"Call: {attributes}")
 
         if attributes is None:
             attributes = []
@@ -276,7 +277,7 @@ class Actionparser:
         Returns:
             Integer: 1 on Error, else 0
         """
-        pr.dbg(f"Call: {attributes}")
+        Pr.dbg(f"Call: {attributes}")
 
         if attributes is None:
             attributes = []
@@ -298,7 +299,7 @@ class Actionparser:
         Returns:
             Integer: 1 on Error, else 0
         """
-        pr.dbg(f"Call: {attributes}")
+        Pr.dbg(f"Call: {attributes}")
 
         if attributes is None:
             attributes = []

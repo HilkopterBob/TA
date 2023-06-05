@@ -1,5 +1,6 @@
 __pycache__/**
 .vscode/**
 **/__pycache__/**
-logs/**
+*.log
 test.py
+Utils/createChecksums.py
