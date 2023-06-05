@@ -2,7 +2,7 @@
 """
 from Entities import Entity, gitem
 from Effect import Effect, EffectInit
-from Utils import Pr, Debug, Inp
+from Utils import Pr, Debug, Inp, inventorystate
 from actionparser import Actionparser
 from config import effects_file
 from Assethandler import AssetHandler
@@ -139,24 +139,30 @@ def gameloop(player, level_list=None):
                 current_level = level
 
         # Loop through all Entities in CurrentLevel and Apply Actionstack
-        for e in current_level.entitylist:
-            for action in e.actionstack:
-                Pr.dbg(action)
-                Actionparser.callfunction(action)
-                e.actionstack.remove(action)
+        if Actionparser.gamestate == "game":
+            for e in current_level.entitylist:
+                for action in e.actionstack:
+                    Pr.dbg(action)
+                    Actionparser.callfunction(action)
+                    e.actionstack.remove(action)
 
         Pr.dbg(f"Current Gamestate: {Actionparser.gamestate}")
 
         match Actionparser.gamestate:
             case "loading":
                 Pr.dbg("You are now in Loading")
+                #loding steps
+                Actionparser.gamestate = "game"
             case "game":
                 Pr.dbg("You are now in Game")
+                interact_with_level(player, current_level, level_list)
             case "inv":
                 Pr.dbg("You are now in Inventory")
+                inventorystate(mPlayer)
+                Actionparser.gamestate = "game"
 
         player.check_level_up()
-        interact_with_level(player, current_level, level_list)
+        
         # changes the entity location, deletes entity from old level and adds to the new one
 
         # Increase Lap Counter by i
