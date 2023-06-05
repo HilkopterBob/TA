@@ -363,7 +363,6 @@ class Entity():
             break
         return True
 
-
 class EntityInit():
     """
         Class which Initializes Entities
@@ -439,6 +438,13 @@ class gitem():
         self.usable = useable
         self.equipable = equipable
         self.questitem = questitem
+
+    def get(self, thing: str, *args):
+        """compatibility function for questify
+        """
+        thing = thing
+        args = args
+        return self.name
 
     @staticmethod
     def from_json(json_dct, iname):

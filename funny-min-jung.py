@@ -43,8 +43,11 @@ def interact_with_level(player, level, level_list):
                     printed = True
                     i = i + 1
     if printed:
-        action = int(Inp.inp()) - 1
-
+        Pr.dbg(f"{mPlayer}")
+        action = int(Inp.inp(mPlayer)) - 1
+        if action == 33:
+            Pr.dbg("Break!")
+            return
     ##### ##### Reads triggers and action calls in level.text[dicts] ##### #####
 
     Pr.n(level.text[action][0])
@@ -127,22 +130,38 @@ def gameloop(player, level_list=None):
         level_list = []
 
     lap = 0
+
+    #Entering Gameloop
     while True:
+
         for level in level_list:
             if level.name == player.location:
                 current_level = level
 
         # Loop through all Entities in CurrentLevel and Apply Actionstack
-        for e in current_level.entitylist:
+        if Actionparser.gamestate == "game":
+            for e in current_level.entitylist:
+                for action in e.actionstack:
+                    Pr.dbg(action)
+                    Actionparser.callfunction(action)
+                    e.actionstack.remove(action)
 
+        Pr.dbg(f"Current Gamestate: {Actionparser.gamestate}")
 
-            for action in e.actionstack:
-                Pr.dbg(action)
-                Actionparser.callfunction(action)
-                e.actionstack.remove(action)
+        match Actionparser.gamestate:
+            case "loading":
+                Pr.dbg("You are now in Loading")
+                #loding steps
+                Actionparser.gamestate = "game"
+            case "game":
+                Pr.dbg("You are now in Game")
+                interact_with_level(player, current_level, level_list)
+            case "inv":
+                Pr.dbg("You are now in Inventory")
+                Actionparser.gamestate = "game"
 
         player.check_level_up()
-        interact_with_level(player, current_level, level_list)
+
         # changes the entity location, deletes entity from old level and adds to the new one
 
         # Increase Lap Counter by i
@@ -192,6 +211,7 @@ if __name__ == "__main__":
     # put Kopfschmerz Effect in Actionstack
     mPlayer.actionstack.append(["add_effect", [mPlayer, "Kopfschmerz"]])
     mPlayer.actionstack.append(["take_effects", [mPlayer, True]])
+    mPlayer.actionstack.insert(0,["change_gamestate",["game"]])
 
     # List all Loaded Levels and Entities
     Debug.objlist(allLevels, "Levels")
