@@ -5,6 +5,26 @@ from Utils import pr
 
 
 def inventorystate(Player):
+
+    def consume_item(item_name, Player):
+        for item in Player.inv:
+            if item.name == item_name:
+                consumable = item
+
+        if consumable.effects and consumable.type != "Food":
+            Player.remove_item_by_name(consumable.name)
+            for effect in consumable.effects:
+                Player.add_effect(effect)
+
+        if consumable.type == "Food":
+            Player.change_health(consumable.dmg)
+
+    
+
+
+
+
+
     wants_exit = False
     weapons = []
     tools = []
@@ -66,8 +86,10 @@ def inventorystate(Player):
         
         try:
             print(choosen_item)
-            if choosen_item == "Cancelled by user":
-                exit()
+            
+
+
+
         except UnboundLocalError as e:
             pr.Pr.dbg(f"Catched Error: {e}.\n\t\t\t\t\t\t It may be an empty Inventory Space, which tried to by printed.", 1)
         
