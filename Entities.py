@@ -448,11 +448,9 @@ class gitem():
         self.equipable = equipable
         self.questitem = questitem
 
-    def get(self, thing: str, *args):
+    def get(self, thing: str, *args): #pylint: disable=W0613
         """compatibility function for questify
         """
-        thing = thing
-        args = args
         return self.name
 
     @staticmethod

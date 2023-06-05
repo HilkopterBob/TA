@@ -56,7 +56,7 @@ def interact_with_level(player, level, level_list):
     Pr.dbg(f"Available Actions: {level.getAvailableChoices()}")
 
     # Sehr falsch, Index Choice 2 wird text 1 zugeordnet
-    availableChoicesDict = dict(zip(availableChoices, level.text)) 
+    availableChoicesDict = dict(zip(availableChoices, level.text))
 
     Pr.dbg(availableChoicesDict, 2)
     #Link Choices - result test
@@ -73,10 +73,10 @@ def interact_with_level(player, level, level_list):
                         try:
                             if "action" in _currentAction.keys():
                                 if _currentAction.get("action") == "change_location":
-                                    for level in level_list:
-                                        if level.name == list(_currentAction.values())[1]:
+                                    for _level in level_list:
+                                        if _level.name == list(_currentAction.values())[1]:
                                             actiontoadd = [_currentAction.get("action"),
-                                                            [mPlayer,mPlayer.location,level]]
+                                                            [mPlayer,mPlayer.location,_level]]
                                 else:
                                     actiontoadd = [_currentAction.get("action"),
                                                     [mPlayer,list(_currentAction.values())[1]]]
