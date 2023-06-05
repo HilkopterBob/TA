@@ -26,7 +26,7 @@ class Actionparser:
     """
 
     gamestate = "loading"
-    
+
     def callfunction(attr = None):
         """Calls an internal function by it's String Name
 

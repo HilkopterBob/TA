@@ -442,6 +442,8 @@ class gitem():
     def get(self, thing: str, *args):
         """compatibility function for questify
         """
+        thing = thing
+        args = args
         return self.name
 
     @staticmethod

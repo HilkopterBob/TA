@@ -158,11 +158,10 @@ def gameloop(player, level_list=None):
                 interact_with_level(player, current_level, level_list)
             case "inv":
                 Pr.dbg("You are now in Inventory")
-                inventorystate(mPlayer)
                 Actionparser.gamestate = "game"
 
         player.check_level_up()
-        
+
         # changes the entity location, deletes entity from old level and adds to the new one
 
         # Increase Lap Counter by i

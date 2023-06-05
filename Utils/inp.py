@@ -8,7 +8,7 @@ class Inp():
     """
     Utility Class for getting custom input prompts
     """
-    def inp(player,text=""):
+    def inp(player,text=""): # pylint: disable=too-many-return-statements
         """Method to get User Input
         """
         Pr.dbg(f"{player}")
@@ -68,10 +68,10 @@ class Inp():
 
                     case "inv":
                         Pr.dbg(f"{player}")
-                        player.actionstack.insert(0,["change_gamestate",["inv"]])
+                        player.actionstack.insert(0,["change_gamestate",["inv"]]) # pylint: disable=no-member
                         return 34
                     case "changegamestate":
-                        player.actionstack.insert(0,["change_gamestate",[input_list[1]]])
+                        player.actionstack.insert(0,["change_gamestate",[input_list[1]]]) # pylint: disable=no-member
                         return 34
                     case "save":
                         Pr.i("Die Funktion ist noch nicht implementiert")
