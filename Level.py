@@ -6,7 +6,6 @@ Levels Module which holds 2 Classes
 import json
 from Utils import Pr
 
-
 class Level():
     """
         Class which defines Levels
@@ -78,6 +77,8 @@ class Level():
         """
         match ctype:
             case "+":
+                Pr.dbg(f"Entitylist of Level {Level.levelname(self)}: {self.entitylist}")
+                Pr.dbg(f"Trying to add {entity.name} to {Level.levelname(self)}")
                 try:
                     for e in self.entitylist:
                         if e.name == entity.name:
@@ -86,21 +87,87 @@ class Level():
                                             {Pr.cyan(self.name)} \
                                             and thus cannot be added.")
                     self.entitylist.append(entity)
+                    Pr.dbg(f"{entity.name} got added to Level {Level.levelname(self)}")
+                    Pr.dbg(f"Entitylist of Level {Level.levelname(self)}: {self.entitylist}")
                     return True
                 except Exception as e:
                     Pr.dbg(e, 1)
                     return False
             case "-":
+                Pr.dbg(f"Entitylist of Level {Level.levelname(self)}: {self.entitylist}")
+                Pr.dbg(f"Trying to remove {entity.name} from {Level.levelname(self)}")
                 try:
                     self.entitylist = list (filter(lambda e: e.name != entity.name,
                                             self.entitylist))
+                    Pr.dbg(f"{entity.name} got removed from Level {Level.levelname(self)}")
+                    Pr.dbg(f"Entitylist of Level {Level.levelname(self)}: {self.entitylist}")
                     return True
                 except:
                     return False
             case _:
                 return Pr.dbg("got no right ctype. choose between + and -",1)
 
+    def printDesc(self):
+        """Prints Level Description to User
+        """
+        for entry in self.descr:
+            if len(entry) > 1:
+                if isinstance(entry,str):
+                    Pr.n(f"{str(entry)}")
+                    continue
+                if entry[1] in self.triggers:
+                    Pr.n(f"{str(entry[0])}")
+                continue
 
+    def getAvailableChoices(self):
+        """Returns the Choices currently available to the User
+
+        Returns:
+            list: Choices
+        """
+        achoices = []
+        for choice in self.choices:
+            if len(choice) == 1 and choice[0] !="":
+                achoices.append(choice[0])
+            elif len(choice) > 1:
+                for cdict in self.triggers:
+                    if choice[1] == cdict:
+                        achoices.append(choice[0])
+
+        return achoices
+
+    def printChoices(self):
+        """Prints the Available Choices to the User
+
+        Returns:
+            Boolean: True
+        """
+        i = 1
+        for llist in self.choices:
+            if len(llist) == 1 and llist[0] != "":
+                Pr.n(f"{i}. {llist[0]}")
+                i = i + 1
+            elif len(llist) > 1:
+                for ddict in self.triggers:
+                    if llist[1] == ddict:
+                        Pr.n(f"{i}. {llist[0]}")
+                        i = i + 1
+        return True
+
+    def levelname(lobject):
+        """Return the Name of an Levelobject
+
+        Args:
+            object (Level): Level from what you wan't the Objectname
+
+        Returns:
+            String: Levelname
+        """
+        try:
+            return lobject.name
+        except Exception as e:
+            Pr.dbg(f"ERR: {e}",2)
+            return None
 
 class LevelInit():
     """

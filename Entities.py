@@ -4,6 +4,7 @@ Entities Module which holds 2 Classes
     Entityinit()
 """
 import json
+from Level import Level
 from Utils import Pr, Inp
 
 
@@ -309,7 +310,12 @@ class Entity():
         
             =return= returns nothing, yet
         """
-        self.location = new_level.name
+        if not isinstance(old_level, Level) or not isinstance(new_level, Level):
+            Pr.dbg("Level not Level Object!",1)
+            Pr.dbg(f"OldLevel: {old_level} | {type(old_level)},"
+                   f" New_Level: {new_level} | {type(new_level)}")
+        Pr.dbg(f"Changing Level for {self} from {old_level} to {new_level}")
+        self.location = new_level
         new_level.change_entity_list("+", self)
         old_level.change_entity_list("-", self)
 
@@ -379,6 +385,9 @@ class EntityInit():
 
             =return= List of all Entities loaded from Json
         """
+
+        Pr.dbg(f"Loading Entities from: {json_file}")
+
         curEntities = []
         with open(json_file, encoding="UTF-8") as json_data:
             data = json.load(json_data)
@@ -439,11 +448,9 @@ class gitem():
         self.equipable = equipable
         self.questitem = questitem
 
-    def get(self, thing: str, *args):
+    def get(self, thing: str, *args): #pylint: disable=W0613
         """compatibility function for questify
         """
-        thing = thing
-        args = args
         return self.name
 
     @staticmethod
