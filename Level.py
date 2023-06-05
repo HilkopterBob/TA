@@ -77,8 +77,8 @@ class Level():
         """
         match ctype:
             case "+":
-                pr.dbg(f"Entitylist of Level {Level.levelname(self)}: {self.entitylist}")
-                pr.dbg(f"Trying to add {entity.name} to {Level.levelname(self)}")
+                Pr.dbg(f"Entitylist of Level {Level.levelname(self)}: {self.entitylist}")
+                Pr.dbg(f"Trying to add {entity.name} to {Level.levelname(self)}")
                 try:
                     for e in self.entitylist:
                         if e.name == entity.name:
@@ -87,20 +87,20 @@ class Level():
                                             {Pr.cyan(self.name)} \
                                             and thus cannot be added.")
                     self.entitylist.append(entity)
-                    pr.dbg(f"{entity.name} got added to Level {Level.levelname(self)}")
-                    pr.dbg(f"Entitylist of Level {Level.levelname(self)}: {self.entitylist}")
+                    Pr.dbg(f"{entity.name} got added to Level {Level.levelname(self)}")
+                    Pr.dbg(f"Entitylist of Level {Level.levelname(self)}: {self.entitylist}")
                     return True
                 except Exception as e:
                     Pr.dbg(e, 1)
                     return False
             case "-":
-                pr.dbg(f"Entitylist of Level {Level.levelname(self)}: {self.entitylist}")
-                pr.dbg(f"Trying to remove {entity.name} from {Level.levelname(self)}")
+                Pr.dbg(f"Entitylist of Level {Level.levelname(self)}: {self.entitylist}")
+                Pr.dbg(f"Trying to remove {entity.name} from {Level.levelname(self)}")
                 try:
                     self.entitylist = list (filter(lambda e: e.name != entity.name,
                                             self.entitylist))
-                    pr.dbg(f"{entity.name} got removed from Level {Level.levelname(self)}")
-                    pr.dbg(f"Entitylist of Level {Level.levelname(self)}: {self.entitylist}")
+                    Pr.dbg(f"{entity.name} got removed from Level {Level.levelname(self)}")
+                    Pr.dbg(f"Entitylist of Level {Level.levelname(self)}: {self.entitylist}")
                     return True
                 except:
                     return False
@@ -111,10 +111,10 @@ class Level():
         for entry in self.descr:
             if len(entry) > 1:
                 if isinstance(entry,str):
-                    pr.n(f"{str(entry)}")
+                    Pr.n(f"{str(entry)}")
                     continue
                 if entry[1] in self.triggers:
-                    pr.n(f"{str(entry[0])}")
+                    Pr.n(f"{str(entry[0])}")
                 continue
     
     def getAvailableChoices(self):
@@ -133,12 +133,12 @@ class Level():
         i = 1
         for llist in self.choices:
             if len(llist) == 1 and llist[0] != "":
-                pr.n(f"{i}. {llist[0]}")
+                Pr.n(f"{i}. {llist[0]}")
                 i = i + 1
             elif len(llist) > 1:
                 for ddict in self.triggers:
                     if llist[1] == ddict:
-                        pr.n(f"{i}. {llist[0]}")
+                        Pr.n(f"{i}. {llist[0]}")
                         i = i + 1
         return True
 
@@ -146,7 +146,7 @@ class Level():
         try:
             return object.name
         except Exception as e:
-            pr.dbg(f"ERR: {e}")
+            Pr.dbg(f"ERR: {e}",2)
             return None
 
 class LevelInit():
