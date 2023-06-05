@@ -24,7 +24,8 @@ class Entity():
                     beffects=None,
                     eeffects=None,
                     location="Nirvana",
-                    level=1
+                    level=1,
+                    equip_slots=None
                     ):
 
         if inv is None:
@@ -35,6 +36,8 @@ class Entity():
             beffects = []
         if eeffects is None:
             eeffects = []
+        if equip_slots is None:
+            equip_slots = []
 
         self.location = location
         self.name = name
@@ -49,6 +52,9 @@ class Entity():
         self.eeffects = eeffects
         self.effects = [[self.geffects],[self.beffects],[self.eeffects]]
         self.actionstack = []
+        self.equip_slots = equip_slots  #["Head_slot", "Torso_slot", "Underwear", "Left_arm", "Right_arm", 
+                                        #"Left_leg", "Right_leg", "Gloves_slot", "Meele Weapon", "Ranged Weapon", 
+                                        #"Quick_draw potion"]
 
     @staticmethod
     def from_json(json_dct):
