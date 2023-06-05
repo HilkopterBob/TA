@@ -1,0 +1,911 @@
+07:50:42 - [43] INFO - Assethandler - getFiles: Gathering Assets from: Assets/Levels
+07:50:42 - [50] INFO - Assethandler - getFiles: Found Asset: Assets/Levels\Kreuzung.json
+07:50:42 - [50] INFO - Assethandler - getFiles: Found Asset: Assets/Levels\levels.json
+07:50:42 - [50] INFO - Assethandler - getFiles: Found Asset: Assets/Levels\Wiese.json
+07:50:42 - [70] INFO - Assethandler - importLevels: Importing Level(s) from: ['Assets/Levels\\Kreuzung.json', 'Assets/Levels\\levels.json', 'Assets/Levels\\Wiese.json']
+07:50:42 - [43] INFO - Assethandler - getFiles: Gathering Assets from: Assets/Entities
+07:50:42 - [50] INFO - Assethandler - getFiles: Found Asset: Assets/Entities\Goblin.json
+07:50:42 - [50] INFO - Assethandler - getFiles: Found Asset: Assets/Entities\Player.json
+07:50:42 - [55] WARN - Assethandler - getFiles: Assets/Entities\trial.png is no valid Asset File
+07:50:42 - [87] INFO - Assethandler - importEntities: Importing Entities: ['Assets/Entities\\Goblin.json', 'Assets/Entities\\Player.json']
+07:50:42 - [29] INFO - Utils.Debug - objlist: Loaded Levels: ['Kreuzung', 'Menu', 'Options', 'Tisch', 'Zimmer', 'Pub', 'Kräuterhändler', 'Schmied', 'Markthalle', 'Stadt', 'placeholder', 'Wiese']
+07:50:42 - [29] INFO - Utils.Debug - objlist: Loaded Entities: ['', 'Player']
+07:50:42 - [149] INFO - __main__ - gameloop: Current Gamestate: loading
+07:50:42 - [153] INFO - __main__ - gameloop: You are now in Loading
+07:50:42 - [325] INFO - Entities - check_level_up: Previous Level: 1
+07:50:45 - [149] INFO - __main__ - gameloop: Current Gamestate: game
+07:50:45 - [157] INFO - __main__ - gameloop: You are now in Game
+07:50:45 - [46] INFO - __main__ - interact_with_level: <Entities.Entity object at 0x000001A5F5BE3190>
+07:50:45 - [14] INFO - Utils.inp - inp: <Entities.Entity object at 0x000001A5F5BE3190>
+07:50:47 - [82] INFO - __main__ - interact_with_level: ['action', 'new_level_name']
+07:50:47 - [83] INFO - __main__ - interact_with_level: change_location
+07:50:47 - [84] INFO - __main__ - interact_with_level: Wiese
+07:50:47 - [82] INFO - __main__ - interact_with_level: ['action', 'effect_name']
+07:50:47 - [83] INFO - __main__ - interact_with_level: add_effect
+07:50:47 - [84] INFO - __main__ - interact_with_level: Kopfschmerz
+07:50:47 - [325] INFO - Entities - check_level_up: Previous Level: 1
+07:50:47 - [145] INFO - __main__ - gameloop: ['change_gamestate', ['game']]
+07:50:47 - [309] INFO - actionparser - change_gamestate: Changing Gamestate to game
+07:50:47 - [145] INFO - __main__ - gameloop: ['take_effects', [<Entities.Entity object at 0x000001A5F5BE3190>, True]]
+07:50:47 - [149] INFO - __main__ - gameloop: Current Gamestate: game
+07:50:47 - [157] INFO - __main__ - gameloop: You are now in Game
+07:50:48 - [46] INFO - __main__ - interact_with_level: <Entities.Entity object at 0x000001A5F5BE3190>
+07:50:48 - [14] INFO - Utils.inp - inp: <Entities.Entity object at 0x000001A5F5BE3190>
+07:50:51 - [70] INFO - Utils.inp - inp: <Entities.Entity object at 0x000001A5F5BE3190>
+07:50:51 - [49] INFO - __main__ - interact_with_level: Break!
+07:50:51 - [325] INFO - Entities - check_level_up: Previous Level: 1
+07:50:51 - [145] INFO - __main__ - gameloop: ['change_gamestate', ['inv']]
+07:50:51 - [309] INFO - actionparser - change_gamestate: Changing Gamestate to inv
+07:50:51 - [149] INFO - __main__ - gameloop: Current Gamestate: inv
+07:50:51 - [160] INFO - __main__ - gameloop: You are now in Inventory
+07:51:49 - [43] INFO - Assethandler - getFiles: Gathering Assets from: Assets/Levels
+07:51:49 - [50] INFO - Assethandler - getFiles: Found Asset: Assets/Levels\Kreuzung.json
+07:51:49 - [50] INFO - Assethandler - getFiles: Found Asset: Assets/Levels\levels.json
+07:51:49 - [50] INFO - Assethandler - getFiles: Found Asset: Assets/Levels\Wiese.json
+07:51:49 - [70] INFO - Assethandler - importLevels: Importing Level(s) from: ['Assets/Levels\\Kreuzung.json', 'Assets/Levels\\levels.json', 'Assets/Levels\\Wiese.json']
+07:51:49 - [43] INFO - Assethandler - getFiles: Gathering Assets from: Assets/Entities
+07:51:49 - [50] INFO - Assethandler - getFiles: Found Asset: Assets/Entities\Goblin.json
+07:51:49 - [50] INFO - Assethandler - getFiles: Found Asset: Assets/Entities\Player.json
+07:51:49 - [55] WARN - Assethandler - getFiles: Assets/Entities\trial.png is no valid Asset File
+07:51:49 - [87] INFO - Assethandler - importEntities: Importing Entities: ['Assets/Entities\\Goblin.json', 'Assets/Entities\\Player.json']
+07:51:49 - [29] INFO - Utils.Debug - objlist: Loaded Levels: ['Kreuzung', 'Menu', 'Options', 'Tisch', 'Zimmer', 'Pub', 'Kräuterhändler', 'Schmied', 'Markthalle', 'Stadt', 'placeholder', 'Wiese']
+07:51:49 - [29] INFO - Utils.Debug - objlist: Loaded Entities: ['', 'Player']
+07:51:49 - [149] INFO - __main__ - gameloop: Current Gamestate: loading
+07:51:49 - [153] INFO - __main__ - gameloop: You are now in Loading
+07:51:49 - [325] INFO - Entities - check_level_up: Previous Level: 1
+07:52:08 - [149] INFO - __main__ - gameloop: Current Gamestate: game
+07:52:08 - [157] INFO - __main__ - gameloop: You are now in Game
+07:52:08 - [46] INFO - __main__ - interact_with_level: <Entities.Entity object at 0x000001D1D61131D0>
+07:52:08 - [14] INFO - Utils.inp - inp: <Entities.Entity object at 0x000001D1D61131D0>
+07:52:10 - [82] INFO - __main__ - interact_with_level: ['action', 'new_level_name']
+07:52:10 - [83] INFO - __main__ - interact_with_level: change_location
+07:52:10 - [84] INFO - __main__ - interact_with_level: Wiese
+07:52:10 - [82] INFO - __main__ - interact_with_level: ['action', 'effect_name']
+07:52:10 - [83] INFO - __main__ - interact_with_level: add_effect
+07:52:10 - [84] INFO - __main__ - interact_with_level: Kopfschmerz
+07:52:10 - [325] INFO - Entities - check_level_up: Previous Level: 1
+07:52:10 - [145] INFO - __main__ - gameloop: ['change_gamestate', ['game']]
+07:52:10 - [309] INFO - actionparser - change_gamestate: Changing Gamestate to game
+07:52:10 - [145] INFO - __main__ - gameloop: ['take_effects', [<Entities.Entity object at 0x000001D1D61131D0>, True]]
+07:52:10 - [149] INFO - __main__ - gameloop: Current Gamestate: game
+07:52:10 - [157] INFO - __main__ - gameloop: You are now in Game
+07:52:11 - [46] INFO - __main__ - interact_with_level: <Entities.Entity object at 0x000001D1D61131D0>
+07:52:11 - [14] INFO - Utils.inp - inp: <Entities.Entity object at 0x000001D1D61131D0>
+07:52:13 - [70] INFO - Utils.inp - inp: <Entities.Entity object at 0x000001D1D61131D0>
+07:52:13 - [49] INFO - __main__ - interact_with_level: Break!
+07:52:13 - [325] INFO - Entities - check_level_up: Previous Level: 1
+07:52:15 - [145] INFO - __main__ - gameloop: ['change_gamestate', ['inv']]
+07:52:15 - [309] INFO - actionparser - change_gamestate: Changing Gamestate to inv
+07:52:15 - [149] INFO - __main__ - gameloop: Current Gamestate: inv
+07:52:15 - [160] INFO - __main__ - gameloop: You are now in Inventory
+08:02:23 - [43] INFO - Assethandler - getFiles: Gathering Assets from: Assets/Levels
+08:02:23 - [50] INFO - Assethandler - getFiles: Found Asset: Assets/Levels\Kreuzung.json
+08:02:23 - [50] INFO - Assethandler - getFiles: Found Asset: Assets/Levels\levels.json
+08:02:23 - [50] INFO - Assethandler - getFiles: Found Asset: Assets/Levels\Wiese.json
+08:02:23 - [70] INFO - Assethandler - importLevels: Importing Level(s) from: ['Assets/Levels\\Kreuzung.json', 'Assets/Levels\\levels.json', 'Assets/Levels\\Wiese.json']
+08:02:23 - [43] INFO - Assethandler - getFiles: Gathering Assets from: Assets/Entities
+08:02:23 - [50] INFO - Assethandler - getFiles: Found Asset: Assets/Entities\Goblin.json
+08:02:23 - [50] INFO - Assethandler - getFiles: Found Asset: Assets/Entities\Player.json
+08:02:23 - [55] WARN - Assethandler - getFiles: Assets/Entities\trial.png is no valid Asset File
+08:02:23 - [87] INFO - Assethandler - importEntities: Importing Entities: ['Assets/Entities\\Goblin.json', 'Assets/Entities\\Player.json']
+08:02:23 - [29] INFO - Utils.Debug - objlist: Loaded Levels: ['Kreuzung', 'Menu', 'Options', 'Tisch', 'Zimmer', 'Pub', 'Kräuterhändler', 'Schmied', 'Markthalle', 'Stadt', 'placeholder', 'Wiese']
+08:02:23 - [29] INFO - Utils.Debug - objlist: Loaded Entities: ['', 'Player']
+08:02:23 - [149] INFO - __main__ - gameloop: Current Gamestate: loading
+08:02:23 - [153] INFO - __main__ - gameloop: You are now in Loading
+08:02:23 - [325] INFO - Entities - check_level_up: Previous Level: 1
+08:02:24 - [149] INFO - __main__ - gameloop: Current Gamestate: game
+08:02:24 - [157] INFO - __main__ - gameloop: You are now in Game
+08:02:24 - [46] INFO - __main__ - interact_with_level: <Entities.Entity object at 0x000002AB7DDA7550>
+08:02:24 - [14] INFO - Utils.inp - inp: <Entities.Entity object at 0x000002AB7DDA7550>
+08:02:26 - [82] INFO - __main__ - interact_with_level: ['action', 'new_level_name']
+08:02:26 - [83] INFO - __main__ - interact_with_level: change_location
+08:02:26 - [84] INFO - __main__ - interact_with_level: Wiese
+08:02:26 - [82] INFO - __main__ - interact_with_level: ['action', 'effect_name']
+08:02:26 - [83] INFO - __main__ - interact_with_level: add_effect
+08:02:26 - [84] INFO - __main__ - interact_with_level: Kopfschmerz
+08:02:26 - [325] INFO - Entities - check_level_up: Previous Level: 1
+08:02:27 - [145] INFO - __main__ - gameloop: ['change_gamestate', ['game']]
+08:02:27 - [309] INFO - actionparser - change_gamestate: Changing Gamestate to game
+08:02:27 - [145] INFO - __main__ - gameloop: ['take_effects', [<Entities.Entity object at 0x000002AB7DDA7550>, True]]
+08:02:27 - [149] INFO - __main__ - gameloop: Current Gamestate: game
+08:02:27 - [157] INFO - __main__ - gameloop: You are now in Game
+08:02:27 - [46] INFO - __main__ - interact_with_level: <Entities.Entity object at 0x000002AB7DDA7550>
+08:02:27 - [14] INFO - Utils.inp - inp: <Entities.Entity object at 0x000002AB7DDA7550>
+08:02:30 - [70] INFO - Utils.inp - inp: <Entities.Entity object at 0x000002AB7DDA7550>
+08:02:30 - [49] INFO - __main__ - interact_with_level: Break!
+08:02:30 - [325] INFO - Entities - check_level_up: Previous Level: 1
+08:02:30 - [145] INFO - __main__ - gameloop: ['change_gamestate', ['inv']]
+08:02:30 - [309] INFO - actionparser - change_gamestate: Changing Gamestate to inv
+08:02:30 - [149] INFO - __main__ - gameloop: Current Gamestate: inv
+08:02:30 - [160] INFO - __main__ - gameloop: You are now in Inventory
+08:03:18 - [43] INFO - Assethandler - getFiles: Gathering Assets from: Assets/Levels
+08:03:18 - [50] INFO - Assethandler - getFiles: Found Asset: Assets/Levels\Kreuzung.json
+08:03:18 - [50] INFO - Assethandler - getFiles: Found Asset: Assets/Levels\levels.json
+08:03:18 - [50] INFO - Assethandler - getFiles: Found Asset: Assets/Levels\Wiese.json
+08:03:18 - [70] INFO - Assethandler - importLevels: Importing Level(s) from: ['Assets/Levels\\Kreuzung.json', 'Assets/Levels\\levels.json', 'Assets/Levels\\Wiese.json']
+08:03:18 - [43] INFO - Assethandler - getFiles: Gathering Assets from: Assets/Entities
+08:03:18 - [50] INFO - Assethandler - getFiles: Found Asset: Assets/Entities\Goblin.json
+08:03:18 - [50] INFO - Assethandler - getFiles: Found Asset: Assets/Entities\Player.json
+08:03:18 - [55] WARN - Assethandler - getFiles: Assets/Entities\trial.png is no valid Asset File
+08:03:18 - [87] INFO - Assethandler - importEntities: Importing Entities: ['Assets/Entities\\Goblin.json', 'Assets/Entities\\Player.json']
+08:03:18 - [29] INFO - Utils.Debug - objlist: Loaded Levels: ['Kreuzung', 'Menu', 'Options', 'Tisch', 'Zimmer', 'Pub', 'Kräuterhändler', 'Schmied', 'Markthalle', 'Stadt', 'placeholder', 'Wiese']
+08:03:18 - [29] INFO - Utils.Debug - objlist: Loaded Entities: ['', 'Player']
+08:03:18 - [149] INFO - __main__ - gameloop: Current Gamestate: loading
+08:03:18 - [153] INFO - __main__ - gameloop: You are now in Loading
+08:03:18 - [325] INFO - Entities - check_level_up: Previous Level: 1
+08:03:20 - [149] INFO - __main__ - gameloop: Current Gamestate: game
+08:03:20 - [157] INFO - __main__ - gameloop: You are now in Game
+08:03:20 - [46] INFO - __main__ - interact_with_level: <Entities.Entity object at 0x0000028BCD6A3610>
+08:03:20 - [14] INFO - Utils.inp - inp: <Entities.Entity object at 0x0000028BCD6A3610>
+08:03:21 - [82] INFO - __main__ - interact_with_level: ['action', 'new_level_name']
+08:03:21 - [83] INFO - __main__ - interact_with_level: change_location
+08:03:21 - [84] INFO - __main__ - interact_with_level: Wiese
+08:03:21 - [82] INFO - __main__ - interact_with_level: ['action', 'effect_name']
+08:03:21 - [83] INFO - __main__ - interact_with_level: add_effect
+08:03:21 - [84] INFO - __main__ - interact_with_level: Kopfschmerz
+08:03:21 - [325] INFO - Entities - check_level_up: Previous Level: 1
+08:03:22 - [145] INFO - __main__ - gameloop: ['change_gamestate', ['game']]
+08:03:22 - [309] INFO - actionparser - change_gamestate: Changing Gamestate to game
+08:03:22 - [145] INFO - __main__ - gameloop: ['take_effects', [<Entities.Entity object at 0x0000028BCD6A3610>, True]]
+08:03:22 - [149] INFO - __main__ - gameloop: Current Gamestate: game
+08:03:22 - [157] INFO - __main__ - gameloop: You are now in Game
+08:03:23 - [46] INFO - __main__ - interact_with_level: <Entities.Entity object at 0x0000028BCD6A3610>
+08:03:23 - [14] INFO - Utils.inp - inp: <Entities.Entity object at 0x0000028BCD6A3610>
+08:03:24 - [70] INFO - Utils.inp - inp: <Entities.Entity object at 0x0000028BCD6A3610>
+08:03:24 - [49] INFO - __main__ - interact_with_level: Break!
+08:03:24 - [325] INFO - Entities - check_level_up: Previous Level: 1
+08:03:25 - [145] INFO - __main__ - gameloop: ['change_gamestate', ['inv']]
+08:03:25 - [309] INFO - actionparser - change_gamestate: Changing Gamestate to inv
+08:03:25 - [149] INFO - __main__ - gameloop: Current Gamestate: inv
+08:03:25 - [160] INFO - __main__ - gameloop: You are now in Inventory
+08:11:37 - [43] INFO - Assethandler - getFiles: Gathering Assets from: Assets/Levels
+08:11:37 - [50] INFO - Assethandler - getFiles: Found Asset: Assets/Levels\Kreuzung.json
+08:11:37 - [50] INFO - Assethandler - getFiles: Found Asset: Assets/Levels\levels.json
+08:11:37 - [50] INFO - Assethandler - getFiles: Found Asset: Assets/Levels\Wiese.json
+08:11:37 - [70] INFO - Assethandler - importLevels: Importing Level(s) from: ['Assets/Levels\\Kreuzung.json', 'Assets/Levels\\levels.json', 'Assets/Levels\\Wiese.json']
+08:11:37 - [43] INFO - Assethandler - getFiles: Gathering Assets from: Assets/Entities
+08:11:37 - [50] INFO - Assethandler - getFiles: Found Asset: Assets/Entities\Goblin.json
+08:11:37 - [50] INFO - Assethandler - getFiles: Found Asset: Assets/Entities\Player.json
+08:11:37 - [55] WARN - Assethandler - getFiles: Assets/Entities\trial.png is no valid Asset File
+08:11:37 - [87] INFO - Assethandler - importEntities: Importing Entities: ['Assets/Entities\\Goblin.json', 'Assets/Entities\\Player.json']
+08:11:37 - [29] INFO - Utils.Debug - objlist: Loaded Levels: ['Kreuzung', 'Menu', 'Options', 'Tisch', 'Zimmer', 'Pub', 'Kräuterhändler', 'Schmied', 'Markthalle', 'Stadt', 'placeholder', 'Wiese']
+08:11:37 - [29] INFO - Utils.Debug - objlist: Loaded Entities: ['', 'Player']
+08:11:37 - [149] INFO - __main__ - gameloop: Current Gamestate: loading
+08:11:37 - [153] INFO - __main__ - gameloop: You are now in Loading
+08:11:37 - [325] INFO - Entities - check_level_up: Previous Level: 1
+08:11:39 - [149] INFO - __main__ - gameloop: Current Gamestate: game
+08:11:39 - [157] INFO - __main__ - gameloop: You are now in Game
+08:11:39 - [46] INFO - __main__ - interact_with_level: <Entities.Entity object at 0x00000241167C3750>
+08:11:39 - [14] INFO - Utils.inp - inp: <Entities.Entity object at 0x00000241167C3750>
+08:11:41 - [82] INFO - __main__ - interact_with_level: ['action', 'new_level_name']
+08:11:41 - [83] INFO - __main__ - interact_with_level: change_location
+08:11:41 - [84] INFO - __main__ - interact_with_level: Wiese
+08:11:41 - [82] INFO - __main__ - interact_with_level: ['action', 'effect_name']
+08:11:41 - [83] INFO - __main__ - interact_with_level: add_effect
+08:11:41 - [84] INFO - __main__ - interact_with_level: Kopfschmerz
+08:11:41 - [325] INFO - Entities - check_level_up: Previous Level: 1
+08:11:41 - [145] INFO - __main__ - gameloop: ['change_gamestate', ['game']]
+08:11:41 - [309] INFO - actionparser - change_gamestate: Changing Gamestate to game
+08:11:41 - [145] INFO - __main__ - gameloop: ['take_effects', [<Entities.Entity object at 0x00000241167C3750>, True]]
+08:11:41 - [149] INFO - __main__ - gameloop: Current Gamestate: game
+08:11:41 - [157] INFO - __main__ - gameloop: You are now in Game
+08:11:42 - [46] INFO - __main__ - interact_with_level: <Entities.Entity object at 0x00000241167C3750>
+08:11:42 - [14] INFO - Utils.inp - inp: <Entities.Entity object at 0x00000241167C3750>
+08:11:45 - [70] INFO - Utils.inp - inp: <Entities.Entity object at 0x00000241167C3750>
+08:11:45 - [49] INFO - __main__ - interact_with_level: Break!
+08:11:45 - [325] INFO - Entities - check_level_up: Previous Level: 1
+08:11:45 - [145] INFO - __main__ - gameloop: ['change_gamestate', ['inv']]
+08:11:45 - [309] INFO - actionparser - change_gamestate: Changing Gamestate to inv
+08:11:45 - [149] INFO - __main__ - gameloop: Current Gamestate: inv
+08:11:45 - [160] INFO - __main__ - gameloop: You are now in Inventory
+08:13:14 - [43] INFO - Assethandler - getFiles: Gathering Assets from: Assets/Levels
+08:13:14 - [50] INFO - Assethandler - getFiles: Found Asset: Assets/Levels\Kreuzung.json
+08:13:14 - [50] INFO - Assethandler - getFiles: Found Asset: Assets/Levels\levels.json
+08:13:14 - [50] INFO - Assethandler - getFiles: Found Asset: Assets/Levels\Wiese.json
+08:13:14 - [70] INFO - Assethandler - importLevels: Importing Level(s) from: ['Assets/Levels\\Kreuzung.json', 'Assets/Levels\\levels.json', 'Assets/Levels\\Wiese.json']
+08:13:14 - [43] INFO - Assethandler - getFiles: Gathering Assets from: Assets/Entities
+08:13:14 - [50] INFO - Assethandler - getFiles: Found Asset: Assets/Entities\Goblin.json
+08:13:14 - [50] INFO - Assethandler - getFiles: Found Asset: Assets/Entities\Player.json
+08:13:14 - [55] WARN - Assethandler - getFiles: Assets/Entities\trial.png is no valid Asset File
+08:13:14 - [87] INFO - Assethandler - importEntities: Importing Entities: ['Assets/Entities\\Goblin.json', 'Assets/Entities\\Player.json']
+08:13:14 - [29] INFO - Utils.Debug - objlist: Loaded Levels: ['Kreuzung', 'Menu', 'Options', 'Tisch', 'Zimmer', 'Pub', 'Kräuterhändler', 'Schmied', 'Markthalle', 'Stadt', 'placeholder', 'Wiese']
+08:13:14 - [29] INFO - Utils.Debug - objlist: Loaded Entities: ['', 'Player']
+08:13:14 - [149] INFO - __main__ - gameloop: Current Gamestate: loading
+08:13:14 - [153] INFO - __main__ - gameloop: You are now in Loading
+08:13:14 - [325] INFO - Entities - check_level_up: Previous Level: 1
+08:13:16 - [149] INFO - __main__ - gameloop: Current Gamestate: game
+08:13:16 - [157] INFO - __main__ - gameloop: You are now in Game
+08:13:16 - [46] INFO - __main__ - interact_with_level: <Entities.Entity object at 0x0000017258AA3290>
+08:13:16 - [14] INFO - Utils.inp - inp: <Entities.Entity object at 0x0000017258AA3290>
+08:13:17 - [82] INFO - __main__ - interact_with_level: ['action', 'new_level_name']
+08:13:17 - [83] INFO - __main__ - interact_with_level: change_location
+08:13:17 - [84] INFO - __main__ - interact_with_level: Wiese
+08:13:17 - [82] INFO - __main__ - interact_with_level: ['action', 'effect_name']
+08:13:17 - [83] INFO - __main__ - interact_with_level: add_effect
+08:13:17 - [84] INFO - __main__ - interact_with_level: Kopfschmerz
+08:13:17 - [325] INFO - Entities - check_level_up: Previous Level: 1
+08:13:18 - [145] INFO - __main__ - gameloop: ['change_gamestate', ['game']]
+08:13:18 - [309] INFO - actionparser - change_gamestate: Changing Gamestate to game
+08:13:18 - [145] INFO - __main__ - gameloop: ['take_effects', [<Entities.Entity object at 0x0000017258AA3290>, True]]
+08:13:18 - [149] INFO - __main__ - gameloop: Current Gamestate: game
+08:13:18 - [157] INFO - __main__ - gameloop: You are now in Game
+08:13:19 - [46] INFO - __main__ - interact_with_level: <Entities.Entity object at 0x0000017258AA3290>
+08:13:19 - [14] INFO - Utils.inp - inp: <Entities.Entity object at 0x0000017258AA3290>
+08:13:20 - [70] INFO - Utils.inp - inp: <Entities.Entity object at 0x0000017258AA3290>
+08:13:20 - [49] INFO - __main__ - interact_with_level: Break!
+08:13:20 - [325] INFO - Entities - check_level_up: Previous Level: 1
+08:13:21 - [145] INFO - __main__ - gameloop: ['change_gamestate', ['inv']]
+08:13:21 - [309] INFO - actionparser - change_gamestate: Changing Gamestate to inv
+08:13:21 - [149] INFO - __main__ - gameloop: Current Gamestate: inv
+08:13:21 - [160] INFO - __main__ - gameloop: You are now in Inventory
+08:13:32 - [325] INFO - Entities - check_level_up: Previous Level: 1
+08:13:33 - [145] INFO - __main__ - gameloop: ['add_effect', [<Entities.Entity object at 0x0000017258AA3290>, 'Kopfschmerz']]
+08:13:33 - [149] INFO - __main__ - gameloop: Current Gamestate: game
+08:13:33 - [157] INFO - __main__ - gameloop: You are now in Game
+08:13:34 - [46] INFO - __main__ - interact_with_level: <Entities.Entity object at 0x0000017258AA3290>
+08:13:34 - [14] INFO - Utils.inp - inp: <Entities.Entity object at 0x0000017258AA3290>
+08:19:15 - [43] INFO - Assethandler - getFiles: Gathering Assets from: Assets/Levels
+08:19:15 - [50] INFO - Assethandler - getFiles: Found Asset: Assets/Levels\Kreuzung.json
+08:19:15 - [50] INFO - Assethandler - getFiles: Found Asset: Assets/Levels\levels.json
+08:19:15 - [50] INFO - Assethandler - getFiles: Found Asset: Assets/Levels\Wiese.json
+08:19:15 - [70] INFO - Assethandler - importLevels: Importing Level(s) from: ['Assets/Levels\\Kreuzung.json', 'Assets/Levels\\levels.json', 'Assets/Levels\\Wiese.json']
+08:19:15 - [43] INFO - Assethandler - getFiles: Gathering Assets from: Assets/Entities
+08:19:15 - [50] INFO - Assethandler - getFiles: Found Asset: Assets/Entities\Goblin.json
+08:19:15 - [50] INFO - Assethandler - getFiles: Found Asset: Assets/Entities\Player.json
+08:19:15 - [55] WARN - Assethandler - getFiles: Assets/Entities\trial.png is no valid Asset File
+08:19:15 - [87] INFO - Assethandler - importEntities: Importing Entities: ['Assets/Entities\\Goblin.json', 'Assets/Entities\\Player.json']
+08:19:15 - [29] INFO - Utils.Debug - objlist: Loaded Levels: ['Kreuzung', 'Menu', 'Options', 'Tisch', 'Zimmer', 'Pub', 'Kräuterhändler', 'Schmied', 'Markthalle', 'Stadt', 'placeholder', 'Wiese']
+08:19:15 - [29] INFO - Utils.Debug - objlist: Loaded Entities: ['', 'Player']
+08:19:16 - [149] INFO - __main__ - gameloop: Current Gamestate: loading
+08:19:16 - [153] INFO - __main__ - gameloop: You are now in Loading
+08:19:16 - [325] INFO - Entities - check_level_up: Previous Level: 1
+08:19:17 - [149] INFO - __main__ - gameloop: Current Gamestate: game
+08:19:17 - [157] INFO - __main__ - gameloop: You are now in Game
+08:19:17 - [46] INFO - __main__ - interact_with_level: <Entities.Entity object at 0x00000226A0833750>
+08:19:17 - [14] INFO - Utils.inp - inp: <Entities.Entity object at 0x00000226A0833750>
+08:19:18 - [82] INFO - __main__ - interact_with_level: ['action', 'new_level_name']
+08:19:18 - [83] INFO - __main__ - interact_with_level: change_location
+08:19:18 - [84] INFO - __main__ - interact_with_level: Wiese
+08:19:18 - [82] INFO - __main__ - interact_with_level: ['action', 'effect_name']
+08:19:18 - [83] INFO - __main__ - interact_with_level: add_effect
+08:19:18 - [84] INFO - __main__ - interact_with_level: Kopfschmerz
+08:19:18 - [325] INFO - Entities - check_level_up: Previous Level: 1
+08:19:18 - [145] INFO - __main__ - gameloop: ['change_gamestate', ['game']]
+08:19:18 - [309] INFO - actionparser - change_gamestate: Changing Gamestate to game
+08:19:18 - [145] INFO - __main__ - gameloop: ['take_effects', [<Entities.Entity object at 0x00000226A0833750>, True]]
+08:19:18 - [149] INFO - __main__ - gameloop: Current Gamestate: game
+08:19:18 - [157] INFO - __main__ - gameloop: You are now in Game
+08:19:19 - [46] INFO - __main__ - interact_with_level: <Entities.Entity object at 0x00000226A0833750>
+08:19:19 - [14] INFO - Utils.inp - inp: <Entities.Entity object at 0x00000226A0833750>
+08:19:25 - [70] INFO - Utils.inp - inp: <Entities.Entity object at 0x00000226A0833750>
+08:19:25 - [49] INFO - __main__ - interact_with_level: Break!
+08:19:25 - [325] INFO - Entities - check_level_up: Previous Level: 1
+08:19:25 - [145] INFO - __main__ - gameloop: ['change_gamestate', ['inv']]
+08:19:25 - [309] INFO - actionparser - change_gamestate: Changing Gamestate to inv
+08:19:25 - [149] INFO - __main__ - gameloop: Current Gamestate: inv
+08:19:25 - [160] INFO - __main__ - gameloop: You are now in Inventory
+08:19:41 - [43] INFO - Assethandler - getFiles: Gathering Assets from: Assets/Levels
+08:19:41 - [50] INFO - Assethandler - getFiles: Found Asset: Assets/Levels\Kreuzung.json
+08:19:41 - [50] INFO - Assethandler - getFiles: Found Asset: Assets/Levels\levels.json
+08:19:41 - [50] INFO - Assethandler - getFiles: Found Asset: Assets/Levels\Wiese.json
+08:19:41 - [70] INFO - Assethandler - importLevels: Importing Level(s) from: ['Assets/Levels\\Kreuzung.json', 'Assets/Levels\\levels.json', 'Assets/Levels\\Wiese.json']
+08:19:41 - [43] INFO - Assethandler - getFiles: Gathering Assets from: Assets/Entities
+08:19:41 - [50] INFO - Assethandler - getFiles: Found Asset: Assets/Entities\Goblin.json
+08:19:41 - [50] INFO - Assethandler - getFiles: Found Asset: Assets/Entities\Player.json
+08:19:41 - [55] WARN - Assethandler - getFiles: Assets/Entities\trial.png is no valid Asset File
+08:19:41 - [87] INFO - Assethandler - importEntities: Importing Entities: ['Assets/Entities\\Goblin.json', 'Assets/Entities\\Player.json']
+08:19:41 - [29] INFO - Utils.Debug - objlist: Loaded Levels: ['Kreuzung', 'Menu', 'Options', 'Tisch', 'Zimmer', 'Pub', 'Kräuterhändler', 'Schmied', 'Markthalle', 'Stadt', 'placeholder', 'Wiese']
+08:19:41 - [29] INFO - Utils.Debug - objlist: Loaded Entities: ['', 'Player']
+08:19:41 - [149] INFO - __main__ - gameloop: Current Gamestate: loading
+08:19:41 - [153] INFO - __main__ - gameloop: You are now in Loading
+08:19:41 - [325] INFO - Entities - check_level_up: Previous Level: 1
+08:19:44 - [149] INFO - __main__ - gameloop: Current Gamestate: game
+08:19:44 - [157] INFO - __main__ - gameloop: You are now in Game
+08:19:44 - [46] INFO - __main__ - interact_with_level: <Entities.Entity object at 0x0000020BB294B9D0>
+08:19:44 - [14] INFO - Utils.inp - inp: <Entities.Entity object at 0x0000020BB294B9D0>
+08:19:48 - [70] INFO - Utils.inp - inp: <Entities.Entity object at 0x0000020BB294B9D0>
+08:19:48 - [49] INFO - __main__ - interact_with_level: Break!
+08:19:48 - [325] INFO - Entities - check_level_up: Previous Level: 1
+08:19:49 - [149] INFO - __main__ - gameloop: Current Gamestate: game
+08:19:49 - [157] INFO - __main__ - gameloop: You are now in Game
+08:19:49 - [46] INFO - __main__ - interact_with_level: <Entities.Entity object at 0x0000020BB294B9D0>
+08:19:49 - [14] INFO - Utils.inp - inp: <Entities.Entity object at 0x0000020BB294B9D0>
+08:19:51 - [82] INFO - __main__ - interact_with_level: ['action', 'new_level_name']
+08:19:51 - [83] INFO - __main__ - interact_with_level: change_location
+08:19:51 - [84] INFO - __main__ - interact_with_level: Wiese
+08:19:51 - [82] INFO - __main__ - interact_with_level: ['action', 'effect_name']
+08:19:51 - [83] INFO - __main__ - interact_with_level: add_effect
+08:19:51 - [84] INFO - __main__ - interact_with_level: Kopfschmerz
+08:19:51 - [325] INFO - Entities - check_level_up: Previous Level: 1
+08:19:53 - [145] INFO - __main__ - gameloop: ['change_gamestate', ['inv']]
+08:19:53 - [309] INFO - actionparser - change_gamestate: Changing Gamestate to inv
+08:19:53 - [145] INFO - __main__ - gameloop: ['add_effect', [<Entities.Entity object at 0x0000020BB294B9D0>, 'Kopfschmerz']]
+08:19:53 - [149] INFO - __main__ - gameloop: Current Gamestate: inv
+08:19:53 - [160] INFO - __main__ - gameloop: You are now in Inventory
+08:20:25 - [43] INFO - Assethandler - getFiles: Gathering Assets from: Assets/Levels
+08:20:25 - [50] INFO - Assethandler - getFiles: Found Asset: Assets/Levels\Kreuzung.json
+08:20:25 - [50] INFO - Assethandler - getFiles: Found Asset: Assets/Levels\levels.json
+08:20:25 - [50] INFO - Assethandler - getFiles: Found Asset: Assets/Levels\Wiese.json
+08:20:25 - [70] INFO - Assethandler - importLevels: Importing Level(s) from: ['Assets/Levels\\Kreuzung.json', 'Assets/Levels\\levels.json', 'Assets/Levels\\Wiese.json']
+08:20:25 - [43] INFO - Assethandler - getFiles: Gathering Assets from: Assets/Entities
+08:20:25 - [50] INFO - Assethandler - getFiles: Found Asset: Assets/Entities\Goblin.json
+08:20:25 - [50] INFO - Assethandler - getFiles: Found Asset: Assets/Entities\Player.json
+08:20:25 - [55] WARN - Assethandler - getFiles: Assets/Entities\trial.png is no valid Asset File
+08:20:25 - [87] INFO - Assethandler - importEntities: Importing Entities: ['Assets/Entities\\Goblin.json', 'Assets/Entities\\Player.json']
+08:20:25 - [29] INFO - Utils.Debug - objlist: Loaded Levels: ['Kreuzung', 'Menu', 'Options', 'Tisch', 'Zimmer', 'Pub', 'Kräuterhändler', 'Schmied', 'Markthalle', 'Stadt', 'placeholder', 'Wiese']
+08:20:25 - [29] INFO - Utils.Debug - objlist: Loaded Entities: ['', 'Player']
+08:20:25 - [149] INFO - __main__ - gameloop: Current Gamestate: loading
+08:20:25 - [153] INFO - __main__ - gameloop: You are now in Loading
+08:20:25 - [325] INFO - Entities - check_level_up: Previous Level: 1
+08:20:31 - [149] INFO - __main__ - gameloop: Current Gamestate: game
+08:20:31 - [157] INFO - __main__ - gameloop: You are now in Game
+08:20:31 - [46] INFO - __main__ - interact_with_level: <Entities.Entity object at 0x000001DEB603B9D0>
+08:20:31 - [14] INFO - Utils.inp - inp: <Entities.Entity object at 0x000001DEB603B9D0>
+08:20:32 - [82] INFO - __main__ - interact_with_level: ['action', 'new_level_name']
+08:20:32 - [83] INFO - __main__ - interact_with_level: change_location
+08:20:32 - [84] INFO - __main__ - interact_with_level: Wiese
+08:20:32 - [82] INFO - __main__ - interact_with_level: ['action', 'effect_name']
+08:20:32 - [83] INFO - __main__ - interact_with_level: add_effect
+08:20:32 - [84] INFO - __main__ - interact_with_level: Kopfschmerz
+08:20:32 - [325] INFO - Entities - check_level_up: Previous Level: 1
+08:20:33 - [145] INFO - __main__ - gameloop: ['change_gamestate', ['game']]
+08:20:33 - [309] INFO - actionparser - change_gamestate: Changing Gamestate to game
+08:20:33 - [145] INFO - __main__ - gameloop: ['take_effects', [<Entities.Entity object at 0x000001DEB603B9D0>, True]]
+08:20:33 - [149] INFO - __main__ - gameloop: Current Gamestate: game
+08:20:33 - [157] INFO - __main__ - gameloop: You are now in Game
+08:20:34 - [46] INFO - __main__ - interact_with_level: <Entities.Entity object at 0x000001DEB603B9D0>
+08:20:34 - [14] INFO - Utils.inp - inp: <Entities.Entity object at 0x000001DEB603B9D0>
+08:20:35 - [70] INFO - Utils.inp - inp: <Entities.Entity object at 0x000001DEB603B9D0>
+08:20:35 - [49] INFO - __main__ - interact_with_level: Break!
+08:20:35 - [325] INFO - Entities - check_level_up: Previous Level: 1
+08:20:36 - [145] INFO - __main__ - gameloop: ['change_gamestate', ['inv']]
+08:20:36 - [309] INFO - actionparser - change_gamestate: Changing Gamestate to inv
+08:20:36 - [149] INFO - __main__ - gameloop: Current Gamestate: inv
+08:20:36 - [160] INFO - __main__ - gameloop: You are now in Inventory
+08:25:48 - [43] INFO - Assethandler - getFiles: Gathering Assets from: Assets/Levels
+08:25:48 - [50] INFO - Assethandler - getFiles: Found Asset: Assets/Levels\Kreuzung.json
+08:25:48 - [50] INFO - Assethandler - getFiles: Found Asset: Assets/Levels\levels.json
+08:25:48 - [50] INFO - Assethandler - getFiles: Found Asset: Assets/Levels\Wiese.json
+08:25:48 - [70] INFO - Assethandler - importLevels: Importing Level(s) from: ['Assets/Levels\\Kreuzung.json', 'Assets/Levels\\levels.json', 'Assets/Levels\\Wiese.json']
+08:25:48 - [43] INFO - Assethandler - getFiles: Gathering Assets from: Assets/Entities
+08:25:48 - [50] INFO - Assethandler - getFiles: Found Asset: Assets/Entities\Goblin.json
+08:25:48 - [50] INFO - Assethandler - getFiles: Found Asset: Assets/Entities\Player.json
+08:25:48 - [55] WARN - Assethandler - getFiles: Assets/Entities\trial.png is no valid Asset File
+08:25:48 - [87] INFO - Assethandler - importEntities: Importing Entities: ['Assets/Entities\\Goblin.json', 'Assets/Entities\\Player.json']
+08:25:48 - [29] INFO - Utils.Debug - objlist: Loaded Levels: ['Kreuzung', 'Menu', 'Options', 'Tisch', 'Zimmer', 'Pub', 'Kräuterhändler', 'Schmied', 'Markthalle', 'Stadt', 'placeholder', 'Wiese']
+08:25:48 - [29] INFO - Utils.Debug - objlist: Loaded Entities: ['', 'Player']
+08:25:48 - [149] INFO - __main__ - gameloop: Current Gamestate: loading
+08:25:48 - [153] INFO - __main__ - gameloop: You are now in Loading
+08:25:48 - [325] INFO - Entities - check_level_up: Previous Level: 1
+08:25:50 - [149] INFO - __main__ - gameloop: Current Gamestate: game
+08:25:50 - [157] INFO - __main__ - gameloop: You are now in Game
+08:25:50 - [46] INFO - __main__ - interact_with_level: <Entities.Entity object at 0x000002B55B06BE90>
+08:25:50 - [14] INFO - Utils.inp - inp: <Entities.Entity object at 0x000002B55B06BE90>
+08:25:51 - [82] INFO - __main__ - interact_with_level: ['action', 'new_level_name']
+08:25:51 - [83] INFO - __main__ - interact_with_level: change_location
+08:25:51 - [84] INFO - __main__ - interact_with_level: Wiese
+08:25:51 - [82] INFO - __main__ - interact_with_level: ['action', 'effect_name']
+08:25:51 - [83] INFO - __main__ - interact_with_level: add_effect
+08:25:51 - [84] INFO - __main__ - interact_with_level: Kopfschmerz
+08:25:51 - [325] INFO - Entities - check_level_up: Previous Level: 1
+08:25:52 - [145] INFO - __main__ - gameloop: ['change_gamestate', ['game']]
+08:25:52 - [309] INFO - actionparser - change_gamestate: Changing Gamestate to game
+08:25:52 - [145] INFO - __main__ - gameloop: ['take_effects', [<Entities.Entity object at 0x000002B55B06BE90>, True]]
+08:25:52 - [149] INFO - __main__ - gameloop: Current Gamestate: game
+08:25:52 - [157] INFO - __main__ - gameloop: You are now in Game
+08:25:53 - [46] INFO - __main__ - interact_with_level: <Entities.Entity object at 0x000002B55B06BE90>
+08:25:53 - [14] INFO - Utils.inp - inp: <Entities.Entity object at 0x000002B55B06BE90>
+08:25:54 - [70] INFO - Utils.inp - inp: <Entities.Entity object at 0x000002B55B06BE90>
+08:25:54 - [49] INFO - __main__ - interact_with_level: Break!
+08:25:54 - [325] INFO - Entities - check_level_up: Previous Level: 1
+08:25:55 - [145] INFO - __main__ - gameloop: ['change_gamestate', ['inv']]
+08:25:55 - [309] INFO - actionparser - change_gamestate: Changing Gamestate to inv
+08:25:55 - [149] INFO - __main__ - gameloop: Current Gamestate: inv
+08:25:55 - [160] INFO - __main__ - gameloop: You are now in Inventory
+08:25:59 - [47] WARN - Utils.gamestates.inventorystate - inventorystate: Catched Error: 'InquirerControl' object has no attribute 'pointed_at'.
+ It may be an empty Inventory Space.
+08:27:38 - [43] INFO - Assethandler - getFiles: Gathering Assets from: Assets/Levels
+08:27:38 - [50] INFO - Assethandler - getFiles: Found Asset: Assets/Levels\Kreuzung.json
+08:27:38 - [50] INFO - Assethandler - getFiles: Found Asset: Assets/Levels\levels.json
+08:27:38 - [50] INFO - Assethandler - getFiles: Found Asset: Assets/Levels\Wiese.json
+08:27:38 - [70] INFO - Assethandler - importLevels: Importing Level(s) from: ['Assets/Levels\\Kreuzung.json', 'Assets/Levels\\levels.json', 'Assets/Levels\\Wiese.json']
+08:27:38 - [43] INFO - Assethandler - getFiles: Gathering Assets from: Assets/Entities
+08:27:38 - [50] INFO - Assethandler - getFiles: Found Asset: Assets/Entities\Goblin.json
+08:27:38 - [50] INFO - Assethandler - getFiles: Found Asset: Assets/Entities\Player.json
+08:27:38 - [55] WARN - Assethandler - getFiles: Assets/Entities\trial.png is no valid Asset File
+08:27:38 - [87] INFO - Assethandler - importEntities: Importing Entities: ['Assets/Entities\\Goblin.json', 'Assets/Entities\\Player.json']
+08:27:38 - [29] INFO - Utils.Debug - objlist: Loaded Levels: ['Kreuzung', 'Menu', 'Options', 'Tisch', 'Zimmer', 'Pub', 'Kräuterhändler', 'Schmied', 'Markthalle', 'Stadt', 'placeholder', 'Wiese']
+08:27:38 - [29] INFO - Utils.Debug - objlist: Loaded Entities: ['', 'Player']
+08:27:38 - [149] INFO - __main__ - gameloop: Current Gamestate: loading
+08:27:38 - [153] INFO - __main__ - gameloop: You are now in Loading
+08:27:38 - [325] INFO - Entities - check_level_up: Previous Level: 1
+08:27:39 - [149] INFO - __main__ - gameloop: Current Gamestate: game
+08:27:39 - [157] INFO - __main__ - gameloop: You are now in Game
+08:27:39 - [46] INFO - __main__ - interact_with_level: <Entities.Entity object at 0x000001BBA04B3150>
+08:27:39 - [14] INFO - Utils.inp - inp: <Entities.Entity object at 0x000001BBA04B3150>
+08:27:39 - [82] INFO - __main__ - interact_with_level: ['action', 'new_level_name']
+08:27:39 - [83] INFO - __main__ - interact_with_level: change_location
+08:27:39 - [84] INFO - __main__ - interact_with_level: Wiese
+08:27:39 - [82] INFO - __main__ - interact_with_level: ['action', 'effect_name']
+08:27:39 - [83] INFO - __main__ - interact_with_level: add_effect
+08:27:39 - [84] INFO - __main__ - interact_with_level: Kopfschmerz
+08:27:40 - [325] INFO - Entities - check_level_up: Previous Level: 1
+08:27:40 - [145] INFO - __main__ - gameloop: ['change_gamestate', ['game']]
+08:27:40 - [309] INFO - actionparser - change_gamestate: Changing Gamestate to game
+08:27:40 - [145] INFO - __main__ - gameloop: ['take_effects', [<Entities.Entity object at 0x000001BBA04B3150>, True]]
+08:27:40 - [149] INFO - __main__ - gameloop: Current Gamestate: game
+08:27:40 - [157] INFO - __main__ - gameloop: You are now in Game
+08:27:41 - [46] INFO - __main__ - interact_with_level: <Entities.Entity object at 0x000001BBA04B3150>
+08:27:41 - [14] INFO - Utils.inp - inp: <Entities.Entity object at 0x000001BBA04B3150>
+08:27:42 - [70] INFO - Utils.inp - inp: <Entities.Entity object at 0x000001BBA04B3150>
+08:27:42 - [49] INFO - __main__ - interact_with_level: Break!
+08:27:42 - [325] INFO - Entities - check_level_up: Previous Level: 1
+08:27:43 - [145] INFO - __main__ - gameloop: ['change_gamestate', ['inv']]
+08:27:43 - [309] INFO - actionparser - change_gamestate: Changing Gamestate to inv
+08:27:43 - [149] INFO - __main__ - gameloop: Current Gamestate: inv
+08:27:43 - [160] INFO - __main__ - gameloop: You are now in Inventory
+08:27:47 - [54] WARN - Utils.gamestates.inventorystate - inventorystate: Catched Error: 'InquirerControl' object has no attribute 'pointed_at'.
+			 It may be an empty Inventory Space.
+08:29:30 - [43] INFO - Assethandler - getFiles: Gathering Assets from: Assets/Levels
+08:29:30 - [50] INFO - Assethandler - getFiles: Found Asset: Assets/Levels\Kreuzung.json
+08:29:30 - [50] INFO - Assethandler - getFiles: Found Asset: Assets/Levels\levels.json
+08:29:30 - [50] INFO - Assethandler - getFiles: Found Asset: Assets/Levels\Wiese.json
+08:29:30 - [70] INFO - Assethandler - importLevels: Importing Level(s) from: ['Assets/Levels\\Kreuzung.json', 'Assets/Levels\\levels.json', 'Assets/Levels\\Wiese.json']
+08:29:30 - [43] INFO - Assethandler - getFiles: Gathering Assets from: Assets/Entities
+08:29:30 - [50] INFO - Assethandler - getFiles: Found Asset: Assets/Entities\Goblin.json
+08:29:30 - [50] INFO - Assethandler - getFiles: Found Asset: Assets/Entities\Player.json
+08:29:30 - [55] WARN - Assethandler - getFiles: Assets/Entities\trial.png is no valid Asset File
+08:29:30 - [87] INFO - Assethandler - importEntities: Importing Entities: ['Assets/Entities\\Goblin.json', 'Assets/Entities\\Player.json']
+08:29:30 - [29] INFO - Utils.Debug - objlist: Loaded Levels: ['Kreuzung', 'Menu', 'Options', 'Tisch', 'Zimmer', 'Pub', 'Kräuterhändler', 'Schmied', 'Markthalle', 'Stadt', 'placeholder', 'Wiese']
+08:29:30 - [29] INFO - Utils.Debug - objlist: Loaded Entities: ['', 'Player']
+08:29:30 - [149] INFO - __main__ - gameloop: Current Gamestate: loading
+08:29:30 - [153] INFO - __main__ - gameloop: You are now in Loading
+08:29:31 - [325] INFO - Entities - check_level_up: Previous Level: 1
+08:29:33 - [149] INFO - __main__ - gameloop: Current Gamestate: game
+08:29:33 - [157] INFO - __main__ - gameloop: You are now in Game
+08:29:33 - [46] INFO - __main__ - interact_with_level: <Entities.Entity object at 0x0000027B69513590>
+08:29:33 - [14] INFO - Utils.inp - inp: <Entities.Entity object at 0x0000027B69513590>
+08:29:34 - [82] INFO - __main__ - interact_with_level: ['action', 'new_level_name']
+08:29:34 - [83] INFO - __main__ - interact_with_level: change_location
+08:29:34 - [84] INFO - __main__ - interact_with_level: Wiese
+08:29:34 - [82] INFO - __main__ - interact_with_level: ['action', 'effect_name']
+08:29:34 - [83] INFO - __main__ - interact_with_level: add_effect
+08:29:34 - [84] INFO - __main__ - interact_with_level: Kopfschmerz
+08:29:34 - [325] INFO - Entities - check_level_up: Previous Level: 1
+08:29:34 - [145] INFO - __main__ - gameloop: ['change_gamestate', ['game']]
+08:29:34 - [309] INFO - actionparser - change_gamestate: Changing Gamestate to game
+08:29:34 - [145] INFO - __main__ - gameloop: ['take_effects', [<Entities.Entity object at 0x0000027B69513590>, True]]
+08:29:34 - [149] INFO - __main__ - gameloop: Current Gamestate: game
+08:29:34 - [157] INFO - __main__ - gameloop: You are now in Game
+08:29:35 - [46] INFO - __main__ - interact_with_level: <Entities.Entity object at 0x0000027B69513590>
+08:29:35 - [14] INFO - Utils.inp - inp: <Entities.Entity object at 0x0000027B69513590>
+08:29:38 - [70] INFO - Utils.inp - inp: <Entities.Entity object at 0x0000027B69513590>
+08:29:38 - [49] INFO - __main__ - interact_with_level: Break!
+08:29:38 - [325] INFO - Entities - check_level_up: Previous Level: 1
+08:29:38 - [145] INFO - __main__ - gameloop: ['change_gamestate', ['inv']]
+08:29:38 - [309] INFO - actionparser - change_gamestate: Changing Gamestate to inv
+08:29:38 - [149] INFO - __main__ - gameloop: Current Gamestate: inv
+08:29:38 - [160] INFO - __main__ - gameloop: You are now in Inventory
+08:29:40 - [54] WARN - Utils.gamestates.inventorystate - inventorystate: Catched Error: 'InquirerControl' object has no attribute 'pointed_at'.
+						 It may be an empty Inventory Space.
+08:29:40 - [69] WARN - Utils.gamestates.inventorystate - inventorystate: Catched Error: cannot access local variable 'choosen_item' where it is not associated with a value.
+						 It may be an empty Inventory Space, which tried to by printed.
+08:31:55 - [54] WARN - Utils.gamestates.inventorystate - inventorystate: Catched Error: 'InquirerControl' object has no attribute 'pointed_at'.
+						 It may be an empty Inventory Space.
+08:31:55 - [69] WARN - Utils.gamestates.inventorystate - inventorystate: Catched Error: cannot access local variable 'choosen_item' where it is not associated with a value.
+						 It may be an empty Inventory Space, which tried to by printed.
+08:31:59 - [47] WARN - Utils.gamestates.inventorystate - inventorystate: Catched Error: 'InquirerControl' object has no attribute 'pointed_at'.
+						 It may be an empty Inventory Space.
+08:37:20 - [43] INFO - Assethandler - getFiles: Gathering Assets from: Assets/Levels
+08:37:20 - [50] INFO - Assethandler - getFiles: Found Asset: Assets/Levels\Kreuzung.json
+08:37:20 - [50] INFO - Assethandler - getFiles: Found Asset: Assets/Levels\levels.json
+08:37:20 - [50] INFO - Assethandler - getFiles: Found Asset: Assets/Levels\Wiese.json
+08:37:20 - [70] INFO - Assethandler - importLevels: Importing Level(s) from: ['Assets/Levels\\Kreuzung.json', 'Assets/Levels\\levels.json', 'Assets/Levels\\Wiese.json']
+08:37:20 - [43] INFO - Assethandler - getFiles: Gathering Assets from: Assets/Entities
+08:37:20 - [50] INFO - Assethandler - getFiles: Found Asset: Assets/Entities\Goblin.json
+08:37:20 - [50] INFO - Assethandler - getFiles: Found Asset: Assets/Entities\Player.json
+08:37:20 - [55] WARN - Assethandler - getFiles: Assets/Entities\trial.png is no valid Asset File
+08:37:20 - [87] INFO - Assethandler - importEntities: Importing Entities: ['Assets/Entities\\Goblin.json', 'Assets/Entities\\Player.json']
+08:37:20 - [29] INFO - Utils.Debug - objlist: Loaded Levels: ['Kreuzung', 'Menu', 'Options', 'Tisch', 'Zimmer', 'Pub', 'Kräuterhändler', 'Schmied', 'Markthalle', 'Stadt', 'placeholder', 'Wiese']
+08:37:20 - [29] INFO - Utils.Debug - objlist: Loaded Entities: ['', 'Player']
+08:37:20 - [149] INFO - __main__ - gameloop: Current Gamestate: loading
+08:37:20 - [153] INFO - __main__ - gameloop: You are now in Loading
+08:37:20 - [325] INFO - Entities - check_level_up: Previous Level: 1
+08:37:22 - [149] INFO - __main__ - gameloop: Current Gamestate: game
+08:37:22 - [157] INFO - __main__ - gameloop: You are now in Game
+08:37:22 - [46] INFO - __main__ - interact_with_level: <Entities.Entity object at 0x00000260BE213610>
+08:37:22 - [14] INFO - Utils.inp - inp: <Entities.Entity object at 0x00000260BE213610>
+08:37:23 - [82] INFO - __main__ - interact_with_level: ['action', 'new_level_name']
+08:37:23 - [83] INFO - __main__ - interact_with_level: change_location
+08:37:23 - [84] INFO - __main__ - interact_with_level: Wiese
+08:37:23 - [82] INFO - __main__ - interact_with_level: ['action', 'effect_name']
+08:37:23 - [83] INFO - __main__ - interact_with_level: add_effect
+08:37:23 - [84] INFO - __main__ - interact_with_level: Kopfschmerz
+08:37:23 - [325] INFO - Entities - check_level_up: Previous Level: 1
+08:37:24 - [145] INFO - __main__ - gameloop: ['change_gamestate', ['game']]
+08:37:24 - [309] INFO - actionparser - change_gamestate: Changing Gamestate to game
+08:37:24 - [145] INFO - __main__ - gameloop: ['take_effects', [<Entities.Entity object at 0x00000260BE213610>, True]]
+08:37:24 - [149] INFO - __main__ - gameloop: Current Gamestate: game
+08:37:24 - [157] INFO - __main__ - gameloop: You are now in Game
+08:37:25 - [46] INFO - __main__ - interact_with_level: <Entities.Entity object at 0x00000260BE213610>
+08:37:25 - [14] INFO - Utils.inp - inp: <Entities.Entity object at 0x00000260BE213610>
+08:37:26 - [70] INFO - Utils.inp - inp: <Entities.Entity object at 0x00000260BE213610>
+08:37:26 - [49] INFO - __main__ - interact_with_level: Break!
+08:37:26 - [325] INFO - Entities - check_level_up: Previous Level: 1
+08:37:27 - [145] INFO - __main__ - gameloop: ['change_gamestate', ['inv']]
+08:37:27 - [309] INFO - actionparser - change_gamestate: Changing Gamestate to inv
+08:37:27 - [149] INFO - __main__ - gameloop: Current Gamestate: inv
+08:37:27 - [160] INFO - __main__ - gameloop: You are now in Inventory
+08:37:30 - [72] WARN - Utils.gamestates.inventorystate - inventorystate: Catched Error: cannot access local variable 'choosen_item' where it is not associated with a value.
+						 It may be an empty Inventory Space, which tried to by printed.
+08:39:29 - [72] WARN - Utils.gamestates.inventorystate - inventorystate: Catched Error: cannot access local variable 'choosen_item' where it is not associated with a value.
+						 It may be an empty Inventory Space, which tried to by printed.
+08:39:30 - [72] WARN - Utils.gamestates.inventorystate - inventorystate: Catched Error: cannot access local variable 'choosen_item' where it is not associated with a value.
+						 It may be an empty Inventory Space, which tried to by printed.
+08:39:34 - [72] WARN - Utils.gamestates.inventorystate - inventorystate: Catched Error: cannot access local variable 'choosen_item' where it is not associated with a value.
+						 It may be an empty Inventory Space, which tried to by printed.
+08:42:49 - [72] WARN - Utils.gamestates.inventorystate - inventorystate: Catched Error: cannot access local variable 'choosen_item' where it is not associated with a value.
+						 It may be an empty Inventory Space, which tried to by printed.
+08:42:49 - [72] WARN - Utils.gamestates.inventorystate - inventorystate: Catched Error: cannot access local variable 'choosen_item' where it is not associated with a value.
+						 It may be an empty Inventory Space, which tried to by printed.
+08:42:55 - [43] INFO - Assethandler - getFiles: Gathering Assets from: Assets/Levels
+08:42:55 - [50] INFO - Assethandler - getFiles: Found Asset: Assets/Levels\Kreuzung.json
+08:42:55 - [50] INFO - Assethandler - getFiles: Found Asset: Assets/Levels\levels.json
+08:42:55 - [50] INFO - Assethandler - getFiles: Found Asset: Assets/Levels\Wiese.json
+08:42:55 - [70] INFO - Assethandler - importLevels: Importing Level(s) from: ['Assets/Levels\\Kreuzung.json', 'Assets/Levels\\levels.json', 'Assets/Levels\\Wiese.json']
+08:42:55 - [43] INFO - Assethandler - getFiles: Gathering Assets from: Assets/Entities
+08:42:55 - [50] INFO - Assethandler - getFiles: Found Asset: Assets/Entities\Goblin.json
+08:42:55 - [50] INFO - Assethandler - getFiles: Found Asset: Assets/Entities\Player.json
+08:42:55 - [55] WARN - Assethandler - getFiles: Assets/Entities\trial.png is no valid Asset File
+08:42:55 - [87] INFO - Assethandler - importEntities: Importing Entities: ['Assets/Entities\\Goblin.json', 'Assets/Entities\\Player.json']
+08:42:55 - [29] INFO - Utils.Debug - objlist: Loaded Levels: ['Kreuzung', 'Menu', 'Options', 'Tisch', 'Zimmer', 'Pub', 'Kräuterhändler', 'Schmied', 'Markthalle', 'Stadt', 'placeholder', 'Wiese']
+08:42:55 - [29] INFO - Utils.Debug - objlist: Loaded Entities: ['', 'Player']
+08:42:55 - [149] INFO - __main__ - gameloop: Current Gamestate: loading
+08:42:55 - [153] INFO - __main__ - gameloop: You are now in Loading
+08:42:55 - [325] INFO - Entities - check_level_up: Previous Level: 1
+08:42:59 - [149] INFO - __main__ - gameloop: Current Gamestate: game
+08:42:59 - [157] INFO - __main__ - gameloop: You are now in Game
+08:42:59 - [46] INFO - __main__ - interact_with_level: <Entities.Entity object at 0x000001D87F463710>
+08:42:59 - [14] INFO - Utils.inp - inp: <Entities.Entity object at 0x000001D87F463710>
+08:43:00 - [82] INFO - __main__ - interact_with_level: ['action', 'new_level_name']
+08:43:00 - [83] INFO - __main__ - interact_with_level: change_location
+08:43:00 - [84] INFO - __main__ - interact_with_level: Wiese
+08:43:00 - [82] INFO - __main__ - interact_with_level: ['action', 'effect_name']
+08:43:00 - [83] INFO - __main__ - interact_with_level: add_effect
+08:43:00 - [84] INFO - __main__ - interact_with_level: Kopfschmerz
+08:43:00 - [325] INFO - Entities - check_level_up: Previous Level: 1
+08:43:01 - [145] INFO - __main__ - gameloop: ['change_gamestate', ['game']]
+08:43:01 - [309] INFO - actionparser - change_gamestate: Changing Gamestate to game
+08:43:01 - [145] INFO - __main__ - gameloop: ['take_effects', [<Entities.Entity object at 0x000001D87F463710>, True]]
+08:43:01 - [149] INFO - __main__ - gameloop: Current Gamestate: game
+08:43:01 - [157] INFO - __main__ - gameloop: You are now in Game
+08:43:02 - [46] INFO - __main__ - interact_with_level: <Entities.Entity object at 0x000001D87F463710>
+08:43:02 - [14] INFO - Utils.inp - inp: <Entities.Entity object at 0x000001D87F463710>
+08:43:03 - [70] INFO - Utils.inp - inp: <Entities.Entity object at 0x000001D87F463710>
+08:43:03 - [49] INFO - __main__ - interact_with_level: Break!
+08:43:03 - [325] INFO - Entities - check_level_up: Previous Level: 1
+08:43:04 - [145] INFO - __main__ - gameloop: ['change_gamestate', ['inv']]
+08:43:04 - [309] INFO - actionparser - change_gamestate: Changing Gamestate to inv
+08:43:04 - [149] INFO - __main__ - gameloop: Current Gamestate: inv
+08:43:04 - [160] INFO - __main__ - gameloop: You are now in Inventory
+08:43:31 - [43] INFO - Assethandler - getFiles: Gathering Assets from: Assets/Levels
+08:43:31 - [50] INFO - Assethandler - getFiles: Found Asset: Assets/Levels\Kreuzung.json
+08:43:31 - [50] INFO - Assethandler - getFiles: Found Asset: Assets/Levels\levels.json
+08:43:31 - [50] INFO - Assethandler - getFiles: Found Asset: Assets/Levels\Wiese.json
+08:43:31 - [70] INFO - Assethandler - importLevels: Importing Level(s) from: ['Assets/Levels\\Kreuzung.json', 'Assets/Levels\\levels.json', 'Assets/Levels\\Wiese.json']
+08:43:31 - [43] INFO - Assethandler - getFiles: Gathering Assets from: Assets/Entities
+08:43:31 - [50] INFO - Assethandler - getFiles: Found Asset: Assets/Entities\Goblin.json
+08:43:31 - [50] INFO - Assethandler - getFiles: Found Asset: Assets/Entities\Player.json
+08:43:31 - [55] WARN - Assethandler - getFiles: Assets/Entities\trial.png is no valid Asset File
+08:43:31 - [87] INFO - Assethandler - importEntities: Importing Entities: ['Assets/Entities\\Goblin.json', 'Assets/Entities\\Player.json']
+08:43:31 - [29] INFO - Utils.Debug - objlist: Loaded Levels: ['Kreuzung', 'Menu', 'Options', 'Tisch', 'Zimmer', 'Pub', 'Kräuterhändler', 'Schmied', 'Markthalle', 'Stadt', 'placeholder', 'Wiese']
+08:43:31 - [29] INFO - Utils.Debug - objlist: Loaded Entities: ['', 'Player']
+08:43:31 - [149] INFO - __main__ - gameloop: Current Gamestate: loading
+08:43:31 - [153] INFO - __main__ - gameloop: You are now in Loading
+08:43:31 - [325] INFO - Entities - check_level_up: Previous Level: 1
+08:43:57 - [43] INFO - Assethandler - getFiles: Gathering Assets from: Assets/Levels
+08:43:57 - [50] INFO - Assethandler - getFiles: Found Asset: Assets/Levels\Kreuzung.json
+08:43:57 - [50] INFO - Assethandler - getFiles: Found Asset: Assets/Levels\levels.json
+08:43:57 - [50] INFO - Assethandler - getFiles: Found Asset: Assets/Levels\Wiese.json
+08:43:57 - [70] INFO - Assethandler - importLevels: Importing Level(s) from: ['Assets/Levels\\Kreuzung.json', 'Assets/Levels\\levels.json', 'Assets/Levels\\Wiese.json']
+08:43:57 - [43] INFO - Assethandler - getFiles: Gathering Assets from: Assets/Entities
+08:43:57 - [50] INFO - Assethandler - getFiles: Found Asset: Assets/Entities\Goblin.json
+08:43:57 - [50] INFO - Assethandler - getFiles: Found Asset: Assets/Entities\Player.json
+08:43:57 - [55] WARN - Assethandler - getFiles: Assets/Entities\trial.png is no valid Asset File
+08:43:57 - [87] INFO - Assethandler - importEntities: Importing Entities: ['Assets/Entities\\Goblin.json', 'Assets/Entities\\Player.json']
+08:43:57 - [29] INFO - Utils.Debug - objlist: Loaded Levels: ['Kreuzung', 'Menu', 'Options', 'Tisch', 'Zimmer', 'Pub', 'Kräuterhändler', 'Schmied', 'Markthalle', 'Stadt', 'placeholder', 'Wiese']
+08:43:57 - [29] INFO - Utils.Debug - objlist: Loaded Entities: ['', 'Player']
+08:43:57 - [149] INFO - __main__ - gameloop: Current Gamestate: loading
+08:43:57 - [153] INFO - __main__ - gameloop: You are now in Loading
+08:43:58 - [325] INFO - Entities - check_level_up: Previous Level: 1
+08:43:59 - [149] INFO - __main__ - gameloop: Current Gamestate: game
+08:43:59 - [157] INFO - __main__ - gameloop: You are now in Game
+08:43:59 - [46] INFO - __main__ - interact_with_level: <Entities.Entity object at 0x00000223B49B3710>
+08:43:59 - [14] INFO - Utils.inp - inp: <Entities.Entity object at 0x00000223B49B3710>
+08:44:00 - [82] INFO - __main__ - interact_with_level: ['action', 'new_level_name']
+08:44:00 - [83] INFO - __main__ - interact_with_level: change_location
+08:44:00 - [84] INFO - __main__ - interact_with_level: Wiese
+08:44:00 - [82] INFO - __main__ - interact_with_level: ['action', 'effect_name']
+08:44:00 - [83] INFO - __main__ - interact_with_level: add_effect
+08:44:00 - [84] INFO - __main__ - interact_with_level: Kopfschmerz
+08:44:00 - [325] INFO - Entities - check_level_up: Previous Level: 1
+08:44:01 - [145] INFO - __main__ - gameloop: ['change_gamestate', ['game']]
+08:44:01 - [309] INFO - actionparser - change_gamestate: Changing Gamestate to game
+08:44:01 - [145] INFO - __main__ - gameloop: ['take_effects', [<Entities.Entity object at 0x00000223B49B3710>, True]]
+08:44:01 - [149] INFO - __main__ - gameloop: Current Gamestate: game
+08:44:01 - [157] INFO - __main__ - gameloop: You are now in Game
+08:44:01 - [46] INFO - __main__ - interact_with_level: <Entities.Entity object at 0x00000223B49B3710>
+08:44:02 - [14] INFO - Utils.inp - inp: <Entities.Entity object at 0x00000223B49B3710>
+08:44:03 - [70] INFO - Utils.inp - inp: <Entities.Entity object at 0x00000223B49B3710>
+08:44:03 - [49] INFO - __main__ - interact_with_level: Break!
+08:44:03 - [325] INFO - Entities - check_level_up: Previous Level: 1
+08:44:03 - [145] INFO - __main__ - gameloop: ['change_gamestate', ['inv']]
+08:44:03 - [309] INFO - actionparser - change_gamestate: Changing Gamestate to inv
+08:44:03 - [149] INFO - __main__ - gameloop: Current Gamestate: inv
+08:44:03 - [160] INFO - __main__ - gameloop: You are now in Inventory
+08:44:27 - [43] INFO - Assethandler - getFiles: Gathering Assets from: Assets/Levels
+08:44:27 - [50] INFO - Assethandler - getFiles: Found Asset: Assets/Levels\Kreuzung.json
+08:44:27 - [50] INFO - Assethandler - getFiles: Found Asset: Assets/Levels\levels.json
+08:44:27 - [50] INFO - Assethandler - getFiles: Found Asset: Assets/Levels\Wiese.json
+08:44:27 - [70] INFO - Assethandler - importLevels: Importing Level(s) from: ['Assets/Levels\\Kreuzung.json', 'Assets/Levels\\levels.json', 'Assets/Levels\\Wiese.json']
+08:44:27 - [43] INFO - Assethandler - getFiles: Gathering Assets from: Assets/Entities
+08:44:27 - [50] INFO - Assethandler - getFiles: Found Asset: Assets/Entities\Goblin.json
+08:44:27 - [50] INFO - Assethandler - getFiles: Found Asset: Assets/Entities\Player.json
+08:44:27 - [55] WARN - Assethandler - getFiles: Assets/Entities\trial.png is no valid Asset File
+08:44:27 - [87] INFO - Assethandler - importEntities: Importing Entities: ['Assets/Entities\\Goblin.json', 'Assets/Entities\\Player.json']
+08:44:27 - [29] INFO - Utils.Debug - objlist: Loaded Levels: ['Kreuzung', 'Menu', 'Options', 'Tisch', 'Zimmer', 'Pub', 'Kräuterhändler', 'Schmied', 'Markthalle', 'Stadt', 'placeholder', 'Wiese']
+08:44:27 - [29] INFO - Utils.Debug - objlist: Loaded Entities: ['', 'Player']
+08:44:27 - [149] INFO - __main__ - gameloop: Current Gamestate: loading
+08:44:27 - [153] INFO - __main__ - gameloop: You are now in Loading
+08:44:27 - [325] INFO - Entities - check_level_up: Previous Level: 1
+08:44:28 - [149] INFO - __main__ - gameloop: Current Gamestate: game
+08:44:28 - [157] INFO - __main__ - gameloop: You are now in Game
+08:44:28 - [46] INFO - __main__ - interact_with_level: <Entities.Entity object at 0x000002C0B9E93610>
+08:44:28 - [14] INFO - Utils.inp - inp: <Entities.Entity object at 0x000002C0B9E93610>
+08:44:30 - [82] INFO - __main__ - interact_with_level: ['action', 'new_level_name']
+08:44:30 - [83] INFO - __main__ - interact_with_level: change_location
+08:44:30 - [84] INFO - __main__ - interact_with_level: Wiese
+08:44:30 - [82] INFO - __main__ - interact_with_level: ['action', 'effect_name']
+08:44:30 - [83] INFO - __main__ - interact_with_level: add_effect
+08:44:30 - [84] INFO - __main__ - interact_with_level: Kopfschmerz
+08:44:30 - [325] INFO - Entities - check_level_up: Previous Level: 1
+08:44:30 - [145] INFO - __main__ - gameloop: ['change_gamestate', ['game']]
+08:44:30 - [309] INFO - actionparser - change_gamestate: Changing Gamestate to game
+08:44:30 - [145] INFO - __main__ - gameloop: ['take_effects', [<Entities.Entity object at 0x000002C0B9E93610>, True]]
+08:44:30 - [149] INFO - __main__ - gameloop: Current Gamestate: game
+08:44:30 - [157] INFO - __main__ - gameloop: You are now in Game
+08:44:31 - [46] INFO - __main__ - interact_with_level: <Entities.Entity object at 0x000002C0B9E93610>
+08:44:31 - [14] INFO - Utils.inp - inp: <Entities.Entity object at 0x000002C0B9E93610>
+08:44:33 - [70] INFO - Utils.inp - inp: <Entities.Entity object at 0x000002C0B9E93610>
+08:44:33 - [49] INFO - __main__ - interact_with_level: Break!
+08:44:33 - [325] INFO - Entities - check_level_up: Previous Level: 1
+08:44:33 - [145] INFO - __main__ - gameloop: ['change_gamestate', ['inv']]
+08:44:33 - [309] INFO - actionparser - change_gamestate: Changing Gamestate to inv
+08:44:33 - [149] INFO - __main__ - gameloop: Current Gamestate: inv
+08:44:33 - [160] INFO - __main__ - gameloop: You are now in Inventory
+08:44:37 - [47] WARN - Utils.gamestates.inventorystate - inventorystate: Catched Error: 'InquirerControl' object has no attribute 'pointed_at'.
+						 It may be an empty Inventory Space.
+08:44:40 - [47] WARN - Utils.gamestates.inventorystate - inventorystate: Catched Error: 'InquirerControl' object has no attribute 'pointed_at'.
+						 It may be an empty Inventory Space.
+08:44:43 - [54] WARN - Utils.gamestates.inventorystate - inventorystate: Catched Error: 'InquirerControl' object has no attribute 'pointed_at'.
+						 It may be an empty Inventory Space.
+08:53:55 - [43] INFO - Assethandler - getFiles: Gathering Assets from: Assets/Levels
+08:53:55 - [50] INFO - Assethandler - getFiles: Found Asset: Assets/Levels\Kreuzung.json
+08:53:55 - [50] INFO - Assethandler - getFiles: Found Asset: Assets/Levels\levels.json
+08:53:55 - [50] INFO - Assethandler - getFiles: Found Asset: Assets/Levels\Wiese.json
+08:53:55 - [70] INFO - Assethandler - importLevels: Importing Level(s) from: ['Assets/Levels\\Kreuzung.json', 'Assets/Levels\\levels.json', 'Assets/Levels\\Wiese.json']
+08:53:55 - [43] INFO - Assethandler - getFiles: Gathering Assets from: Assets/Entities
+08:53:55 - [50] INFO - Assethandler - getFiles: Found Asset: Assets/Entities\Goblin.json
+08:53:55 - [50] INFO - Assethandler - getFiles: Found Asset: Assets/Entities\Player.json
+08:53:55 - [55] WARN - Assethandler - getFiles: Assets/Entities\trial.png is no valid Asset File
+08:53:55 - [87] INFO - Assethandler - importEntities: Importing Entities: ['Assets/Entities\\Goblin.json', 'Assets/Entities\\Player.json']
+08:53:55 - [29] INFO - Utils.Debug - objlist: Loaded Levels: ['Kreuzung', 'Menu', 'Options', 'Tisch', 'Zimmer', 'Pub', 'Kräuterhändler', 'Schmied', 'Markthalle', 'Stadt', 'placeholder', 'Wiese']
+08:53:55 - [29] INFO - Utils.Debug - objlist: Loaded Entities: ['', 'Player']
+08:53:55 - [149] INFO - __main__ - gameloop: Current Gamestate: loading
+08:53:55 - [153] INFO - __main__ - gameloop: You are now in Loading
+08:53:55 - [325] INFO - Entities - check_level_up: Previous Level: 1
+08:53:56 - [149] INFO - __main__ - gameloop: Current Gamestate: game
+08:53:56 - [157] INFO - __main__ - gameloop: You are now in Game
+08:53:57 - [46] INFO - __main__ - interact_with_level: <Entities.Entity object at 0x000001FAFAA03510>
+08:53:57 - [14] INFO - Utils.inp - inp: <Entities.Entity object at 0x000001FAFAA03510>
+08:54:02 - [82] INFO - __main__ - interact_with_level: ['action', 'new_level_name']
+08:54:02 - [83] INFO - __main__ - interact_with_level: change_location
+08:54:02 - [84] INFO - __main__ - interact_with_level: Wiese
+08:54:02 - [82] INFO - __main__ - interact_with_level: ['action', 'effect_name']
+08:54:03 - [83] INFO - __main__ - interact_with_level: add_effect
+08:54:03 - [84] INFO - __main__ - interact_with_level: Kopfschmerz
+08:54:03 - [325] INFO - Entities - check_level_up: Previous Level: 1
+08:54:03 - [145] INFO - __main__ - gameloop: ['change_gamestate', ['game']]
+08:54:03 - [309] INFO - actionparser - change_gamestate: Changing Gamestate to game
+08:54:03 - [145] INFO - __main__ - gameloop: ['take_effects', [<Entities.Entity object at 0x000001FAFAA03510>, True]]
+08:54:03 - [149] INFO - __main__ - gameloop: Current Gamestate: game
+08:54:03 - [157] INFO - __main__ - gameloop: You are now in Game
+08:54:04 - [46] INFO - __main__ - interact_with_level: <Entities.Entity object at 0x000001FAFAA03510>
+08:54:04 - [14] INFO - Utils.inp - inp: <Entities.Entity object at 0x000001FAFAA03510>
+08:54:05 - [70] INFO - Utils.inp - inp: <Entities.Entity object at 0x000001FAFAA03510>
+08:54:05 - [49] INFO - __main__ - interact_with_level: Break!
+08:54:05 - [325] INFO - Entities - check_level_up: Previous Level: 1
+08:54:06 - [145] INFO - __main__ - gameloop: ['change_gamestate', ['inv']]
+08:54:06 - [309] INFO - actionparser - change_gamestate: Changing Gamestate to inv
+08:54:06 - [149] INFO - __main__ - gameloop: Current Gamestate: inv
+08:54:06 - [160] INFO - __main__ - gameloop: You are now in Inventory
+08:59:22 - [43] INFO - Assethandler - getFiles: Gathering Assets from: Assets/Levels
+08:59:22 - [50] INFO - Assethandler - getFiles: Found Asset: Assets/Levels\Kreuzung.json
+08:59:22 - [50] INFO - Assethandler - getFiles: Found Asset: Assets/Levels\levels.json
+08:59:22 - [50] INFO - Assethandler - getFiles: Found Asset: Assets/Levels\Wiese.json
+08:59:22 - [70] INFO - Assethandler - importLevels: Importing Level(s) from: ['Assets/Levels\\Kreuzung.json', 'Assets/Levels\\levels.json', 'Assets/Levels\\Wiese.json']
+08:59:22 - [43] INFO - Assethandler - getFiles: Gathering Assets from: Assets/Entities
+08:59:22 - [50] INFO - Assethandler - getFiles: Found Asset: Assets/Entities\Goblin.json
+08:59:22 - [50] INFO - Assethandler - getFiles: Found Asset: Assets/Entities\Player.json
+08:59:22 - [55] WARN - Assethandler - getFiles: Assets/Entities\trial.png is no valid Asset File
+08:59:22 - [87] INFO - Assethandler - importEntities: Importing Entities: ['Assets/Entities\\Goblin.json', 'Assets/Entities\\Player.json']
+08:59:22 - [29] INFO - Utils.Debug - objlist: Loaded Levels: ['Kreuzung', 'Menu', 'Options', 'Tisch', 'Zimmer', 'Pub', 'Kräuterhändler', 'Schmied', 'Markthalle', 'Stadt', 'placeholder', 'Wiese']
+08:59:22 - [29] INFO - Utils.Debug - objlist: Loaded Entities: ['', 'Player']
+08:59:22 - [149] INFO - __main__ - gameloop: Current Gamestate: loading
+08:59:22 - [153] INFO - __main__ - gameloop: You are now in Loading
+08:59:22 - [325] INFO - Entities - check_level_up: Previous Level: 1
+08:59:23 - [149] INFO - __main__ - gameloop: Current Gamestate: game
+08:59:23 - [157] INFO - __main__ - gameloop: You are now in Game
+08:59:23 - [46] INFO - __main__ - interact_with_level: <Entities.Entity object at 0x00000291996F3510>
+08:59:23 - [14] INFO - Utils.inp - inp: <Entities.Entity object at 0x00000291996F3510>
+08:59:25 - [70] INFO - Utils.inp - inp: <Entities.Entity object at 0x00000291996F3510>
+08:59:25 - [49] INFO - __main__ - interact_with_level: Break!
+08:59:25 - [325] INFO - Entities - check_level_up: Previous Level: 1
+08:59:26 - [149] INFO - __main__ - gameloop: Current Gamestate: game
+08:59:26 - [157] INFO - __main__ - gameloop: You are now in Game
+08:59:26 - [46] INFO - __main__ - interact_with_level: <Entities.Entity object at 0x00000291996F3510>
+08:59:26 - [14] INFO - Utils.inp - inp: <Entities.Entity object at 0x00000291996F3510>
+08:59:28 - [82] INFO - __main__ - interact_with_level: ['action', 'new_level_name']
+08:59:28 - [83] INFO - __main__ - interact_with_level: change_location
+08:59:28 - [84] INFO - __main__ - interact_with_level: Wiese
+08:59:28 - [82] INFO - __main__ - interact_with_level: ['action', 'effect_name']
+08:59:28 - [83] INFO - __main__ - interact_with_level: add_effect
+08:59:28 - [84] INFO - __main__ - interact_with_level: Kopfschmerz
+08:59:28 - [325] INFO - Entities - check_level_up: Previous Level: 1
+08:59:29 - [145] INFO - __main__ - gameloop: ['change_gamestate', ['inv']]
+08:59:29 - [309] INFO - actionparser - change_gamestate: Changing Gamestate to inv
+08:59:29 - [145] INFO - __main__ - gameloop: ['add_effect', [<Entities.Entity object at 0x00000291996F3510>, 'Kopfschmerz']]
+08:59:29 - [149] INFO - __main__ - gameloop: Current Gamestate: inv
+08:59:29 - [160] INFO - __main__ - gameloop: You are now in Inventory
+08:59:34 - [47] WARN - Utils.gamestates.inventorystate - inventorystate: Catched Error: 'InquirerControl' object has no attribute 'pointed_at'.
+						 It may be an empty Inventory Space.
+08:59:34 - [72] WARN - Utils.gamestates.inventorystate - inventorystate: Catched Error: cannot access local variable 'choosen_item' where it is not associated with a value.
+						 It may be an empty Inventory Space, which tried to by printed.
+08:59:36 - [54] WARN - Utils.gamestates.inventorystate - inventorystate: Catched Error: 'InquirerControl' object has no attribute 'pointed_at'.
+						 It may be an empty Inventory Space.
+08:59:36 - [72] WARN - Utils.gamestates.inventorystate - inventorystate: Catched Error: cannot access local variable 'choosen_item' where it is not associated with a value.
+						 It may be an empty Inventory Space, which tried to by printed.
+08:59:48 - [325] INFO - Entities - check_level_up: Previous Level: 1
+08:59:49 - [145] INFO - __main__ - gameloop: ['change_gamestate', ['game']]
+08:59:49 - [309] INFO - actionparser - change_gamestate: Changing Gamestate to game
+08:59:49 - [149] INFO - __main__ - gameloop: Current Gamestate: game
+08:59:49 - [157] INFO - __main__ - gameloop: You are now in Game
+08:59:50 - [46] INFO - __main__ - interact_with_level: <Entities.Entity object at 0x00000291996F3510>
+08:59:50 - [14] INFO - Utils.inp - inp: <Entities.Entity object at 0x00000291996F3510>
+09:00:50 - [43] INFO - Assethandler - getFiles: Gathering Assets from: Assets/Levels
+09:00:50 - [50] INFO - Assethandler - getFiles: Found Asset: Assets/Levels\Kreuzung.json
+09:00:50 - [50] INFO - Assethandler - getFiles: Found Asset: Assets/Levels\levels.json
+09:00:50 - [50] INFO - Assethandler - getFiles: Found Asset: Assets/Levels\Wiese.json
+09:00:50 - [70] INFO - Assethandler - importLevels: Importing Level(s) from: ['Assets/Levels\\Kreuzung.json', 'Assets/Levels\\levels.json', 'Assets/Levels\\Wiese.json']
+09:00:50 - [43] INFO - Assethandler - getFiles: Gathering Assets from: Assets/Entities
+09:00:50 - [50] INFO - Assethandler - getFiles: Found Asset: Assets/Entities\Goblin.json
+09:00:50 - [50] INFO - Assethandler - getFiles: Found Asset: Assets/Entities\Player.json
+09:00:50 - [55] WARN - Assethandler - getFiles: Assets/Entities\trial.png is no valid Asset File
+09:00:50 - [87] INFO - Assethandler - importEntities: Importing Entities: ['Assets/Entities\\Goblin.json', 'Assets/Entities\\Player.json']
+09:00:50 - [29] INFO - Utils.Debug - objlist: Loaded Levels: ['Kreuzung', 'Menu', 'Options', 'Tisch', 'Zimmer', 'Pub', 'Kräuterhändler', 'Schmied', 'Markthalle', 'Stadt', 'placeholder', 'Wiese']
+09:00:50 - [29] INFO - Utils.Debug - objlist: Loaded Entities: ['', 'Player']
+09:00:50 - [149] INFO - __main__ - gameloop: Current Gamestate: loading
+09:00:50 - [153] INFO - __main__ - gameloop: You are now in Loading
+09:00:50 - [325] INFO - Entities - check_level_up: Previous Level: 1
+09:01:11 - [149] INFO - __main__ - gameloop: Current Gamestate: game
+09:01:11 - [157] INFO - __main__ - gameloop: You are now in Game
+09:01:11 - [46] INFO - __main__ - interact_with_level: <Entities.Entity object at 0x000001AE23E73550>
+09:01:11 - [14] INFO - Utils.inp - inp: <Entities.Entity object at 0x000001AE23E73550>
+09:01:12 - [82] INFO - __main__ - interact_with_level: ['action', 'new_level_name']
+09:01:12 - [83] INFO - __main__ - interact_with_level: change_location
+09:01:12 - [84] INFO - __main__ - interact_with_level: Wiese
+09:01:12 - [82] INFO - __main__ - interact_with_level: ['action', 'effect_name']
+09:01:12 - [83] INFO - __main__ - interact_with_level: add_effect
+09:01:12 - [84] INFO - __main__ - interact_with_level: Kopfschmerz
+09:01:12 - [325] INFO - Entities - check_level_up: Previous Level: 1
+09:01:13 - [145] INFO - __main__ - gameloop: ['change_gamestate', ['game']]
+09:01:13 - [309] INFO - actionparser - change_gamestate: Changing Gamestate to game
+09:01:13 - [145] INFO - __main__ - gameloop: ['take_effects', [<Entities.Entity object at 0x000001AE23E73550>, True]]
+09:01:13 - [149] INFO - __main__ - gameloop: Current Gamestate: game
+09:01:13 - [157] INFO - __main__ - gameloop: You are now in Game
+09:01:14 - [46] INFO - __main__ - interact_with_level: <Entities.Entity object at 0x000001AE23E73550>
+09:01:14 - [14] INFO - Utils.inp - inp: <Entities.Entity object at 0x000001AE23E73550>
+09:01:14 - [70] INFO - Utils.inp - inp: <Entities.Entity object at 0x000001AE23E73550>
+09:01:14 - [49] INFO - __main__ - interact_with_level: Break!
+09:01:14 - [325] INFO - Entities - check_level_up: Previous Level: 1
+09:01:15 - [145] INFO - __main__ - gameloop: ['change_gamestate', ['inv']]
+09:01:15 - [309] INFO - actionparser - change_gamestate: Changing Gamestate to inv
+09:01:15 - [149] INFO - __main__ - gameloop: Current Gamestate: inv
+09:01:15 - [160] INFO - __main__ - gameloop: You are now in Inventory
+09:04:00 - [43] INFO - Assethandler - getFiles: Gathering Assets from: Assets/Levels
+09:04:00 - [50] INFO - Assethandler - getFiles: Found Asset: Assets/Levels\Kreuzung.json
+09:04:00 - [50] INFO - Assethandler - getFiles: Found Asset: Assets/Levels\levels.json
+09:04:00 - [50] INFO - Assethandler - getFiles: Found Asset: Assets/Levels\Wiese.json
+09:04:00 - [70] INFO - Assethandler - importLevels: Importing Level(s) from: ['Assets/Levels\\Kreuzung.json', 'Assets/Levels\\levels.json', 'Assets/Levels\\Wiese.json']
+09:04:00 - [43] INFO - Assethandler - getFiles: Gathering Assets from: Assets/Entities
+09:04:00 - [50] INFO - Assethandler - getFiles: Found Asset: Assets/Entities\Goblin.json
+09:04:00 - [50] INFO - Assethandler - getFiles: Found Asset: Assets/Entities\Player.json
+09:04:00 - [55] WARN - Assethandler - getFiles: Assets/Entities\trial.png is no valid Asset File
+09:04:00 - [87] INFO - Assethandler - importEntities: Importing Entities: ['Assets/Entities\\Goblin.json', 'Assets/Entities\\Player.json']
+09:04:00 - [29] INFO - Utils.Debug - objlist: Loaded Levels: ['Kreuzung', 'Menu', 'Options', 'Tisch', 'Zimmer', 'Pub', 'Kräuterhändler', 'Schmied', 'Markthalle', 'Stadt', 'placeholder', 'Wiese']
+09:04:00 - [29] INFO - Utils.Debug - objlist: Loaded Entities: ['', 'Player']
+09:04:00 - [149] INFO - __main__ - gameloop: Current Gamestate: loading
+09:04:00 - [153] INFO - __main__ - gameloop: You are now in Loading
+09:04:00 - [325] INFO - Entities - check_level_up: Previous Level: 1
+09:04:01 - [149] INFO - __main__ - gameloop: Current Gamestate: game
+09:04:01 - [157] INFO - __main__ - gameloop: You are now in Game
+09:04:01 - [46] INFO - __main__ - interact_with_level: <Entities.Entity object at 0x000001D489243550>
+09:04:01 - [14] INFO - Utils.inp - inp: <Entities.Entity object at 0x000001D489243550>
+09:04:02 - [82] INFO - __main__ - interact_with_level: ['action', 'new_level_name']
+09:04:02 - [83] INFO - __main__ - interact_with_level: change_location
+09:04:02 - [84] INFO - __main__ - interact_with_level: Wiese
+09:04:02 - [82] INFO - __main__ - interact_with_level: ['action', 'effect_name']
+09:04:02 - [83] INFO - __main__ - interact_with_level: add_effect
+09:04:02 - [84] INFO - __main__ - interact_with_level: Kopfschmerz
+09:04:02 - [325] INFO - Entities - check_level_up: Previous Level: 1
+09:04:03 - [145] INFO - __main__ - gameloop: ['change_gamestate', ['game']]
+09:04:03 - [309] INFO - actionparser - change_gamestate: Changing Gamestate to game
+09:04:03 - [145] INFO - __main__ - gameloop: ['take_effects', [<Entities.Entity object at 0x000001D489243550>, True]]
+09:04:03 - [149] INFO - __main__ - gameloop: Current Gamestate: game
+09:04:03 - [157] INFO - __main__ - gameloop: You are now in Game
+09:04:04 - [46] INFO - __main__ - interact_with_level: <Entities.Entity object at 0x000001D489243550>
+09:04:04 - [14] INFO - Utils.inp - inp: <Entities.Entity object at 0x000001D489243550>
+09:04:04 - [70] INFO - Utils.inp - inp: <Entities.Entity object at 0x000001D489243550>
+09:04:04 - [49] INFO - __main__ - interact_with_level: Break!
+09:04:04 - [325] INFO - Entities - check_level_up: Previous Level: 1
+09:04:05 - [145] INFO - __main__ - gameloop: ['change_gamestate', ['inv']]
+09:04:05 - [309] INFO - actionparser - change_gamestate: Changing Gamestate to inv
+09:04:05 - [149] INFO - __main__ - gameloop: Current Gamestate: inv
+09:04:05 - [160] INFO - __main__ - gameloop: You are now in Inventory
+09:04:08 - [47] WARN - Utils.gamestates.inventorystate - inventorystate: Catched Error: A list of choices needs to be provided..
+						 It may be an empty Inventory Space.
+09:04:09 - [54] WARN - Utils.gamestates.inventorystate - inventorystate: Catched Error: A list of choices needs to be provided..
+						 It may be an empty Inventory Space.
+09:04:14 - [325] INFO - Entities - check_level_up: Previous Level: 1
+09:40:24 - [43] INFO - Assethandler - getFiles: Gathering Assets from: Assets/Levels
+09:40:24 - [50] INFO - Assethandler - getFiles: Found Asset: Assets/Levels\Kreuzung.json
+09:40:24 - [50] INFO - Assethandler - getFiles: Found Asset: Assets/Levels\levels.json
+09:40:24 - [50] INFO - Assethandler - getFiles: Found Asset: Assets/Levels\Wiese.json
+09:40:24 - [70] INFO - Assethandler - importLevels: Importing Level(s) from: ['Assets/Levels\\Kreuzung.json', 'Assets/Levels\\levels.json', 'Assets/Levels\\Wiese.json']
+09:40:24 - [43] INFO - Assethandler - getFiles: Gathering Assets from: Assets/Entities
+09:40:24 - [50] INFO - Assethandler - getFiles: Found Asset: Assets/Entities\Goblin.json
+09:40:24 - [50] INFO - Assethandler - getFiles: Found Asset: Assets/Entities\Player.json
+09:40:24 - [55] WARN - Assethandler - getFiles: Assets/Entities\trial.png is no valid Asset File
+09:40:24 - [87] INFO - Assethandler - importEntities: Importing Entities: ['Assets/Entities\\Goblin.json', 'Assets/Entities\\Player.json']
+09:40:24 - [29] INFO - Utils.Debug - objlist: Loaded Levels: ['Kreuzung', 'Menu', 'Options', 'Tisch', 'Zimmer', 'Pub', 'Kräuterhändler', 'Schmied', 'Markthalle', 'Stadt', 'placeholder', 'Wiese']
+09:40:24 - [29] INFO - Utils.Debug - objlist: Loaded Entities: ['', 'Player']
+09:40:24 - [149] INFO - __main__ - gameloop: Current Gamestate: loading
+09:40:24 - [153] INFO - __main__ - gameloop: You are now in Loading
+09:40:24 - [325] INFO - Entities - check_level_up: Previous Level: 1
+09:40:27 - [149] INFO - __main__ - gameloop: Current Gamestate: game
+09:40:27 - [157] INFO - __main__ - gameloop: You are now in Game
+09:40:27 - [46] INFO - __main__ - interact_with_level: <Entities.Entity object at 0x000002929ED06B10>
+09:40:27 - [14] INFO - Utils.inp - inp: <Entities.Entity object at 0x000002929ED06B10>
+09:40:28 - [82] INFO - __main__ - interact_with_level: ['action', 'new_level_name']
+09:40:28 - [83] INFO - __main__ - interact_with_level: change_location
+09:40:28 - [84] INFO - __main__ - interact_with_level: Wiese
+09:40:28 - [82] INFO - __main__ - interact_with_level: ['action', 'effect_name']
+09:40:28 - [83] INFO - __main__ - interact_with_level: add_effect
+09:40:28 - [84] INFO - __main__ - interact_with_level: Kopfschmerz
+09:40:28 - [325] INFO - Entities - check_level_up: Previous Level: 1
+09:40:29 - [145] INFO - __main__ - gameloop: ['change_gamestate', ['game']]
+09:40:29 - [309] INFO - actionparser - change_gamestate: Changing Gamestate to game
+09:40:29 - [145] INFO - __main__ - gameloop: ['take_effects', [<Entities.Entity object at 0x000002929ED06B10>, True]]
+09:40:29 - [149] INFO - __main__ - gameloop: Current Gamestate: game
+09:40:29 - [157] INFO - __main__ - gameloop: You are now in Game
+09:40:29 - [46] INFO - __main__ - interact_with_level: <Entities.Entity object at 0x000002929ED06B10>
+09:40:29 - [14] INFO - Utils.inp - inp: <Entities.Entity object at 0x000002929ED06B10>
+09:40:31 - [82] INFO - __main__ - interact_with_level: ['action', 'new_level_name']
+09:40:31 - [83] INFO - __main__ - interact_with_level: change_location
+09:40:31 - [84] INFO - __main__ - interact_with_level: Kreuzung
+09:40:31 - [325] INFO - Entities - check_level_up: Previous Level: 1
+09:40:31 - [145] INFO - __main__ - gameloop: ['add_effect', [<Entities.Entity object at 0x000002929ED06B10>, 'Kopfschmerz']]
+09:40:31 - [149] INFO - __main__ - gameloop: Current Gamestate: game
+09:40:31 - [157] INFO - __main__ - gameloop: You are now in Game
+09:40:32 - [46] INFO - __main__ - interact_with_level: <Entities.Entity object at 0x000002929ED06B10>
+09:40:32 - [14] INFO - Utils.inp - inp: <Entities.Entity object at 0x000002929ED06B10>

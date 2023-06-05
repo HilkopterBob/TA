@@ -8,9 +8,10 @@ class Inp():
     """
     Utility Class for getting custom input prompts
     """
-    def inp(text=""):
+    def inp(player,text=""): # pylint: disable=too-many-return-statements
         """Method to get User Input
         """
+        Pr.dbg(f"{player}")
         befehlszeichen = "#"
         userbefehl = [" inv: Öffnet das Inventar"," opt: Öffnet die Optioen",
                       " men: Öffnet das Menü","save: Speichert das Spiel",
@@ -61,29 +62,33 @@ class Inp():
                             Pr.headline ("devbefehle")
                             for einzelwert in devbefehl:
                                 Pr.i(einzelwert)
-
+                        return 34
                     case "opt":
-                        pass
+                        return 34
 
                     case "inv":
-                        pass
-
+                        Pr.dbg(f"{player}")
+                        player.actionstack.insert(0,["change_gamestate",["inv"]]) # pylint: disable=no-member
+                        return 34
+                    case "changegamestate":
+                        player.actionstack.insert(0,["change_gamestate",[input_list[1]]]) # pylint: disable=no-member
+                        return 34
                     case "save":
                         Pr.i("Die Funktion ist noch nicht implementiert")
-
+                        return 34
                     case "exit":
-                        pass
+                        return 34
 
                     case _:
-                        pass
+                        return 34
 
-                return Inp.inp()
+                return Inp.inp(player)
             return user_input
 
 
         except ValueError as e:
             Pr.a (f"Fehler bei Eingabe: {e}")
-            return None
-        except:
-            Pr.a ("Unbekannter Fehler beim Input")
-            return None
+            return 1
+        except Exception as e:
+            Pr.a (f"Unbekannter Fehler beim Input: {e}")
+            return 1

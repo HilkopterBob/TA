@@ -26,6 +26,8 @@ class Actionparser:
         check_level_up : Checks for Player Level Up Conditions
     """
 
+    gamestate = "loading"
+
     def callfunction(attr = None):
         """Calls an internal function by it's String Name
 
@@ -307,6 +309,21 @@ class Actionparser:
         try:
             _entity = attributes[0]
             _entity.check_level_up()
+            return 0
+        except:
+            return 1
+
+    def change_gamestate(attributes = None):
+        """Changes the Current Game State
+        """
+
+        if attributes is None:
+            attributes = []
+
+        try:
+            newgamestate = attributes[0]
+            Actionparser.gamestate = newgamestate
+            Pr.dbg(f"Changing Gamestate to {newgamestate}")
             return 0
         except:
             return 1
