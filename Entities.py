@@ -419,7 +419,7 @@ class gitem():
     def __init__(   self,
                     name="placeholder",
                     itype="misc",
-                    dmg=0,
+                    dmg=0, # positive damadge heals, negative damage damages (+30 dmg = +30 Health)
                     condition=0,
                     effects = None,
                     useable=False,
