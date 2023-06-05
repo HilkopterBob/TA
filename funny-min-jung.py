@@ -2,7 +2,7 @@
 """
 from Entities import Entity, gitem
 from Effect import Effect, EffectInit
-from Utils import Pr, Debug, Inp, inventorystate
+from Utils import Pr, Debug, Inp
 from actionparser import Actionparser
 from config import effects_file
 from Assethandler import AssetHandler
