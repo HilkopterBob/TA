@@ -2,7 +2,7 @@
 """
 import os
 from hashlib import sha256
-from time import sleep
+from time import sleep, process_time
 from progress.bar import Bar
 from Level import LevelInit
 from Entities import EntityInit
@@ -41,6 +41,7 @@ class AssetHandler:
             List: List of Paths to Files
         """
         Pr.dbg(f"Gathering Assets from: {folder}")
+        st = process_time()
         _file_list = []
         for file in os.listdir(folder):
             filename = os.fsdecode(file)
@@ -53,6 +54,8 @@ class AssetHandler:
                     Debug.stop_game_on_exception("File Integrity Check Failed")
             else:
                 Pr.dbg(f"{os.path.join(folder, filename)} is no valid Asset File", 1)
+        et = process_time()
+        Pr.dbg(f"Gathering Assets took: {(et-st)*1000}ms")
         return _file_list
 
     def importLevels():
@@ -61,6 +64,7 @@ class AssetHandler:
         Returns:
             None: None
         """
+        st = process_time()
         _level_files = AssetHandler.getFiles(levels_folder)
 
         if not _level_files:
@@ -70,6 +74,8 @@ class AssetHandler:
         Pr.dbg(f"Importing Level(s) from: {_level_files}")
         for _level in _level_files:
             AssetHandler.allLevels.extend(LevelInit.load_all_levels_from_json(_level))
+        et = process_time()
+        Pr.dbg(f"Importing Levels took: {(et-st)*1000}ms")
         return None
 
     def importEntities():
@@ -78,6 +84,7 @@ class AssetHandler:
         Returns:
             None: None
         """
+        st = process_time()
         _entity_files = AssetHandler.getFiles(entities_folder)
 
         if not _entity_files:
@@ -88,6 +95,8 @@ class AssetHandler:
 
         for _entity in _entity_files:
             AssetHandler.allEntities.extend(EntityInit.load_entities_fromjson(_entity))
+        et = process_time()
+        Pr.dbg(f"Importing Entities took: {(et-st)*1000}ms")
         return None
 
     def importEffects():
@@ -96,6 +105,7 @@ class AssetHandler:
         Returns:
             None: None
         """
+        st = process_time()
         _effects_files = AssetHandler.getFiles(effects_folder)
 
         if not _effects_files:
@@ -108,6 +118,8 @@ class AssetHandler:
             AssetHandler.allEffects.extend(
                 EffectInit.load_all_effects_from_json(_effect)
             )
+        et = process_time()
+        Pr.dbg(f"Importing Effects took: {(et-st)*1000}ms")
         return None
 
     def check_integrity(file):
@@ -119,7 +131,6 @@ class AssetHandler:
         Returns:
             Bool: True if integrity is Verified, otherwise False
         """
-
         # Skip Integrity Check if Debug Mode is Enabled
         if dbg:
             return True
