@@ -59,9 +59,17 @@
           "type": "boolean",
           "description": "Ist das Item ausrüstbar?"
         },
+        "slots": {
+          "type": "array",
+          "description": "Mögliche Slots an denen das Item ausgerüstet werden kann"
+        },
         "questitem": {
           "type": "boolean",
           "description": "Ist das Item ein Questitem"
+        },
+        "rarity": {
+          "type": "string",
+          "description": "Die Rarität des Items"
         }
       },
       "required": [
@@ -75,7 +83,9 @@
         "effects",
         "useable",
         "equipable",
-        "questitem"
+        "slots",
+        "questitem",
+        "rarity"
       ]
     }
   }

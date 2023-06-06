@@ -28,10 +28,13 @@ class gitem:
         effects=None,
         useable=False,
         equipable=False,
+        slots=None,
         questitem=False,
     ):
         if effects is None:
             effects = []
+        if slots is None:
+            slots = []
 
         self.name = name
         self.itype = itype
@@ -45,6 +48,7 @@ class gitem:
         self.effects = effects
         self.usable = useable
         self.equipable = equipable
+        self.slots = slots
         self.questitem = questitem
 
     def get(self, thing: str, *args):  # pylint: disable=W0613
@@ -74,6 +78,7 @@ class gitem:
             json_dct["effects"],
             json_dct["useable"],
             json_dct["equipable"],
+            json_dct["slots"],
             json_dct["questitem"],
         )
 
