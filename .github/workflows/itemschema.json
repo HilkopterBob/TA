@@ -15,6 +15,10 @@
           "description": "Der Itemtyp",
           "enum": ["weapon", "tool", "potion", "misc", "armor"]
         },
+        "description": {
+          "type": "string",
+          "description": "Die Beschreibung des Items"
+        },
         "ad": {
           "type": "string",
           "description": "Der Schaden des Items",
@@ -62,6 +66,7 @@
       },
       "required": [
         "type",
+        "description",
         "ad",
         "ap",
         "hp",

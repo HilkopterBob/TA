@@ -15,6 +15,7 @@ class gitem():
     def __init__(   self,
                     name="placeholder",
                     itype="misc",
+                    description="",
                     ad=0,
                     ap=0,
                     hp=0,
@@ -32,6 +33,7 @@ class gitem():
 
         self.name = name
         self.itype = itype
+        self.description = description
         self.ad = ad
         self.ap = ap
         self.hp = hp
@@ -58,8 +60,10 @@ class gitem():
         Returns:
             Item: Item
         """
+        Pr.dbg(f"{json_dct}",3)
         return gitem(iname,
                     json_dct['type'],
+                    json_dct['description'],
                     json_dct['ad'],
                     json_dct['ap'],
                     json_dct['hp'],

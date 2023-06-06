@@ -1,0 +1,16 @@
+{
+  "$schema": "../../.github/workflows/itemschema.json",
+  "Liandia": {
+    "type": "weapon",
+    "description": "Eine geschwungene Doppelklinge",
+    "ad": "1w6+2",
+    "ap": "0w0+0",
+    "hp": 5,
+    "ar": 0,
+    "mr": 0,
+    "effects": [],
+    "useable": false,
+    "equipable": true,
+    "questitem": false
+  }
+}
