@@ -15,7 +15,7 @@ def inventorystate(Player):
 
     wants_exit = False
 
-    def consume_item_inv_helper(Player, choosen_item):
+    def item_inv_helper(Player, choosen_item):
         print("consume_item_inv_helper called!!!")
         for item in Player.inv:
             print(Player.inv)
@@ -78,7 +78,7 @@ def inventorystate(Player):
                 "Tools",
                 "Potions",
                 "Misc",
-                "Equipment ablegen",
+                "Equipment",
                 "zurück zum Spiel"
             ]).unsafe_ask()
         
@@ -88,6 +88,8 @@ def inventorystate(Player):
                     choosen_item = questionary.select(
                     'Weapons',
                     choices=weapons).unsafe_ask()
+                    if choosen_item != "zurück":
+                        item_inv_helper(Player, choosen_item)
                 else:
                     choosen_item = questionary.select(
                     'Du hast momentan keine Waffen im Inventar. Hast du sie vielleicht grade ausgerüstet?',
@@ -107,7 +109,7 @@ def inventorystate(Player):
                     'Potions',
                     choices=potions).unsafe_ask()
                     if choosen_item != "zurück":
-                        consume_item_inv_helper(Player, choosen_item)
+                        item_inv_helper(Player, choosen_item)
                 else:
                     choosen_item = questionary.select(
                     'Du hast momentan keine Tränke im Inventar.',
@@ -123,10 +125,42 @@ def inventorystate(Player):
                     choices=["zurück"]).unsafe_ask()
             case "Equipment":
                 #print(Player.equip_slots)
-                choosen_item = questionary.select(
-                    'Du hast momentan kein Zeugs im Inventar.',
-                    choices=["zurück"]).unsafe_ask()
-                Player.unequip_item(choosen_item)
+                equip = []
+                for item in Player.equip_slots:
+                    if item == "placeholder":
+                        continue
+                    else:
+                        try:
+                            if item.name != "placeholder":
+                                equip.append(item.name)
+                        except Exception as e:
+                            pass
+                if len(equip) != 0:
+                    choosen_item = questionary.select(
+                    'Deine verwendete Ausrüstung:',
+                    choices=equip).unsafe_ask()
+                    if choosen_item != "zurück":
+                        """hier muss ein auswahlmenü hin"""
+                        choosen_choice = questionary.select(
+                            'Deine verwendete Ausrüstung:',
+                            choices=["ablegen", "zurück"]).unsafe_ask()
+                        match choosen_choice:
+                            case "ablegen":
+                                pr.Pr.dbg(f"Player Health: {Player.equip_slots}", 3)
+                                pr.Pr.dbg(f"Player inv: {Player.inv}", 3)
+                                Player.unequip_item(choosen_item)
+                                pr.Pr.dbg(f"Player Health: {Player.equip_slots}", 3)
+                                pr.Pr.dbg(f"Player inv: {Player.inv}", 3)
+                            case "zurück":
+                                pass
+                            case _:
+                                pr.Pr.dbg("Ein Item wurde weder abgelegt noch ist der spieler aus dem menü gegangen", 2)
+                else:
+                    choosen_item = questionary.select(
+                        'Du hast gerade nichts Ausgerüstet.',
+                        choices=["zurück"]).unsafe_ask()
+                    if choosen_item != "zurück":
+                        Player.unequip_item(choosen_item)
             case "zurück zum Spiel":
                 wants_exit = True
             case "zurück":
