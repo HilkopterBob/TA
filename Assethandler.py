@@ -7,10 +7,12 @@ from progress.bar import Bar
 from Level import LevelInit
 from Entities import EntityInit
 from Effect import EffectInit
+from Items import itemInit
 from config import (
     levels_folder,
     entities_folder,
     effects_folder,
+    items_folder,
     checksum_file,
     dbg,
     root_folder,
@@ -99,6 +101,26 @@ class AssetHandler:
         Pr.dbg(f"Importing Entities took: {(et-st)*1000}ms")
         return None
 
+    def importItems():
+        """Imports Items from Assets
+
+        Returns:
+            None: None
+        """
+        st = process_time()
+        _items_files = AssetHandler.getFiles(items_folder)
+
+        if not _items_files:
+            Pr.dbg(f"No Items to import from {items_folder}", 1)
+            return None
+
+        Pr.dbg(f"Importing Item(s) from: {_items_files}")
+        for _items in _items_files:
+            AssetHandler.allItems.extend(itemInit.load_all_items_from_json(_items))
+        et = process_time()
+        Pr.dbg(f"Importing Items took: {(et-st)*1000}ms")
+        return None
+    
     def importEffects():
         """Imports Effects from Assets
 

@@ -40,6 +40,7 @@ effects_file = "config/effects.json"
 levels_folder = "Assets/Levels"
 entities_folder = "Assets/Entities"
 effects_folder = "Assets/Effects"
+items_folder = "Assets/Items"
 log_file = f"logs/{today}.log"
 checksum_file = "config/integrity.md"
 root_folder = get_project_root()

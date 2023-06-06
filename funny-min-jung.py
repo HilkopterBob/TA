@@ -1,8 +1,9 @@
 """Main Module for Textadventure
 """
-from Entities import Entity, gitem
+from Entities import Entity
 from Level import Level
 from Effect import Effect
+from Items import gitem
 from Utils import Pr, Debug, Inp
 from actionparser import Actionparser
 from Assethandler import AssetHandler
@@ -204,6 +205,10 @@ if __name__ == "__main__":
     # Importing Entity Assets
     AssetHandler.importEntities()
     allEntities = AssetHandler.allEntities
+
+    #importing Item Assets
+    AssetHandler.importItems()
+    allItems = AssetHandler.allItems
 
     # Creating seperate Player Entitiies
     mPlayer = Entity(
