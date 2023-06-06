@@ -42,9 +42,13 @@
                 "questitem":{
                     "type":"boolean",
                     "description": "Ist das Item ein Questitem"
+                },
+                "equip_slot":{
+                    "type":"string",
+                    "description": "Wenn der spieler das Item ausrüsten kann, wo kann er das tun?"
                 }
             },   
-            "required": ["type","dmg","condition","effects","useable","equipable","questitem"]
+            "required": ["type","dmg","condition","effects","useable","equipable","questitem","equip_slot"]
         }   
     }
 }   

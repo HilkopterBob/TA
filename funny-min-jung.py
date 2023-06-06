@@ -190,15 +190,16 @@ if __name__ == "__main__":
         100,
         100,
         0,
-        [gitem("Item1", "weapon"), gitem("item2", "misc")],
+        [gitem("Item1", "weapon",equipable=True, equip_slot="meele"), gitem("item2", "misc", dmg=100, useable=True)],
         location="Menu",
+        equip_slots=[]
     )
     hurensohn = Entity(
         "Hurensohn",
         100,
         100,
         0,
-        [gitem("Item1", "weapon"), gitem("item2", "misc")],
+        inv=[gitem("Item1", "weapon"), gitem("Item1", "weapon"), gitem("item2", "misc")],
         location="Wiese",
     )
 
@@ -217,6 +218,8 @@ if __name__ == "__main__":
     # List all Loaded Levels and Entities
     Debug.objlist(allLevels, "Levels")
     Debug.objlist(allEntities, "Entities")
+    while len(mPlayer.equip_slots) < 11:
+        mPlayer.equip_slots.append("placeholder")
 
     # Run Game
     gameloop(mPlayer, allLevels)

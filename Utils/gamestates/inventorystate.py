@@ -13,15 +13,6 @@ Gamelogic: Was wird actionpaser und was direkt abgeabreitet?
 
 def inventorystate(Player):
 
-    
-
-
-            
-
-
-
-
-
     wants_exit = False
     weapons = []
     tools = []
@@ -47,6 +38,7 @@ def inventorystate(Player):
                 "Tools",
                 "Potions",
                 "Misc",
+                "Equipment ablegen",
                 "zurück zum Spiel"
             ]).unsafe_ask()
         
@@ -76,11 +68,51 @@ def inventorystate(Player):
                     choices=misc).unsafe_ask()
                 except ValueError as e:
                     pr.Pr.dbg(f"Catched Error: {e}.\n\t\t\t\t\t\t It may be an empty Inventory Space.", 1)
+            case "Equipment":
+                print(Player.equip_slots)
+                choosen_item = questionary.select(
+                    'Equipment Ablegen:',
+                    choices=Player.equip_slots).unsafe_ask()
+                Player.unequip_item(choosen_item)
             case "zurück zum Spiel":
                 wants_exit = True
             case _:
                 print("No valid choice made")
         
+        for item in Player.inv:
+            print(Player.inv)
+            print(item)
+            try:
+                if choosen_item == item.name:
+                    if item.usable == True:
+                        action = questionary.select(
+                            f'Möchtest du {choosen_item} verbrauchen?',
+                            choices=["ja", "nein"]).unsafe_ask()
+                        if action == "ja":
+                            pr.Pr.dbg(f"Player Health: {Player.health}", 3)
+                            Player.consume_item(choosen_item)
+                            pr.Pr.dbg(f"Player Health: {Player.health}", 3)
+                            pr.Pr.dbg(f"Player inv: {Player.inv}", 3)
+                        else:
+                            break
+                    if item.equipable == True:
+                        action = questionary.select(
+                        f'Möchtest du {choosen_item} ausrüsten?',
+                        choices=["ja", "nein"]).unsafe_ask()
+                        print(action)
+                        if action == "ja":
+                            pr.Pr.dbg(f"Player Health: {Player.equip_slots}", 3)
+                            pr.Pr.dbg(f"Player inv: {Player.inv}", 3)
+                            Player.equip_item(choosen_item)
+                            pr.Pr.dbg(f"Player Health: {Player.equip_slots}", 3)
+                            pr.Pr.dbg(f"Player inv: {Player.inv}", 3)
+                        else:
+                            break
+                        
+            except Exception as e:
+                print(e)
+                print(item)
+
         try:
             print(choosen_item)
             
