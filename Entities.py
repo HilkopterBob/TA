@@ -460,9 +460,12 @@ class Entity():
 
     def unequip_item(self, item_name):
         for index, item in enumerate(self.equip_slots):
-            if item.name == item_name:
-                self.inv.append(item)
-                self.equip_slots[index] = "placeholder"
+            if isinstance(item, str):
+                continue
+            else:
+                if item.name == item_name:
+                    self.inv.append(item)
+                    self.equip_slots[index] = "placeholder"
 
 
 class EntityInit():
