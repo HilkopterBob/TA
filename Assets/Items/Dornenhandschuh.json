@@ -11,7 +11,7 @@
     "effects": [],
     "useable": false,
     "equipable": true,
-    "slots": [],
+    "slots": ["gloves", "melee"],
     "questitem": false,
     "rarity": "common"
   }
