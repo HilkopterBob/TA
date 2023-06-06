@@ -113,11 +113,7 @@ def hud(player):
         Pr.n("+"*12+" "+"+"*12)
         Pr.n(f"Du befindest dich in: {player.location}")
 
-        if player.hp > 25:
-            Pr.g(f"HP: {player.hp}")
-        else:
-
-            Pr.b(f"HP: {player.hp}")
+        Pr.b(f"HP: {player.hp}")
         Pr.n(f"Gold: {player.wealth}")
         Pr.n(F"Level: {player.level} XP: {player.xp}")
 
@@ -190,17 +186,9 @@ if __name__ == "__main__":
         100,
         100,
         0,
-        [gitem("Item1", "weapon",equipable=True, equip_slot="meele"), gitem("item2", "misc", dmg=100, useable=True)],
+        [gitem("Item1", "weapon",equipable=True, equip_slot="meele"), gitem("item2", "potion", dmg=100, useable=True)],
         location="Menu",
         equip_slots=[]
-    )
-    hurensohn = Entity(
-        "Hurensohn",
-        100,
-        100,
-        0,
-        inv=[gitem("Item1", "weapon"), gitem("Item1", "weapon"), gitem("item2", "misc")],
-        location="Wiese",
     )
 
     # Creating seperate Effects

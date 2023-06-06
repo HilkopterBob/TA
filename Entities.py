@@ -373,12 +373,15 @@ class Entity():
             if item.name == item_name:
                 consumable = item
 
-        if consumable.effects and consumable.type != "Food":
+        if consumable.effects and consumable.itype != "Food":
+            if len(consumable.effects) != 0:
+                for effect in consumable.effects:
+                    self.add_effect(effect)
+            else:
+                self.change_health(consumable.dbg)
             self.remove_item_by_name(consumable.name)
-            for effect in consumable.effects:
-                self.add_effect(effect)
 
-        if consumable.type == "Food":
+        if consumable.itype == "Food":
             self.change_health(consumable.dmg)
 
     def equip_item(self, item_name):
