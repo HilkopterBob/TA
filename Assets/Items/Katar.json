@@ -11,6 +11,7 @@
     "effects": [],
     "useable": false,
     "equipable": true,
-    "questitem": false
+    "questitem": false,
+    "rarity": "common"
   }
 }

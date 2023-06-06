@@ -6,23 +6,25 @@ Levels Module which holds 2 Classes
 import json
 from Utils import Pr
 
-class Level():
-    """
-        Class which defines Levels
-        Contains Functions:
-        from_json : Creates Levels from JSON
-    """
-    def __init__(   self,
-                    text=None,
-                    choices=None,
-                    name="Levelnameplatzhalter",
-                    inv=None,
-                    ltype="Testtype",
-                    descr="Standartdescription du Sohn einer Dirne",
-                    entitylist = None,
-                    triggers=None
-                    ):
 
+class Level:
+    """
+    Class which defines Levels
+    Contains Functions:
+    from_json : Creates Levels from JSON
+    """
+
+    def __init__(
+        self,
+        text=None,
+        choices=None,
+        name="Levelnameplatzhalter",
+        inv=None,
+        ltype="Testtype",
+        descr="Standartdescription du Sohn einer Dirne",
+        entitylist=None,
+        triggers=None,
+    ):
         if text is None:
             text = []
         if choices is None:
@@ -54,65 +56,79 @@ class Level():
         Returns:
             Level: Level
         """
-        return Level(json_dct['text'],
-                    json_dct['choices'],
-                    lname, json_dct['inv'],
-                    json_dct['ltype'],
-                    json_dct['descr'],
-                    json_dct['entitylist'],
-                    json_dct['triggers'])
-
+        return Level(
+            json_dct["text"],
+            json_dct["choices"],
+            lname,
+            json_dct["inv"],
+            json_dct["ltype"],
+            json_dct["descr"],
+            json_dct["entitylist"],
+            json_dct["triggers"],
+        )
 
     def change_entity_list(self, ctype, entity):
         """
-            Changes the list of entities for specific level
+        Changes the list of entities for specific level
 
-            :ctype: + for adding, - for subtracting entity from list
+        :ctype: + for adding, - for subtracting entity from list
 
-            :entity: the entity obj
+        :entity: the entity obj
 
-            :dbg: debug, default = True
+        :dbg: debug, default = True
 
-            =return= returns True if seccessfull, else false
+        =return= returns True if seccessfull, else false
         """
         match ctype:
             case "+":
-                Pr.dbg(f"Entitylist of Level {Level.levelname(self)}: {self.entitylist}")
+                Pr.dbg(
+                    f"Entitylist of Level {Level.levelname(self)}: {self.entitylist}"
+                )
                 Pr.dbg(f"Trying to add {entity.name} to {Level.levelname(self)}")
                 try:
                     for e in self.entitylist:
                         if e.name == entity.name:
-                            raise Exception(f"{Pr.cyan(entity.name)} \
+                            raise Exception(
+                                f"{Pr.cyan(entity.name)} \
                                             is already in entitielist of Level \
                                             {Pr.cyan(self.name)} \
-                                            and thus cannot be added.")
+                                            and thus cannot be added."
+                            )
                     self.entitylist.append(entity)
                     Pr.dbg(f"{entity.name} got added to Level {Level.levelname(self)}")
-                    Pr.dbg(f"Entitylist of Level {Level.levelname(self)}: {self.entitylist}")
+                    Pr.dbg(
+                        f"Entitylist of Level {Level.levelname(self)}: {self.entitylist}"
+                    )
                     return True
                 except Exception as e:
                     Pr.dbg(e, 1)
                     return False
             case "-":
-                Pr.dbg(f"Entitylist of Level {Level.levelname(self)}: {self.entitylist}")
+                Pr.dbg(
+                    f"Entitylist of Level {Level.levelname(self)}: {self.entitylist}"
+                )
                 Pr.dbg(f"Trying to remove {entity.name} from {Level.levelname(self)}")
                 try:
-                    self.entitylist = list (filter(lambda e: e.name != entity.name,
-                                            self.entitylist))
-                    Pr.dbg(f"{entity.name} got removed from Level {Level.levelname(self)}")
-                    Pr.dbg(f"Entitylist of Level {Level.levelname(self)}: {self.entitylist}")
+                    self.entitylist = list(
+                        filter(lambda e: e.name != entity.name, self.entitylist)
+                    )
+                    Pr.dbg(
+                        f"{entity.name} got removed from Level {Level.levelname(self)}"
+                    )
+                    Pr.dbg(
+                        f"Entitylist of Level {Level.levelname(self)}: {self.entitylist}"
+                    )
                     return True
                 except:
                     return False
             case _:
-                return Pr.dbg("got no right ctype. choose between + and -",1)
+                return Pr.dbg("got no right ctype. choose between + and -", 1)
 
     def printDesc(self):
-        """Prints Level Description to User
-        """
+        """Prints Level Description to User"""
         for entry in self.descr:
             if len(entry) > 1:
-                if isinstance(entry,str):
+                if isinstance(entry, str):
                     Pr.n(f"{str(entry)}")
                     continue
                 if entry[1] in self.triggers:
@@ -127,7 +143,7 @@ class Level():
         """
         achoices = []
         for choice in self.choices:
-            if len(choice) == 1 and choice[0] !="":
+            if len(choice) == 1 and choice[0] != "":
                 achoices.append(choice[0])
             elif len(choice) > 1:
                 for cdict in self.triggers:
@@ -166,32 +182,36 @@ class Level():
         try:
             return lobject.name
         except Exception as e:
-            Pr.dbg(f"ERR: {e}",2)
+            Pr.dbg(f"ERR: {e}", 2)
             return None
 
-class LevelInit():
+
+class LevelInit:
     """
-        Class which Initializes Levels
-        Contains Functions:
-        load_all_levels_from_json : Loads all available Levels from a Json File
-        load_level_by_name_from_json : Loads an Level by it's Name from a Json File
+    Class which Initializes Levels
+    Contains Functions:
+    load_all_levels_from_json : Loads all available Levels from a Json File
+    load_level_by_name_from_json : Loads an Level by it's Name from a Json File
 
     """
-    def load_all_levels_from_json(json_file, _curLevels = None):
+
+    def load_all_levels_from_json(json_file, _curLevels=None):
         """
-            Return alls Levels from Json file
-            
-            :json_file (File): Json file to load Levels from
-            :_curLevels (List): Internally used for recursion
+        Return alls Levels from Json file
 
-            =return= List of all Levels loaded from Json
+        :json_file (File): Json file to load Levels from
+        :_curLevels (List): Internally used for recursion
+
+        =return= List of all Levels loaded from Json
         """
         if _curLevels is None:
             _curLevels = []
         curLevels = _curLevels
 
+        Pr.dbg(f"Loading Levels from: {json_file}")
+
         if json_file:
-            if not isinstance(json_file,dict):
+            if not isinstance(json_file, dict):
                 with open(json_file, encoding="UTF-8") as json_data:
                     data = json.load(json_data)
             else:
@@ -205,18 +225,16 @@ class LevelInit():
                 curLevels.append(Level.from_json(data[lname], lname))
         return curLevels
 
-
-
     def load_level_by_name_from_json(json_file, name):
         """
-            Return a single Level Object from Json/File by given Name
-            
-            :json_file (File): Json File to load Level from
+        Return a single Level Object from Json/File by given Name
 
-            =return= Level object
+        :json_file (File): Json File to load Level from
+
+        =return= Level object
         """
         if json_file:
-            if not isinstance(json_file,dict):
+            if not isinstance(json_file, dict):
                 with open(json_file, encoding="UTF-8") as json_data:
                     data = json.load(json_data)
             else:
@@ -225,5 +243,5 @@ class LevelInit():
             for lname in data.keys():
                 if name == lname:
                     return Level.from_json(data[lname], lname)
-            Pr.dbg(f"Levelname: {Pr.cyan(name)} not found!",1)
+            Pr.dbg(f"Levelname: {Pr.cyan(name)} not found!", 1)
         return False
