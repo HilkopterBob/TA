@@ -7,10 +7,12 @@ from progress.bar import Bar
 from Level import LevelInit
 from Entities import EntityInit
 from Effect import EffectInit
+from Items import itemInit
 from config import (
     levels_folder,
     entities_folder,
     effects_folder,
+    items_folder,
     checksum_file,
     dbg,
     root_folder,
@@ -41,6 +43,8 @@ class AssetHandler:
             List: List of Paths to Files
         """
         Pr.dbg(f"Gathering Assets from: {folder}")
+        # TODO: find out the problem pylint has
+        _folder_name = folder.split("/")[1]  # pylint: disable=E1101
         st = process_time()
         _file_list = []
         for file in os.listdir(folder):
@@ -55,7 +59,12 @@ class AssetHandler:
             else:
                 Pr.dbg(f"{os.path.join(folder, filename)} is no valid Asset File", 1)
         et = process_time()
-        Pr.dbg(f"Gathering Assets took: {(et-st)*1000}ms")
+        importtime = et - st
+        if importtime > 1:
+            dbglevel = 2
+        else:
+            dbglevel = 1
+        Pr.dbg(f"Gathering {_folder_name} took: {importtime*1000}ms", dbglevel)
         return _file_list
 
     def importLevels():
@@ -75,7 +84,12 @@ class AssetHandler:
         for _level in _level_files:
             AssetHandler.allLevels.extend(LevelInit.load_all_levels_from_json(_level))
         et = process_time()
-        Pr.dbg(f"Importing Levels took: {(et-st)*1000}ms")
+        importtime = et - st
+        if importtime > 1:
+            dbglevel = 2
+        else:
+            dbglevel = 1
+        Pr.dbg(f"Importing Levels took: {importtime*1000}ms", dbglevel)
         return None
 
     def importEntities():
@@ -96,7 +110,37 @@ class AssetHandler:
         for _entity in _entity_files:
             AssetHandler.allEntities.extend(EntityInit.load_entities_fromjson(_entity))
         et = process_time()
-        Pr.dbg(f"Importing Entities took: {(et-st)*1000}ms")
+        importtime = et - st
+        if importtime > 1:
+            dbglevel = 2
+        else:
+            dbglevel = 1
+        Pr.dbg(f"Importing Entities took: {importtime*1000}ms", dbglevel)
+        return None
+
+    def importItems():
+        """Imports Items from Assets
+
+        Returns:
+            None: None
+        """
+        st = process_time()
+        _items_files = AssetHandler.getFiles(items_folder)
+
+        if not _items_files:
+            Pr.dbg(f"No Items to import from {items_folder}", 1)
+            return None
+
+        Pr.dbg(f"Importing Item(s) from: {_items_files}")
+        for _items in _items_files:
+            AssetHandler.allItems.extend(itemInit.load_all_items_from_json(_items))
+        et = process_time()
+        importtime = et - st
+        if importtime > 1:
+            dbglevel = 2
+        else:
+            dbglevel = 1
+        Pr.dbg(f"Importing Items took: {importtime*1000}ms", dbglevel)
         return None
 
     def importEffects():
@@ -119,7 +163,12 @@ class AssetHandler:
                 EffectInit.load_all_effects_from_json(_effect)
             )
         et = process_time()
-        Pr.dbg(f"Importing Effects took: {(et-st)*1000}ms")
+        importtime = et - st
+        if importtime > 1:
+            dbglevel = 2
+        else:
+            dbglevel = 1
+        Pr.dbg(f"Importing Effects took: {importtime*1000}ms", dbglevel)
         return None
 
     def check_integrity(file):
@@ -179,7 +228,7 @@ class AssetHandler:
 
         with Bar(
             "Checking File integrity...",
-            suffix="%(percent).1f%% - %(eta)ds",
+            suffix="%(percent).1f%% - ETA: %(eta)ds",
             max=len(_gameFiles),
         ) as progress:
             for gfile in _gameFiles:

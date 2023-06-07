@@ -1,12 +1,12 @@
 """Main Module for Textadventure
 """
-from Entities import Entity, gitem
+from Entities import Entity
 from Level import Level
 from Effect import Effect
+from Items import gitem
 from Utils import Pr, Debug, Inp
 from actionparser import Actionparser
 from Assethandler import AssetHandler
-
 
 
 def interact_with_level(player, level, level_list):
@@ -16,22 +16,19 @@ def interact_with_level(player, level, level_list):
     i = 1
     Pr.dbg(f"Player: {player.name}, in Level: {level.name}")
     if level.name == "Menu":
-
-        Pr.n("\n"*5)
+        Pr.n("\n" * 5)
         Pr.headline(level.descr)
-        Pr.n("\n"*2)
+        Pr.n("\n" * 2)
     else:
         Pr.dbg("HUD")
         hud(player)
-        #pr.n(level.descr)
+        # pr.n(level.descr)
 
-
-        #Level Headers and Description
+        # Level Headers and Description
         level.printDesc()
 
-    #Print Level Choices
+    # Print Level Choices
     availableChoices = level.getAvailableChoices()
-    Pr.dbg(availableChoices, 1)
     for choice in availableChoices:
         print(f"{availableChoices.index(choice)+1}. {choice}")
     printed = True
@@ -45,28 +42,26 @@ def interact_with_level(player, level, level_list):
             Pr.dbg("Break!")
             return
     ##### ##### Reads triggers and action calls in level.text[dicts] ##### #####
-    #Pr.dbg("*"*20)
-    #pr.n(level.text[action][0])
-    #Pr.dbg("*"*20)
+    # Pr.dbg("*"*20)
+    # pr.n(level.text[action][0])
+    # Pr.dbg("*"*20)
     ####Is doing nothing ?
 
-    #Selecting index from available Actions
-    Pr.dbg(availableChoices, 2)
+    # Selecting index from available Actions
     Pr.dbg(f"All Actions: {availableChoices[action]}")
     Pr.dbg(f"Available Actions: {level.getAvailableChoices()}")
 
     # Sehr falsch, Index Choice 2 wird text 1 zugeordnet
     availableChoicesDict = dict(zip(availableChoices, level.text))
 
-    Pr.dbg(availableChoicesDict, 2)
-    #Link Choices - result test
+    # Link Choices - result test
 
     if action < len(availableChoicesDict.keys()):
         actions = availableChoicesDict[availableChoices[action]]
         for i in actions:
             _currentAction = actions[actions.index(i)]
             if _currentAction != "":
-                if isinstance(_currentAction,str):
+                if isinstance(_currentAction, str):
                     Pr.n(_currentAction)
                 else:
                     try:
@@ -74,15 +69,22 @@ def interact_with_level(player, level, level_list):
                             if "action" in _currentAction.keys():
                                 if _currentAction.get("action") == "change_location":
                                     for _level in level_list:
-                                        if _level.name == list(_currentAction.values())[1]:
-                                            actiontoadd = [_currentAction.get("action"),
-                                                            [mPlayer,mPlayer.location,_level]]
+                                        if (
+                                            _level.name
+                                            == list(_currentAction.values())[1]
+                                        ):
+                                            actiontoadd = [
+                                                _currentAction.get("action"),
+                                                [mPlayer, mPlayer.location, _level],
+                                            ]
                                 else:
-                                    actiontoadd = [_currentAction.get("action"),
-                                                    [mPlayer,list(_currentAction.values())[1]]]
+                                    actiontoadd = [
+                                        _currentAction.get("action"),
+                                        [mPlayer, list(_currentAction.values())[1]],
+                                    ]
                             else:
                                 Pr.dbg(f"No Action in Keys: {_currentAction}", 1)
-                                #Do Trigger Stuff
+                                # Do Trigger Stuff
                                 # Letzter eintrag aus actions = immer Trigger.
                                 # Supported nur einen Trigger!!!
                                 touched_trigger = actions[-1]
@@ -91,12 +93,15 @@ def interact_with_level(player, level, level_list):
                                 for index, l_trigger in enumerate(level_triggers_list):
                                     if l_trigger.keys() == touched_trigger.keys():
                                         level_triggers_list[index] = touched_trigger
-                            Pr.dbg(f'Add {actiontoadd} to Actionstack for entity: {mPlayer}')
+                            Pr.dbg(
+                                f"Add {actiontoadd} to Actionstack for entity: {mPlayer}"
+                            )
                             mPlayer.actionstack.append(actiontoadd)
                         except Exception as e:
                             Pr.dbg(f"ERR: {e}", 2)
                     except:
                         Pr.dbg(f"CurrentAction: {_currentAction}", 2)
+
 
 def hud(player):
     """Player Hud
@@ -104,16 +109,15 @@ def hud(player):
     Args:
         player (Entity): The Player to which the Hud should be displayed
     """
-    if Level.levelname(player.location) not in ("Menu","Options"):
-        Pr.n("+"*12+" "+"+"*12)
+    if Level.levelname(player.location) not in ("Menu", "Options"):
+        Pr.n("+" * 12 + " " + "+" * 12)
         Pr.n(f"Du befindest dich in: {Level.levelname(player.location)}")
         if player.hp > 25:
             Pr.g(f"HP: {player.hp}")
         else:
-
             Pr.b(f"HP: {player.hp}")
         Pr.n(f"Gold: {player.wealth}")
-        Pr.n(F"Level: {player.level} XP: {player.xp}")
+        Pr.n(f"Level: {player.level} XP: {player.xp}")
 
 
 def gameloop(player, level_list=None):
@@ -126,19 +130,25 @@ def gameloop(player, level_list=None):
 
     lap = 0
 
-    #Entering Gameloop
+    # Entering Gameloop
     while True:
-
         for level in level_list:
-            Pr.dbg(f"Comparing Levelname: {level.name} "
-                    f"to Player location: {Level.levelname(player.location)}")
+            Pr.dbg(
+                f"Comparing Levelname: {level.name} "
+                f"to Player location: {Level.levelname(player.location)}"
+            )
             if str(level.name) == str(Level.levelname(player.location)):
-                Pr.dbg(f"Player location ({Level.levelname(player.location)}) "
-                        f"is equal to Level ({level.name}), ")
+                Pr.dbg(
+                    f"Player location ({Level.levelname(player.location)}) "
+                    f"is equal to Level ({level.name}), "
+                )
                 if not player in level.entitylist:
-                    Pr.dbg(f"{player.name} not in {level.name} "
-                            f"- adding {player.name} to {level.name} entitylist",1)
-                    level.change_entity_list("+",player)
+                    Pr.dbg(
+                        f"{player.name} not in {level.name} "
+                        f"- adding {player.name} to {level.name} entitylist",
+                        1,
+                    )
+                    level.change_entity_list("+", player)
                 Pr.dbg(f"Setting CurrentLevel to Level: {Level.levelname(level)}")
                 current_level = level
 
@@ -155,7 +165,7 @@ def gameloop(player, level_list=None):
         match Actionparser.gamestate:
             case "loading":
                 Pr.dbg("You are now in Loading")
-                #loding steps
+                # loding steps
                 Actionparser.gamestate = "game"
             case "game":
                 Pr.dbg("You are now in Game")
@@ -171,17 +181,14 @@ def gameloop(player, level_list=None):
         # Increase Lap Counter by i
         lap = lap + 1
 
-        # Wait for Player Input
-        Debug.pause()
-
-        #Loop through all Entities in CurrentLevel and Apply Actionstack
+        # Loop through all Entities in CurrentLevel and Apply Actionstack
         Pr.dbg(f"Entitylist: {current_level.entitylist}")
         for e in current_level.entitylist:
             Pr.dbg(f"Working Actionstack for {e.name}")
             Pr.dbg(f"Actionstack: {e.actionstack}")
-            #Work through actionstack of Entity and process actions
-            for i in range(0,len(e.actionstack)):
-                Pr.dbg("#"*50)
+            # Work through actionstack of Entity and process actions
+            for i in range(0, len(e.actionstack)):
+                Pr.dbg("#" * 50)
                 Pr.dbg(f"Length of Actionstack: {len(e.actionstack)}")
                 Pr.dbg(f"Current Actionstack: {e.actionstack}")
                 Pr.dbg(f"Current Index: {i}")
@@ -190,7 +197,7 @@ def gameloop(player, level_list=None):
                 Pr.dbg(f"Cur_Action: {cur_action}")
                 Pr.dbg(f"Length of Actionstack after Action: {len(e.actionstack)}")
                 Pr.dbg(f"Current Actionstack after Action: {e.actionstack}")
-                Pr.dbg("#"*50)
+                Pr.dbg("#" * 50)
 
 
 if __name__ == "__main__":
@@ -204,6 +211,10 @@ if __name__ == "__main__":
     # Importing Entity Assets
     AssetHandler.importEntities()
     allEntities = AssetHandler.allEntities
+
+    # importing Item Assets
+    AssetHandler.importItems()
+    allItems = AssetHandler.allItems
 
     # Creating seperate Player Entitiies
     mPlayer = Entity(
@@ -233,11 +244,11 @@ if __name__ == "__main__":
     # put Kopfschmerz Effect in Actionstack
     mPlayer.actionstack.append(["add_effect", [mPlayer, "Kopfschmerz"]])
     mPlayer.actionstack.append(["take_effects", [mPlayer, True]])
-    mPlayer.actionstack.insert(0,["change_gamestate",["game"]])
+    mPlayer.actionstack.insert(0, ["change_gamestate", ["game"]])
 
     # List all Loaded Levels and Entities
     Debug.objlist(allLevels, "Levels")
     Debug.objlist(allEntities, "Entities")
-
+    Debug.objlist(allItems, "Items")
     # Run Game
     gameloop(mPlayer, allLevels)
