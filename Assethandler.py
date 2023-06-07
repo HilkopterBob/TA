@@ -43,7 +43,8 @@ class AssetHandler:
             List: List of Paths to Files
         """
         Pr.dbg(f"Gathering Assets from: {folder}")
-        _folder_name = folder.split("/")[1]
+        # TODO: find out the problem pylint has
+        _folder_name = folder.split("/")[1]  # pylint: disable=E1101
         st = process_time()
         _file_list = []
         for file in os.listdir(folder):

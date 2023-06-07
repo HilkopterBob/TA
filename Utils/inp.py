@@ -83,15 +83,16 @@ class Inp:
                         return 34
 
                     case "inv":
+                        # TODO: Pylint fix
                         Pr.dbg(f"{player}")
-                        player.actionstack.insert(
+                        player.actionstack.insert(  # pylint: disable=E1101
                             0, ["change_gamestate", ["inv"]]
-                        )  # pylint: disable=no-member
+                        )
                         return 34
                     case "changegamestate":
-                        player.actionstack.insert(
+                        player.actionstack.insert(  # pylint: disable=E1101
                             0, ["change_gamestate", [input_list[1]]]
-                        )  # pylint: disable=no-member
+                        )
                         return 34
                     case "save":
                         Pr.i("Die Funktion ist noch nicht implementiert")

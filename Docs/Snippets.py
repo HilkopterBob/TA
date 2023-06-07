@@ -1,3 +1,4 @@
+# pylint: skip-file
 """File just for some Snippets
 """
 import random
