@@ -57,7 +57,12 @@ class AssetHandler:
             else:
                 Pr.dbg(f"{os.path.join(folder, filename)} is no valid Asset File", 1)
         et = process_time()
-        Pr.dbg(f"Gathering Assets took: {(et-st)*1000}ms")
+        importtime = et - st
+        if importtime > 1:
+            dbglevel = 2
+        else:
+            dbglevel = 1
+        Pr.dbg(f"Gathering Assets took: {importtime*1000}ms", dbglevel)
         return _file_list
 
     def importLevels():
@@ -77,7 +82,12 @@ class AssetHandler:
         for _level in _level_files:
             AssetHandler.allLevels.extend(LevelInit.load_all_levels_from_json(_level))
         et = process_time()
-        Pr.dbg(f"Importing Levels took: {(et-st)*1000}ms")
+        importtime = et - st
+        if importtime > 1:
+            dbglevel = 2
+        else:
+            dbglevel = 1
+        Pr.dbg(f"Importing Levels took: {importtime*1000}ms", dbglevel)
         return None
 
     def importEntities():
@@ -156,7 +166,7 @@ class AssetHandler:
             dbglevel = 2
         else:
             dbglevel = 1
-        Pr.dbg(f"Importing Entities took: {importtime*1000}ms", dbglevel)
+        Pr.dbg(f"Importing Effects took: {importtime*1000}ms", dbglevel)
         return None
 
     def check_integrity(file):
