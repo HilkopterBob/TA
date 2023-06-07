@@ -14,12 +14,10 @@ Gamelogic: Was wird actionpaser und was direkt abgeabreitet?
 def inventorystate(Player):
 
     wants_exit = False
+    default_choice_items = ["zurück"]
 
     def item_inv_helper(Player, choosen_item):
-        print("consume_item_inv_helper called!!!")
         for item in Player.inv:
-            print(Player.inv)
-            print(item)
             try:
                 if choosen_item == item.name:
                     if item.usable == True:
@@ -38,7 +36,7 @@ def inventorystate(Player):
                         action = questionary.select(
                         f'Möchtest du {choosen_item} ausrüsten?',
                         choices=["ja", "nein"]).unsafe_ask()
-                        print(action)
+                        pr.Pr.dbg(action)
                         if action == "ja":
                             pr.Pr.dbg(f"Player Health: {Player.equip_slots}", 3)
                             pr.Pr.dbg(f"Player inv: {Player.inv}", 3)
@@ -47,11 +45,9 @@ def inventorystate(Player):
                             pr.Pr.dbg(f"Player inv: {Player.inv}", 3)
                         else:
                             break
-                        
             except Exception as e:
-                print(e)
-                print(item)
-
+                pr.Pr.dbg(e)
+                pr.Pr.dbg(item)
 
     while wants_exit != True:
 
@@ -65,11 +61,13 @@ def inventorystate(Player):
             if item.itype == "tool":
                 tools.append(item.name)
             if item.itype == "potion":
-                print(item)
                 potions.append(item.name)
             if item.itype == "misc":
                 misc.append(item.name)
-        print(potions)
+        weapons.extend(default_choice_items)
+        tools.extend(default_choice_items)
+        potions.extend(default_choice_items)
+        misc.extend(default_choice_items)
 
         inventory_space = questionary.select(
             'Choose 1Type:',
@@ -81,7 +79,7 @@ def inventorystate(Player):
                 "Equipment",
                 "zurück zum Spiel"
             ]).unsafe_ask()
-        
+
         match inventory_space:
             case "Weapons":
                 if len(weapons) != 0:
@@ -124,7 +122,6 @@ def inventorystate(Player):
                     'Du hast momentan kein Zeugs im Inventar.',
                     choices=["zurück"]).unsafe_ask()
             case "Equipment":
-                #print(Player.equip_slots)
                 equip = []
                 for item in Player.equip_slots:
                     if item == "placeholder":
@@ -146,15 +143,15 @@ def inventorystate(Player):
                             choices=["ablegen", "zurück"]).unsafe_ask()
                         match choosen_choice:
                             case "ablegen":
-                                pr.Pr.dbg(f"Player Health: {Player.equip_slots}", 3)
+                                pr.Pr.dbg(f"Player Current Equip: {Player.equip_slots}", 3)
                                 pr.Pr.dbg(f"Player inv: {Player.inv}", 3)
                                 Player.unequip_item(choosen_item)
-                                pr.Pr.dbg(f"Player Health: {Player.equip_slots}", 3)
+                                pr.Pr.dbg(f"Player New Equip: {Player.equip_slots}", 3)
                                 pr.Pr.dbg(f"Player inv: {Player.inv}", 3)
                             case "zurück":
                                 pass
                             case _:
-                                pr.Pr.dbg("Ein Item wurde weder abgelegt noch ist der spieler aus dem menü gegangen", 2)
+                                pr.Pr.dbg("Ein Unerlaubtes Menüitem wurde unter >>Inv>>Equip>> ausgewählt.", 2)
                 else:
                     choosen_item = questionary.select(
                         'Du hast gerade nichts Ausgerüstet.',
@@ -166,18 +163,8 @@ def inventorystate(Player):
             case "zurück":
                 pass
             case _:
-                print("No valid choice made")
-        
-        
-        try:
-            print(choosen_item)
-            
+                pr.Pr.dbg("Ein Unerlaubtes Menüitem wurde unter >>Inv>> ausgewählt.", 2)
 
-
-
-        except UnboundLocalError as e:
-            pr.Pr.dbg(f"Catched Error: {e}.\n\t\t\t\t\t\t It may be an empty Inventory Space, which tried to by printed.", 1)
-        
         if wants_exit == True:
             break
 
