@@ -98,7 +98,12 @@ class AssetHandler:
         for _entity in _entity_files:
             AssetHandler.allEntities.extend(EntityInit.load_entities_fromjson(_entity))
         et = process_time()
-        Pr.dbg(f"Importing Entities took: {(et-st)*1000}ms")
+        importtime = et - st
+        if importtime > 1:
+            dbglevel = 2
+        else:
+            dbglevel = 1
+        Pr.dbg(f"Importing Entities took: {importtime*1000}ms", dbglevel)
         return None
 
     def importItems():
@@ -118,9 +123,14 @@ class AssetHandler:
         for _items in _items_files:
             AssetHandler.allItems.extend(itemInit.load_all_items_from_json(_items))
         et = process_time()
-        Pr.dbg(f"Importing Items took: {(et-st)*1000}ms")
+        importtime = et - st
+        if importtime > 1:
+            dbglevel = 2
+        else:
+            dbglevel = 1
+        Pr.dbg(f"Importing Items took: {importtime*1000}ms", dbglevel)
         return None
-    
+
     def importEffects():
         """Imports Effects from Assets
 
@@ -141,7 +151,12 @@ class AssetHandler:
                 EffectInit.load_all_effects_from_json(_effect)
             )
         et = process_time()
-        Pr.dbg(f"Importing Effects took: {(et-st)*1000}ms")
+        importtime = et - st
+        if importtime > 1:
+            dbglevel = 2
+        else:
+            dbglevel = 1
+        Pr.dbg(f"Importing Entities took: {importtime*1000}ms", dbglevel)
         return None
 
     def check_integrity(file):
@@ -201,7 +216,7 @@ class AssetHandler:
 
         with Bar(
             "Checking File integrity...",
-            suffix="%(percent).1f%% - %(eta)ds",
+            suffix="%(percent).1f%% - ETA: %(eta)ds",
             max=len(_gameFiles),
         ) as progress:
             for gfile in _gameFiles:

@@ -184,9 +184,6 @@ def gameloop(player, level_list=None):
         # Increase Lap Counter by i
         lap = lap + 1
 
-        # Wait for Player Input
-        Debug.pause()
-
         # Loop through all Entities in CurrentLevel and Apply Actionstack
         Pr.dbg(f"Entitylist: {current_level.entitylist}")
         for e in current_level.entitylist:
