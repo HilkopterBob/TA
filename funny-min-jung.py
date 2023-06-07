@@ -29,7 +29,6 @@ def interact_with_level(player, level, level_list):
 
     # Print Level Choices
     availableChoices = level.getAvailableChoices()
-    Pr.dbg(availableChoices, 1)
     for choice in availableChoices:
         print(f"{availableChoices.index(choice)+1}. {choice}")
     printed = True
@@ -49,14 +48,12 @@ def interact_with_level(player, level, level_list):
     ####Is doing nothing ?
 
     # Selecting index from available Actions
-    Pr.dbg(availableChoices, 2)
     Pr.dbg(f"All Actions: {availableChoices[action]}")
     Pr.dbg(f"Available Actions: {level.getAvailableChoices()}")
 
     # Sehr falsch, Index Choice 2 wird text 1 zugeordnet
     availableChoicesDict = dict(zip(availableChoices, level.text))
 
-    Pr.dbg(availableChoicesDict, 2)
     # Link Choices - result test
 
     if action < len(availableChoicesDict.keys()):

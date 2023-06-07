@@ -43,6 +43,7 @@ class AssetHandler:
             List: List of Paths to Files
         """
         Pr.dbg(f"Gathering Assets from: {folder}")
+        _folder_name = folder.split("/")[1]
         st = process_time()
         _file_list = []
         for file in os.listdir(folder):
@@ -62,7 +63,7 @@ class AssetHandler:
             dbglevel = 2
         else:
             dbglevel = 1
-        Pr.dbg(f"Gathering Assets took: {importtime*1000}ms", dbglevel)
+        Pr.dbg(f"Gathering {_folder_name} took: {importtime*1000}ms", dbglevel)
         return _file_list
 
     def importLevels():
