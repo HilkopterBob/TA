@@ -186,7 +186,7 @@ if __name__ == "__main__":
     # Creating seperate Player Entitiies
     mPlayer = Entity(
         "Player",
-        100,
+        50,
         100,
         0,
         [gitem("Item1", "weapon"), gitem("item2", "misc")],

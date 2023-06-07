@@ -3,6 +3,7 @@
 from pystyle import  Colors, Write
 from Utils.pr import Pr
 from config import dbg
+#from Assethandler import AssetHandler
 
 class Inp():
     """
@@ -46,10 +47,31 @@ class Inp():
                 match input_list[0]:
 
                     #dev Befehle
-                    case "hallo":
-                        print("Hallo")
-                        for e in input_list:
-                            print(e)
+                    case "give" | "item":
+                        Pr.dbg("YES",3)
+                        pass
+                    
+                    # case "tp" | "teleport" | "changelevel" | "cl":
+                    #    Pr.dbg(f"{input_list[1]} - {AssetHandler.allLevels}",2)
+                    #    if [input_list[1]] in AssetHandler.allLevels :
+                    #        player.change_location(player.location, [input_list[1]])
+                    #    else :
+                    #        raise ValueError(f"{[input_list[1]]} ist kein gültiges Level")
+                    #    return 34
+                    
+                    case "changegamestate":
+                        player.actionstack.insert(0,["change_gamestate",[input_list[1]]]) # pylint: disable=no-member
+                        return 34
+                    
+                    case "effect":
+                        pass
+
+                    case "changehealth" | "ch":
+                        cvalue = int(input_list[1])
+                        player.change_health (cvalue)
+
+                    case "kill":
+                        player.change_health (-player.hp)
 
                     #User Befehle
 
@@ -63,6 +85,7 @@ class Inp():
                             for einzelwert in devbefehl:
                                 Pr.i(einzelwert)
                         return 34
+                    
                     case "opt":
                         return 34
 
@@ -70,9 +93,7 @@ class Inp():
                         Pr.dbg(f"{player}")
                         player.actionstack.insert(0,["change_gamestate",["inv"]]) # pylint: disable=no-member
                         return 34
-                    case "changegamestate":
-                        player.actionstack.insert(0,["change_gamestate",[input_list[1]]]) # pylint: disable=no-member
-                        return 34
+                    
                     case "save":
                         Pr.i("Die Funktion ist noch nicht implementiert")
                         return 34
