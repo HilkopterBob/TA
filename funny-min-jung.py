@@ -108,9 +108,11 @@ def hud(player):
     Args:
         player (Entity): The Player to which the Hud should be displayed
     """
-    if Level.levelname(player.location) not in ("Menu", "Options"):
-        Pr.n("+" * 12 + " " + "+" * 12)
-        Pr.n(f"Du befindest dich in: {Level.levelname(player.location)}")
+
+    if player.location not in ("Menu","Options"):
+        Pr.n("+"*12+" "+"+"*12)
+        Pr.n(f"Du befindest dich in: {player.location}")
+
         if player.hp > 25:
             Pr.g(f"HP: {player.hp}")
         else:
@@ -249,5 +251,7 @@ if __name__ == "__main__":
     Debug.objlist(allLevels, "Levels")
     Debug.objlist(allEntities, "Entities")
     Debug.objlist(allItems, "Items")
+    while len(mPlayer.slots) < 11:
+        mPlayer.slots.append("placeholder")
     # Run Game
     gameloop(mPlayer, allLevels)

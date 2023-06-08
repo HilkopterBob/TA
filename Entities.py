@@ -14,21 +14,21 @@ class Entity:
     Contains Functions:
     from_json : Creates Entities from JSON
     """
+    def __init__(   self,
+                    name="Blanko",
+                    health=100,
+                    wealth=100,
+                    xp=0,
+                    inv=None,
+                    ptype="",
+                    geffects=None,
+                    beffects=None,
+                    eeffects=None,
+                    location="Nirvana",
+                    level=1,
+                    slots=None
+                    ):
 
-    def __init__(
-        self,
-        name="Blanko",
-        health=100,
-        wealth=100,
-        xp=0,
-        inv=None,
-        ptype="",
-        geffects=None,
-        beffects=None,
-        eeffects=None,
-        location="Nirvana",
-        level=1,
-    ):
         if inv is None:
             inv = []
         if geffects is None:
@@ -37,6 +37,8 @@ class Entity:
             beffects = []
         if eeffects is None:
             eeffects = []
+        if slots is None:
+            slots = []
 
         self.location = location
         self.name = name
@@ -51,6 +53,10 @@ class Entity:
         self.eeffects = eeffects
         self.effects = [[self.geffects], [self.beffects], [self.eeffects]]
         self.actionstack = []
+        self.slots = slots  #["Head_slot", "Torso_slot", "Underwear", "Left_arm", "Right_arm",
+                                        #"Left_leg", "Right_leg", "Gloves_slot",
+                                        # "Meele Weapon", "Ranged Weapon",
+                                        #"Quick_draw potion"]
 
     @staticmethod
     def from_json(json_dct):
@@ -375,8 +381,113 @@ class Entity:
             break
         return True
 
+    def consume_item(self, item_name):
+        """enables consumption of consumables.
+        """
+        for item in self.inv:
+            if item.name == item_name:
+                consumable = item
 
-class EntityInit:
+        if consumable.effects and consumable.itype != "Food":
+            if len(consumable.effects) != 0:
+                for effect in consumable.effects:
+                    self.add_effect(effect)
+            else:
+                self.change_health(consumable.dbg)
+            self.remove_item_by_name(consumable.name)
+
+        if consumable.itype == "Food":
+            self.change_health(consumable.dmg)
+
+    def equip_item(self, item_name):
+        """enables equiping of eqipment"""
+        for item in self.inv:
+            if item.name == item_name:
+                cur_item = item
+
+        match cur_item.equip_slot:
+            case "head":
+                if self.slots[0]:
+                    if self.slots[0] != "placeholder":
+                        self.inv.append(self.slots[0])
+                self.slots[0] = cur_item
+                self.inv.remove(cur_item)
+            case "torso":
+                if self.slots[1]:
+                    if self.slots[1] != "placeholder":
+                        self.inv.append(self.slots[1])
+                self.slots[1] = cur_item
+                self.inv.remove(cur_item)
+            case "underwear":
+                if self.slots[2]:
+                    if self.slots[2] != "placeholder":
+                        self.inv.append(self.slots[2])
+                self.slots[2] = cur_item
+                self.inv.remove(cur_item)
+            case "left_arm":
+                if self.slots[3]:
+                    if self.slots[3] != "placeholder":
+                        self.inv.append(self.slots[3])
+                self.slots[3] = cur_item
+                self.inv.remove(cur_item)
+            case "right_arm":
+                if self.slots[4]:
+                    if self.slots[4] != "placeholder":
+                        self.inv.append(self.slots[4])
+                self.slots[4] = cur_item
+                self.inv.remove(cur_item)
+            case "left_leg":
+                if self.slots[5]:
+                    if self.slots[5] != "placeholder":
+                        self.inv.append(self.slots[5])
+                self.slots[5] = cur_item
+                self.inv.remove(cur_item)
+            case "right_leg":
+                if self.slots[6]:
+                    if self.slots[6] != "placeholder":
+                        self.inv.append(self.slots[6])
+                self.slots[6] = cur_item
+                self.inv.remove(cur_item)
+            case "gloves":
+                if self.slots[7]:
+                    if self.slots[7] != "placeholder":
+                        self.inv.append(self.slots[7])
+                self.slots[7] = cur_item
+                self.inv.remove(cur_item)
+            case "meele":
+                if self.slots[8]:
+                    if self.slots[8] != "placeholder":
+                        self.inv.append(self.slots[8])
+                self.slots[8] = cur_item
+                self.inv.remove(cur_item)
+            case "ranged":
+                if self.slots[9]:
+                    if self.slots[9] != "placeholder":
+                        self.inv.append(self.slots[9])
+                self.slots[9] = cur_item
+                self.inv.remove(cur_item)
+            case "quick_draw_potion":
+                if self.slots[10]:
+                    if self.slots[10] != "placeholder":
+                        self.inv.append(self.slots[10])
+                self.slots[10] = cur_item
+                self.inv.remove(cur_item)
+
+    def unequip_item(self, item_name):
+        """enable unequiping equiped items
+
+        Args:
+            item_name (str): name of unequiping item
+        """
+        for index, item in enumerate(self.slots):
+            if isinstance(item, str):
+                continue
+            if item.name == item_name:
+                self.inv.append(item)
+                self.slots[index] = "placeholder"
+
+
+class EntityInit():
     """
     Class which Initializes Entities
     Contains Functions:
