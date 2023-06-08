@@ -53,8 +53,9 @@ class Entity:
         self.eeffects = eeffects
         self.effects = [[self.geffects], [self.beffects], [self.eeffects]]
         self.actionstack = []
-        self.slots = slots  #["Head_slot", "Torso_slot", "Underwear", "Left_arm", "Right_arm", 
-                                        #"Left_leg", "Right_leg", "Gloves_slot", "Meele Weapon", "Ranged Weapon", 
+        self.slots = slots  #["Head_slot", "Torso_slot", "Underwear", "Left_arm", "Right_arm",
+                                        #"Left_leg", "Right_leg", "Gloves_slot",
+                                        # "Meele Weapon", "Ranged Weapon",
                                         #"Quick_draw potion"]
 
     @staticmethod
@@ -381,6 +382,8 @@ class Entity:
         return True
 
     def consume_item(self, item_name):
+        """enables consumption of consumables.
+        """
         for item in self.inv:
             if item.name == item_name:
                 consumable = item
@@ -397,11 +400,11 @@ class Entity:
             self.change_health(consumable.dmg)
 
     def equip_item(self, item_name):
-    
+        """enables equiping of eqipment"""
         for item in self.inv:
             if item.name == item_name:
                 cur_item = item
-        
+
         match cur_item.equip_slot:
             case "head":
                 if self.slots[0]:
@@ -471,6 +474,11 @@ class Entity:
                 self.inv.remove(cur_item)
 
     def unequip_item(self, item_name):
+        """enable unequiping equiped items
+
+        Args:
+            item_name (str): name of unequiping item
+        """
         for index, item in enumerate(self.slots):
             if isinstance(item, str):
                 continue

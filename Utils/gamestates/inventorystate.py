@@ -1,17 +1,16 @@
+"""implementation of inventory
+"""
 import questionary
 from Utils import pr
 
 
-"""
-TODO:
-Gamelogic: Was wird actionpaser und was direkt abgeabreitet?
-
-
-
-
-"""
 
 def inventorystate(Player):
+    """implementation of inventory
+
+    Args:
+        Player (obj:entity): the player obj.
+    """
 
     wants_exit = False
     default_choice_items = ["zurück"]
@@ -20,7 +19,7 @@ def inventorystate(Player):
         for item in Player.inv:
             try:
                 if choosen_item == item.name:
-                    if item.usable == True:
+                    if item.usable:
                         action = questionary.select(
                             f'Möchtest du {choosen_item} verbrauchen?',
                             choices=["ja", "nein"]).unsafe_ask()
@@ -32,7 +31,7 @@ def inventorystate(Player):
                             pr.Pr.dbg(f"Player inv:                 {Player.inv}", 3)
                         else:
                             break
-                    if item.equipable == True:
+                    if item.equipable:
                         action = questionary.select(
                         f'Möchtest du {choosen_item} ausrüsten?',
                         choices=["ja", "nein"]).unsafe_ask()
@@ -49,7 +48,7 @@ def inventorystate(Player):
                 pr.Pr.dbg(e)
                 pr.Pr.dbg(item)
 
-    while wants_exit != True:
+    while not wants_exit:
 
         weapons = []
         tools = []
@@ -90,7 +89,8 @@ def inventorystate(Player):
                         item_inv_helper(Player, choosen_item)
                 else:
                     choosen_item = questionary.select(
-                    'Du hast momentan keine Waffen im Inventar. Hast du sie vielleicht grade ausgerüstet?',
+                    '''Du hast momentan keine Waffen im Inventar.
+                    Hast du sie vielleicht grade ausgerüstet?''',
                     choices=["zurück"]).unsafe_ask()
             case "Tools":
                 if len(tools) != 0:
@@ -126,18 +126,16 @@ def inventorystate(Player):
                 for item in Player.slots:
                     if item == "placeholder":
                         continue
-                    else:
-                        try:
-                            if item.name != "placeholder":
-                                equip.append(item.name)
-                        except Exception as e:
-                            pass
+                    try:
+                        if item.name != "placeholder":
+                            equip.append(item.name)
+                    except:
+                        pass
                 if len(equip) != 0:
                     choosen_item = questionary.select(
                     'Deine verwendete Ausrüstung:',
                     choices=equip).unsafe_ask()
                     if choosen_item != "zurück":
-                        """hier muss ein auswahlmenü hin"""
                         choosen_choice = questionary.select(
                             'Deine verwendete Ausrüstung:',
                             choices=["ablegen", "zurück"]).unsafe_ask()
@@ -151,7 +149,8 @@ def inventorystate(Player):
                             case "zurück":
                                 pass
                             case _:
-                                pr.Pr.dbg("Ein Unerlaubtes Menüitem wurde unter >>Inv>>Equip>> ausgewählt.", 2)
+                                pr.Pr.dbg("Ein Unerlaubtes Menüitem wurde unter"\
+                                           ">>Inv>>Equip>> ausgewählt.", 2)
                 else:
                     choosen_item = questionary.select(
                         'Du hast gerade nichts Ausgerüstet.',
@@ -165,6 +164,6 @@ def inventorystate(Player):
             case _:
                 pr.Pr.dbg("Ein Unerlaubtes Menüitem wurde unter >>Inv>> ausgewählt.", 2)
 
-        if wants_exit == True:
+        if wants_exit:
             break
 
