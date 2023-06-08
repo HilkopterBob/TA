@@ -404,8 +404,7 @@ class Entity:
         for item in self.inv:
             if item.name == item_name:
                 cur_item = item
-
-        match cur_item.equip_slot:
+        match cur_item.slots[0]:
             case "head":
                 if self.slots[0]:
                     if self.slots[0] != "placeholder":
@@ -454,7 +453,7 @@ class Entity:
                         self.inv.append(self.slots[7])
                 self.slots[7] = cur_item
                 self.inv.remove(cur_item)
-            case "meele":
+            case "melee":
                 if self.slots[8]:
                     if self.slots[8] != "placeholder":
                         self.inv.append(self.slots[8])
@@ -472,6 +471,8 @@ class Entity:
                         self.inv.append(self.slots[10])
                 self.slots[10] = cur_item
                 self.inv.remove(cur_item)
+            case _:
+                Pr.dbg("Item has no equipment slot assigned", 1)
 
     def unequip_item(self, item_name):
         """enable unequiping equiped items

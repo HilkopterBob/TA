@@ -5,6 +5,7 @@ from Level import Level
 from Effect import Effect
 from Items import gitem
 from Utils import Pr, Debug, Inp
+from Utils.gamestates.inventorystate import inventorystate
 from actionparser import Actionparser
 from Assethandler import AssetHandler
 
@@ -172,7 +173,7 @@ def gameloop(player, level_list=None):
                 Pr.dbg("You are now in Game")
                 interact_with_level(player, current_level, level_list)
             case "inv":
-                Pr.dbg("You are now in Inventory")
+                inventorystate(mPlayer)
                 Actionparser.gamestate = "game"
 
         player.check_level_up()
@@ -223,7 +224,7 @@ if __name__ == "__main__":
         100,
         100,
         0,
-        [gitem("Item1", "weapon"), gitem("item2", "misc")],
+        [gitem("Item1", "weapon"), gitem("item2", "misc"), allItems[0], allItems[2]],
         location=allLevels[1],
     )
     hurensohn = Entity(
@@ -231,7 +232,7 @@ if __name__ == "__main__":
         100,
         100,
         0,
-        [gitem("Item1", "weapon"), gitem("item2", "misc")],
+        [gitem("Item1", "weapon", ), gitem("item2", "misc")],
         location="Wiese",
     )
 

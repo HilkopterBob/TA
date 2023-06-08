@@ -35,13 +35,12 @@ def inventorystate(Player):
                         action = questionary.select(
                         f'Möchtest du {choosen_item} ausrüsten?',
                         choices=["ja", "nein"]).unsafe_ask()
-                        pr.Pr.dbg(action)
                         if action == "ja":
-                            pr.Pr.dbg(f"Player Health: {Player.slots}", 3)
-                            pr.Pr.dbg(f"Player inv: {Player.inv}", 3)
+                            pr.Pr.dbg(f"Player Slots: {Player.slots}", 0)
+                            pr.Pr.dbg(f"Player inv: {Player.inv}", 0)
                             Player.equip_item(choosen_item)
-                            pr.Pr.dbg(f"Player Health: {Player.slots}", 3)
-                            pr.Pr.dbg(f"Player inv: {Player.inv}", 3)
+                            pr.Pr.dbg(f"Player Slots: {Player.slots}", 0)
+                            pr.Pr.dbg(f"Player inv: {Player.inv}", 0)
                         else:
                             break
             except Exception as e:
