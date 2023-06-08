@@ -9,6 +9,7 @@ from .config import (
     levels_folder,
     entities_folder,
     effects_folder,
+    items_folder,
     checksum_file,
     root_folder,
 )
@@ -21,6 +22,7 @@ __all__ = [
     "log_file",
     "levels_folder",
     "entities_folder",
+    "items_folder",
     "effects_folder",
     "checksum_file",
     "root_folder",

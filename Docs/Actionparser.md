@@ -45,9 +45,6 @@ Diese Methode ruft im Actionparser die Funktion "applyeffect" mit den Parametern
 
 ### Applyeffect
 
-TODO:
-[ ] Actually apply Effect and not only write it to DBG
-
 Die Funktion ist zum Anwenden eines Effektes auf eine Entität
 
 Aus dem Vorherigen Beispiel wäre der Funktionsaufruf wie folgt:
