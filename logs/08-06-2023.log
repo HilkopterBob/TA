@@ -1,0 +1,734 @@
+09:39:11 - [43] INFO - Assethandler - getFiles: Gathering Assets from: Assets/Levels
+09:39:11 - [50] INFO - Assethandler - getFiles: Found Asset: Assets/Levels\Kreuzung.json
+09:39:11 - [50] INFO - Assethandler - getFiles: Found Asset: Assets/Levels\levels.json
+09:39:11 - [50] INFO - Assethandler - getFiles: Found Asset: Assets/Levels\Wiese.json
+09:39:11 - [70] INFO - Assethandler - importLevels: Importing Level(s) from: ['Assets/Levels\\Kreuzung.json', 'Assets/Levels\\levels.json', 'Assets/Levels\\Wiese.json']
+09:39:11 - [43] INFO - Assethandler - getFiles: Gathering Assets from: Assets/Entities
+09:39:11 - [50] INFO - Assethandler - getFiles: Found Asset: Assets/Entities\Goblin.json
+09:39:11 - [50] INFO - Assethandler - getFiles: Found Asset: Assets/Entities\Player.json
+09:39:11 - [55] WARN - Assethandler - getFiles: Assets/Entities\trial.png is no valid Asset File
+09:39:11 - [87] INFO - Assethandler - importEntities: Importing Entities: ['Assets/Entities\\Goblin.json', 'Assets/Entities\\Player.json']
+09:39:11 - [29] INFO - Utils.Debug - objlist: Loaded Levels: ['Kreuzung', 'Menu', 'Options', 'Tisch', 'Zimmer', 'Pub', 'Kräuterhändler', 'Schmied', 'Markthalle', 'Stadt', 'placeholder', 'Wiese']
+09:39:11 - [29] INFO - Utils.Debug - objlist: Loaded Entities: ['', 'Player']
+09:39:11 - [145] INFO - __main__ - gameloop: Current Gamestate: loading
+09:39:11 - [149] INFO - __main__ - gameloop: You are now in Loading
+09:39:11 - [331] INFO - Entities - check_level_up: Previous Level: 1
+09:39:11 - [145] INFO - __main__ - gameloop: Current Gamestate: game
+09:39:11 - [153] INFO - __main__ - gameloop: You are now in Game
+09:39:12 - [46] INFO - __main__ - interact_with_level: <Entities.Entity object at 0x00000273ED0F0B90>
+09:39:12 - [14] INFO - Utils.inp - inp: <Entities.Entity object at 0x00000273ED0F0B90>
+09:39:12 - [82] INFO - __main__ - interact_with_level: ['action', 'new_level_name']
+09:39:12 - [83] INFO - __main__ - interact_with_level: change_location
+09:39:12 - [84] INFO - __main__ - interact_with_level: Wiese
+09:39:12 - [82] INFO - __main__ - interact_with_level: ['action', 'effect_name']
+09:39:12 - [83] INFO - __main__ - interact_with_level: add_effect
+09:39:12 - [84] INFO - __main__ - interact_with_level: Kopfschmerz
+09:39:12 - [331] INFO - Entities - check_level_up: Previous Level: 1
+09:39:13 - [141] INFO - __main__ - gameloop: ['change_gamestate', ['game']]
+09:39:13 - [309] INFO - actionparser - change_gamestate: Changing Gamestate to game
+09:39:13 - [141] INFO - __main__ - gameloop: ['take_effects', [<Entities.Entity object at 0x00000273ED0F0B90>, True]]
+09:39:13 - [145] INFO - __main__ - gameloop: Current Gamestate: game
+09:39:13 - [153] INFO - __main__ - gameloop: You are now in Game
+09:39:14 - [46] INFO - __main__ - interact_with_level: <Entities.Entity object at 0x00000273ED0F0B90>
+09:39:14 - [14] INFO - Utils.inp - inp: <Entities.Entity object at 0x00000273ED0F0B90>
+09:39:14 - [70] INFO - Utils.inp - inp: <Entities.Entity object at 0x00000273ED0F0B90>
+09:39:14 - [49] INFO - __main__ - interact_with_level: Break!
+09:39:14 - [331] INFO - Entities - check_level_up: Previous Level: 1
+09:39:14 - [141] INFO - __main__ - gameloop: ['change_gamestate', ['inv']]
+09:39:14 - [309] INFO - actionparser - change_gamestate: Changing Gamestate to inv
+09:39:14 - [145] INFO - __main__ - gameloop: Current Gamestate: inv
+09:39:14 - [156] INFO - __main__ - gameloop: You are now in Inventory
+09:40:24 - [331] INFO - Entities - check_level_up: Previous Level: 1
+09:40:25 - [141] INFO - __main__ - gameloop: ['add_effect', [<Entities.Entity object at 0x00000273ED0F0B90>, 'Kopfschmerz']]
+09:40:25 - [145] INFO - __main__ - gameloop: Current Gamestate: game
+09:40:25 - [153] INFO - __main__ - gameloop: You are now in Game
+09:40:26 - [46] INFO - __main__ - interact_with_level: <Entities.Entity object at 0x00000273ED0F0B90>
+09:40:26 - [14] INFO - Utils.inp - inp: <Entities.Entity object at 0x00000273ED0F0B90>
+09:40:27 - [82] INFO - __main__ - interact_with_level: ['action', 'effect.name']
+09:40:27 - [83] INFO - __main__ - interact_with_level: remove_effect_by_name
+09:40:27 - [84] INFO - __main__ - interact_with_level: Kopfschmerz
+09:40:27 - [331] INFO - Entities - check_level_up: Previous Level: 1
+09:40:28 - [145] INFO - __main__ - gameloop: Current Gamestate: game
+09:40:28 - [153] INFO - __main__ - gameloop: You are now in Game
+09:40:28 - [46] INFO - __main__ - interact_with_level: <Entities.Entity object at 0x00000273ED0F0B90>
+09:40:28 - [14] INFO - Utils.inp - inp: <Entities.Entity object at 0x00000273ED0F0B90>
+09:40:29 - [82] INFO - __main__ - interact_with_level: ['action', 'effect.name']
+09:40:29 - [83] INFO - __main__ - interact_with_level: remove_effect_by_name
+09:40:29 - [84] INFO - __main__ - interact_with_level: Kopfschmerz
+09:40:29 - [331] INFO - Entities - check_level_up: Previous Level: 1
+09:40:30 - [145] INFO - __main__ - gameloop: Current Gamestate: game
+09:40:30 - [153] INFO - __main__ - gameloop: You are now in Game
+09:40:30 - [46] INFO - __main__ - interact_with_level: <Entities.Entity object at 0x00000273ED0F0B90>
+09:40:30 - [14] INFO - Utils.inp - inp: <Entities.Entity object at 0x00000273ED0F0B90>
+09:40:31 - [82] INFO - __main__ - interact_with_level: ['action', 'effect.name']
+09:40:31 - [83] INFO - __main__ - interact_with_level: remove_effect_by_name
+09:40:31 - [84] INFO - __main__ - interact_with_level: Kopfschmerz
+09:40:31 - [331] INFO - Entities - check_level_up: Previous Level: 1
+09:40:31 - [145] INFO - __main__ - gameloop: Current Gamestate: game
+09:40:31 - [153] INFO - __main__ - gameloop: You are now in Game
+09:40:32 - [46] INFO - __main__ - interact_with_level: <Entities.Entity object at 0x00000273ED0F0B90>
+09:40:32 - [14] INFO - Utils.inp - inp: <Entities.Entity object at 0x00000273ED0F0B90>
+09:40:32 - [82] INFO - __main__ - interact_with_level: ['action', 'effect.name']
+09:40:32 - [83] INFO - __main__ - interact_with_level: remove_effect_by_name
+09:40:32 - [84] INFO - __main__ - interact_with_level: Kopfschmerz
+09:40:32 - [331] INFO - Entities - check_level_up: Previous Level: 1
+09:40:32 - [145] INFO - __main__ - gameloop: Current Gamestate: game
+09:40:32 - [153] INFO - __main__ - gameloop: You are now in Game
+09:40:33 - [46] INFO - __main__ - interact_with_level: <Entities.Entity object at 0x00000273ED0F0B90>
+09:40:33 - [14] INFO - Utils.inp - inp: <Entities.Entity object at 0x00000273ED0F0B90>
+09:40:33 - [82] INFO - __main__ - interact_with_level: ['action', 'effect.name']
+09:40:33 - [83] INFO - __main__ - interact_with_level: remove_effect_by_name
+09:40:33 - [84] INFO - __main__ - interact_with_level: Kopfschmerz
+09:40:33 - [331] INFO - Entities - check_level_up: Previous Level: 1
+09:40:33 - [145] INFO - __main__ - gameloop: Current Gamestate: game
+09:40:33 - [153] INFO - __main__ - gameloop: You are now in Game
+09:40:34 - [46] INFO - __main__ - interact_with_level: <Entities.Entity object at 0x00000273ED0F0B90>
+09:40:34 - [14] INFO - Utils.inp - inp: <Entities.Entity object at 0x00000273ED0F0B90>
+09:40:34 - [82] INFO - __main__ - interact_with_level: ['action', 'effect.name']
+09:40:34 - [83] INFO - __main__ - interact_with_level: remove_effect_by_name
+09:40:34 - [84] INFO - __main__ - interact_with_level: Kopfschmerz
+09:40:34 - [331] INFO - Entities - check_level_up: Previous Level: 1
+09:40:34 - [145] INFO - __main__ - gameloop: Current Gamestate: game
+09:40:34 - [153] INFO - __main__ - gameloop: You are now in Game
+09:40:35 - [46] INFO - __main__ - interact_with_level: <Entities.Entity object at 0x00000273ED0F0B90>
+09:40:35 - [14] INFO - Utils.inp - inp: <Entities.Entity object at 0x00000273ED0F0B90>
+09:40:35 - [82] INFO - __main__ - interact_with_level: ['action', 'effect.name']
+09:40:35 - [83] INFO - __main__ - interact_with_level: remove_effect_by_name
+09:40:35 - [84] INFO - __main__ - interact_with_level: Kopfschmerz
+09:40:35 - [331] INFO - Entities - check_level_up: Previous Level: 1
+09:40:35 - [145] INFO - __main__ - gameloop: Current Gamestate: game
+09:40:35 - [153] INFO - __main__ - gameloop: You are now in Game
+09:40:36 - [46] INFO - __main__ - interact_with_level: <Entities.Entity object at 0x00000273ED0F0B90>
+09:40:36 - [14] INFO - Utils.inp - inp: <Entities.Entity object at 0x00000273ED0F0B90>
+09:40:36 - [82] INFO - __main__ - interact_with_level: ['action', 'effect.name']
+09:40:36 - [83] INFO - __main__ - interact_with_level: remove_effect_by_name
+09:40:36 - [84] INFO - __main__ - interact_with_level: Kopfschmerz
+09:40:36 - [331] INFO - Entities - check_level_up: Previous Level: 1
+09:40:36 - [145] INFO - __main__ - gameloop: Current Gamestate: game
+09:40:36 - [153] INFO - __main__ - gameloop: You are now in Game
+09:40:37 - [46] INFO - __main__ - interact_with_level: <Entities.Entity object at 0x00000273ED0F0B90>
+09:40:37 - [14] INFO - Utils.inp - inp: <Entities.Entity object at 0x00000273ED0F0B90>
+09:40:37 - [82] INFO - __main__ - interact_with_level: ['action', 'effect.name']
+09:40:37 - [83] INFO - __main__ - interact_with_level: remove_effect_by_name
+09:40:37 - [84] INFO - __main__ - interact_with_level: Kopfschmerz
+09:40:37 - [331] INFO - Entities - check_level_up: Previous Level: 1
+09:40:37 - [145] INFO - __main__ - gameloop: Current Gamestate: game
+09:40:37 - [153] INFO - __main__ - gameloop: You are now in Game
+09:40:38 - [46] INFO - __main__ - interact_with_level: <Entities.Entity object at 0x00000273ED0F0B90>
+09:40:38 - [14] INFO - Utils.inp - inp: <Entities.Entity object at 0x00000273ED0F0B90>
+09:40:38 - [82] INFO - __main__ - interact_with_level: ['action', 'effect.name']
+09:40:38 - [83] INFO - __main__ - interact_with_level: remove_effect_by_name
+09:40:38 - [84] INFO - __main__ - interact_with_level: Kopfschmerz
+09:40:38 - [331] INFO - Entities - check_level_up: Previous Level: 1
+09:40:38 - [145] INFO - __main__ - gameloop: Current Gamestate: game
+09:40:38 - [153] INFO - __main__ - gameloop: You are now in Game
+09:40:39 - [46] INFO - __main__ - interact_with_level: <Entities.Entity object at 0x00000273ED0F0B90>
+09:40:39 - [14] INFO - Utils.inp - inp: <Entities.Entity object at 0x00000273ED0F0B90>
+09:40:40 - [82] INFO - __main__ - interact_with_level: ['action', 'effect.name']
+09:40:40 - [83] INFO - __main__ - interact_with_level: remove_effect_by_name
+09:40:40 - [84] INFO - __main__ - interact_with_level: Kopfschmerz
+09:40:40 - [331] INFO - Entities - check_level_up: Previous Level: 1
+09:40:40 - [145] INFO - __main__ - gameloop: Current Gamestate: game
+09:40:40 - [153] INFO - __main__ - gameloop: You are now in Game
+09:40:40 - [46] INFO - __main__ - interact_with_level: <Entities.Entity object at 0x00000273ED0F0B90>
+09:40:40 - [14] INFO - Utils.inp - inp: <Entities.Entity object at 0x00000273ED0F0B90>
+09:40:41 - [82] INFO - __main__ - interact_with_level: ['action', 'effect.name']
+09:40:41 - [83] INFO - __main__ - interact_with_level: remove_effect_by_name
+09:40:41 - [84] INFO - __main__ - interact_with_level: Kopfschmerz
+09:40:41 - [331] INFO - Entities - check_level_up: Previous Level: 1
+09:40:41 - [145] INFO - __main__ - gameloop: Current Gamestate: game
+09:40:41 - [153] INFO - __main__ - gameloop: You are now in Game
+09:40:41 - [46] INFO - __main__ - interact_with_level: <Entities.Entity object at 0x00000273ED0F0B90>
+09:40:41 - [14] INFO - Utils.inp - inp: <Entities.Entity object at 0x00000273ED0F0B90>
+09:40:42 - [82] INFO - __main__ - interact_with_level: ['action', 'effect.name']
+09:40:42 - [83] INFO - __main__ - interact_with_level: remove_effect_by_name
+09:40:42 - [84] INFO - __main__ - interact_with_level: Kopfschmerz
+09:40:42 - [331] INFO - Entities - check_level_up: Previous Level: 1
+09:40:42 - [145] INFO - __main__ - gameloop: Current Gamestate: game
+09:40:42 - [153] INFO - __main__ - gameloop: You are now in Game
+09:40:42 - [46] INFO - __main__ - interact_with_level: <Entities.Entity object at 0x00000273ED0F0B90>
+09:40:42 - [14] INFO - Utils.inp - inp: <Entities.Entity object at 0x00000273ED0F0B90>
+09:40:43 - [82] INFO - __main__ - interact_with_level: ['action', 'effect.name']
+09:40:43 - [83] INFO - __main__ - interact_with_level: remove_effect_by_name
+09:40:43 - [84] INFO - __main__ - interact_with_level: Kopfschmerz
+09:40:43 - [331] INFO - Entities - check_level_up: Previous Level: 1
+09:40:43 - [145] INFO - __main__ - gameloop: Current Gamestate: game
+09:40:43 - [153] INFO - __main__ - gameloop: You are now in Game
+09:40:44 - [46] INFO - __main__ - interact_with_level: <Entities.Entity object at 0x00000273ED0F0B90>
+09:40:44 - [14] INFO - Utils.inp - inp: <Entities.Entity object at 0x00000273ED0F0B90>
+09:40:44 - [82] INFO - __main__ - interact_with_level: ['action', 'effect.name']
+09:40:44 - [83] INFO - __main__ - interact_with_level: remove_effect_by_name
+09:40:44 - [84] INFO - __main__ - interact_with_level: Kopfschmerz
+09:40:44 - [331] INFO - Entities - check_level_up: Previous Level: 1
+09:40:44 - [145] INFO - __main__ - gameloop: Current Gamestate: game
+09:40:44 - [153] INFO - __main__ - gameloop: You are now in Game
+09:40:45 - [46] INFO - __main__ - interact_with_level: <Entities.Entity object at 0x00000273ED0F0B90>
+09:40:45 - [14] INFO - Utils.inp - inp: <Entities.Entity object at 0x00000273ED0F0B90>
+09:40:45 - [82] INFO - __main__ - interact_with_level: ['action', 'effect.name']
+09:40:45 - [83] INFO - __main__ - interact_with_level: remove_effect_by_name
+09:40:45 - [84] INFO - __main__ - interact_with_level: Kopfschmerz
+09:40:45 - [331] INFO - Entities - check_level_up: Previous Level: 1
+09:40:45 - [145] INFO - __main__ - gameloop: Current Gamestate: game
+09:40:45 - [153] INFO - __main__ - gameloop: You are now in Game
+09:40:46 - [46] INFO - __main__ - interact_with_level: <Entities.Entity object at 0x00000273ED0F0B90>
+09:40:46 - [14] INFO - Utils.inp - inp: <Entities.Entity object at 0x00000273ED0F0B90>
+09:40:46 - [82] INFO - __main__ - interact_with_level: ['action', 'effect.name']
+09:40:46 - [83] INFO - __main__ - interact_with_level: remove_effect_by_name
+09:40:46 - [84] INFO - __main__ - interact_with_level: Kopfschmerz
+09:40:46 - [331] INFO - Entities - check_level_up: Previous Level: 1
+09:40:46 - [145] INFO - __main__ - gameloop: Current Gamestate: game
+09:40:46 - [153] INFO - __main__ - gameloop: You are now in Game
+09:40:47 - [46] INFO - __main__ - interact_with_level: <Entities.Entity object at 0x00000273ED0F0B90>
+09:40:47 - [14] INFO - Utils.inp - inp: <Entities.Entity object at 0x00000273ED0F0B90>
+09:40:47 - [82] INFO - __main__ - interact_with_level: ['action', 'effect.name']
+09:40:47 - [83] INFO - __main__ - interact_with_level: remove_effect_by_name
+09:40:47 - [84] INFO - __main__ - interact_with_level: Kopfschmerz
+09:40:47 - [331] INFO - Entities - check_level_up: Previous Level: 1
+09:40:47 - [145] INFO - __main__ - gameloop: Current Gamestate: game
+09:40:47 - [153] INFO - __main__ - gameloop: You are now in Game
+09:40:48 - [46] INFO - __main__ - interact_with_level: <Entities.Entity object at 0x00000273ED0F0B90>
+09:40:48 - [14] INFO - Utils.inp - inp: <Entities.Entity object at 0x00000273ED0F0B90>
+09:40:48 - [82] INFO - __main__ - interact_with_level: ['action', 'effect.name']
+09:40:48 - [83] INFO - __main__ - interact_with_level: remove_effect_by_name
+09:40:48 - [84] INFO - __main__ - interact_with_level: Kopfschmerz
+09:40:48 - [331] INFO - Entities - check_level_up: Previous Level: 1
+09:40:48 - [145] INFO - __main__ - gameloop: Current Gamestate: game
+09:40:48 - [153] INFO - __main__ - gameloop: You are now in Game
+09:40:49 - [46] INFO - __main__ - interact_with_level: <Entities.Entity object at 0x00000273ED0F0B90>
+09:40:49 - [14] INFO - Utils.inp - inp: <Entities.Entity object at 0x00000273ED0F0B90>
+09:40:49 - [82] INFO - __main__ - interact_with_level: ['action', 'effect.name']
+09:40:49 - [83] INFO - __main__ - interact_with_level: remove_effect_by_name
+09:40:49 - [84] INFO - __main__ - interact_with_level: Kopfschmerz
+09:40:49 - [331] INFO - Entities - check_level_up: Previous Level: 1
+09:40:49 - [145] INFO - __main__ - gameloop: Current Gamestate: game
+09:40:49 - [153] INFO - __main__ - gameloop: You are now in Game
+09:40:50 - [46] INFO - __main__ - interact_with_level: <Entities.Entity object at 0x00000273ED0F0B90>
+09:40:50 - [14] INFO - Utils.inp - inp: <Entities.Entity object at 0x00000273ED0F0B90>
+09:40:51 - [82] INFO - __main__ - interact_with_level: ['action', 'effect.name']
+09:40:51 - [83] INFO - __main__ - interact_with_level: remove_effect_by_name
+09:40:51 - [84] INFO - __main__ - interact_with_level: Kopfschmerz
+09:40:51 - [331] INFO - Entities - check_level_up: Previous Level: 1
+09:40:51 - [145] INFO - __main__ - gameloop: Current Gamestate: game
+09:40:51 - [153] INFO - __main__ - gameloop: You are now in Game
+09:40:51 - [46] INFO - __main__ - interact_with_level: <Entities.Entity object at 0x00000273ED0F0B90>
+09:40:51 - [14] INFO - Utils.inp - inp: <Entities.Entity object at 0x00000273ED0F0B90>
+09:40:52 - [82] INFO - __main__ - interact_with_level: ['action', 'effect.name']
+09:40:52 - [83] INFO - __main__ - interact_with_level: remove_effect_by_name
+09:40:52 - [84] INFO - __main__ - interact_with_level: Kopfschmerz
+09:40:52 - [331] INFO - Entities - check_level_up: Previous Level: 1
+09:40:52 - [145] INFO - __main__ - gameloop: Current Gamestate: game
+09:40:52 - [153] INFO - __main__ - gameloop: You are now in Game
+09:40:52 - [46] INFO - __main__ - interact_with_level: <Entities.Entity object at 0x00000273ED0F0B90>
+09:40:52 - [14] INFO - Utils.inp - inp: <Entities.Entity object at 0x00000273ED0F0B90>
+09:40:53 - [82] INFO - __main__ - interact_with_level: ['action', 'effect.name']
+09:40:53 - [83] INFO - __main__ - interact_with_level: remove_effect_by_name
+09:40:53 - [84] INFO - __main__ - interact_with_level: Kopfschmerz
+09:40:53 - [331] INFO - Entities - check_level_up: Previous Level: 1
+09:40:53 - [145] INFO - __main__ - gameloop: Current Gamestate: game
+09:40:53 - [153] INFO - __main__ - gameloop: You are now in Game
+09:40:53 - [46] INFO - __main__ - interact_with_level: <Entities.Entity object at 0x00000273ED0F0B90>
+09:40:53 - [14] INFO - Utils.inp - inp: <Entities.Entity object at 0x00000273ED0F0B90>
+09:40:54 - [82] INFO - __main__ - interact_with_level: ['action', 'effect.name']
+09:40:54 - [83] INFO - __main__ - interact_with_level: remove_effect_by_name
+09:40:54 - [84] INFO - __main__ - interact_with_level: Kopfschmerz
+09:40:54 - [331] INFO - Entities - check_level_up: Previous Level: 1
+09:40:54 - [145] INFO - __main__ - gameloop: Current Gamestate: game
+09:40:54 - [153] INFO - __main__ - gameloop: You are now in Game
+09:40:55 - [46] INFO - __main__ - interact_with_level: <Entities.Entity object at 0x00000273ED0F0B90>
+09:40:55 - [14] INFO - Utils.inp - inp: <Entities.Entity object at 0x00000273ED0F0B90>
+09:40:55 - [82] INFO - __main__ - interact_with_level: ['action', 'effect.name']
+09:40:55 - [83] INFO - __main__ - interact_with_level: remove_effect_by_name
+09:40:55 - [84] INFO - __main__ - interact_with_level: Kopfschmerz
+09:40:55 - [331] INFO - Entities - check_level_up: Previous Level: 1
+09:40:55 - [145] INFO - __main__ - gameloop: Current Gamestate: game
+09:40:55 - [153] INFO - __main__ - gameloop: You are now in Game
+09:40:56 - [46] INFO - __main__ - interact_with_level: <Entities.Entity object at 0x00000273ED0F0B90>
+09:40:56 - [14] INFO - Utils.inp - inp: <Entities.Entity object at 0x00000273ED0F0B90>
+09:40:56 - [82] INFO - __main__ - interact_with_level: ['action', 'effect.name']
+09:40:56 - [83] INFO - __main__ - interact_with_level: remove_effect_by_name
+09:40:56 - [84] INFO - __main__ - interact_with_level: Kopfschmerz
+09:40:56 - [331] INFO - Entities - check_level_up: Previous Level: 1
+09:40:56 - [145] INFO - __main__ - gameloop: Current Gamestate: game
+09:40:56 - [153] INFO - __main__ - gameloop: You are now in Game
+09:40:57 - [46] INFO - __main__ - interact_with_level: <Entities.Entity object at 0x00000273ED0F0B90>
+09:40:57 - [14] INFO - Utils.inp - inp: <Entities.Entity object at 0x00000273ED0F0B90>
+09:40:57 - [82] INFO - __main__ - interact_with_level: ['action', 'effect.name']
+09:40:57 - [83] INFO - __main__ - interact_with_level: remove_effect_by_name
+09:40:57 - [84] INFO - __main__ - interact_with_level: Kopfschmerz
+09:40:57 - [331] INFO - Entities - check_level_up: Previous Level: 1
+09:40:57 - [145] INFO - __main__ - gameloop: Current Gamestate: game
+09:40:57 - [153] INFO - __main__ - gameloop: You are now in Game
+09:40:58 - [46] INFO - __main__ - interact_with_level: <Entities.Entity object at 0x00000273ED0F0B90>
+09:40:58 - [14] INFO - Utils.inp - inp: <Entities.Entity object at 0x00000273ED0F0B90>
+09:40:58 - [82] INFO - __main__ - interact_with_level: ['action', 'effect.name']
+09:40:58 - [83] INFO - __main__ - interact_with_level: remove_effect_by_name
+09:40:58 - [84] INFO - __main__ - interact_with_level: Kopfschmerz
+09:40:58 - [331] INFO - Entities - check_level_up: Previous Level: 1
+09:40:58 - [145] INFO - __main__ - gameloop: Current Gamestate: game
+09:40:58 - [153] INFO - __main__ - gameloop: You are now in Game
+09:40:59 - [46] INFO - __main__ - interact_with_level: <Entities.Entity object at 0x00000273ED0F0B90>
+09:40:59 - [14] INFO - Utils.inp - inp: <Entities.Entity object at 0x00000273ED0F0B90>
+09:40:59 - [82] INFO - __main__ - interact_with_level: ['action', 'effect.name']
+09:40:59 - [83] INFO - __main__ - interact_with_level: remove_effect_by_name
+09:40:59 - [84] INFO - __main__ - interact_with_level: Kopfschmerz
+09:40:59 - [331] INFO - Entities - check_level_up: Previous Level: 1
+09:40:59 - [145] INFO - __main__ - gameloop: Current Gamestate: game
+09:40:59 - [153] INFO - __main__ - gameloop: You are now in Game
+09:41:00 - [46] INFO - __main__ - interact_with_level: <Entities.Entity object at 0x00000273ED0F0B90>
+09:41:00 - [14] INFO - Utils.inp - inp: <Entities.Entity object at 0x00000273ED0F0B90>
+09:41:00 - [82] INFO - __main__ - interact_with_level: ['action', 'effect.name']
+09:41:00 - [83] INFO - __main__ - interact_with_level: remove_effect_by_name
+09:41:00 - [84] INFO - __main__ - interact_with_level: Kopfschmerz
+09:41:00 - [331] INFO - Entities - check_level_up: Previous Level: 1
+09:41:00 - [145] INFO - __main__ - gameloop: Current Gamestate: game
+09:41:00 - [153] INFO - __main__ - gameloop: You are now in Game
+09:41:01 - [46] INFO - __main__ - interact_with_level: <Entities.Entity object at 0x00000273ED0F0B90>
+09:41:01 - [14] INFO - Utils.inp - inp: <Entities.Entity object at 0x00000273ED0F0B90>
+09:41:01 - [82] INFO - __main__ - interact_with_level: ['action', 'effect.name']
+09:41:01 - [83] INFO - __main__ - interact_with_level: remove_effect_by_name
+09:41:01 - [84] INFO - __main__ - interact_with_level: Kopfschmerz
+09:41:01 - [331] INFO - Entities - check_level_up: Previous Level: 1
+09:41:01 - [145] INFO - __main__ - gameloop: Current Gamestate: game
+09:41:01 - [153] INFO - __main__ - gameloop: You are now in Game
+09:41:02 - [46] INFO - __main__ - interact_with_level: <Entities.Entity object at 0x00000273ED0F0B90>
+09:41:02 - [14] INFO - Utils.inp - inp: <Entities.Entity object at 0x00000273ED0F0B90>
+09:41:03 - [82] INFO - __main__ - interact_with_level: ['action', 'effect.name']
+09:41:03 - [83] INFO - __main__ - interact_with_level: remove_effect_by_name
+09:41:03 - [84] INFO - __main__ - interact_with_level: Kopfschmerz
+09:41:03 - [331] INFO - Entities - check_level_up: Previous Level: 1
+09:41:03 - [145] INFO - __main__ - gameloop: Current Gamestate: game
+09:41:03 - [153] INFO - __main__ - gameloop: You are now in Game
+09:41:03 - [46] INFO - __main__ - interact_with_level: <Entities.Entity object at 0x00000273ED0F0B90>
+09:41:03 - [14] INFO - Utils.inp - inp: <Entities.Entity object at 0x00000273ED0F0B90>
+09:41:04 - [82] INFO - __main__ - interact_with_level: ['action', 'effect.name']
+09:41:04 - [83] INFO - __main__ - interact_with_level: remove_effect_by_name
+09:41:04 - [84] INFO - __main__ - interact_with_level: Kopfschmerz
+09:41:04 - [331] INFO - Entities - check_level_up: Previous Level: 1
+09:41:04 - [145] INFO - __main__ - gameloop: Current Gamestate: game
+09:41:04 - [153] INFO - __main__ - gameloop: You are now in Game
+09:41:04 - [46] INFO - __main__ - interact_with_level: <Entities.Entity object at 0x00000273ED0F0B90>
+09:41:04 - [14] INFO - Utils.inp - inp: <Entities.Entity object at 0x00000273ED0F0B90>
+09:41:05 - [82] INFO - __main__ - interact_with_level: ['action', 'effect.name']
+09:41:05 - [83] INFO - __main__ - interact_with_level: remove_effect_by_name
+09:41:05 - [84] INFO - __main__ - interact_with_level: Kopfschmerz
+09:41:05 - [331] INFO - Entities - check_level_up: Previous Level: 1
+09:41:05 - [145] INFO - __main__ - gameloop: Current Gamestate: game
+09:41:05 - [153] INFO - __main__ - gameloop: You are now in Game
+09:41:05 - [46] INFO - __main__ - interact_with_level: <Entities.Entity object at 0x00000273ED0F0B90>
+09:41:05 - [14] INFO - Utils.inp - inp: <Entities.Entity object at 0x00000273ED0F0B90>
+09:41:06 - [82] INFO - __main__ - interact_with_level: ['action', 'effect.name']
+09:41:06 - [83] INFO - __main__ - interact_with_level: remove_effect_by_name
+09:41:06 - [84] INFO - __main__ - interact_with_level: Kopfschmerz
+09:41:06 - [331] INFO - Entities - check_level_up: Previous Level: 1
+09:41:06 - [145] INFO - __main__ - gameloop: Current Gamestate: game
+09:41:06 - [153] INFO - __main__ - gameloop: You are now in Game
+09:41:07 - [46] INFO - __main__ - interact_with_level: <Entities.Entity object at 0x00000273ED0F0B90>
+09:41:07 - [14] INFO - Utils.inp - inp: <Entities.Entity object at 0x00000273ED0F0B90>
+09:41:07 - [82] INFO - __main__ - interact_with_level: ['action', 'effect.name']
+09:41:07 - [83] INFO - __main__ - interact_with_level: remove_effect_by_name
+09:41:07 - [84] INFO - __main__ - interact_with_level: Kopfschmerz
+09:41:07 - [331] INFO - Entities - check_level_up: Previous Level: 1
+09:41:07 - [145] INFO - __main__ - gameloop: Current Gamestate: game
+09:41:07 - [153] INFO - __main__ - gameloop: You are now in Game
+09:41:08 - [46] INFO - __main__ - interact_with_level: <Entities.Entity object at 0x00000273ED0F0B90>
+09:41:08 - [14] INFO - Utils.inp - inp: <Entities.Entity object at 0x00000273ED0F0B90>
+09:41:08 - [82] INFO - __main__ - interact_with_level: ['action', 'effect.name']
+09:41:08 - [83] INFO - __main__ - interact_with_level: remove_effect_by_name
+09:41:08 - [84] INFO - __main__ - interact_with_level: Kopfschmerz
+09:41:08 - [331] INFO - Entities - check_level_up: Previous Level: 1
+09:41:08 - [145] INFO - __main__ - gameloop: Current Gamestate: game
+09:41:08 - [153] INFO - __main__ - gameloop: You are now in Game
+09:41:09 - [46] INFO - __main__ - interact_with_level: <Entities.Entity object at 0x00000273ED0F0B90>
+09:41:09 - [14] INFO - Utils.inp - inp: <Entities.Entity object at 0x00000273ED0F0B90>
+09:41:09 - [82] INFO - __main__ - interact_with_level: ['action', 'effect.name']
+09:41:09 - [83] INFO - __main__ - interact_with_level: remove_effect_by_name
+09:41:09 - [84] INFO - __main__ - interact_with_level: Kopfschmerz
+09:41:09 - [331] INFO - Entities - check_level_up: Previous Level: 1
+09:41:09 - [145] INFO - __main__ - gameloop: Current Gamestate: game
+09:41:09 - [153] INFO - __main__ - gameloop: You are now in Game
+09:41:10 - [46] INFO - __main__ - interact_with_level: <Entities.Entity object at 0x00000273ED0F0B90>
+09:41:10 - [14] INFO - Utils.inp - inp: <Entities.Entity object at 0x00000273ED0F0B90>
+09:41:10 - [82] INFO - __main__ - interact_with_level: ['action', 'effect.name']
+09:41:10 - [83] INFO - __main__ - interact_with_level: remove_effect_by_name
+09:41:10 - [84] INFO - __main__ - interact_with_level: Kopfschmerz
+09:41:10 - [331] INFO - Entities - check_level_up: Previous Level: 1
+09:41:10 - [145] INFO - __main__ - gameloop: Current Gamestate: game
+09:41:10 - [153] INFO - __main__ - gameloop: You are now in Game
+09:41:11 - [46] INFO - __main__ - interact_with_level: <Entities.Entity object at 0x00000273ED0F0B90>
+09:41:11 - [14] INFO - Utils.inp - inp: <Entities.Entity object at 0x00000273ED0F0B90>
+09:41:11 - [82] INFO - __main__ - interact_with_level: ['action', 'effect.name']
+09:41:11 - [83] INFO - __main__ - interact_with_level: remove_effect_by_name
+09:41:11 - [84] INFO - __main__ - interact_with_level: Kopfschmerz
+09:41:11 - [331] INFO - Entities - check_level_up: Previous Level: 1
+09:41:11 - [145] INFO - __main__ - gameloop: Current Gamestate: game
+09:41:11 - [153] INFO - __main__ - gameloop: You are now in Game
+09:41:12 - [46] INFO - __main__ - interact_with_level: <Entities.Entity object at 0x00000273ED0F0B90>
+09:41:12 - [14] INFO - Utils.inp - inp: <Entities.Entity object at 0x00000273ED0F0B90>
+09:41:12 - [82] INFO - __main__ - interact_with_level: ['action', 'effect.name']
+09:41:12 - [83] INFO - __main__ - interact_with_level: remove_effect_by_name
+09:41:12 - [84] INFO - __main__ - interact_with_level: Kopfschmerz
+09:41:12 - [331] INFO - Entities - check_level_up: Previous Level: 1
+09:41:12 - [145] INFO - __main__ - gameloop: Current Gamestate: game
+09:41:12 - [153] INFO - __main__ - gameloop: You are now in Game
+09:41:13 - [46] INFO - __main__ - interact_with_level: <Entities.Entity object at 0x00000273ED0F0B90>
+09:41:13 - [14] INFO - Utils.inp - inp: <Entities.Entity object at 0x00000273ED0F0B90>
+09:41:13 - [82] INFO - __main__ - interact_with_level: ['action', 'effect.name']
+09:41:13 - [83] INFO - __main__ - interact_with_level: remove_effect_by_name
+09:41:13 - [84] INFO - __main__ - interact_with_level: Kopfschmerz
+09:41:13 - [331] INFO - Entities - check_level_up: Previous Level: 1
+09:41:13 - [145] INFO - __main__ - gameloop: Current Gamestate: game
+09:41:13 - [153] INFO - __main__ - gameloop: You are now in Game
+09:41:14 - [46] INFO - __main__ - interact_with_level: <Entities.Entity object at 0x00000273ED0F0B90>
+09:41:14 - [14] INFO - Utils.inp - inp: <Entities.Entity object at 0x00000273ED0F0B90>
+09:41:15 - [82] INFO - __main__ - interact_with_level: ['action', 'effect.name']
+09:41:15 - [83] INFO - __main__ - interact_with_level: remove_effect_by_name
+09:41:15 - [84] INFO - __main__ - interact_with_level: Kopfschmerz
+09:41:15 - [331] INFO - Entities - check_level_up: Previous Level: 1
+09:41:15 - [145] INFO - __main__ - gameloop: Current Gamestate: game
+09:41:15 - [153] INFO - __main__ - gameloop: You are now in Game
+09:41:15 - [46] INFO - __main__ - interact_with_level: <Entities.Entity object at 0x00000273ED0F0B90>
+09:41:15 - [14] INFO - Utils.inp - inp: <Entities.Entity object at 0x00000273ED0F0B90>
+09:41:16 - [82] INFO - __main__ - interact_with_level: ['action', 'effect.name']
+09:41:16 - [83] INFO - __main__ - interact_with_level: remove_effect_by_name
+09:41:16 - [84] INFO - __main__ - interact_with_level: Kopfschmerz
+09:41:16 - [331] INFO - Entities - check_level_up: Previous Level: 1
+09:41:16 - [145] INFO - __main__ - gameloop: Current Gamestate: game
+09:41:16 - [153] INFO - __main__ - gameloop: You are now in Game
+09:41:16 - [46] INFO - __main__ - interact_with_level: <Entities.Entity object at 0x00000273ED0F0B90>
+09:41:16 - [14] INFO - Utils.inp - inp: <Entities.Entity object at 0x00000273ED0F0B90>
+09:41:17 - [82] INFO - __main__ - interact_with_level: ['action', 'effect.name']
+09:41:17 - [83] INFO - __main__ - interact_with_level: remove_effect_by_name
+09:41:17 - [84] INFO - __main__ - interact_with_level: Kopfschmerz
+09:41:17 - [331] INFO - Entities - check_level_up: Previous Level: 1
+09:41:17 - [145] INFO - __main__ - gameloop: Current Gamestate: game
+09:41:17 - [153] INFO - __main__ - gameloop: You are now in Game
+09:41:18 - [46] INFO - __main__ - interact_with_level: <Entities.Entity object at 0x00000273ED0F0B90>
+09:41:18 - [14] INFO - Utils.inp - inp: <Entities.Entity object at 0x00000273ED0F0B90>
+09:41:18 - [82] INFO - __main__ - interact_with_level: ['action', 'effect.name']
+09:41:18 - [83] INFO - __main__ - interact_with_level: remove_effect_by_name
+09:41:18 - [84] INFO - __main__ - interact_with_level: Kopfschmerz
+09:41:18 - [331] INFO - Entities - check_level_up: Previous Level: 1
+09:41:18 - [145] INFO - __main__ - gameloop: Current Gamestate: game
+09:41:18 - [153] INFO - __main__ - gameloop: You are now in Game
+09:41:19 - [46] INFO - __main__ - interact_with_level: <Entities.Entity object at 0x00000273ED0F0B90>
+09:41:19 - [14] INFO - Utils.inp - inp: <Entities.Entity object at 0x00000273ED0F0B90>
+09:41:19 - [82] INFO - __main__ - interact_with_level: ['action', 'effect.name']
+09:41:19 - [83] INFO - __main__ - interact_with_level: remove_effect_by_name
+09:41:19 - [84] INFO - __main__ - interact_with_level: Kopfschmerz
+09:41:19 - [331] INFO - Entities - check_level_up: Previous Level: 1
+09:41:19 - [145] INFO - __main__ - gameloop: Current Gamestate: game
+09:41:19 - [153] INFO - __main__ - gameloop: You are now in Game
+09:41:20 - [46] INFO - __main__ - interact_with_level: <Entities.Entity object at 0x00000273ED0F0B90>
+09:41:20 - [14] INFO - Utils.inp - inp: <Entities.Entity object at 0x00000273ED0F0B90>
+09:41:20 - [82] INFO - __main__ - interact_with_level: ['action', 'effect.name']
+09:41:20 - [83] INFO - __main__ - interact_with_level: remove_effect_by_name
+09:41:20 - [84] INFO - __main__ - interact_with_level: Kopfschmerz
+09:41:20 - [331] INFO - Entities - check_level_up: Previous Level: 1
+09:41:20 - [145] INFO - __main__ - gameloop: Current Gamestate: game
+09:41:20 - [153] INFO - __main__ - gameloop: You are now in Game
+09:41:21 - [46] INFO - __main__ - interact_with_level: <Entities.Entity object at 0x00000273ED0F0B90>
+09:41:21 - [14] INFO - Utils.inp - inp: <Entities.Entity object at 0x00000273ED0F0B90>
+09:41:21 - [82] INFO - __main__ - interact_with_level: ['action', 'effect.name']
+09:41:21 - [83] INFO - __main__ - interact_with_level: remove_effect_by_name
+09:41:21 - [84] INFO - __main__ - interact_with_level: Kopfschmerz
+09:41:21 - [331] INFO - Entities - check_level_up: Previous Level: 1
+09:41:21 - [145] INFO - __main__ - gameloop: Current Gamestate: game
+09:41:21 - [153] INFO - __main__ - gameloop: You are now in Game
+09:41:22 - [46] INFO - __main__ - interact_with_level: <Entities.Entity object at 0x00000273ED0F0B90>
+09:41:22 - [14] INFO - Utils.inp - inp: <Entities.Entity object at 0x00000273ED0F0B90>
+09:41:22 - [82] INFO - __main__ - interact_with_level: ['action', 'effect.name']
+09:41:22 - [83] INFO - __main__ - interact_with_level: remove_effect_by_name
+09:41:22 - [84] INFO - __main__ - interact_with_level: Kopfschmerz
+09:41:22 - [331] INFO - Entities - check_level_up: Previous Level: 1
+09:41:22 - [145] INFO - __main__ - gameloop: Current Gamestate: game
+09:41:22 - [153] INFO - __main__ - gameloop: You are now in Game
+09:41:23 - [46] INFO - __main__ - interact_with_level: <Entities.Entity object at 0x00000273ED0F0B90>
+09:41:23 - [14] INFO - Utils.inp - inp: <Entities.Entity object at 0x00000273ED0F0B90>
+09:41:23 - [82] INFO - __main__ - interact_with_level: ['action', 'effect.name']
+09:41:23 - [83] INFO - __main__ - interact_with_level: remove_effect_by_name
+09:41:23 - [84] INFO - __main__ - interact_with_level: Kopfschmerz
+09:41:23 - [331] INFO - Entities - check_level_up: Previous Level: 1
+09:41:23 - [145] INFO - __main__ - gameloop: Current Gamestate: game
+09:41:23 - [153] INFO - __main__ - gameloop: You are now in Game
+09:41:24 - [46] INFO - __main__ - interact_with_level: <Entities.Entity object at 0x00000273ED0F0B90>
+09:41:24 - [14] INFO - Utils.inp - inp: <Entities.Entity object at 0x00000273ED0F0B90>
+09:41:24 - [82] INFO - __main__ - interact_with_level: ['action', 'effect.name']
+09:41:24 - [83] INFO - __main__ - interact_with_level: remove_effect_by_name
+09:41:24 - [84] INFO - __main__ - interact_with_level: Kopfschmerz
+09:41:24 - [331] INFO - Entities - check_level_up: Previous Level: 1
+09:41:24 - [145] INFO - __main__ - gameloop: Current Gamestate: game
+09:41:24 - [153] INFO - __main__ - gameloop: You are now in Game
+09:41:25 - [46] INFO - __main__ - interact_with_level: <Entities.Entity object at 0x00000273ED0F0B90>
+09:41:25 - [14] INFO - Utils.inp - inp: <Entities.Entity object at 0x00000273ED0F0B90>
+09:41:25 - [82] INFO - __main__ - interact_with_level: ['action', 'effect.name']
+09:41:25 - [83] INFO - __main__ - interact_with_level: remove_effect_by_name
+09:41:25 - [84] INFO - __main__ - interact_with_level: Kopfschmerz
+09:41:25 - [331] INFO - Entities - check_level_up: Previous Level: 1
+09:41:25 - [145] INFO - __main__ - gameloop: Current Gamestate: game
+09:41:25 - [153] INFO - __main__ - gameloop: You are now in Game
+09:41:26 - [46] INFO - __main__ - interact_with_level: <Entities.Entity object at 0x00000273ED0F0B90>
+09:41:26 - [14] INFO - Utils.inp - inp: <Entities.Entity object at 0x00000273ED0F0B90>
+09:41:27 - [82] INFO - __main__ - interact_with_level: ['action', 'effect.name']
+09:41:27 - [83] INFO - __main__ - interact_with_level: remove_effect_by_name
+09:41:27 - [84] INFO - __main__ - interact_with_level: Kopfschmerz
+09:41:27 - [331] INFO - Entities - check_level_up: Previous Level: 1
+09:41:27 - [145] INFO - __main__ - gameloop: Current Gamestate: game
+09:41:27 - [153] INFO - __main__ - gameloop: You are now in Game
+09:41:27 - [46] INFO - __main__ - interact_with_level: <Entities.Entity object at 0x00000273ED0F0B90>
+09:41:27 - [14] INFO - Utils.inp - inp: <Entities.Entity object at 0x00000273ED0F0B90>
+09:41:28 - [82] INFO - __main__ - interact_with_level: ['action', 'effect.name']
+09:41:28 - [83] INFO - __main__ - interact_with_level: remove_effect_by_name
+09:41:28 - [84] INFO - __main__ - interact_with_level: Kopfschmerz
+09:41:28 - [331] INFO - Entities - check_level_up: Previous Level: 1
+09:41:28 - [145] INFO - __main__ - gameloop: Current Gamestate: game
+09:41:28 - [153] INFO - __main__ - gameloop: You are now in Game
+09:41:28 - [46] INFO - __main__ - interact_with_level: <Entities.Entity object at 0x00000273ED0F0B90>
+09:41:28 - [14] INFO - Utils.inp - inp: <Entities.Entity object at 0x00000273ED0F0B90>
+09:41:29 - [82] INFO - __main__ - interact_with_level: ['action', 'effect.name']
+09:41:29 - [83] INFO - __main__ - interact_with_level: remove_effect_by_name
+09:41:29 - [84] INFO - __main__ - interact_with_level: Kopfschmerz
+09:41:29 - [331] INFO - Entities - check_level_up: Previous Level: 1
+09:41:29 - [145] INFO - __main__ - gameloop: Current Gamestate: game
+09:41:29 - [153] INFO - __main__ - gameloop: You are now in Game
+09:41:30 - [46] INFO - __main__ - interact_with_level: <Entities.Entity object at 0x00000273ED0F0B90>
+09:41:30 - [14] INFO - Utils.inp - inp: <Entities.Entity object at 0x00000273ED0F0B90>
+09:41:30 - [82] INFO - __main__ - interact_with_level: ['action', 'effect.name']
+09:41:30 - [83] INFO - __main__ - interact_with_level: remove_effect_by_name
+09:41:30 - [84] INFO - __main__ - interact_with_level: Kopfschmerz
+09:41:30 - [331] INFO - Entities - check_level_up: Previous Level: 1
+09:41:30 - [145] INFO - __main__ - gameloop: Current Gamestate: game
+09:41:30 - [153] INFO - __main__ - gameloop: You are now in Game
+09:41:31 - [46] INFO - __main__ - interact_with_level: <Entities.Entity object at 0x00000273ED0F0B90>
+09:41:31 - [14] INFO - Utils.inp - inp: <Entities.Entity object at 0x00000273ED0F0B90>
+09:41:31 - [82] INFO - __main__ - interact_with_level: ['action', 'effect.name']
+09:41:31 - [83] INFO - __main__ - interact_with_level: remove_effect_by_name
+09:41:31 - [84] INFO - __main__ - interact_with_level: Kopfschmerz
+09:41:31 - [331] INFO - Entities - check_level_up: Previous Level: 1
+09:41:31 - [145] INFO - __main__ - gameloop: Current Gamestate: game
+09:41:31 - [153] INFO - __main__ - gameloop: You are now in Game
+09:41:32 - [46] INFO - __main__ - interact_with_level: <Entities.Entity object at 0x00000273ED0F0B90>
+09:41:32 - [14] INFO - Utils.inp - inp: <Entities.Entity object at 0x00000273ED0F0B90>
+09:41:32 - [82] INFO - __main__ - interact_with_level: ['action', 'effect.name']
+09:41:32 - [83] INFO - __main__ - interact_with_level: remove_effect_by_name
+09:41:32 - [84] INFO - __main__ - interact_with_level: Kopfschmerz
+09:41:32 - [331] INFO - Entities - check_level_up: Previous Level: 1
+09:41:32 - [145] INFO - __main__ - gameloop: Current Gamestate: game
+09:41:32 - [153] INFO - __main__ - gameloop: You are now in Game
+09:41:33 - [46] INFO - __main__ - interact_with_level: <Entities.Entity object at 0x00000273ED0F0B90>
+09:41:33 - [14] INFO - Utils.inp - inp: <Entities.Entity object at 0x00000273ED0F0B90>
+09:41:33 - [82] INFO - __main__ - interact_with_level: ['action', 'effect.name']
+09:41:33 - [83] INFO - __main__ - interact_with_level: remove_effect_by_name
+09:41:33 - [84] INFO - __main__ - interact_with_level: Kopfschmerz
+09:41:33 - [331] INFO - Entities - check_level_up: Previous Level: 1
+09:41:33 - [145] INFO - __main__ - gameloop: Current Gamestate: game
+09:41:33 - [153] INFO - __main__ - gameloop: You are now in Game
+09:41:34 - [46] INFO - __main__ - interact_with_level: <Entities.Entity object at 0x00000273ED0F0B90>
+09:41:34 - [14] INFO - Utils.inp - inp: <Entities.Entity object at 0x00000273ED0F0B90>
+09:41:34 - [82] INFO - __main__ - interact_with_level: ['action', 'effect.name']
+09:41:34 - [83] INFO - __main__ - interact_with_level: remove_effect_by_name
+09:41:34 - [84] INFO - __main__ - interact_with_level: Kopfschmerz
+09:41:34 - [331] INFO - Entities - check_level_up: Previous Level: 1
+09:41:34 - [145] INFO - __main__ - gameloop: Current Gamestate: game
+09:41:34 - [153] INFO - __main__ - gameloop: You are now in Game
+09:41:35 - [46] INFO - __main__ - interact_with_level: <Entities.Entity object at 0x00000273ED0F0B90>
+09:41:35 - [14] INFO - Utils.inp - inp: <Entities.Entity object at 0x00000273ED0F0B90>
+09:41:35 - [82] INFO - __main__ - interact_with_level: ['action', 'effect.name']
+09:41:35 - [83] INFO - __main__ - interact_with_level: remove_effect_by_name
+09:41:35 - [84] INFO - __main__ - interact_with_level: Kopfschmerz
+09:41:35 - [331] INFO - Entities - check_level_up: Previous Level: 1
+09:41:35 - [145] INFO - __main__ - gameloop: Current Gamestate: game
+09:41:35 - [153] INFO - __main__ - gameloop: You are now in Game
+09:41:36 - [46] INFO - __main__ - interact_with_level: <Entities.Entity object at 0x00000273ED0F0B90>
+09:41:36 - [14] INFO - Utils.inp - inp: <Entities.Entity object at 0x00000273ED0F0B90>
+09:41:36 - [82] INFO - __main__ - interact_with_level: ['action', 'effect.name']
+09:41:36 - [83] INFO - __main__ - interact_with_level: remove_effect_by_name
+09:41:36 - [84] INFO - __main__ - interact_with_level: Kopfschmerz
+09:41:36 - [331] INFO - Entities - check_level_up: Previous Level: 1
+09:41:36 - [145] INFO - __main__ - gameloop: Current Gamestate: game
+09:41:36 - [153] INFO - __main__ - gameloop: You are now in Game
+09:41:37 - [46] INFO - __main__ - interact_with_level: <Entities.Entity object at 0x00000273ED0F0B90>
+09:41:37 - [14] INFO - Utils.inp - inp: <Entities.Entity object at 0x00000273ED0F0B90>
+09:41:37 - [82] INFO - __main__ - interact_with_level: ['action', 'effect.name']
+09:41:37 - [83] INFO - __main__ - interact_with_level: remove_effect_by_name
+09:41:37 - [84] INFO - __main__ - interact_with_level: Kopfschmerz
+09:41:37 - [331] INFO - Entities - check_level_up: Previous Level: 1
+09:41:37 - [145] INFO - __main__ - gameloop: Current Gamestate: game
+09:41:37 - [153] INFO - __main__ - gameloop: You are now in Game
+09:41:38 - [46] INFO - __main__ - interact_with_level: <Entities.Entity object at 0x00000273ED0F0B90>
+09:41:38 - [14] INFO - Utils.inp - inp: <Entities.Entity object at 0x00000273ED0F0B90>
+09:41:39 - [82] INFO - __main__ - interact_with_level: ['action', 'effect.name']
+09:41:39 - [83] INFO - __main__ - interact_with_level: remove_effect_by_name
+09:41:39 - [84] INFO - __main__ - interact_with_level: Kopfschmerz
+09:41:39 - [331] INFO - Entities - check_level_up: Previous Level: 1
+09:41:39 - [145] INFO - __main__ - gameloop: Current Gamestate: game
+09:41:39 - [153] INFO - __main__ - gameloop: You are now in Game
+09:41:39 - [46] INFO - __main__ - interact_with_level: <Entities.Entity object at 0x00000273ED0F0B90>
+09:41:39 - [14] INFO - Utils.inp - inp: <Entities.Entity object at 0x00000273ED0F0B90>
+09:41:40 - [82] INFO - __main__ - interact_with_level: ['action', 'effect.name']
+09:41:40 - [83] INFO - __main__ - interact_with_level: remove_effect_by_name
+09:41:40 - [84] INFO - __main__ - interact_with_level: Kopfschmerz
+09:41:40 - [331] INFO - Entities - check_level_up: Previous Level: 1
+09:41:40 - [145] INFO - __main__ - gameloop: Current Gamestate: game
+09:41:40 - [153] INFO - __main__ - gameloop: You are now in Game
+09:41:40 - [46] INFO - __main__ - interact_with_level: <Entities.Entity object at 0x00000273ED0F0B90>
+09:41:40 - [14] INFO - Utils.inp - inp: <Entities.Entity object at 0x00000273ED0F0B90>
+09:41:41 - [82] INFO - __main__ - interact_with_level: ['action', 'effect.name']
+09:41:41 - [83] INFO - __main__ - interact_with_level: remove_effect_by_name
+09:41:41 - [84] INFO - __main__ - interact_with_level: Kopfschmerz
+09:41:41 - [331] INFO - Entities - check_level_up: Previous Level: 1
+09:41:41 - [145] INFO - __main__ - gameloop: Current Gamestate: game
+09:41:41 - [153] INFO - __main__ - gameloop: You are now in Game
+09:41:41 - [46] INFO - __main__ - interact_with_level: <Entities.Entity object at 0x00000273ED0F0B90>
+09:41:41 - [14] INFO - Utils.inp - inp: <Entities.Entity object at 0x00000273ED0F0B90>
+09:41:42 - [82] INFO - __main__ - interact_with_level: ['action', 'effect.name']
+09:41:42 - [83] INFO - __main__ - interact_with_level: remove_effect_by_name
+09:41:42 - [84] INFO - __main__ - interact_with_level: Kopfschmerz
+09:41:42 - [331] INFO - Entities - check_level_up: Previous Level: 1
+09:41:42 - [145] INFO - __main__ - gameloop: Current Gamestate: game
+09:41:42 - [153] INFO - __main__ - gameloop: You are now in Game
+09:41:43 - [46] INFO - __main__ - interact_with_level: <Entities.Entity object at 0x00000273ED0F0B90>
+09:41:43 - [14] INFO - Utils.inp - inp: <Entities.Entity object at 0x00000273ED0F0B90>
+09:41:43 - [82] INFO - __main__ - interact_with_level: ['action', 'effect.name']
+09:41:43 - [83] INFO - __main__ - interact_with_level: remove_effect_by_name
+09:41:43 - [84] INFO - __main__ - interact_with_level: Kopfschmerz
+09:41:43 - [331] INFO - Entities - check_level_up: Previous Level: 1
+09:41:43 - [145] INFO - __main__ - gameloop: Current Gamestate: game
+09:41:43 - [153] INFO - __main__ - gameloop: You are now in Game
+09:41:44 - [46] INFO - __main__ - interact_with_level: <Entities.Entity object at 0x00000273ED0F0B90>
+09:41:44 - [14] INFO - Utils.inp - inp: <Entities.Entity object at 0x00000273ED0F0B90>
+09:41:44 - [82] INFO - __main__ - interact_with_level: ['action', 'effect.name']
+09:41:44 - [83] INFO - __main__ - interact_with_level: remove_effect_by_name
+09:41:44 - [84] INFO - __main__ - interact_with_level: Kopfschmerz
+09:41:44 - [331] INFO - Entities - check_level_up: Previous Level: 1
+09:41:44 - [145] INFO - __main__ - gameloop: Current Gamestate: game
+09:41:44 - [153] INFO - __main__ - gameloop: You are now in Game
+09:41:45 - [46] INFO - __main__ - interact_with_level: <Entities.Entity object at 0x00000273ED0F0B90>
+09:41:45 - [14] INFO - Utils.inp - inp: <Entities.Entity object at 0x00000273ED0F0B90>
+09:41:45 - [82] INFO - __main__ - interact_with_level: ['action', 'effect.name']
+09:41:45 - [83] INFO - __main__ - interact_with_level: remove_effect_by_name
+09:41:45 - [84] INFO - __main__ - interact_with_level: Kopfschmerz
+09:41:45 - [331] INFO - Entities - check_level_up: Previous Level: 1
+09:41:45 - [145] INFO - __main__ - gameloop: Current Gamestate: game
+09:41:45 - [153] INFO - __main__ - gameloop: You are now in Game
+09:41:46 - [46] INFO - __main__ - interact_with_level: <Entities.Entity object at 0x00000273ED0F0B90>
+09:41:46 - [14] INFO - Utils.inp - inp: <Entities.Entity object at 0x00000273ED0F0B90>
+09:41:46 - [82] INFO - __main__ - interact_with_level: ['action', 'effect.name']
+09:41:46 - [83] INFO - __main__ - interact_with_level: remove_effect_by_name
+09:41:46 - [84] INFO - __main__ - interact_with_level: Kopfschmerz
+09:41:46 - [331] INFO - Entities - check_level_up: Previous Level: 1
+09:41:46 - [145] INFO - __main__ - gameloop: Current Gamestate: game
+09:41:46 - [153] INFO - __main__ - gameloop: You are now in Game
+09:41:47 - [46] INFO - __main__ - interact_with_level: <Entities.Entity object at 0x00000273ED0F0B90>
+09:41:47 - [14] INFO - Utils.inp - inp: <Entities.Entity object at 0x00000273ED0F0B90>
+09:41:47 - [82] INFO - __main__ - interact_with_level: ['action', 'effect.name']
+09:41:47 - [83] INFO - __main__ - interact_with_level: remove_effect_by_name
+09:41:47 - [84] INFO - __main__ - interact_with_level: Kopfschmerz
+09:41:47 - [331] INFO - Entities - check_level_up: Previous Level: 1
+09:41:47 - [145] INFO - __main__ - gameloop: Current Gamestate: game
+09:41:47 - [153] INFO - __main__ - gameloop: You are now in Game
+09:41:48 - [46] INFO - __main__ - interact_with_level: <Entities.Entity object at 0x00000273ED0F0B90>
+09:41:48 - [14] INFO - Utils.inp - inp: <Entities.Entity object at 0x00000273ED0F0B90>
+09:41:48 - [82] INFO - __main__ - interact_with_level: ['action', 'effect.name']
+09:41:48 - [83] INFO - __main__ - interact_with_level: remove_effect_by_name
+09:41:48 - [84] INFO - __main__ - interact_with_level: Kopfschmerz
+09:41:48 - [331] INFO - Entities - check_level_up: Previous Level: 1
+09:41:48 - [145] INFO - __main__ - gameloop: Current Gamestate: game
+09:41:48 - [153] INFO - __main__ - gameloop: You are now in Game
+09:41:49 - [46] INFO - __main__ - interact_with_level: <Entities.Entity object at 0x00000273ED0F0B90>
+09:41:49 - [14] INFO - Utils.inp - inp: <Entities.Entity object at 0x00000273ED0F0B90>
+09:41:49 - [82] INFO - __main__ - interact_with_level: ['action', 'effect.name']
+09:41:49 - [83] INFO - __main__ - interact_with_level: remove_effect_by_name
+09:41:49 - [84] INFO - __main__ - interact_with_level: Kopfschmerz
+09:41:49 - [331] INFO - Entities - check_level_up: Previous Level: 1
+09:41:49 - [145] INFO - __main__ - gameloop: Current Gamestate: game
+09:41:49 - [153] INFO - __main__ - gameloop: You are now in Game
+09:41:50 - [46] INFO - __main__ - interact_with_level: <Entities.Entity object at 0x00000273ED0F0B90>
+09:41:50 - [14] INFO - Utils.inp - inp: <Entities.Entity object at 0x00000273ED0F0B90>
+09:41:50 - [82] INFO - __main__ - interact_with_level: ['action', 'effect.name']
+09:41:50 - [83] INFO - __main__ - interact_with_level: remove_effect_by_name
+09:41:50 - [84] INFO - __main__ - interact_with_level: Kopfschmerz
+09:41:50 - [331] INFO - Entities - check_level_up: Previous Level: 1
+09:41:50 - [145] INFO - __main__ - gameloop: Current Gamestate: game
+09:41:51 - [153] INFO - __main__ - gameloop: You are now in Game
+09:41:51 - [46] INFO - __main__ - interact_with_level: <Entities.Entity object at 0x00000273ED0F0B90>
+09:41:51 - [14] INFO - Utils.inp - inp: <Entities.Entity object at 0x00000273ED0F0B90>
+09:41:52 - [82] INFO - __main__ - interact_with_level: ['action', 'effect.name']
+09:41:52 - [83] INFO - __main__ - interact_with_level: remove_effect_by_name
+09:41:52 - [84] INFO - __main__ - interact_with_level: Kopfschmerz
+09:41:52 - [331] INFO - Entities - check_level_up: Previous Level: 1
+09:41:52 - [145] INFO - __main__ - gameloop: Current Gamestate: game
+09:41:52 - [153] INFO - __main__ - gameloop: You are now in Game
+09:41:52 - [46] INFO - __main__ - interact_with_level: <Entities.Entity object at 0x00000273ED0F0B90>
+09:41:52 - [14] INFO - Utils.inp - inp: <Entities.Entity object at 0x00000273ED0F0B90>
+09:41:53 - [82] INFO - __main__ - interact_with_level: ['action', 'effect.name']
+09:41:53 - [83] INFO - __main__ - interact_with_level: remove_effect_by_name
+09:41:53 - [84] INFO - __main__ - interact_with_level: Kopfschmerz
+09:41:53 - [331] INFO - Entities - check_level_up: Previous Level: 1
+09:41:53 - [145] INFO - __main__ - gameloop: Current Gamestate: game
+09:41:53 - [153] INFO - __main__ - gameloop: You are now in Game
+09:41:53 - [46] INFO - __main__ - interact_with_level: <Entities.Entity object at 0x00000273ED0F0B90>
+09:41:53 - [14] INFO - Utils.inp - inp: <Entities.Entity object at 0x00000273ED0F0B90>
+09:41:54 - [82] INFO - __main__ - interact_with_level: ['action', 'effect.name']
+09:41:54 - [83] INFO - __main__ - interact_with_level: remove_effect_by_name
+09:41:54 - [84] INFO - __main__ - interact_with_level: Kopfschmerz
+09:41:54 - [331] INFO - Entities - check_level_up: Previous Level: 1
+09:41:54 - [145] INFO - __main__ - gameloop: Current Gamestate: game
+09:41:54 - [153] INFO - __main__ - gameloop: You are now in Game
+09:41:55 - [46] INFO - __main__ - interact_with_level: <Entities.Entity object at 0x00000273ED0F0B90>
+09:41:55 - [14] INFO - Utils.inp - inp: <Entities.Entity object at 0x00000273ED0F0B90>
+09:41:55 - [82] INFO - __main__ - interact_with_level: ['action', 'effect.name']
+09:41:55 - [83] INFO - __main__ - interact_with_level: remove_effect_by_name
+09:41:55 - [84] INFO - __main__ - interact_with_level: Kopfschmerz
+09:41:55 - [331] INFO - Entities - check_level_up: Previous Level: 1
+09:41:55 - [145] INFO - __main__ - gameloop: Current Gamestate: game
+09:41:55 - [153] INFO - __main__ - gameloop: You are now in Game
+09:41:56 - [46] INFO - __main__ - interact_with_level: <Entities.Entity object at 0x00000273ED0F0B90>
+09:41:56 - [14] INFO - Utils.inp - inp: <Entities.Entity object at 0x00000273ED0F0B90>
+09:41:56 - [82] INFO - __main__ - interact_with_level: ['action', 'effect.name']
+09:41:56 - [83] INFO - __main__ - interact_with_level: remove_effect_by_name
+09:41:56 - [84] INFO - __main__ - interact_with_level: Kopfschmerz
+09:41:56 - [331] INFO - Entities - check_level_up: Previous Level: 1
+09:41:56 - [145] INFO - __main__ - gameloop: Current Gamestate: game
+09:41:56 - [153] INFO - __main__ - gameloop: You are now in Game
+09:41:57 - [46] INFO - __main__ - interact_with_level: <Entities.Entity object at 0x00000273ED0F0B90>
+09:41:57 - [14] INFO - Utils.inp - inp: <Entities.Entity object at 0x00000273ED0F0B90>
+09:41:57 - [82] INFO - __main__ - interact_with_level: ['action', 'effect.name']
+09:41:57 - [83] INFO - __main__ - interact_with_level: remove_effect_by_name
+09:41:57 - [84] INFO - __main__ - interact_with_level: Kopfschmerz
+09:41:57 - [331] INFO - Entities - check_level_up: Previous Level: 1
+09:41:57 - [145] INFO - __main__ - gameloop: Current Gamestate: game
+09:41:57 - [153] INFO - __main__ - gameloop: You are now in Game
+09:41:58 - [46] INFO - __main__ - interact_with_level: <Entities.Entity object at 0x00000273ED0F0B90>
+09:41:58 - [14] INFO - Utils.inp - inp: <Entities.Entity object at 0x00000273ED0F0B90>
+09:41:58 - [82] INFO - __main__ - interact_with_level: ['action', 'effect.name']
+09:41:58 - [83] INFO - __main__ - interact_with_level: remove_effect_by_name
+09:41:58 - [84] INFO - __main__ - interact_with_level: Kopfschmerz
+09:41:58 - [331] INFO - Entities - check_level_up: Previous Level: 1
+09:41:58 - [145] INFO - __main__ - gameloop: Current Gamestate: game
+09:41:58 - [153] INFO - __main__ - gameloop: You are now in Game
+09:41:59 - [46] INFO - __main__ - interact_with_level: <Entities.Entity object at 0x00000273ED0F0B90>
+09:41:59 - [14] INFO - Utils.inp - inp: <Entities.Entity object at 0x00000273ED0F0B90>
+09:41:59 - [82] INFO - __main__ - interact_with_level: ['action', 'effect.name']
+09:41:59 - [83] INFO - __main__ - interact_with_level: remove_effect_by_name
+09:41:59 - [84] INFO - __main__ - interact_with_level: Kopfschmerz
+09:41:59 - [331] INFO - Entities - check_level_up: Previous Level: 1
+09:41:59 - [145] INFO - __main__ - gameloop: Current Gamestate: game
+09:41:59 - [153] INFO - __main__ - gameloop: You are now in Game
+09:42:00 - [46] INFO - __main__ - interact_with_level: <Entities.Entity object at 0x00000273ED0F0B90>
+09:42:00 - [14] INFO - Utils.inp - inp: <Entities.Entity object at 0x00000273ED0F0B90>
+09:42:00 - [82] INFO - __main__ - interact_with_level: ['action', 'effect.name']
+09:42:00 - [83] INFO - __main__ - interact_with_level: remove_effect_by_name
+09:42:00 - [84] INFO - __main__ - interact_with_level: Kopfschmerz
+09:42:00 - [331] INFO - Entities - check_level_up: Previous Level: 1
+09:42:00 - [145] INFO - __main__ - gameloop: Current Gamestate: game
+09:42:00 - [153] INFO - __main__ - gameloop: You are now in Game
+09:42:01 - [46] INFO - __main__ - interact_with_level: <Entities.Entity object at 0x00000273ED0F0B90>
+09:42:01 - [14] INFO - Utils.inp - inp: <Entities.Entity object at 0x00000273ED0F0B90>
+09:42:01 - [82] INFO - __main__ - interact_with_level: ['action', 'effect.name']
+09:42:01 - [83] INFO - __main__ - interact_with_level: remove_effect_by_name
+09:42:01 - [84] INFO - __main__ - interact_with_level: Kopfschmerz
+09:42:01 - [331] INFO - Entities - check_level_up: Previous Level: 1
+09:42:01 - [145] INFO - __main__ - gameloop: Current Gamestate: game
+09:42:01 - [153] INFO - __main__ - gameloop: You are now in Game
+09:42:02 - [46] INFO - __main__ - interact_with_level: <Entities.Entity object at 0x00000273ED0F0B90>
+09:42:02 - [14] INFO - Utils.inp - inp: <Entities.Entity object at 0x00000273ED0F0B90>

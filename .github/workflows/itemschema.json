@@ -1,0 +1,92 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "type": "object",
+    "patternProperties": {
+      "^[A-Z].[a-z]{1,}": {
+        "$ref": "#/definitions/Item"
+      }
+    },
+    "definitions": {
+      "Item": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "Der Itemtyp",
+            "enum": ["weapon", "tool", "potion", "misc", "armor"]
+          },
+          "description": {
+            "type": "string",
+            "description": "Die Beschreibung des Items"
+          },
+          "ad": {
+            "type": "string",
+            "description": "Der Schaden des Items",
+            "pattern": "^[0-9]w[0-9]+\\+[0-9]+"
+          },
+          "ap": {
+            "type": "string",
+            "description": "Der Magische Schaden des Items",
+            "pattern": "^[0-9]w[0-9]+\\+[0-9]+"
+          },
+          "hp": {
+            "type": "integer",
+            "description": "HP des Items (Weapons: Zustand | Rüstung: Health Bonus)",
+            "minimum": 0,
+            "maximum": 100
+          },
+          "ar": {
+            "type": "integer",
+            "description": "Der Widerstand des Items",
+            "minimum": 0,
+            "maximum": 100
+          },
+          "mr": {
+            "type": "integer",
+            "description": "Der Magische Widerstand des Items",
+            "minimum": 0,
+            "maximum": 100
+          },
+          "effects": {
+            "type": "array",
+            "description": "Eine Liste aller Special Effekte auf dem Item"
+          },
+          "useable": {
+            "type": "boolean",
+            "description": "Ist das Item benutzbar?"
+          },
+          "equipable": {
+            "type": "boolean",
+            "description": "Ist das Item ausrüstbar?"
+          },
+          "slots": {
+            "type": "array",
+            "description": "Mögliche Slots an denen das Item ausgerüstet werden kann"
+          },
+          "questitem": {
+            "type": "boolean",
+            "description": "Ist das Item ein Questitem"
+          },
+          "rarity": {
+            "type": "string",
+            "description": "Die Rarität des Items"
+          }
+        },
+        "required": [
+          "type",
+          "description",
+          "ad",
+          "ap",
+          "hp",
+          "ar",
+          "mr",
+          "effects",
+          "useable",
+          "equipable",
+          "slots",
+          "questitem",
+          "rarity"
+        ]
+      }
+    }
+  }
