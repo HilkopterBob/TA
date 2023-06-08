@@ -104,6 +104,8 @@ class Inp:
                         return 34
 
                 return Inp.inp(player)
+            else:
+                raise ValueError("Unsupported type of Input")
             return user_input
 
         except ValueError as e:

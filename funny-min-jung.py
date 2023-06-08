@@ -48,7 +48,6 @@ def interact_with_level(player, level, level_list):
     ####Is doing nothing ?
 
     # Selecting index from available Actions
-    Pr.dbg(f"All Actions: {availableChoices[action]}")
     Pr.dbg(f"Available Actions: {level.getAvailableChoices()}")
 
     # Sehr falsch, Index Choice 2 wird text 1 zugeordnet
