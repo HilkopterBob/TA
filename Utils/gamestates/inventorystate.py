@@ -38,10 +38,10 @@ def inventorystate(Player):
                         choices=["ja", "nein"]).unsafe_ask()
                         pr.Pr.dbg(action)
                         if action == "ja":
-                            pr.Pr.dbg(f"Player Health: {Player.equip_slots}", 3)
+                            pr.Pr.dbg(f"Player Health: {Player.slots}", 3)
                             pr.Pr.dbg(f"Player inv: {Player.inv}", 3)
                             Player.equip_item(choosen_item)
-                            pr.Pr.dbg(f"Player Health: {Player.equip_slots}", 3)
+                            pr.Pr.dbg(f"Player Health: {Player.slots}", 3)
                             pr.Pr.dbg(f"Player inv: {Player.inv}", 3)
                         else:
                             break
@@ -123,7 +123,7 @@ def inventorystate(Player):
                     choices=["zurück"]).unsafe_ask()
             case "Equipment":
                 equip = []
-                for item in Player.equip_slots:
+                for item in Player.slots:
                     if item == "placeholder":
                         continue
                     else:
@@ -143,10 +143,10 @@ def inventorystate(Player):
                             choices=["ablegen", "zurück"]).unsafe_ask()
                         match choosen_choice:
                             case "ablegen":
-                                pr.Pr.dbg(f"Player Current Equip: {Player.equip_slots}", 3)
+                                pr.Pr.dbg(f"Player Current Equip: {Player.slots}", 3)
                                 pr.Pr.dbg(f"Player inv: {Player.inv}", 3)
                                 Player.unequip_item(choosen_item)
-                                pr.Pr.dbg(f"Player New Equip: {Player.equip_slots}", 3)
+                                pr.Pr.dbg(f"Player New Equip: {Player.slots}", 3)
                                 pr.Pr.dbg(f"Player inv: {Player.inv}", 3)
                             case "zurück":
                                 pass

@@ -188,7 +188,7 @@ if __name__ == "__main__":
         0,
         [gitem("Item1", "weapon",equipable=True, equip_slot="meele"), gitem("item2", "potion", dmg=100, useable=True)],
         location="Menu",
-        equip_slots=[]
+        slots=[]
     )
 
     # Creating seperate Effects
@@ -206,8 +206,8 @@ if __name__ == "__main__":
     # List all Loaded Levels and Entities
     Debug.objlist(allLevels, "Levels")
     Debug.objlist(allEntities, "Entities")
-    while len(mPlayer.equip_slots) < 11:
-        mPlayer.equip_slots.append("placeholder")
+    while len(mPlayer.slots) < 11:
+        mPlayer.slots.append("placeholder")
 
     # Run Game
     gameloop(mPlayer, allLevels)

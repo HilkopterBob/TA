@@ -25,7 +25,7 @@ class Entity():
                     eeffects=None,
                     location="Nirvana",
                     level=1,
-                    equip_slots=None
+                    slots=None
                     ):
 
         if inv is None:
@@ -36,8 +36,8 @@ class Entity():
             beffects = []
         if eeffects is None:
             eeffects = []
-        if equip_slots is None:
-            equip_slots = []
+        if slots is None:
+            slots = []
 
         self.location = location
         self.name = name
@@ -52,7 +52,7 @@ class Entity():
         self.eeffects = eeffects
         self.effects = [[self.geffects],[self.beffects],[self.eeffects]]
         self.actionstack = []
-        self.equip_slots = equip_slots  #["Head_slot", "Torso_slot", "Underwear", "Left_arm", "Right_arm", 
+        self.slots = slots  #["Head_slot", "Torso_slot", "Underwear", "Left_arm", "Right_arm", 
                                         #"Left_leg", "Right_leg", "Gloves_slot", "Meele Weapon", "Ranged Weapon", 
                                         #"Quick_draw potion"]
 
@@ -392,80 +392,80 @@ class Entity():
         
         match cur_item.equip_slot:
             case "head":
-                if self.equip_slots[0]:
-                    if self.equip_slots[0] != "placeholder":
-                        self.inv.append(self.equip_slots[0])
-                self.equip_slots[0] = cur_item
+                if self.slots[0]:
+                    if self.slots[0] != "placeholder":
+                        self.inv.append(self.slots[0])
+                self.slots[0] = cur_item
                 self.inv.remove(cur_item)
             case "torso":
-                if self.equip_slots[1]:
-                    if self.equip_slots[1] != "placeholder":
-                        self.inv.append(self.equip_slots[1])
-                self.equip_slots[1] = cur_item
+                if self.slots[1]:
+                    if self.slots[1] != "placeholder":
+                        self.inv.append(self.slots[1])
+                self.slots[1] = cur_item
                 self.inv.remove(cur_item)
             case "underwear":
-                if self.equip_slots[2]:
-                    if self.equip_slots[2] != "placeholder":
-                        self.inv.append(self.equip_slots[2])
-                self.equip_slots[2] = cur_item
+                if self.slots[2]:
+                    if self.slots[2] != "placeholder":
+                        self.inv.append(self.slots[2])
+                self.slots[2] = cur_item
                 self.inv.remove(cur_item)
             case "left_arm":
-                if self.equip_slots[3]:
-                    if self.equip_slots[3] != "placeholder":
-                        self.inv.append(self.equip_slots[3])
-                self.equip_slots[3] = cur_item
+                if self.slots[3]:
+                    if self.slots[3] != "placeholder":
+                        self.inv.append(self.slots[3])
+                self.slots[3] = cur_item
                 self.inv.remove(cur_item)
             case "right_arm":
-                if self.equip_slots[4]:
-                    if self.equip_slots[4] != "placeholder":
-                        self.inv.append(self.equip_slots[4])
-                self.equip_slots[4] = cur_item
+                if self.slots[4]:
+                    if self.slots[4] != "placeholder":
+                        self.inv.append(self.slots[4])
+                self.slots[4] = cur_item
                 self.inv.remove(cur_item)
             case "left_leg":
-                if self.equip_slots[5]:
-                    if self.equip_slots[5] != "placeholder":
-                        self.inv.append(self.equip_slots[5])
-                self.equip_slots[5] = cur_item
+                if self.slots[5]:
+                    if self.slots[5] != "placeholder":
+                        self.inv.append(self.slots[5])
+                self.slots[5] = cur_item
                 self.inv.remove(cur_item)
             case "right_leg":
-                if self.equip_slots[6]:
-                    if self.equip_slots[6] != "placeholder":
-                        self.inv.append(self.equip_slots[6])
-                self.equip_slots[6] = cur_item
+                if self.slots[6]:
+                    if self.slots[6] != "placeholder":
+                        self.inv.append(self.slots[6])
+                self.slots[6] = cur_item
                 self.inv.remove(cur_item)
             case "gloves":
-                if self.equip_slots[7]:
-                    if self.equip_slots[7] != "placeholder":
-                        self.inv.append(self.equip_slots[7])
-                self.equip_slots[7] = cur_item
+                if self.slots[7]:
+                    if self.slots[7] != "placeholder":
+                        self.inv.append(self.slots[7])
+                self.slots[7] = cur_item
                 self.inv.remove(cur_item)
             case "meele":
-                if self.equip_slots[8]:
-                    if self.equip_slots[8] != "placeholder":
-                        self.inv.append(self.equip_slots[8])
-                self.equip_slots[8] = cur_item
+                if self.slots[8]:
+                    if self.slots[8] != "placeholder":
+                        self.inv.append(self.slots[8])
+                self.slots[8] = cur_item
                 self.inv.remove(cur_item)
             case "ranged":
-                if self.equip_slots[9]:
-                    if self.equip_slots[9] != "placeholder":
-                        self.inv.append(self.equip_slots[9])
-                self.equip_slots[9] = cur_item
+                if self.slots[9]:
+                    if self.slots[9] != "placeholder":
+                        self.inv.append(self.slots[9])
+                self.slots[9] = cur_item
                 self.inv.remove(cur_item)
             case "quick_draw_potion":
-                if self.equip_slots[10]:
-                    if self.equip_slots[10] != "placeholder":
-                        self.inv.append(self.equip_slots[10])
-                self.equip_slots[10] = cur_item
+                if self.slots[10]:
+                    if self.slots[10] != "placeholder":
+                        self.inv.append(self.slots[10])
+                self.slots[10] = cur_item
                 self.inv.remove(cur_item)
 
     def unequip_item(self, item_name):
-        for index, item in enumerate(self.equip_slots):
+        for index, item in enumerate(self.slots):
             if isinstance(item, str):
                 continue
             else:
                 if item.name == item_name:
                     self.inv.append(item)
-                    self.equip_slots[index] = "placeholder"
+                    self.slots[index] = "placeholder"
 
 
 class EntityInit():
