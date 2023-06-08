@@ -166,4 +166,3 @@ def inventorystate(Player):
 
         if wants_exit:
             break
-

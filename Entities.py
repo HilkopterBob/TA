@@ -482,10 +482,9 @@ class Entity:
         for index, item in enumerate(self.slots):
             if isinstance(item, str):
                 continue
-            else:
-                if item.name == item_name:
-                    self.inv.append(item)
-                    self.slots[index] = "placeholder"
+            if item.name == item_name:
+                self.inv.append(item)
+                self.slots[index] = "placeholder"
 
 
 class EntityInit():
