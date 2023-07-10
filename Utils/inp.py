@@ -2,13 +2,35 @@
 """
 from pystyle import  Colors, Write
 from Utils.pr import Pr
-from config import dbg
+from config import dbg, levels_folder
+from os import listdir
+from os import path
+
 #from Assethandler import AssetHandler
+
+
 
 class Inp():
     """
     Utility Class for getting custom input prompts
     """
+    
+    def assetlist(asset=None):
+        """"""
+        match asset:
+            case "level":
+                fileList = listdir(levels_folder)
+                levelList=[
+                    path.splitext(file)[0]
+                    for file in fileList
+                    if file.lower().endswith(".json")
+                    ]
+                
+                    
+                    
+                return levelList
+
+
     def inp(player,text=""): # pylint: disable=too-many-return-statements
         """Method to get User Input
         """
@@ -17,10 +39,11 @@ class Inp():
         userbefehl = [" inv: Öffnet das Inventar"," opt: Öffnet die Optioen",
                       " men: Öffnet das Menü","save: Speichert das Spiel",
                       "exit: Schließt das Spiel"]
-        devbefehl = ["test: test","","","","","","",]
+        devbefehl = ["give: gibt ein Item","changegamestate: wechselt den Gamestate",
+                     "effect: gibt einen Effect","changehealth: ändert die Lebenzzahl des Spielers [+/-]",
+                     "kill: setzt die Lebenszahl des Spielers auf 0","","",]
         min_len = 0
         max_len = 150
-
         user_input = Write.Input(text + "\n >_ ", Colors.white, interval=0.0025)
 
         try:
@@ -45,26 +68,37 @@ class Inp():
                 input_command = user_input[1:]
                 input_list = input_command.split()
                 match input_list[0]:
+    
+
 
                     #dev Befehle
-                    case "give" | "item":
-                        Pr.dbg("YES",3)
-                        pass
+
+#für give tp und effect wird liste an allen benötigt (assethandler circle imports)
+
+                    #case "give" | "item":
+                    #    Pr.i("Die Funktion ist noch nicht implementiert")
+                    #    pass
                     
-                    # case "tp" | "teleport" | "changelevel" | "cl":
-                    #    Pr.dbg(f"{input_list[1]} - {AssetHandler.allLevels}",2)
-                    #    if [input_list[1]] in AssetHandler.allLevels :
-                    #        player.change_location(player.location, [input_list[1]])
-                    #    else :
-                    #        raise ValueError(f"{[input_list[1]]} ist kein gültiges Level")
-                    #    return 34
+                    
+                    case "tp" | "teleport" | "changelevel" | "cl":
+                        llevel = Inp.assetlist("level")
+                        print (llevel)
+                        
+
+                        #Pr.dbg(f"{input_list[1]} - {gameloop.allLevels}",2)
+                        #if [input_list[1]] in gameloop.allLevels :
+                        #    player.change_location(player.location, [input_list[1]])
+                        #else :
+                        #    raise ValueError(f"{[input_list[1]]} ist kein gültiges Level")
+                        return 34
                     
                     case "changegamestate":
                         player.actionstack.insert(0,["change_gamestate",[input_list[1]]]) # pylint: disable=no-member
                         return 34
                     
-                    case "effect":
-                        pass
+                    #case "effect":
+                    #    player.add_effect([input_list[1]])
+                    #    pass
 
                     case "changehealth" | "ch":
                         cvalue = int(input_list[1])
@@ -72,6 +106,10 @@ class Inp():
 
                     case "kill":
                         player.change_health (-player.hp)
+                        
+                    case "god" | "tgm" | "gm1":
+                        player.change_health (10000)
+
 
                     #User Befehle
 
@@ -87,6 +125,7 @@ class Inp():
                         return 34
                     
                     case "opt":
+                        Pr.i("Die Funktion ist noch nicht implementiert")
                         return 34
 
                     case "inv":
@@ -97,7 +136,9 @@ class Inp():
                     case "save":
                         Pr.i("Die Funktion ist noch nicht implementiert")
                         return 34
+                    
                     case "exit":
+                        Pr.i("Bitte Kaufe das Exit DLC")
                         return 34
 
                     case _:
