@@ -44,7 +44,7 @@ class Debug():
         """
         Pr.b((Colorate.Color(Colors.red, "\nThe following error occured:", True)))
         Pr.b((Colorate.Color(Colors.red, f"{exception}", True)))
-        Pr.q("Do you want to continue the game?")
+        Pr.q("Do you want to continue the game? No technical support from this point onward, if you don't restart!")
         action = Inp.inp(text="y/n", yes_no_flag=True)
         match action:
             case "y":
