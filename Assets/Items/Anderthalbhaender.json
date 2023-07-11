@@ -1,0 +1,18 @@
+{
+  "$schema": "../../.github/workflows/itemschema.json",
+  "Anderthalbhaender": {
+    "type": "weapon",
+    "description": "Ein einfaches Schwert",
+    "ad": "2w6+0",
+    "ap": "0w0+0",
+    "hp": 5,
+    "ar": 0,
+    "mr": 0,
+    "effects": [],
+    "useable": false,
+    "equipable": true,
+    "slots": ["melee"],
+    "questitem": false,
+    "rarity": "common"
+  }
+}

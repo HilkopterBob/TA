@@ -27,11 +27,11 @@ def get_project_root() -> Path:
 
 ##################
 ##Debug Variable##
-dbg = True
+dbg = False
 dbg_level = 2  # 0 ERR only | #1 WARN + ERR | #2 INFO + WARN + ERR
 sys.stdout.reconfigure(encoding="utf-8")
-# hunter.trace(module="__main__")
 ##################
+
 
 ##################
 ###ENV Variables##
@@ -40,6 +40,7 @@ effects_file = "config/effects.json"
 levels_folder = "Assets/Levels"
 entities_folder = "Assets/Entities"
 effects_folder = "Assets/Effects"
+items_folder = "Assets/Items"
 log_file = f"logs/{today}.log"
 checksum_file = "config/integrity.md"
 root_folder = get_project_root()
