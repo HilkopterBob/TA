@@ -1,10 +1,11 @@
 """Defines Input Method for User - exact copy of Inputparser-Module
 """
+from os import listdir
+from os import path
 from pystyle import Colors, Write
 from Utils.pr import Pr
 from config import dbg, levels_folder
-from os import listdir
-from os import path
+
 
 #from Assethandler import AssetHandler
 
@@ -17,6 +18,9 @@ class Inp:
     """
 
     def assetlist(asset=None):
+        """
+        listing all assets of one type
+        """
         match asset:
             case "level":
                 fileList = listdir(levels_folder)
@@ -109,7 +113,7 @@ class Inp:
                             0, ["change_gamestate", [input_list[1]]]
                         )
                         return 34
-                    
+
                     #case "effect":
                     #    player.add_effect([input_list[1]])
                     #    pass
