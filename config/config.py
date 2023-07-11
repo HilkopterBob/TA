@@ -27,7 +27,7 @@ def get_project_root() -> Path:
 
 ##################
 ##Debug Variable##
-dbg = True
+dbg = False
 dbg_level = 2  # 0 ERR only | #1 WARN + ERR | #2 INFO + WARN + ERR
 sys.stdout.reconfigure(encoding="utf-8")
 ##################

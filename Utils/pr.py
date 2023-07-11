@@ -147,9 +147,6 @@ class Pr:
             errlvl (int): Errorlevel 0=Inf, 1=Warn, 2=Err, 3=Highlight. Defaults to 0.
         """
 
-        if not dbg:
-            return
-
         module = inspect.currentframe().f_back.f_globals["__name__"]
         function = inspect.stack()[1].function
         line_number = inspect.stack()[1].lineno
@@ -165,34 +162,38 @@ class Pr:
             case 0:  # Informational
                 logstr = f"{stack0}{message}"
                 if dbg_level >= 2:
-                    print(
-                        f'{info("")} {good("")} \
-                                {str(green(stack0))} {message}'
-                    )
+                    if dbg:
+                        print(
+                            f'{info("")} {good("")} \
+                                    {str(green(stack0))} {message}'
+                        )
 
             case 1:  # Warning
                 logstr = f"{stack1}{message}"
                 if dbg_level >= 1:
-                    print(
-                        f'{info("")} {info("")} \
-                                {str(yellow(stack1))} {message}'
-                    )
+                    if dbg:
+                        print(
+                            f'{info("")} {info("")} \
+                                    {str(yellow(stack1))} {message}'
+                        )
 
             case 2:  # Err
                 logstr = f"{stack2}{message}"
                 if dbg_level >= 0:
-                    print(
-                        f'{info("")} {bad("")} \
-                                {str(red(stack2))} {message}'
-                    )
+                    if dbg:
+                        print(
+                            f'{info("")} {bad("")} \
+                                    {str(red(stack2))} {message}'
+                        )
 
             case 3:  # Highlight
                 logstr = f"{stack2}{message}"
                 if dbg_level >= 0:
-                    print(
-                        f'{info("")} {cyan("")} \
-                                {str(yellow(stack2))} {message}'
-                    )
+                    if dbg:
+                        print(
+                            f'{info("")} {cyan("")} \
+                                    {str(yellow(stack2))} {message}'
+                        )
 
         with open(log_file, "a") as log:
             log.write(f"{timestamp} - {logstr}\n")

@@ -165,5 +165,13 @@ Hero.remove_effect_by_name(poisoning.name)
 
 ## Levels
 ## Items
+
+Categories
+Weapons,Tools,Potions,Misc
+
+Equipmentslots
+head, torso, underwear, left_arm, right_arm, left_leg, right_leg, gloves, meele, ranged, quick_draw_potion
+
+
 ## Effects
 ## Utils

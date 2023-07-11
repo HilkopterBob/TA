@@ -57,7 +57,7 @@ class AssetHandler:
                 else:
                     Debug.stop_game_on_exception("File Integrity Check Failed")
             else:
-                Pr.dbg(f"{os.path.join(folder, filename)} is no valid Asset File", 1)
+                Pr.dbg(f"{os.path.join(folder, filename)} is no valid Asset File", 2)
         et = process_time()
         importtime = et - st
         if importtime > 1:
