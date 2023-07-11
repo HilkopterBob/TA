@@ -17,7 +17,6 @@ class Inp:
     """
 
     def assetlist(asset=None):
-        """"""
         match asset:
             case "level":
                 fileList = listdir(levels_folder)
