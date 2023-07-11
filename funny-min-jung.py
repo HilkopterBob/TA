@@ -112,7 +112,7 @@ def hud(player):
 
     if player.location not in ("Menu","Options"):
         Pr.n("+"*12+" "+"+"*12)
-        Pr.n(f"Du befindest dich in: {player.location}")
+        Pr.n(f"Du befindest dich in: {player.location.name}")
 
         if player.hp > 25:
             Pr.g(f"HP: {player.hp}")
