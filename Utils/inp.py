@@ -16,7 +16,6 @@ class Inp:
     Utility Class for getting custom input prompts
     """
 
-    
     def assetlist(asset=None):
         """"""
         match asset:
@@ -27,9 +26,7 @@ class Inp:
                     for file in fileList
                     if file.lower().endswith(".json")
                     ]
-                
-                    
-                    
+
                 return levelList
 
     def inp(
@@ -89,8 +86,6 @@ class Inp:
                 input_list = input_command.split()
                 match input_list[0]:
 
-
-
                     #dev Befehle
 
 #für give tp und effect wird liste an allen benötigt (assethandler circle imports)
@@ -98,12 +93,10 @@ class Inp:
                     #case "give" | "item":
                     #    Pr.i("Die Funktion ist noch nicht implementiert")
                     #    pass
-                    
-                    
+
                     case "tp" | "teleport" | "changelevel" | "cl":
                         llevel = Inp.assetlist("level")
                         print (llevel)
-                        
 
                         #Pr.dbg(f"{input_list[1]} - {gameloop.allLevels}",2)
                         #if [input_list[1]] in gameloop.allLevels :
@@ -111,7 +104,7 @@ class Inp:
                         #else :
                         #    raise ValueError(f"{[input_list[1]]} ist kein gültiges Level")
                         return 34
-                    
+
                     case "changegamestate":
                         player.actionstack.insert(  # pylint: disable=E1101
                             0, ["change_gamestate", [input_list[1]]]
@@ -128,11 +121,9 @@ class Inp:
 
                     case "kill":
                         player.change_health (-player.hp)
-                        
+
                     case "god" | "tgm" | "gm1":
                         player.change_health (10000)
-
-
 
                     # User Befehle
 
@@ -146,7 +137,7 @@ class Inp:
                             for einzelwert in devbefehl:
                                 Pr.i(einzelwert)
                         return 34
-                    
+
                     case "opt":
                         Pr.i("Die Funktion ist noch nicht implementiert")
                         return 34
@@ -162,7 +153,7 @@ class Inp:
                     case "save":
                         Pr.i("Die Funktion ist noch nicht implementiert")
                         return 34
-                    
+
                     case "exit":
                         Pr.i("Bitte Kaufe das Exit DLC")
                         return 34
