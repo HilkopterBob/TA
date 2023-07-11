@@ -14,7 +14,6 @@ from config import (
     effects_folder,
     items_folder,
     checksum_file,
-    dbg,
     root_folder,
 )
 from Utils.pr import Pr

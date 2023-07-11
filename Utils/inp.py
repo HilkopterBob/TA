@@ -10,9 +10,10 @@ class Inp:
     Utility Class for getting custom input prompts
     """
 
-    def inp(player="", text="", yes_no_flag=False):  # pylint: disable=too-many-return-statements
+    def inp(
+        player="", text="", yes_no_flag=False
+    ):  # pylint: disable=too-many-return-statements
         """Method to get User Input"""
-        Pr.dbg(f"{player}")
         befehlszeichen = "#"
         userbefehl = [
             " inv: Öffnet das Inventar",
@@ -54,12 +55,12 @@ class Inp:
             # Wenn Eingabe == Zahl dann
 
             if yes_no_flag and user_input in ["y", "n", "Y", "N", "j", "J"]:
-                Pr.dbg(user_input, 0)
+                pass
+                # Pr.dbg(user_input, 0)
 
             elif user_input.isdigit():
                 user_input = int(user_input)
 
-            
             elif user_input[0] == befehlszeichen:
                 # befehlserkennung
                 input_command = user_input[1:]
