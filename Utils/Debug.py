@@ -42,10 +42,10 @@ class Debug():
     def stop_game_on_exception(exception):
         """Halts the Game on Exception
         """
-        Pr.b((Colorate.Color(Colors.red, "The following error occured:", True)))
+        Pr.b((Colorate.Color(Colors.red, "\nThe following error occured:", True)))
         Pr.b((Colorate.Color(Colors.red, f"{exception}", True)))
         Pr.q("Do you want to continue the game?")
-        action = Inp.inp("y/n")
+        action = Inp.inp(text="y/n", yes_no_flag=True)
         match action:
             case "y":
                 pass
