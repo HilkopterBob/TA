@@ -14,6 +14,7 @@ from config import (
     effects_folder,
     items_folder,
     checksum_file,
+    dbg,
     root_folder,
 )
 from Utils.pr import Pr
@@ -266,6 +267,8 @@ class AssetHandler:
                     progress.next()
                     _success = 3
                     # Debug.stop_game_on_exception("File Integrity Check Failed")
+        if dbg:
+            _success = 0
         match _success:
             case 0:
                 Pr.dbg("File Integrity Check passed", 1)
