@@ -1,5 +1,5 @@
 {
-  "$schema": "../../.github/workflows/effectschema.json",
+  "$schema": "../../../.github/workflows/effectschema.json",
 
   "Ermüdung": {
     "name": "Ermüdung",

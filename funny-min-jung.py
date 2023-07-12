@@ -43,7 +43,7 @@ def interact_with_level(player, level, level_list):
             Pr.dbg("Break!")
             return
     ##### ##### Reads triggers and action calls in level.text[dicts] ##### #####
-    # Pr.dbg("*"*20)
+    # Pr.dbg("*"*20
     # pr.n(level.text[action][0])
     # Pr.dbg("*"*20)
     ####Is doing nothing ?
@@ -110,8 +110,8 @@ def hud(player):
         player (Entity): The Player to which the Hud should be displayed
     """
 
-    if player.location not in ("Menu","Options"):
-        Pr.n("+"*12+" "+"+"*12)
+    if player.location not in ("Menu", "Options"):
+        Pr.n("+" * 12 + " " + "+" * 12)
         Pr.n(f"Du befindest dich in: {player.location.name}")
 
         if player.hp > 25:
@@ -135,10 +135,6 @@ def gameloop(player, level_list=None):
     # Entering Gameloop
     while True:
         for level in level_list:
-            Pr.dbg(
-                f"Comparing Levelname: {level.name} "
-                f"to Player location: {Level.levelname(player.location)}"
-            )
             if str(level.name) == str(Level.levelname(player.location)):
                 Pr.dbg(
                     f"Player location ({Level.levelname(player.location)}) "
@@ -232,7 +228,13 @@ if __name__ == "__main__":
         100,
         100,
         0,
-        [gitem("Item1", "weapon", ), gitem("item2", "misc")],
+        [
+            gitem(
+                "Item1",
+                "weapon",
+            ),
+            gitem("item2", "misc"),
+        ],
         location="Wiese",
     )
 

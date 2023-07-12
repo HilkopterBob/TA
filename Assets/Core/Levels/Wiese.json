@@ -1,5 +1,5 @@
 {
-  "$schema": "../../.github/workflows/levelschema.json",
+  "$schema": "../../../.github/workflows/levelschema.json",
   "Wiese": {
     "text": [
       [

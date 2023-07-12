@@ -14,6 +14,7 @@ from config import (
     effects_folder,
     items_folder,
     checksum_file,
+    dbg,
     root_folder,
 )
 from Utils.pr import Pr
@@ -43,7 +44,7 @@ class AssetHandler:
         """
         Pr.dbg(f"Gathering Assets from: {folder}")
         # TODO: find out the problem pylint has
-        _folder_name = folder.split("/")[1]  # pylint: disable=E1101
+        _folder_name = folder.split("/")[2]  # pylint: disable=E1101
         st = process_time()
         _file_list = []
         for file in os.listdir(folder):
@@ -207,7 +208,10 @@ class AssetHandler:
 
     def CheckGameIntegrity():
         """Checks game Files for Integrity"""
-        _gameFiles = []
+        _modFiles = []
+        _DLCFiles = []
+        _coreFiles = []
+        _success = 0
         exclude = [
             ".git",
             ".github",
@@ -223,17 +227,62 @@ class AssetHandler:
             dirs[:] = [d for d in dirs if d not in exclude]
             for name in files:
                 if name not in excludef:
-                    _gameFiles.append(os.path.join(root, name))
-
+                    if "DLC" in root:
+                        _DLCFiles.append(os.path.join(root, name))
+                    elif "Mods" in root:
+                        _modFiles.append(os.path.join(root, name))
+                    else:
+                        _coreFiles.append(os.path.join(root, name))
         with Bar(
             "Checking File integrity...",
             suffix="%(percent).1f%% - ETA: %(eta)ds",
-            max=len(_gameFiles),
+            max=len(_coreFiles) + len(_DLCFiles) + len(_modFiles),
         ) as progress:
-            for gfile in _gameFiles:
+            for gfile in _coreFiles:
                 sleep(0.1)
                 if AssetHandler.check_integrity(gfile):
                     progress.next()
                 else:
                     # Go on or break
-                    Debug.stop_game_on_exception("File Integrity Check Failed")
+                    progress.next()
+                    _success = 1
+            for gfile in _DLCFiles:
+                sleep(0.1)
+                if AssetHandler.check_integrity(gfile):
+                    progress.next()
+                else:
+                    # Go on or break
+                    progress.next()
+                    _success = 2
+                    # Debug.stop_game_on_exception("File Integrity Check Failed")
+                    # -> Output DLC wurde gefunden aber Files corrupt
+                    # -> Möchtest du das spiel ohne DLC starten
+                    # -> DLC nicht in enabled Flags aufnehmen
+            for gfile in _modFiles:
+                sleep(0.1)
+                if AssetHandler.check_integrity(gfile):
+                    progress.next()
+                else:
+                    # Go on or break
+                    progress.next()
+                    _success = 3
+                    # Debug.stop_game_on_exception("File Integrity Check Failed")
+        if dbg:
+            _success = 0
+        match _success:
+            case 0:
+                Pr.dbg("File Integrity Check passed", 1)
+            case 1:
+                Pr.dbg("Critical Error on integrity Check. Exiting Game!", 2)
+                Pr.red(
+                    "File Integrity Check failed. See Logs for Errors. Exiting Game..."
+                )
+                exit()
+            case 2:
+                Pr.dbg("DLC Error", 2)
+                Pr.red("DLC Integrity Check failed. See Logs for Errors.")
+                Debug.stop_game()
+            case 3:
+                Pr.dbg("MOD Error", 2)
+                Pr.red("MOD Integrity Check failed. See Logs for Errors.")
+                Debug.stop_game()

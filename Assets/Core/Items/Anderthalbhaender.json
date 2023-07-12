@@ -1,9 +1,9 @@
 {
-  "$schema": "../../.github/workflows/itemschema.json",
-  "Katar": {
+  "$schema": "../../../.github/workflows/itemschema.json",
+  "Anderthalbhaender": {
     "type": "weapon",
-    "description": "Ein Faustdolch",
-    "ad": "1w6+1",
+    "description": "Ein einfaches Schwert",
+    "ad": "2w6+0",
     "ap": "0w0+0",
     "hp": 5,
     "ar": 0,

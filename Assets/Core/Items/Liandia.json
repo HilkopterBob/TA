@@ -1,9 +1,9 @@
 {
-  "$schema": "../../.github/workflows/itemschema.json",
-  "Anderthalbhaender": {
+  "$schema": "../../../.github/workflows/itemschema.json",
+  "Liandia": {
     "type": "weapon",
-    "description": "Ein einfaches Schwert",
-    "ad": "2w6+0",
+    "description": "Eine geschwungene Doppelklinge",
+    "ad": "1w6+2",
     "ap": "0w0+0",
     "hp": 5,
     "ar": 0,

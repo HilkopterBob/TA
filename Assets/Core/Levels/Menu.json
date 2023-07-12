@@ -1,34 +1,33 @@
 {
-    "$schema": "../../.github/workflows/levelschema.json",
-    "Menu": {
+  "$schema": "../../../.github/workflows/levelschema.json",
+  "Menu": {
     "text": [
-        [
+      [
         "",
         { "action": "change_location", "new_level_name": "Wiese" },
         { "action": "add_effect", "effect_name": "Kopfschmerz" }
-        ],
-        [""],
-        ["", { "action": "change_location", "new_level_name": "Options" }],
-        ["", { "action": "close_game" }],
-        [
+      ],
+      [""],
+      ["", { "action": "change_location", "new_level_name": "Options" }],
+      ["", { "action": "close_game" }],
+      [
         "",
         { "action": "dbg_true" },
         { "action": "change_location", "new_level_name": "Wiese" },
         { "action": "add_effect", "effect_name": "Kopfschmerz" }
-        ]
+      ]
     ],
     "choices": [
-        ["Spiel starten"],
-        ["Spiel laden"],
-        ["Optionen"],
-        ["Beenden"],
-        [""]
+      ["Spiel starten"],
+      ["Spiel laden"],
+      ["Optionen"],
+      ["Beenden"],
+      [""]
     ],
     "inv": [],
     "ltype": "neutral",
     "descr": "Hauptmenü",
     "entitylist": [],
     "triggers": []
-    }
-
+  }
 }
