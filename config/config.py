@@ -21,8 +21,6 @@ def get_project_root() -> Path:
         Path: Path to Root Dir
     """
     return Path(__file__).parent.parent
-
-
 ##################
 
 ##################
