@@ -95,7 +95,6 @@ class Inp:
                     case "tp" | "teleport" | "changelevel" | "cl":
                         llevel = Inp.assetlist("level")
                         print (llevel)
-
                         return 34
 
                     case "changegamestate":
