@@ -1,5 +1,5 @@
 {
-  "$schema": "../../.github/workflows/itemschema.json",
+  "$schema": "../../../.github/workflows/itemschema.json",
   "Breitschwert": {
     "type": "weapon",
     "description": "Ein Breitschwert",

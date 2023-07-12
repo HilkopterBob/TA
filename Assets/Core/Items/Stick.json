@@ -1,9 +1,9 @@
 {
-  "$schema": "../../.github/workflows/itemschema.json",
-  "Liandia": {
+  "$schema": "../../../.github/workflows/itemschema.json",
+  "Stick": {
     "type": "weapon",
-    "description": "Eine geschwungene Doppelklinge",
-    "ad": "1w6+2",
+    "description": "Ein einfacher Stock",
+    "ad": "1w6+0",
     "ap": "0w0+0",
     "hp": 5,
     "ar": 0,

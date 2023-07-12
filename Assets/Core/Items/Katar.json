@@ -1,9 +1,9 @@
 {
-  "$schema": "../../.github/workflows/itemschema.json",
-  "Stick": {
+  "$schema": "../../../.github/workflows/itemschema.json",
+  "Katar": {
     "type": "weapon",
-    "description": "Ein einfacher Stock",
-    "ad": "1w6+0",
+    "description": "Ein Faustdolch",
+    "ad": "1w6+1",
     "ap": "0w0+0",
     "hp": 5,
     "ar": 0,

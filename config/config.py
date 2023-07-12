@@ -37,10 +37,10 @@ sys.stdout.reconfigure(encoding="utf-8")
 ###ENV Variables##
 items_file = "config/items.json"
 effects_file = "config/effects.json"
-levels_folder = "Assets/Levels"
-entities_folder = "Assets/Entities"
-effects_folder = "Assets/Effects"
-items_folder = "Assets/Items"
+levels_folder = "Assets/Core/Levels"
+entities_folder = "Assets/Core/Entities"
+effects_folder = "Assets/Core/Effects"
+items_folder = "Assets/Core/Items"
 log_file = f"logs/{today}.log"
 checksum_file = "config/integrity.md"
 root_folder = get_project_root()

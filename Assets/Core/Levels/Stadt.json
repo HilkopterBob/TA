@@ -1,0 +1,146 @@
+{
+  "$schema": "../../../.github/workflows/levelschema.json",
+  "Stadt": {
+    "text": [
+      [
+        "Du siehst dich um. Etwas entfernt scheint ein Pub und eine Markthalle zu sein.",
+        { "umgesehen": true }
+      ],
+      [
+        "Du betritst das Pub.",
+        { "action": "change_location", "new_level_name": "Pub" }
+      ],
+      [
+        "Du gehst in die Markhalle",
+        { "action": "change_location", "new_level_name": "Markthalle" }
+      ],
+      [
+        "Du gehst zurück zur Kreuzung",
+        { "action": "change_location", "new_level_name": "Kreuzung" }
+      ]
+    ],
+    "choices": [
+      ["dich umsehen"],
+      ["Den Pub betreten", { "umgesehen": true }],
+      ["Die Markthalle besuchen", { "umgesehen": true }],
+      ["zurück zur Kreuzung gehen"]
+    ],
+    "inv": [],
+    "ltype": "friedlich",
+    "descr": "Du Folgst den Weg bis zu einer großen Stadt",
+    "entitylist": [],
+    "triggers": [{ "umgesehen": false }],
+    "child_levels": {
+      "Pub": {
+        "text": [
+          [
+            "Du setzt dich an einen Tisch eine Bedihnung kommt zu dir.",
+            { "action": "change_location", "new_level_name": "Tisch" }
+          ],
+          [
+            "Du nimmst dir ein Zimmer und betritst dieses.",
+            { "action": "change_location", "new_level_name": "Zimmer" }
+          ],
+          [
+            "Du verlässt den Pub",
+            { "action": "change_location", "new_level_name": "Stadt" }
+          ]
+        ],
+        "choices": [
+          ["An einen Tisch setzen"],
+          ["Ein Zimmer nehmen"],
+          ["Den Pub verlassen"]
+        ],
+        "inv": [],
+        "ltype": "friedlich",
+        "descr": "Ein gemütliches Pub mit einer aufmerksammen Bedienung",
+        "entitylist": [],
+        "triggers": [],
+        "child_levels": {
+          "Tisch": {
+            "text": [[]],
+            "choices": [[]],
+            "inv": [],
+            "ltype": "friedlich",
+            "descr": "Ein Tisch",
+            "entitylist": [],
+            "triggers": []
+          },
+          "Zimmer": {
+            "text": [[]],
+            "choices": [[]],
+            "inv": [],
+            "ltype": "friedlich",
+            "descr": "Ein Zimmer",
+            "entitylist": [],
+            "triggers": []
+          }
+        }
+      },
+      "Markthalle": {
+        "text": [
+          [
+            "Du schaust dich um und siehst einige Marktstände.",
+            { "umgesehen": true }
+          ],
+          [
+            "Du gehst an den Marktstand des Kreuterhändlers",
+            { "action": "change_location", "new_level_name": "Kräuterhändler" }
+          ],
+          [
+            "Du gehst an den Marktstand des Schmieds",
+            { "action": "change_location", "new_level_name": "Schmied" }
+          ],
+          [
+            "Du verlässt die Markthalle",
+            { "action": "change_location", "new_level_name": "Stadt" }
+          ]
+        ],
+        "choices": [
+          ["dich umsehen"],
+          ["Den Kräuterhändler besuchen", { "umgesehen": true }],
+          ["Den Schmied besuchen", { "umgesehen": true }],
+          ["Die Markthalle verlassen"],
+          []
+        ],
+        "inv": [],
+        "ltype": "friedlich",
+        "descr": "Du betritst die Markhalle im inneren hersch ein reges Gewimmel",
+        "entitylist": [],
+        "triggers": [{ "umgesehen": false }],
+        "child_levels": {
+          "Kräuterhändler": {
+            "text": [
+              [],
+              [
+                "Du verlässt den Stand des Kräuterhändlers",
+                { "action": "change_location", "new_level_name": "Markthalle" }
+              ]
+            ],
+            "choices": [[], ["Zurück zur Markthalle"]],
+            "inv": [],
+            "ltype": "friedlich",
+            "descr": "Ein Kräuterstand mit vielen verschiedenen Artikeln",
+            "entitylist": [],
+            "triggers": []
+          },
+          "Schmied": {
+            "text": [
+              [],
+              [
+                "Du verlässt den Schmiedestand",
+                { "action": "change_location", "new_level_name": "Markthalle" }
+              ]
+            ],
+            "choices": [[], ["Zurück zur Markthalle"]],
+            "inv": [],
+            "ltype": "friedlich",
+            "descr": "Der Schmied bietet viele verschiedene Waffen und Rüstungen",
+            "entitylist": [],
+            "triggers": []
+          }
+        }
+      }
+    }
+  }
+}
