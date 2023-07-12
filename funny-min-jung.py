@@ -169,9 +169,16 @@ def gameloop(player, level_list=None):
                 Pr.dbg(f"Gamestate is now {Actionparser.gamestate}")
                 interact_with_level(player, current_level, level_list)
             case "inv":
-                Pr.dbg(f"Gamestate is now {Actionparser.gamestate}")
-                inventorystate(mPlayer)
-                Actionparser.gamestate = "game"
+                if Actionparser.gamestate != "game":
+                    Pr.dbg('Gamestate "inv" not available from Menu!', 1)
+                    Pr.yellow(
+                        'Gamestate "inv" kann nicht aus dem Menü geöffnet werden!'
+                    )
+                    Actionparser.gamestate = "loading"
+                else:
+                    Pr.dbg(f"Gamestate is now {Actionparser.gamestate}")
+                    inventorystate(mPlayer)
+                    Actionparser.gamestate = "game"
             case _:
                 Pr.yellow(
                     f'Der Gamestate "{Actionparser.gamestate}" ist nicht bekannt.'
