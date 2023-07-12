@@ -1,14 +1,36 @@
 """Defines Input Method for User - exact copy of Inputparser-Module
 """
+from os import listdir
+from os import path
 from pystyle import Colors, Write
 from Utils.pr import Pr
-from config import dbg
+from config import dbg, levels_folder
+
+
+#from Assethandler import AssetHandler
+
+
 
 
 class Inp:
     """
     Utility Class for getting custom input prompts
     """
+
+    def assetlist(asset=None):
+        """
+        listing all assets of one type
+        """
+        match asset:
+            case "level":
+                fileList = listdir(levels_folder)
+                levelList=[
+                    path.splitext(file)[0]
+                    for file in fileList
+                    if file.lower().endswith(".json")
+                    ]
+
+                return levelList
 
     def inp(
         player="", text="", yes_no_flag=False
@@ -22,18 +44,21 @@ class Inp:
             "save: Speichert das Spiel",
             "exit: Schließt das Spiel",
         ]
+
         devbefehl = [
-            "test: test",
-            "",
-            "",
+            "give: gibt ein Item",
+            "changegamestate: wechselt den Gamestate",
+            "effect: gibt einen Effect",
+            "changehealth: ändert die Lebenzzahl des Spielers [+/-]",
+            "kill: setzt die Lebenszahl des Spielers auf 0",
             "",
             "",
             "",
             "",
         ]
+
         min_len = 0
         max_len = 150
-
         user_input = Write.Input(text + "\n >_ ", Colors.white, interval=0.0025)
 
         try:
@@ -66,13 +91,28 @@ class Inp:
                 input_command = user_input[1:]
                 input_list = input_command.split()
                 match input_list[0]:
-                    # dev Befehle
-                    case "hallo":
-                        print("Hallo")
-                        for e in input_list:
-                            print(e)
 
-                    # User Befehle
+                    case "tp" | "teleport" | "changelevel" | "cl":
+                        llevel = Inp.assetlist("level")
+                        print (llevel)
+
+                        return 34
+
+                    case "changegamestate":
+                        player.actionstack.insert(  # pylint: disable=E1101
+                            0, ["change_gamestate", [input_list[1]]]
+                        )
+                        return 34
+
+                    case "changehealth" | "ch":
+                        cvalue = int(input_list[1])
+                        player.change_health (cvalue)    # pylint: disable=E1101
+
+                    case "kill":
+                        player.change_health (-player.hp)    # pylint: disable=E1101
+
+                    case "god" | "tgm" | "gm1":
+                        player.change_health (10000)    # pylint: disable=E1101
 
                     case "help":
                         Pr.headline("userbefehle")
@@ -84,7 +124,9 @@ class Inp:
                             for einzelwert in devbefehl:
                                 Pr.i(einzelwert)
                         return 34
+
                     case "opt":
+                        Pr.i("Die Funktion ist noch nicht implementiert")
                         return 34
 
                     case "inv":
@@ -94,15 +136,13 @@ class Inp:
                             0, ["change_gamestate", ["inv"]]
                         )
                         return 34
-                    case "changegamestate":
-                        player.actionstack.insert(  # pylint: disable=E1101
-                            0, ["change_gamestate", [input_list[1]]]
-                        )
-                        return 34
+
                     case "save":
                         Pr.i("Die Funktion ist noch nicht implementiert")
                         return 34
+
                     case "exit":
+                        Pr.i("Bitte Kaufe das Exit DLC")
                         return 34
 
                     case _:

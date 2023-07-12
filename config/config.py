@@ -21,13 +21,11 @@ def get_project_root() -> Path:
         Path: Path to Root Dir
     """
     return Path(__file__).parent.parent
-
-
 ##################
 
 ##################
 ##Debug Variable##
-dbg = False
+dbg = True
 dbg_level = 2  # 0 ERR only | #1 WARN + ERR | #2 INFO + WARN + ERR
 sys.stdout.reconfigure(encoding="utf-8")
 ##################
