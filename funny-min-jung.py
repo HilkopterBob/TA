@@ -110,7 +110,7 @@ def hud(player):
         player (Entity): The Player to which the Hud should be displayed
     """
 
-    if player.location not in ("Menu", "Options"):
+    if player.location.name not in ("Menu", "Options"):
         Pr.n("+" * 12 + " " + "+" * 12)
         Pr.n(f"Du befindest dich in: {player.location.name}")
 
