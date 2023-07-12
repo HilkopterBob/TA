@@ -106,13 +106,13 @@ class Inp:
 
                     case "changehealth" | "ch":
                         cvalue = int(input_list[1])
-                        player.change_health (cvalue)    # pylint: disable=E1101
+                        player.change_health(cvalue)    # pylint: disable=E1101
 
                     case "kill":
-                        player.change_health (-player.hp)    # pylint: disable=E1101
+                        player.change_health(-player.hp)    # pylint: disable=E1101
 
                     case "god" | "tgm" | "gm1":
-                        player.change_health (10000)    # pylint: disable=E1101
+                        player.change_health(10000)    # pylint: disable=E1101
 
                     case "help":
                         Pr.headline("userbefehle")
