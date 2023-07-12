@@ -44,12 +44,13 @@ class Inp:
             "save: Speichert das Spiel",
             "exit: Schließt das Spiel",
         ]
+
         devbefehl = [
-           "give: gibt ein Item",
-           "changegamestate: wechselt den Gamestate",
-           "effect: gibt einen Effect",
-           "changehealth: ändert die Lebenzzahl des Spielers [+/-]",
-           "kill: setzt die Lebenszahl des Spielers auf 0",
+            "give: gibt ein Item",
+            "changegamestate: wechselt den Gamestate",
+            "effect: gibt einen Effect",
+            "changehealth: ändert die Lebenzzahl des Spielers [+/-]",
+            "kill: setzt die Lebenszahl des Spielers auf 0",
             "",
             "",
             "",
@@ -91,23 +92,10 @@ class Inp:
                 input_list = input_command.split()
                 match input_list[0]:
 
-                    #dev Befehle
-
-#für give tp und effect wird liste an allen benötigt (assethandler circle imports)
-
-                    #case "give" | "item":
-                    #    Pr.i("Die Funktion ist noch nicht implementiert")
-                    #    pass
-
                     case "tp" | "teleport" | "changelevel" | "cl":
                         llevel = Inp.assetlist("level")
                         print (llevel)
 
-                        #Pr.dbg(f"{input_list[1]} - {gameloop.allLevels}",2)
-                        #if [input_list[1]] in gameloop.allLevels :
-                        #    player.change_location(player.location, [input_list[1]])
-                        #else :
-                        #    raise ValueError(f"{[input_list[1]]} ist kein gültiges Level")
                         return 34
 
                     case "changegamestate":
@@ -115,10 +103,6 @@ class Inp:
                             0, ["change_gamestate", [input_list[1]]]
                         )
                         return 34
-
-                    #case "effect":
-                    #    player.add_effect([input_list[1]])
-                    #    pass
 
                     case "changehealth" | "ch":
                         cvalue = int(input_list[1])
@@ -129,8 +113,6 @@ class Inp:
 
                     case "god" | "tgm" | "gm1":
                         player.change_health (10000)    # pylint: disable=E1101
-
-                    # User Befehle
 
                     case "help":
                         Pr.headline("userbefehle")
