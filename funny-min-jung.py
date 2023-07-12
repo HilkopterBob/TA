@@ -162,14 +162,21 @@ def gameloop(player, level_list=None):
 
         match Actionparser.gamestate:
             case "loading":
-                Pr.dbg("You are now in Loading")
+                Pr.dbg(f"Gamestate is now {Actionparser.gamestate}")
                 # loding steps
                 Actionparser.gamestate = "game"
             case "game":
-                Pr.dbg("You are now in Game")
+                Pr.dbg(f"Gamestate is now {Actionparser.gamestate}")
                 interact_with_level(player, current_level, level_list)
             case "inv":
+                Pr.dbg(f"Gamestate is now {Actionparser.gamestate}")
                 inventorystate(mPlayer)
+                Actionparser.gamestate = "game"
+            case _:
+                Pr.yellow(
+                    f'Der Gamestate "{Actionparser.gamestate}" ist nicht bekannt.'
+                )
+                Pr.dbg(f"Gamestate {Actionparser.gamestate} unknown", 1)
                 Actionparser.gamestate = "game"
 
         player.check_level_up()
