@@ -76,7 +76,6 @@ class Inp:
 
             if yes_no_flag and user_input in ["y", "n", "Y", "N", "j", "J"]:
                 pass
-                # Pr.dbg(user_input, 0)
 
             elif user_input.isdigit():
                 user_input = int(user_input)
