@@ -1,11 +1,11 @@
 """Defines Input Method for User - exact copy of Inputparser-Module
 """
+from time import sleep
 from os import listdir
 from os import path
 from pystyle import Colors, Write, Center, Box
 from Utils.pr import Pr
 from config import dbg, levels_folder
-from time import sleep
 
 # from Utils import Debug as Dbg
 
