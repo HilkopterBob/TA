@@ -111,13 +111,12 @@
         "child_levels": {
           "Kräuterhändler": {
             "text": [
-              [],
               [
                 "Du verlässt den Stand des Kräuterhändlers",
                 { "action": "change_location", "new_level_name": "Markthalle" }
               ]
             ],
-            "choices": [[], ["Zurück zur Markthalle"]],
+            "choices": [["Zurück zur Markthalle"]],
             "inv": [],
             "ltype": "friedlich",
             "descr": "Ein Kräuterstand mit vielen verschiedenen Artikeln",
