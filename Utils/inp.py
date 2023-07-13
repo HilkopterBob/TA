@@ -4,6 +4,7 @@ from os import listdir
 from os import path
 from pystyle import Colors, Write
 from Utils.pr import Pr
+from Utils.Debug import Debug as Dbg
 from config import dbg, levels_folder
 
 # from Utils import Debug as Dbg
@@ -126,7 +127,7 @@ class Inp:
                         return 34
 
                     case "opt":
-                        # Dbg.show_wip()
+                        Dbg.show_wip()
                         return 34
 
                     case "inv":
@@ -138,12 +139,12 @@ class Inp:
                         return 34
 
                     case "save":
-                        # Dbg.show_wip()
+                        Dbg.show_wip()
                         return 34
 
                     case "exit":
                         Pr.i("Bitte Kaufe das Exit DLC")
-                        # Dbg.show_wip()
+                        Dbg.show_wip()
                         return 34
 
                     case _:
