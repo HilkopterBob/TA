@@ -5,6 +5,7 @@ from os import path
 from pystyle import Colors, Write
 from Utils.pr import Pr
 from config import dbg, levels_folder
+from Utils import Debug as Dbg
 
 
 #from Assethandler import AssetHandler
@@ -93,6 +94,7 @@ class Inp:
                 match input_list[0]:
 
                     case "tp" | "teleport" | "changelevel" | "cl":
+                        Dbg.show_wip()
                         llevel = Inp.assetlist("level")
                         print (llevel)
                         return 34
@@ -128,7 +130,7 @@ class Inp:
                         return 34
 
                     case "opt":
-                        Pr.i("Die Funktion ist noch nicht implementiert")
+                        Dbg.show_wip()
                         return 34
 
                     case "inv":
@@ -140,17 +142,17 @@ class Inp:
                         return 34
 
                     case "save":
-                        Pr.i("Die Funktion ist noch nicht implementiert")
+                        Dbg.show_wip()
                         return 34
 
                     case "exit":
                         Pr.i("Bitte Kaufe das Exit DLC")
+                        Dbg.show_wip()
                         return 34
 
                     case _:
                         return 34
 
-                return Inp.inp(player)
             else:
                 raise ValueError("Unsupported type of Input")
             return user_input
