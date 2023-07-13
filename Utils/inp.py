@@ -86,14 +86,9 @@ class Inp:
                 match input_list[0]:
                     case "tp" | "teleport" | "changelevel" | "cl":
                         allLevels = __import__("Assethandler").AssetHandler.allLevels
-                        # for level in allLevels:
-                        #    Pr.dbg(level.name, 2)
-                        #    Pr.dbg(input_list[1], 2)
-                        player.location = [  # pylint: disable=W0201
-                            level
-                            for level in allLevels
-                            if level.name.lower == input_list[1]
-                        ]
+                        for level in allLevels:
+                            if level.name.lower() == input_list[1]:
+                                player.location = level  # pylint: disable=W0201
                         return 34
 
                     case "changegamestate":
