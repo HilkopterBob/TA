@@ -14,21 +14,23 @@ class Entity:
     Contains Functions:
     from_json : Creates Entities from JSON
     """
-    def __init__(   self,
-                    name="Blanko",
-                    health=100,
-                    wealth=100,
-                    xp=0,
-                    inv=None,
-                    ptype="",
-                    geffects=None,
-                    beffects=None,
-                    eeffects=None,
-                    location="Nirvana",
-                    level=1,
-                    slots=None
-                    ):
 
+    def __init__(
+        self,
+        name="Blanko",
+        health=100,
+        wealth=100,
+        xp=0,
+        inv=None,
+        ptype="",
+        geffects=None,
+        beffects=None,
+        eeffects=None,
+        location="Nirvana",
+        level=1,
+        slots=None,
+        allowdamage=True,
+    ):
         if inv is None:
             inv = []
         if geffects is None:
@@ -53,10 +55,13 @@ class Entity:
         self.eeffects = eeffects
         self.effects = [[self.geffects], [self.beffects], [self.eeffects]]
         self.actionstack = []
-        self.slots = slots  #["Head_slot", "Torso_slot", "Underwear", "Left_arm", "Right_arm",
-                                        #"Left_leg", "Right_leg", "Gloves_slot",
-                                        # "Meele Weapon", "Ranged Weapon",
-                                        #"Quick_draw potion"]
+        self.slots = (
+            slots  # ["Head_slot", "Torso_slot", "Underwear", "Left_arm", "Right_arm",
+        )
+        # "Left_leg", "Right_leg", "Gloves_slot",
+        # "Meele Weapon", "Ranged Weapon",
+        # "Quick_draw potion"]
+        self.allowdamage = allowdamage
 
     @staticmethod
     def from_json(json_dct):
@@ -105,7 +110,18 @@ class Entity:
         """
         try:
             self.hp += value
-            return True
+            if self.hp <= 0:
+                if self.allowdamage:
+                    Pr.dbg("Entity {self} has 0 or less Health")
+                    return True
+                else:
+                    self.hp = 1
+                    Pr.dbg(
+                        f"Entity {self.name} is not allowed to take Damage Allowdamage: {self.allowdamage}",
+                        1,
+                    )
+                    return False
+            return False
         except:
             return False
 
@@ -382,8 +398,7 @@ class Entity:
         return True
 
     def consume_item(self, item_name):
-        """enables consumption of consumables.
-        """
+        """enables consumption of consumables."""
         for item in self.inv:
             if item.name == item_name:
                 consumable = item
@@ -488,7 +503,7 @@ class Entity:
                 self.slots[index] = "placeholder"
 
 
-class EntityInit():
+class EntityInit:
     """
     Class which Initializes Entities
     Contains Functions:
