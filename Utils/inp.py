@@ -50,10 +50,6 @@ class Inp:
             "changegamestate: wechselt den Gamestate",
             "changehealth: ändert die Lebenzzahl des Spielers [+/-]",
             "kill: setzt die Lebenszahl des Spielers auf 0",
-            "",
-            "",
-            "",
-            "",
         ]
 
         min_len = 0
