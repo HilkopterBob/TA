@@ -6,10 +6,7 @@ from pystyle import Colors, Write
 from Utils.pr import Pr
 from config import dbg, levels_folder
 
-
-#from Assethandler import AssetHandler
-
-
+# from Assethandler import AssetHandler
 
 
 class Inp:
@@ -24,11 +21,11 @@ class Inp:
         match asset:
             case "level":
                 fileList = listdir(levels_folder)
-                levelList=[
+                levelList = [
                     path.splitext(file)[0]
                     for file in fileList
                     if file.lower().endswith(".json")
-                    ]
+                ]
 
                 return levelList
 
@@ -38,9 +35,9 @@ class Inp:
         """Method to get User Input"""
         befehlszeichen = "#"
         userbefehl = [
-            " inv: Öffnet das Inventar",
-            " opt: Öffnet die Optioen",
-            " men: Öffnet das Menü",
+            "inv: Öffnet das Inventar",
+            "opt: Öffnet die Optioen",
+            "men: Öffnet das Menü",
             "save: Speichert das Spiel",
             "exit: Schließt das Spiel",
         ]
@@ -91,10 +88,16 @@ class Inp:
                 input_command = user_input[1:]
                 input_list = input_command.split()
                 match input_list[0]:
-
                     case "tp" | "teleport" | "changelevel" | "cl":
-                        llevel = Inp.assetlist("level")
-                        print (llevel)
+                        allLevels = __import__("Assethandler").AssetHandler.allLevels
+                        # for level in allLevels:
+                        #    Pr.dbg(level.name, 2)
+                        #    Pr.dbg(input_list[1], 2)
+                        player.location = [  # pylint: disable=W0201
+                            level
+                            for level in allLevels
+                            if level.name.lower == input_list[1]
+                        ]
                         return 34
 
                     case "changegamestate":
@@ -105,15 +108,15 @@ class Inp:
 
                     case "changehealth" | "ch":
                         cvalue = int(input_list[1])
-                        player.change_health(cvalue)    # pylint: disable=E1101
+                        player.change_health(cvalue)  # pylint: disable=E1101
                         return 34
 
                     case "kill":
-                        player.change_health(-player.hp)    # pylint: disable=E1101
+                        player.change_health(-player.hp)  # pylint: disable=E1101
                         return 34
 
                     case "god" | "tgm" | "gm1":
-                        player.change_health(10000)    # pylint: disable=E1101
+                        player.change_health(10000)  # pylint: disable=E1101
                         return 34
 
                     case "help":
