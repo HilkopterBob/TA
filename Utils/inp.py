@@ -5,6 +5,7 @@ from os import path
 from pystyle import Colors, Write
 from Utils.pr import Pr
 from config import dbg, levels_folder
+from Utils import Debug as Dbg
 
 # from Assethandler import AssetHandler
 
@@ -43,15 +44,9 @@ class Inp:
         ]
 
         devbefehl = [
-            "give: gibt ein Item",
             "changegamestate: wechselt den Gamestate",
-            "effect: gibt einen Effect",
             "changehealth: ändert die Lebenzzahl des Spielers [+/-]",
             "kill: setzt die Lebenszahl des Spielers auf 0",
-            "",
-            "",
-            "",
-            "",
         ]
 
         min_len = 0
@@ -78,7 +73,6 @@ class Inp:
 
             if yes_no_flag and user_input in ["y", "n", "Y", "N", "j", "J"]:
                 pass
-                # Pr.dbg(user_input, 0)
 
             elif user_input.isdigit():
                 user_input = int(user_input)
@@ -131,7 +125,7 @@ class Inp:
                         return 34
 
                     case "opt":
-                        Pr.i("Die Funktion ist noch nicht implementiert")
+                        Dbg.show_wip()
                         return 34
 
                     case "inv":
@@ -143,17 +137,17 @@ class Inp:
                         return 34
 
                     case "save":
-                        Pr.i("Die Funktion ist noch nicht implementiert")
+                        Dbg.show_wip()
                         return 34
 
                     case "exit":
                         Pr.i("Bitte Kaufe das Exit DLC")
+                        Dbg.show_wip()
                         return 34
 
                     case _:
                         return 34
 
-                return Inp.inp(player)
             else:
                 raise ValueError("Unsupported type of Input")
             return user_input

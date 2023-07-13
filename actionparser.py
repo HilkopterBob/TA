@@ -25,6 +25,7 @@ class Actionparser:
     remove_effect_by_name : Removes an Effect by it's Name from an Entity
     change_stat : Changes Stats of an Entity
     check_level_up : Checks for Player Level Up Conditions
+    show_wip : shows wip banner
     """
 
     gamestate = "loading"
@@ -342,3 +343,8 @@ class Actionparser:
             return 0
         except:
             return 1
+
+    def show_wip(*args):
+        """shows wip message
+        """
+        Pr.headline("Work In Progress.\nCheck this feature in a later update.\n-the Devs ♥")
