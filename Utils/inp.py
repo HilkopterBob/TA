@@ -47,9 +47,7 @@ class Inp:
         ]
 
         devbefehl = [
-            "give: gibt ein Item",
             "changegamestate: wechselt den Gamestate",
-            "effect: gibt einen Effect",
             "changehealth: ändert die Lebenzzahl des Spielers [+/-]",
             "kill: setzt die Lebenszahl des Spielers auf 0",
             "",
