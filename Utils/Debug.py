@@ -52,12 +52,6 @@ class Debug():
             case "n":
                 sys.exit()
 
-
-    def show_wip():
-        """shows wip message
-        """
-        Pr.headline("Work In Progress.\nCheck this feature in a later update.\n-the Devs ♥")
-
     def pause():
         """Pauses the Game for User Input
         """

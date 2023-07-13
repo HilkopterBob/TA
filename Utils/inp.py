@@ -2,10 +2,10 @@
 """
 from os import listdir
 from os import path
-from pystyle import Colors, Write
+from pystyle import Colors, Write, Center, Box
 from Utils.pr import Pr
-from Utils.Debug import Debug as Dbg
 from config import dbg, levels_folder
+from time import sleep
 
 # from Utils import Debug as Dbg
 
@@ -122,7 +122,8 @@ class Inp:
                         return 34
 
                     case "opt":
-                        Dbg.show_wip()
+                        print(Center.XCenter(Box.Lines("Work In Progress.\nCheck this feature in a later update.\n-the Devs ♥")))
+                        sleep(2)
                         return 34
 
                     case "inv":
@@ -134,12 +135,13 @@ class Inp:
                         return 34
 
                     case "save":
-                        Dbg.show_wip()
+                        print(Center.XCenter(Box.Lines("Work In Progress.\nCheck this feature in a later update.\n-the Devs ♥")))
+                        sleep(2)
                         return 34
 
                     case "exit":
-                        Pr.i("Bitte Kaufe das Exit DLC")
-                        Dbg.show_wip()
+                        print(Center.XCenter(Box.Lines("Work In Progress.\nCheck this feature in a later update.\n-the Devs ♥")))
+                        sleep(2)
                         return 34
 
                     case _:
