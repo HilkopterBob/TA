@@ -9,7 +9,7 @@
       ],
       ["", { "action": "show_wip", "TODO: ":"FIX"}],
       ["", { "action": "show_wip", "TODO: ":"FIX"}],
-      ["", { "action": "close_game" }],
+      ["", { "action": "close_game", "temporaryfix": "temporaryfix" }],
       [
         "",
         { "action": "dbg_true" },

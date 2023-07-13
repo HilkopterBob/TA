@@ -80,7 +80,12 @@ def interact_with_level(player, level, level_list):
                                 else:
                                     actiontoadd = [
                                         _currentAction.get("action"),
-                                        [mPlayer, list(_currentAction.values())[1]],
+                                        [
+                                            mPlayer,
+                                            list(_currentAction.values())[
+                                                1
+                                            ],  # Before Fix#74 [1] after Fix#74 [0]
+                                        ],
                                     ]
                             else:
                                 Pr.dbg(f"No Action in Keys: {_currentAction}", 1)
@@ -99,7 +104,7 @@ def interact_with_level(player, level, level_list):
                             mPlayer.actionstack.append(actiontoadd)
                         except Exception as e:
                             Pr.dbg(f"ERR: {e}", 2)
-                    except:
+                    except Exception:
                         Pr.dbg(f"CurrentAction: {_currentAction}", 2)
 
 
