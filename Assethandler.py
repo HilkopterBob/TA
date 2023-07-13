@@ -181,8 +181,8 @@ class AssetHandler:
             Bool: True if integrity is Verified, otherwise False
         """
         # Skip Integrity Check if Debug Mode is Enabled
-        # if dbg:
-        #     return True
+        if dbg:
+            return True
 
         # Read checksums_file from Config and saves Checksums
         checksums = []

@@ -9,7 +9,7 @@
       ],
       [""],
       ["", { "action": "change_location", "new_level_name": "Options" }],
-      ["", { "action": "close_game" }],
+      ["", { "action": "close_game", "temporaryfix": "temporaryfix" }],
       [
         "",
         { "action": "dbg_true" },

@@ -47,6 +47,15 @@ class Actionparser:
         Pr.dbg(f"{_call}")
         return _call(attr[1])
 
+    def close_game(attributes=None):
+        """Calls the close_game function with arguments
+
+        Args:
+            attributes (None, optional):
+        """
+        Pr.dbg("Closing game")
+        exit()
+
     def add_effect(attributes=None):
         """Calls the add_effect Function with arguments
 
