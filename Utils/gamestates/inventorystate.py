@@ -2,7 +2,7 @@
 """
 import questionary
 from Utils import pr
-
+from actionparser import Actionparser
 
 
 def inventorystate(Player):
@@ -21,8 +21,9 @@ def inventorystate(Player):
                 if choosen_item == item.name:
                     if item.usable:
                         action = questionary.select(
-                            f'Möchtest du {choosen_item} verbrauchen?',
-                            choices=["ja", "nein"]).unsafe_ask()
+                            f"Möchtest du {choosen_item} verbrauchen?",
+                            choices=["ja", "nein"],
+                        ).unsafe_ask()
                         if action == "ja":
                             pr.Pr.dbg(f"Player Health:                  {Player.hp}", 3)
                             pr.Pr.dbg(f"Player inv:                 {Player.inv}", 3)
@@ -33,8 +34,9 @@ def inventorystate(Player):
                             break
                     if item.equipable:
                         action = questionary.select(
-                        f'Möchtest du {choosen_item} ausrüsten?',
-                        choices=["ja", "nein"]).unsafe_ask()
+                            f"Möchtest du {choosen_item} ausrüsten?",
+                            choices=["ja", "nein"],
+                        ).unsafe_ask()
                         if action == "ja":
                             pr.Pr.dbg(f"Player Slots: {Player.slots}", 0)
                             pr.Pr.dbg(f"Player inv: {Player.inv}", 0)
@@ -48,7 +50,6 @@ def inventorystate(Player):
                 pr.Pr.dbg(item)
 
     while not wants_exit:
-
         weapons = []
         tools = []
         potions = []
@@ -68,58 +69,58 @@ def inventorystate(Player):
         misc.extend(default_choice_items)
 
         inventory_space = questionary.select(
-            'Choose 1Type:',
+            "Choose 1Type:",
             choices=[
                 "Weapons",
                 "Tools",
                 "Potions",
                 "Misc",
                 "Equipment",
-                "zurück zum Spiel"
-            ]).unsafe_ask()
+                "zurück zum Spiel",
+            ],
+        ).unsafe_ask()
 
         match inventory_space:
             case "Weapons":
                 if len(weapons) != 0:
                     choosen_item = questionary.select(
-                    'Weapons',
-                    choices=weapons).unsafe_ask()
+                        "Weapons", choices=weapons
+                    ).unsafe_ask()
                     if choosen_item != "zurück":
                         item_inv_helper(Player, choosen_item)
                 else:
                     choosen_item = questionary.select(
-                    '''Du hast momentan keine Waffen im Inventar.
-                    Hast du sie vielleicht grade ausgerüstet?''',
-                    choices=["zurück"]).unsafe_ask()
+                        """Du hast momentan keine Waffen im Inventar.
+                    Hast du sie vielleicht grade ausgerüstet?""",
+                        choices=["zurück"],
+                    ).unsafe_ask()
             case "Tools":
                 if len(tools) != 0:
                     choosen_item = questionary.select(
-                    'Tools',
-                    choices=tools).unsafe_ask()
+                        "Tools", choices=tools
+                    ).unsafe_ask()
                 else:
                     choosen_item = questionary.select(
-                    'Du hast momentan keine Tools im Inventar.',
-                    choices=["zurück"]).unsafe_ask()
+                        "Du hast momentan keine Tools im Inventar.", choices=["zurück"]
+                    ).unsafe_ask()
             case "Potions":
                 if len(potions) != 0:
                     choosen_item = questionary.select(
-                    'Potions',
-                    choices=potions).unsafe_ask()
+                        "Potions", choices=potions
+                    ).unsafe_ask()
                     if choosen_item != "zurück":
                         item_inv_helper(Player, choosen_item)
                 else:
                     choosen_item = questionary.select(
-                    'Du hast momentan keine Tränke im Inventar.',
-                    choices=["zurück"]).unsafe_ask()
+                        "Du hast momentan keine Tränke im Inventar.", choices=["zurück"]
+                    ).unsafe_ask()
             case "Misc":
                 if len(misc) != 0:
-                    choosen_item = questionary.select(
-                    'Misc',
-                    choices=misc).unsafe_ask()
+                    choosen_item = questionary.select("Misc", choices=misc).unsafe_ask()
                 else:
                     choosen_item = questionary.select(
-                    'Du hast momentan kein Zeugs im Inventar.',
-                    choices=["zurück"]).unsafe_ask()
+                        "Du hast momentan kein Zeugs im Inventar.", choices=["zurück"]
+                    ).unsafe_ask()
             case "Equipment":
                 equip = []
                 for item in Player.slots:
@@ -132,12 +133,13 @@ def inventorystate(Player):
                         pass
                 if len(equip) != 0:
                     choosen_item = questionary.select(
-                    'Deine verwendete Ausrüstung:',
-                    choices=equip).unsafe_ask()
+                        "Deine verwendete Ausrüstung:", choices=equip
+                    ).unsafe_ask()
                     if choosen_item != "zurück":
                         choosen_choice = questionary.select(
-                            'Deine verwendete Ausrüstung:',
-                            choices=["ablegen", "zurück"]).unsafe_ask()
+                            "Deine verwendete Ausrüstung:",
+                            choices=["ablegen", "zurück"],
+                        ).unsafe_ask()
                         match choosen_choice:
                             case "ablegen":
                                 pr.Pr.dbg(f"Player Current Equip: {Player.slots}", 3)
@@ -148,12 +150,15 @@ def inventorystate(Player):
                             case "zurück":
                                 pass
                             case _:
-                                pr.Pr.dbg("Ein Unerlaubtes Menüitem wurde unter"\
-                                           ">>Inv>>Equip>> ausgewählt.", 2)
+                                pr.Pr.dbg(
+                                    "Ein Unerlaubtes Menüitem wurde unter"
+                                    ">>Inv>>Equip>> ausgewählt.",
+                                    2,
+                                )
                 else:
                     choosen_item = questionary.select(
-                        'Du hast gerade nichts Ausgerüstet.',
-                        choices=["zurück"]).unsafe_ask()
+                        "Du hast gerade nichts Ausgerüstet.", choices=["zurück"]
+                    ).unsafe_ask()
                     if choosen_item != "zurück":
                         Player.unequip_item(choosen_item)
             case "zurück zum Spiel":

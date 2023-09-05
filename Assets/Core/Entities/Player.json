@@ -11,6 +11,8 @@
     "beffects": [],
     "eeffects": [],
     "location": "",
-    "level": 0
+    "level": 0,
+    "allowdamage": false,
+    "slots": []
   }
 }

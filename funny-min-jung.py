@@ -82,9 +82,7 @@ def interact_with_level(player, level, level_list):
                                         _currentAction.get("action"),
                                         [
                                             mPlayer,
-                                            list(_currentAction.values())[
-                                                1
-                                            ],  # Before Fix#74 [1] after Fix#74 [0]
+                                            list(_currentAction.values())[1],
                                         ],
                                     ]
                             else:
@@ -163,25 +161,24 @@ def gameloop(player, level_list=None):
                     Actionparser.callfunction(action)
                     e.actionstack.remove(action)
 
-        Pr.dbg(f"Current Gamestate: {Actionparser.gamestate}")
+        Pr.dbg(f"Current Gamestate: {Actionparser.gamestate}", 2)
 
         match Actionparser.gamestate:
             case "loading":
-                Pr.dbg(f"Gamestate is now {Actionparser.gamestate}")
+                Pr.dbg(f"Gamestate is now {Actionparser.gamestate}", 3)
                 # loding steps
                 Actionparser.gamestate = "game"
             case "game":
-                Pr.dbg(f"Gamestate is now {Actionparser.gamestate}")
+                Pr.dbg(f"Gamestate is now {Actionparser.gamestate}", 3)
                 interact_with_level(player, current_level, level_list)
+                Actionparser.gamestate = Actionparser.gamestate
             case "inv":
-                if Actionparser.gamestate != "game":
-                    Pr.dbg('Gamestate "inv" not available from Menu!', 1)
-                    Pr.yellow(
-                        'Gamestate "inv" kann nicht aus dem Menü geöffnet werden!'
-                    )
-                    Actionparser.gamestate = "loading"
+                if Actionparser.gamestate == "game" or player.location.name == "Menu":
+                    Pr.dbg('Gamestate "inv" not available from here!', 1)
+                    Pr.yellow('Gamestate "inv" kann hier nicht geöffnet werden!')
+                    Actionparser.gamestate = "game"
                 else:
-                    Pr.dbg(f"Gamestate is now {Actionparser.gamestate}")
+                    Pr.dbg(f"Gamestate is now {Actionparser.gamestate}", 3)
                     inventorystate(mPlayer)
                     Actionparser.gamestate = "game"
             case _:
