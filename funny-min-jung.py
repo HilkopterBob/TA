@@ -1,5 +1,9 @@
 """Main Module for Textadventure
 """
+# std imports:
+from time import sleep
+
+# project imports:
 from Entities import Entity
 from Level import Level
 from Effect import Effect
@@ -104,7 +108,9 @@ def interact_with_level(player, level, level_list):
                             Pr.dbg(f"ERR: {e}", 2)
                     except Exception:
                         Pr.dbg(f"CurrentAction: {_currentAction}", 2)
-
+    else:
+        Pr.n(f"Bitte gebe eine Zahl kleiner gleich {len(availableChoicesDict.keys())} ein!")
+        sleep(2)
 
 def hud(player):
     """Player Hud

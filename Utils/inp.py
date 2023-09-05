@@ -122,7 +122,8 @@ class Inp:
                         return 34
 
                     case "opt":
-                        print(Center.XCenter(Box.Lines("Work In Progress.\nCheck this feature in a later update.\n-the Devs ♥")))
+                        print(Center.XCenter(Box.Lines("Work In Progress.\nCheck this \
+                            feature in a later update.\n-the Devs ♥")))
                         sleep(2)
                         return 34
 
@@ -135,12 +136,14 @@ class Inp:
                         return 34
 
                     case "save":
-                        print(Center.XCenter(Box.Lines("Work In Progress.\nCheck this feature in a later update.\n-the Devs ♥")))
+                        print(Center.XCenter(Box.Lines("Work In Progress.\nCheck \
+                            this feature in a later update.\n-the Devs ♥")))
                         sleep(2)
                         return 34
 
                     case "exit":
-                        print(Center.XCenter(Box.Lines("Work In Progress.\nCheck this feature in a later update.\n-the Devs ♥")))
+                        print(Center.XCenter(Box.Lines("Work In Progress.\nCheck \
+                            this feature in a later update.\n-the Devs ♥")))
                         sleep(2)
                         return 34
 

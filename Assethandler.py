@@ -1,6 +1,7 @@
 """Assethandler for importing needed Assets
 """
 import os
+import sys
 from hashlib import sha256
 from time import sleep, process_time
 from progress.bar import Bar
@@ -277,7 +278,7 @@ class AssetHandler:
                 Pr.red(
                     "File Integrity Check failed. See Logs for Errors. Exiting Game..."
                 )
-                exit()
+                sys.exit()
             case 2:
                 Pr.dbg("DLC Error", 2)
                 Pr.red("DLC Integrity Check failed. See Logs for Errors.")
