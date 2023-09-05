@@ -1,5 +1,9 @@
 """Main Module for Textadventure
 """
+# std imports:
+from time import sleep
+
+# project imports:
 from Entities import Entity
 from Level import Level
 from Effect import Effect
@@ -8,7 +12,6 @@ from Utils import Pr, Debug, Inp
 from Utils.gamestates.inventorystate import inventorystate
 from actionparser import Actionparser
 from Assethandler import AssetHandler
-from time import sleep
 
 
 def interact_with_level(player, level, level_list):

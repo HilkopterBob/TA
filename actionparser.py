@@ -2,6 +2,7 @@
 Actionparser Module which holds 1 Class
     Actionparser()
 """
+import sys
 from Effect import EffectInit
 from config import config
 from Level import Level
@@ -55,7 +56,7 @@ class Actionparser:
             attributes (None, optional):
         """
         Pr.dbg("Closing game")
-        exit()
+        sys.exit()
 
     def add_effect(attributes=None):
         """Calls the add_effect Function with arguments

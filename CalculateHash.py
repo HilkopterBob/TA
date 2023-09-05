@@ -1,3 +1,9 @@
+"""
+Module for calculating hashes of asset files. Hashes are used for integrity checks.
+
+    Returns:
+        string:checksum: checksum of file
+"""
 from hashlib import sha256
 import os
 from pathlib import Path

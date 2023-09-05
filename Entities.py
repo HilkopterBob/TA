@@ -111,13 +111,14 @@ class Entity:
         try:
             self.hp += value
             if self.hp <= 0:
-                if self.allowdamage:
+                if self.allowdamage: #  pylint: disable=R1705
                     Pr.dbg("Entity {self} has 0 or less Health")
                     return True
                 else:
                     self.hp = 1
                     Pr.dbg(
-                        f"Entity {self.name} is not allowed to take Damage Allowdamage: {self.allowdamage}",
+                        f"Entity {self.name} is not allowed to take \
+                        Damage Allowdamage: {self.allowdamage}",
                         1,
                     )
                     return False
