@@ -109,8 +109,11 @@ def interact_with_level(player, level, level_list):
                     except Exception:
                         Pr.dbg(f"CurrentAction: {_currentAction}", 2)
     else:
-        Pr.n(f"Bitte gebe eine Zahl kleiner gleich {len(availableChoicesDict.keys())} ein!")
+        Pr.n(
+            f"Bitte gebe eine Zahl kleiner gleich {len(availableChoicesDict.keys())} ein!"
+        )
         sleep(2)
+
 
 def hud(player):
     """Player Hud
@@ -167,15 +170,13 @@ def gameloop(player, level_list=None):
                     Actionparser.callfunction(action)
                     e.actionstack.remove(action)
 
-        Pr.dbg(f"Current Gamestate: {Actionparser.gamestate}", 2)
-
         match Actionparser.gamestate:
             case "loading":
-                Pr.dbg(f"Gamestate is now {Actionparser.gamestate}", 3)
+                Pr.dbg(f"Gamestate is now {Actionparser.gamestate}")
                 # loding steps
                 Actionparser.gamestate = "game"
             case "game":
-                Pr.dbg(f"Gamestate is now {Actionparser.gamestate}", 3)
+                Pr.dbg(f"Gamestate is now {Actionparser.gamestate}")
                 interact_with_level(player, current_level, level_list)
                 Actionparser.gamestate = Actionparser.gamestate
             case "inv":
@@ -184,7 +185,7 @@ def gameloop(player, level_list=None):
                     Pr.yellow('Gamestate "inv" kann hier nicht geöffnet werden!')
                     Actionparser.gamestate = "game"
                 else:
-                    Pr.dbg(f"Gamestate is now {Actionparser.gamestate}", 3)
+                    Pr.dbg(f"Gamestate is now {Actionparser.gamestate}")
                     inventorystate(mPlayer)
                     Actionparser.gamestate = "game"
             case _:
