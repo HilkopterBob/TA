@@ -8,6 +8,7 @@ from Utils import Pr, Debug, Inp
 from Utils.gamestates.inventorystate import inventorystate
 from actionparser import Actionparser
 from Assethandler import AssetHandler
+from time import sleep
 
 
 def interact_with_level(player, level, level_list):
@@ -106,7 +107,9 @@ def interact_with_level(player, level, level_list):
                             Pr.dbg(f"ERR: {e}", 2)
                     except Exception:
                         Pr.dbg(f"CurrentAction: {_currentAction}", 2)
-
+    else:
+        Pr.n(f"Bitte gebe eine Zahl kleiner gleich {len(availableChoicesDict.keys())} ein!")
+        sleep(2)
 
 def hud(player):
     """Player Hud
