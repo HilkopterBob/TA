@@ -49,6 +49,7 @@ class Inp:
             "changegamestate": "wechselt den Gamestate",
             "changehealth": "ändert die Lebenzzahl des Spielers [+/-]",
             "kill": "setzt die Lebenszahl des Spielers auf 0",
+            "getdamage":"Würfelt den Schadenswert des aktuellen Items",
         }
 
         min_len = 0
@@ -169,6 +170,10 @@ class Inp:
                             )
                         )
                         sleep(2)
+                        return 34
+
+                    case "getdamage":
+                        print(player.slots[8].getDamage()) # pylint: disable=W0201
                         return 34
 
                     case _:

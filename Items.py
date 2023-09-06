@@ -4,6 +4,7 @@ Entities Module which holds 2 Classes
     Entityinit()
 """
 import json
+import random
 from Utils import Pr
 
 
@@ -54,6 +55,46 @@ class gitem:
     def get(self, thing: str, *args):  # pylint: disable=W0613
         """compatibility function for questify"""
         return self.name
+
+    def getDamage(self):
+        """Return Damage Dict for Item in Format 
+        {
+            "AD":ADDamage,
+            "AP":APDamage
+        }
+        Ease of Access: 
+            AD = Item.getDamage().get('AD')
+            AP = Item.getDamage().get('AP')
+        """
+        ADroll_result = 0
+        ADnum_dice=int(self.ad.split("w")[0])
+        ADBaseDamage=int(self.ad.split("+")[1])
+        ADdice=int(self.ad.split("w")[1].split("+")[0])
+
+        AProll_result = 0
+        APnum_dice=int(self.ap.split("w")[0])
+        APBaseDamage=int(self.ap.split("+")[1])
+        APdice=int(self.ap.split("w")[1].split("+")[0])
+
+        Pr.dbg(f"Rolling: {self.ad} for AD")
+        for _ in range(ADnum_dice):
+            ADroll = random.randint(1, ADdice)
+            Pr.dbg(f"Rolled: {ADroll}")
+            ADroll_result += ADroll
+        ADdmg = ADBaseDamage + ADroll_result
+        Pr.dbg(f"Final Rollresult for AD: {ADdmg}")
+
+        Pr.dbg(f"Rolling: {self.ap} for AP")
+        for _ in range(APnum_dice):
+            AProll = random.randint(1, APdice)
+            Pr.dbg(f"Rolled: {AProll}")
+            AProll_result += AProll
+        APdmg = APBaseDamage + AProll_result
+        Pr.dbg(f"Final Rollresult for AP: {APdmg}")
+
+        return dict(AD = ADdmg, AP = APdmg)
+
+
 
     @staticmethod
     def from_json(json_dct, iname):
