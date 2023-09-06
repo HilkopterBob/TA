@@ -1,5 +1,6 @@
 """Defines Input Method for User - exact copy of Inputparser-Module
 """
+import re
 from time import sleep
 from os import listdir
 from os import path
@@ -37,19 +38,19 @@ class Inp:
     ):  # pylint: disable=too-many-return-statements
         """Method to get User Input"""
         befehlszeichen = "#"
-        userbefehl = [
-            "inv: Öffnet das Inventar",
-            "opt: Öffnet die Optioen",
-            "men: Öffnet das Menü",
-            "save: Speichert das Spiel",
-            "exit: Schließt das Spiel",
-        ]
+        userbefehl = {
+            "inv": "Öffnet das Inventar",
+            "opt": "Öffnet die Optioen",
+            "men": "Öffnet das Menü",
+            "save": "Speichert das Spiel",
+            "exit": "Schließt das Spiel",
+        }
 
-        devbefehl = [
-            "changegamestate: wechselt den Gamestate",
-            "changehealth: ändert die Lebenzzahl des Spielers [+/-]",
-            "kill: setzt die Lebenszahl des Spielers auf 0",
-        ]
+        devbefehl = {
+            "changegamestate": "wechselt den Gamestate",
+            "changehealth": "ändert die Lebenzzahl des Spielers [+/-]",
+            "kill": "setzt die Lebenszahl des Spielers auf 0",
+        }
 
         min_len = 0
         max_len = 150
@@ -72,6 +73,8 @@ class Inp:
             # alles kleinbuchstaben
             user_input = user_input.lower()
             # Wenn Eingabe == Zahl dann
+            user_command = re.split(" ", user_input)[0]
+            Pr.dbg(user_command, 2)
 
             if yes_no_flag and user_input in ["y", "n", "Y", "N", "j", "J"]:
                 pass
@@ -79,9 +82,13 @@ class Inp:
             elif user_input.isdigit():
                 user_input = int(user_input)
 
-            elif user_input[0] == befehlszeichen:
+            elif (
+                user_command in userbefehl.keys()  # pylint: disable=C0201
+                or user_command in devbefehl.keys()  # pylint: disable=C0201
+            ):
                 # befehlserkennung
-                input_command = user_input[1:]
+                Pr.dbg("Befehlserkennung", 2)
+                input_command = user_input
                 input_list = input_command.split()
                 match input_list[0]:
                     case "tp" | "teleport" | "changelevel" | "cl":
@@ -112,13 +119,13 @@ class Inp:
 
                     case "help":
                         Pr.headline("userbefehle")
-                        for einzelwert in userbefehl:
-                            Pr.i(einzelwert)
+                        for einzelwert in userbefehl.keys():
+                            Pr.i(einzelwert + "-" + userbefehl.get(einzelwert))
                         if dbg:
                             Pr.n("")
                             Pr.headline("devbefehle")
                             for einzelwert in devbefehl:
-                                Pr.i(einzelwert)
+                                Pr.i(einzelwert + "-" + devbefehl.get(einzelwert))
                         return 34
 
                     case "opt":
