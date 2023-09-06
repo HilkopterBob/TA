@@ -37,7 +37,6 @@ class Inp:
         player="", text="", yes_no_flag=False
     ):  # pylint: disable=too-many-return-statements
         """Method to get User Input"""
-        befehlszeichen = "#"
         userbefehl = {
             "inv": "Öffnet das Inventar",
             "opt": "Öffnet die Optioen",
@@ -119,7 +118,7 @@ class Inp:
 
                     case "help":
                         Pr.headline("userbefehle")
-                        for einzelwert in userbefehl.keys():
+                        for einzelwert in userbefehl.keys():  # pylint: disable=C0201
                             Pr.i(einzelwert + "-" + userbefehl.get(einzelwert))
                         if dbg:
                             Pr.n("")
