@@ -2,7 +2,6 @@
 """
 import questionary
 from Utils import pr
-from actionparser import Actionparser
 
 
 def inventorystate(Player):
