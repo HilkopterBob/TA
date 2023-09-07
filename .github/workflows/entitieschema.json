@@ -75,6 +75,32 @@
         "slots": {
           "type": "array",
           "description": "Array Containing Equipped Items"
+        },
+        "attributes": {
+          "type": "object",
+          "description": "Contains all Entity Attributes",
+          "properties": {
+            "str": {
+              "type": "integer",
+              "description": "The strength of an Entity"
+            },
+            "dex": {
+              "type": "integer",
+              "description": "The dexterity of an Entity"
+            },
+            "int": {
+              "type": "integer",
+              "description": "The intelligence of an Entity"
+            },
+            "wis": {
+              "type": "integer",
+              "description": "The wisdom of an Entity"
+            },
+            "chr": {
+              "type": "integer",
+              "description": "The charisma of an Entity"
+            }
+          }
         }
       },
       "required": [
@@ -90,7 +116,8 @@
         "location",
         "level",
         "allowdamage",
-        "slots"
+        "slots",
+        "attributes"
       ]
     }
   }

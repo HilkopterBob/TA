@@ -43,25 +43,35 @@ class Entity:
             slots = []
 
         self.location = location
+        """Entity Location as Level Object"""
         self.name = name
+        """Entity Name as String"""
         self.hp = health
+        """Entity Health Points as Integer"""
         self.wealth = wealth
+        """Entity Wealth Points as Integer"""
         self.level = level
+        """Entity Level as Integer"""
         self.xp = xp
+        """Entity Experience Points as Integer"""
         self.inv = inv
+        """Entity Inventory as Array"""
         self.ptype = ptype
+        """Entity Type as String [Types= "good","bad","neutral"]"""
         self.geffects = geffects
+        """List of positive Effects for Entity as Array of Objects"""
         self.beffects = beffects
+        """List of negative Effects for Entity as Array of Objects"""
         self.eeffects = eeffects
+        """List of evil Effects for Entity (Mainly Boss Effects) as Array of Objects"""
         self.effects = [[self.geffects], [self.beffects], [self.eeffects]]
+        """Entities list of effects to be applied as Array of Arrays Containing [gEffects, bEffects, eEffects]"""  # pylint:disable=C0301
         self.actionstack = []
-        self.slots = (
-            slots  # ["Head_slot", "Torso_slot", "Underwear", "Left_arm", "Right_arm",
-        )
-        # "Left_leg", "Right_leg", "Gloves_slot",
-        # "Meele Weapon", "Ranged Weapon",
-        # "Quick_draw potion"]
+        """Current Queue of actions for entity as Array"""
+        self.slots = slots
+        """Entity Slots ["Head_slot", "Torso_slot", "Underwear", "Left_arm", "Right_arm","Left_leg", "Right_leg", "Gloves_slot","Meele Weapon", "Ranged Weapon","Quick_draw potion"]"""  # pylint:disable=C0301
         self.allowdamage = allowdamage
+        """Entity allowDamage Flag as Boolean"""
 
     @staticmethod
     def from_json(json_dct):
@@ -111,7 +121,7 @@ class Entity:
         try:
             self.hp += value
             if self.hp <= 0:
-                if self.allowdamage: #  pylint: disable=R1705
+                if self.allowdamage:  #  pylint: disable=R1705
                     Pr.dbg("Entity {self} has 0 or less Health")
                     return True
                 else:

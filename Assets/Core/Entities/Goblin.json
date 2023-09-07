@@ -13,6 +13,13 @@
     "location": "",
     "level": 0,
     "allowdamage": false,
-    "slots": []
+    "slots": [],
+    "attributes": {
+      "str": 0,
+      "dex": 0,
+      "int": 0,
+      "wis": 0,
+      "chr": 0
+    }
   }
 }

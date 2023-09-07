@@ -49,7 +49,8 @@ class Inp:
             "changegamestate": "wechselt den Gamestate",
             "changehealth": "ändert die Lebenzzahl des Spielers [+/-]",
             "kill": "setzt die Lebenszahl des Spielers auf 0",
-            "getdamage":"Würfelt den Schadenswert des aktuellen Items",
+            "combat": "versetzt den Player in den Combatstate",
+            "getdamage": "Würfelt den Schadenswert des aktuellen Items",
         }
 
         min_len = 0
@@ -74,7 +75,6 @@ class Inp:
             user_input = user_input.lower()
             # Wenn Eingabe == Zahl dann
             user_command = re.split(" ", user_input)[0]
-            Pr.dbg(user_command, 2)
 
             if yes_no_flag and user_input in ["y", "n", "Y", "N", "j", "J"]:
                 pass
@@ -86,8 +86,6 @@ class Inp:
                 user_command in userbefehl.keys()  # pylint: disable=C0201
                 or user_command in devbefehl.keys()  # pylint: disable=C0201
             ):
-                # befehlserkennung
-                Pr.dbg("Befehlserkennung", 2)
                 input_command = user_input
                 input_list = input_command.split()
                 match input_list[0]:
@@ -148,6 +146,12 @@ class Inp:
                         )
                         return 34
 
+                    case "combat":
+                        player.actionstack.insert(  # pylint: disable=E1101
+                            0, ["change_gamestate", ["combat"]]
+                        )
+                        return 34
+
                     case "save":
                         print(
                             Center.XCenter(
@@ -173,7 +177,21 @@ class Inp:
                         return 34
 
                     case "getdamage":
-                        print(player.slots[8].getDamage()) # pylint: disable=W0201
+                        damage = 0
+                        for i in range(7, 10):
+                            try:
+                                if (
+                                    player.slots[i].itype  # pylint: disable=E1101
+                                    != "weapon"
+                                ):
+                                    Pr.dbg(f"There is no Weapon Item in Slot {i}", 1)
+                                else:
+                                    damage = player.slots[  # pylint: disable=E1101
+                                        i
+                                    ].getDamage()
+                                    print(damage)
+                            except Exception:
+                                Pr.dbg(f"There is no Valid Item in Slot {i}", 1)
                         return 34
 
                     case _:

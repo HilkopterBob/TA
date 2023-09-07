@@ -10,6 +10,7 @@ from Effect import Effect
 from Items import gitem
 from Utils import Pr, Debug, Inp
 from Utils.gamestates.inventorystate import inventorystate
+from Utils.gamestates.combatstate import combatstate
 from actionparser import Actionparser
 from Assethandler import AssetHandler
 
@@ -38,10 +39,9 @@ def interact_with_level(player, level, level_list):
         print(f"{availableChoices.index(choice)+1}. {choice}")
     printed = True
 
-    Pr.dbg(level.choices)
+    Pr.dbg(f"Current Choices: {level.choices}", -1)
 
     if printed:
-        Pr.dbg(f"{mPlayer}")
         action = int(Inp.inp(mPlayer)) - 1
         if action == 33:
             Pr.dbg("Break!")
@@ -113,7 +113,6 @@ def interact_with_level(player, level, level_list):
             f"Bitte gebe eine Zahl kleiner gleich {len(availableChoicesDict.keys())} ein!"
         )
         sleep(2)
-
 
 
 def hud(player):
@@ -189,6 +188,10 @@ def gameloop(player, level_list=None):
                     Pr.dbg(f"Gamestate is now {Actionparser.gamestate}")
                     inventorystate(mPlayer)
                     Actionparser.gamestate = "game"
+            case "combat":
+                Pr.dbg(f"{mPlayer} Entering Combatstate")
+                combatstate(mPlayer)
+                Actionparser.gamestate = "game"
             case _:
                 Pr.yellow(
                     f'Der Gamestate "{Actionparser.gamestate}" ist nicht bekannt.'
@@ -204,22 +207,22 @@ def gameloop(player, level_list=None):
         lap = lap + 1
 
         # Loop through all Entities in CurrentLevel and Apply Actionstack
-        Pr.dbg(f"Entitylist: {current_level.entitylist}")
+        Pr.dbg(f"Entitylist: {current_level.entitylist}", -1)
         for e in current_level.entitylist:
             Pr.dbg(f"Working Actionstack for {e.name}")
             Pr.dbg(f"Actionstack: {e.actionstack}")
             # Work through actionstack of Entity and process actions
             for i in range(0, len(e.actionstack)):
-                Pr.dbg("#" * 50)
-                Pr.dbg(f"Length of Actionstack: {len(e.actionstack)}")
-                Pr.dbg(f"Current Actionstack: {e.actionstack}")
-                Pr.dbg(f"Current Index: {i}")
+                Pr.dbg("#" * 50, -1)
+                Pr.dbg(f"Length of Actionstack: {len(e.actionstack)}", -1)
+                Pr.dbg(f"Current Actionstack: {e.actionstack}", -1)
+                Pr.dbg(f"Current Index: {i}", -1)
                 cur_action = e.actionstack.pop(0)
                 Actionparser.callfunction(cur_action)
-                Pr.dbg(f"Cur_Action: {cur_action}")
-                Pr.dbg(f"Length of Actionstack after Action: {len(e.actionstack)}")
-                Pr.dbg(f"Current Actionstack after Action: {e.actionstack}")
-                Pr.dbg("#" * 50)
+                Pr.dbg(f"Cur_Action: {cur_action}", -1)
+                Pr.dbg(f"Length of Actionstack after Action: {len(e.actionstack)}", -1)
+                Pr.dbg(f"Current Actionstack after Action: {e.actionstack}", -1)
+                Pr.dbg("#" * 50, -1)
 
 
 if __name__ == "__main__":
@@ -244,7 +247,7 @@ if __name__ == "__main__":
         100,
         100,
         0,
-        [gitem("Item1", "weapon"), gitem("item2", "misc"), allItems[0], allItems[2]],
+        [allItems[0], allItems[2], allItems[3]],
         location=allLevels[1],
     )
     hurensohn = Entity(
@@ -278,6 +281,7 @@ if __name__ == "__main__":
     Debug.objlist(allLevels, "Levels")
     Debug.objlist(allEntities, "Entities")
     Debug.objlist(allItems, "Items")
+    # Fill Player iventory with Placeholder Items
     while len(mPlayer.slots) < 11:
         mPlayer.slots.append("placeholder")
     # Run Game
