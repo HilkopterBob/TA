@@ -43,6 +43,7 @@ class Inp:
             "men": "Öffnet das Menü",
             "save": "Speichert das Spiel",
             "exit": "Schließt das Spiel",
+            "help": "Öffnet das Hilfemenü",
         }
 
         devbefehl = {
@@ -73,7 +74,6 @@ class Inp:
             user_input = user_input.lower()
             # Wenn Eingabe == Zahl dann
             user_command = re.split(" ", user_input)[0]
-            Pr.dbg(user_command, 2)
 
             if yes_no_flag and user_input in ["y", "n", "Y", "N", "j", "J"]:
                 pass
@@ -85,8 +85,6 @@ class Inp:
                 user_command in userbefehl.keys()  # pylint: disable=C0201
                 or user_command in devbefehl.keys()  # pylint: disable=C0201
             ):
-                # befehlserkennung
-                Pr.dbg("Befehlserkennung", 2)
                 input_command = user_input
                 input_list = input_command.split()
                 match input_list[0]:
@@ -119,12 +117,12 @@ class Inp:
                     case "help":
                         Pr.headline("userbefehle")
                         for einzelwert in userbefehl.keys():  # pylint: disable=C0201
-                            Pr.i(einzelwert + "-" + userbefehl.get(einzelwert))
+                            Pr.i(einzelwert + ": " + userbefehl.get(einzelwert))
                         if dbg:
                             Pr.n("")
                             Pr.headline("devbefehle")
                             for einzelwert in devbefehl:
-                                Pr.i(einzelwert + "-" + devbefehl.get(einzelwert))
+                                Pr.i(einzelwert + ": " + devbefehl.get(einzelwert))
                         return 34
 
                     case "opt":
