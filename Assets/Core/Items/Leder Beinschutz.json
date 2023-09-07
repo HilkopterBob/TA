@@ -1,0 +1,20 @@
+{
+    "$schema": "../../../.github/workflows/itemschema.json",
+    "Leder Beinschutz": {
+        "type": "Armor",
+        "description": "",
+        "ad": "0",
+        "ap": "0",
+        "hp": "2",
+        "ar": "2",
+        "mr": "0",
+        "effects": [],
+        "useable": "Common",
+        "equipable": "",
+        "slots": [
+            "melee"
+        ],
+        "questitem": "false",
+        "rarity": ""
+    }
+}

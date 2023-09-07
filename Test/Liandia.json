@@ -1,0 +1,20 @@
+{
+    "$schema": "../../../.github/workflows/itemschema.json",
+    "Liandia": {
+        "type": "Melee",
+        "description": "",
+        "ad": "1w6+2",
+        "ap": "0",
+        "hp": "0",
+        "ar": "0",
+        "mr": "0",
+        "effects": [],
+        "useable": "Rare",
+        "equipable": "",
+        "slots": [
+            "melee"
+        ],
+        "questitem": "false",
+        "rarity": ""
+    }
+}

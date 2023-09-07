@@ -1,0 +1,20 @@
+{
+    "$schema": "../../../.github/workflows/itemschema.json",
+    "Langbogen": {
+        "type": "Ranged",
+        "description": "",
+        "ad": "1w10+8",
+        "ap": "0",
+        "hp": "0",
+        "ar": "0",
+        "mr": "0",
+        "effects": [],
+        "useable": "Uncommon",
+        "equipable": "",
+        "slots": [
+            "melee"
+        ],
+        "questitem": "false",
+        "rarity": ""
+    }
+}

@@ -1,0 +1,20 @@
+{
+    "$schema": "../../../.github/workflows/itemschema.json",
+    "Fell Torso": {
+        "type": "Armor",
+        "description": "",
+        "ad": "0",
+        "ap": "0",
+        "hp": "2",
+        "ar": "1",
+        "mr": "0",
+        "effects": [],
+        "useable": "Uncommon",
+        "equipable": "",
+        "slots": [
+            "melee"
+        ],
+        "questitem": "false",
+        "rarity": ""
+    }
+}

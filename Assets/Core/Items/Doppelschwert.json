@@ -1,0 +1,20 @@
+{
+    "$schema": "../../../.github/workflows/itemschema.json",
+    "Doppelschwert": {
+        "type": "Melee",
+        "description": "",
+        "ad": "2w10+4",
+        "ap": "0",
+        "hp": "0",
+        "ar": "0",
+        "mr": "0",
+        "effects": [],
+        "useable": "Very Rare",
+        "equipable": "",
+        "slots": [
+            "melee"
+        ],
+        "questitem": "false",
+        "rarity": ""
+    }
+}

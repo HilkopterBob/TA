@@ -1,0 +1,20 @@
+{
+    "$schema": "../../../.github/workflows/itemschema.json",
+    "Chakram": {
+        "type": "Ranged",
+        "description": "",
+        "ad": "2w6+0",
+        "ap": "0",
+        "hp": "0",
+        "ar": "0",
+        "mr": "0",
+        "effects": [],
+        "useable": "Rare",
+        "equipable": "",
+        "slots": [
+            "melee"
+        ],
+        "questitem": "false",
+        "rarity": ""
+    }
+}

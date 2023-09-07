@@ -1,0 +1,20 @@
+{
+    "$schema": "../../../.github/workflows/itemschema.json",
+    "Dornenhandschuh": {
+        "type": "Melee",
+        "description": "",
+        "ad": "1w6+1",
+        "ap": "0",
+        "hp": "0",
+        "ar": "1",
+        "mr": "0",
+        "effects": [],
+        "useable": "Uncommon",
+        "equipable": "",
+        "slots": [
+            "melee"
+        ],
+        "questitem": "false",
+        "rarity": ""
+    }
+}

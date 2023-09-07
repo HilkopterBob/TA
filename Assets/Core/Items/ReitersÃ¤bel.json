@@ -1,0 +1,20 @@
+{
+    "$schema": "../../../.github/workflows/itemschema.json",
+    "Reiters\u00c3\u00a4bel": {
+        "type": "Melee",
+        "description": "",
+        "ad": "1w6+3",
+        "ap": "0",
+        "hp": "0",
+        "ar": "0",
+        "mr": "0",
+        "effects": [],
+        "useable": "Uncommon",
+        "equipable": "",
+        "slots": [
+            "melee"
+        ],
+        "questitem": "false",
+        "rarity": ""
+    }
+}

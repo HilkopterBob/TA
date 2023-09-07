@@ -1,0 +1,20 @@
+{
+    "$schema": "../../../.github/workflows/itemschema.json",
+    "Tuch Torso": {
+        "type": "Armor",
+        "description": "",
+        "ad": "0",
+        "ap": "0",
+        "hp": "1",
+        "ar": "0",
+        "mr": "0",
+        "effects": [],
+        "useable": "Common",
+        "equipable": "",
+        "slots": [
+            "melee"
+        ],
+        "questitem": "false",
+        "rarity": ""
+    }
+}

@@ -247,7 +247,7 @@ if __name__ == "__main__":
         100,
         100,
         0,
-        [allItems[0], allItems[2], allItems[3]],
+        allItems,
         location=allLevels[1],
     )
     hurensohn = Entity(

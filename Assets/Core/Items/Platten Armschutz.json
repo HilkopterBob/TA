@@ -1,0 +1,20 @@
+{
+    "$schema": "../../../.github/workflows/itemschema.json",
+    "Platten Armschutz": {
+        "type": "Armor",
+        "description": "",
+        "ad": "0",
+        "ap": "0",
+        "hp": "10",
+        "ar": "5",
+        "mr": "1",
+        "effects": [],
+        "useable": "Rare",
+        "equipable": "",
+        "slots": [
+            "melee"
+        ],
+        "questitem": "false",
+        "rarity": ""
+    }
+}
