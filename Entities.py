@@ -136,24 +136,46 @@ class Entity:
         except:
             return False
 
-    def take_damage(self, value=0, type=0):
+    def take_damage(self, value=None):
         """Adds Damage to the Entity and Calculates health loss based on Armor and Resistance
 
         Args:
-            value (int, optional): Damage that is Inflicted. Defaults to 0.
-            type (int, optional): The Type of Damage (0=Physical; 1=Magical). Defaults to 0
+            value (dict): Damage that is Inflicted. Defaults to {"AD":0,"AP":0}.
         """
+        if value is None:
+            value = {"AD": 0, "AP": 0}
+        Pr.dbg(f"{self.name} is about to take {value} damage")
+        resistance = {}
+        ar = 0
+        mr = 0
         for i in range(0, 8):
             try:
                 if self.slots[i].itype != "armor":  # pylint: disable=E1101
-                    Pr.dbg(f"There is no Armor Item in Slot {i}", 1)
+                    Pr.dbg(f"There is no Armor Item in Slot {i}")
                 else:
-                    ar = self.slots[i].ar  # pylint: disable=E1101
-                    mr = self.slots[i].mr  # pylint: diasble=E1101
-                    resistance = [ar, mr]
-                    print(resistance)
+                    ar += self.slots[i].ar  # pylint: disable=E1101
+                    mr += self.slots[i].mr  # pylint: disable=E1101
+                    resistance = {"AR": ar, "MR": mr}
             except Exception:
                 Pr.dbg(f"There is no Valid Item in Slot {i}", 1)
+
+        if not resistance:
+            resistance = {"AR": 0, "MR": 0}
+
+        attacklist = list(value.values())
+        resistancelist = list(resistance.values())
+        Pr.dbg(f"{self.name} has {resistance} defence")
+        _attacklist = []
+        for c, v in enumerate(attacklist):
+            if v != 0:
+                _attack = v * (v / (v + resistancelist[c]))
+            else:
+                _attack = v
+            _attacklist.append(round(_attack, 1))
+        damage = dict(zip(value.keys(), _attacklist))
+        Pr.dbg(f"{self.name} taking {damage} damage")
+        for i in _attacklist:
+            self.change_health(i * -1)
 
     def add_item(self, item):
         """

@@ -51,7 +51,7 @@ class Inp:
             "kill": "setzt die Lebenszahl des Spielers auf 0",
             "combat": "versetzt den Player in den Combatstate",
             "getdamage": "Würfelt den Schadenswert des aktuellen Items",
-            "takedamage": "Simuliert das nehmen von Schaden",
+            "takedamage": "Simuliert einen Angriff gegen sich selbst mit der Primärwaffe",
         }
 
         min_len = 0
@@ -196,7 +196,9 @@ class Inp:
                         return 34
 
                     case "takedamage":
-                        player.take_damage()  # pylint: disable=E1101
+                        player.take_damage(  # pylint: disable=E1101
+                            player.slots[8].getDamage()  # pylint: disable=E1101
+                        )
                         return 34
 
                     case _:
@@ -209,6 +211,6 @@ class Inp:
         except ValueError as e:
             Pr.a(f"Fehler bei Eingabe: {e}")
             return 34
-        except Exception as e:
-            Pr.a(f"Unbekannter Fehler beim Input: {e}")
-            return 34
+        # except Exception as e:
+        #   Pr.a(f"Unbekannter Fehler beim Input: {e}")
+        #  return 34
