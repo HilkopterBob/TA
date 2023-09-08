@@ -1,20 +1,18 @@
 {
-    "$schema": "../../../.github/workflows/itemschema.json",
-    "Zackenspie\u00df": {
-        "type": "weapon",
-        "description": "",
-        "ad": "1w6+5",
-        "ap": "0w0+0",
-        "hp": 0,
-        "ar": 0,
-        "mr": 0,
-        "effects": [],
-        "useable": false,
-        "equipable": true,
-        "slots": [
-            "melee"
-        ],
-        "questitem": false,
-        "rarity": "uncommon"
-    }
+  "$schema": "../../../.github/workflows/itemschema.json",
+  "Zackenspiess": {
+    "type": "weapon",
+    "description": "",
+    "ad": "1w6+5",
+    "ap": "0w0+0",
+    "hp": 0,
+    "ar": 0,
+    "mr": 0,
+    "effects": [],
+    "useable": false,
+    "equipable": true,
+    "slots": ["melee"],
+    "questitem": false,
+    "rarity": "uncommon"
+  }
 }

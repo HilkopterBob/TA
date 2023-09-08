@@ -53,6 +53,7 @@ def inventorystate(Player):
         tools = []
         potions = []
         misc = []
+        armor = []
         for item in Player.inv:
             if item.itype == "weapon":
                 weapons.append(item.name)
@@ -62,15 +63,20 @@ def inventorystate(Player):
                 potions.append(item.name)
             if item.itype == "misc":
                 misc.append(item.name)
+            if item.itype == "armor":
+                armor.append(item.name)
+
         weapons.extend(default_choice_items)
         tools.extend(default_choice_items)
         potions.extend(default_choice_items)
         misc.extend(default_choice_items)
+        armor.extend(default_choice_items)
 
         inventory_space = questionary.select(
             "Choose 1Type:",
             choices=[
                 "Weapons",
+                "Armor",
                 "Tools",
                 "Potions",
                 "Misc",
@@ -90,6 +96,19 @@ def inventorystate(Player):
                 else:
                     choosen_item = questionary.select(
                         """Du hast momentan keine Waffen im Inventar.
+                    Hast du sie vielleicht grade ausgerüstet?""",
+                        choices=["zurück"],
+                    ).unsafe_ask()
+            case "Armor":
+                if len(armor) != 0:
+                    choosen_item = questionary.select(
+                        "Armor", choices=armor
+                    ).unsafe_ask()
+                    if choosen_item != "zurück":
+                        item_inv_helper(Player, choosen_item)
+                else:
+                    choosen_item = questionary.select(
+                        """Du hast momentan keine Ausrüstung im Inventar.
                     Hast du sie vielleicht grade ausgerüstet?""",
                         choices=["zurück"],
                     ).unsafe_ask()
