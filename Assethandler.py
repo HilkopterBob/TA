@@ -240,7 +240,7 @@ class AssetHandler:
             max=len(_coreFiles) + len(_DLCFiles) + len(_modFiles),
         ) as progress:
             for gfile in _coreFiles:
-                sleep(0.1)
+                sleep(0.02)
                 if AssetHandler.check_integrity(gfile):
                     progress.next()
                 else:
