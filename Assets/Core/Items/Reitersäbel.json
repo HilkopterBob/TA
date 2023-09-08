@@ -1,11 +1,11 @@
 {
   "$schema": "../../../.github/workflows/itemschema.json",
-  "Faust": {
+  "Reitersaebel": {
     "type": "weapon",
-    "description": "Deine Fäuste",
-    "ad": "1w3+0",
+    "description": "",
+    "ad": "1w6+3",
     "ap": "0w0+0",
-    "hp": 5,
+    "hp": 0,
     "ar": 0,
     "mr": 0,
     "effects": [],
@@ -13,6 +13,6 @@
     "equipable": true,
     "slots": ["melee"],
     "questitem": false,
-    "rarity": "common"
+    "rarity": "uncommon"
   }
 }

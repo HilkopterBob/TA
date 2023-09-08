@@ -1,38 +1,46 @@
+"""Helper Script to Generate Items from CSV
+"""
 import csv
 import json
-from Items import itemInit, gitem
-
 
 table = "../TA/table.csv"
-with open(table) as csvfile:
+
+with open(table, encoding="UTF-8") as csvfile:
     csv_reader = csv.reader(csvfile)
-    zeilennummer = 0
+    line = 0
     for row in csv_reader:
-        if zeilennummer > 1:
-            b = "false"
+        if line > 1:
+            if row[6] == "0":
+                ad = "0w0+0"
+            else:
+                ad = row[6]
+            if row[9] == "0":
+                ap = "0w0+0"
+            else:
+                ap = row[9]
             data = {
                 "$schema": "../../../.github/workflows/itemschema.json",
                 row[0]: {
-                    "type": row[3],
+                    "type": row[2].lower(),
                     "description": row[1],
-                    "ad": row[6],
-                    "ap": row[9],
-                    "hp": row[7],
-                    "ar": row[8],
-                    "mr": row[10],
+                    "ad": ad,
+                    "ap": ap,
+                    "hp": int(row[7]),
+                    "ar": int(row[8]),
+                    "mr": int(row[10]),
                     "effects": [],
-                    "useable": row[13],
-                    "equipable": row[11],
+                    "useable": bool(row[11]),
+                    "equipable": bool(row[12]),
                     "slots": ["melee"],
-                    "questitem": b,
-                    "rarity": row[12],
+                    "questitem": bool(row[14]),
+                    "rarity": row[13].lower(),
                 },
             }
 
             json_object = json.dumps(data, indent=4)
 
-            with open(f"../TA/Test/{row[0]}.json", "w") as outfile:
+            with open(f"../TA/Test/{row[0]}.json", "w", encoding="UTF8") as outfile:
                 outfile.write(json_object)
-        zeilennummer += 1
+        line += 1
 
-    print(f"Anzahl Datensätze: {zeilennummer-2}")
+    print(f"Anzahl Datensätze: {line-2}")

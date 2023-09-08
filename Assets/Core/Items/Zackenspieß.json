@@ -1,9 +1,9 @@
 {
     "$schema": "../../../.github/workflows/itemschema.json",
-    "Kettensichel": {
+    "Zackenspie\u00df": {
         "type": "weapon",
         "description": "",
-        "ad": "1w10+0",
+        "ad": "1w6+5",
         "ap": "0w0+0",
         "hp": 0,
         "ar": 0,
@@ -15,6 +15,6 @@
             "melee"
         ],
         "questitem": false,
-        "rarity": "common"
+        "rarity": "uncommon"
     }
 }

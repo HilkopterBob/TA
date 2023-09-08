@@ -1,20 +1,20 @@
 {
     "$schema": "../../../.github/workflows/itemschema.json",
     "Tuch Armschutz": {
-        "type": "Armor",
+        "type": "armor",
         "description": "",
-        "ad": "0",
-        "ap": "0",
-        "hp": "1",
-        "ar": "0",
-        "mr": "0",
+        "ad": "0w0+0",
+        "ap": "0w0+0",
+        "hp": 1,
+        "ar": 0,
+        "mr": 0,
         "effects": [],
-        "useable": "Common",
-        "equipable": "",
+        "useable": false,
+        "equipable": true,
         "slots": [
             "melee"
         ],
-        "questitem": "false",
-        "rarity": ""
+        "questitem": false,
+        "rarity": "common"
     }
 }

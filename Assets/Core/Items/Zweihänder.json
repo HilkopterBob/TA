@@ -1,18 +1,18 @@
 {
   "$schema": "../../../.github/workflows/itemschema.json",
   "Zweihaender": {
-    "type": "Melee",
+    "type": "weapon",
     "description": "",
     "ad": "1w10+5",
-    "ap": "0",
-    "hp": "0",
-    "ar": "0",
-    "mr": "0",
+    "ap": "0w0+0",
+    "hp": 0,
+    "ar": 0,
+    "mr": 0,
     "effects": [],
-    "useable": "Rare",
-    "equipable": "",
+    "useable": false,
+    "equipable": true,
     "slots": ["melee"],
-    "questitem": "false",
-    "rarity": ""
+    "questitem": false,
+    "rarity": "rare"
   }
 }

@@ -1,20 +1,20 @@
 {
     "$schema": "../../../.github/workflows/itemschema.json",
     "Handarmbrust": {
-        "type": "Ranged",
+        "type": "weapon",
         "description": "",
         "ad": "2w6+2",
-        "ap": "0",
-        "hp": "0",
-        "ar": "0",
-        "mr": "0",
+        "ap": "0w0+0",
+        "hp": 0,
+        "ar": 0,
+        "mr": 0,
         "effects": [],
-        "useable": "Common",
-        "equipable": "",
+        "useable": false,
+        "equipable": true,
         "slots": [
             "melee"
         ],
-        "questitem": "false",
-        "rarity": ""
+        "questitem": false,
+        "rarity": "common"
     }
 }
