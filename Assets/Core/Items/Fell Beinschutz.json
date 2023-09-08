@@ -12,7 +12,8 @@
         "useable": false,
         "equipable": true,
         "slots": [
-            "melee"
+            "left_leg",
+            "right_leg"
         ],
         "questitem": false,
         "rarity": "uncommon"

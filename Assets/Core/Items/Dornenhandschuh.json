@@ -12,7 +12,7 @@
         "useable": false,
         "equipable": true,
         "slots": [
-            "melee"
+            "gloves"
         ],
         "questitem": false,
         "rarity": "uncommon"

@@ -37,9 +37,14 @@ def inventorystate(Player):
                             choices=["ja", "nein"],
                         ).unsafe_ask()
                         if action == "ja":
-                            pr.Pr.dbg(f"Player Slots: {Player.slots}", 0)
-                            pr.Pr.dbg(f"Player inv: {Player.inv}", 0)
-                            Player.equip_item(choosen_item)
+                            if len(item.slots) > 1:
+                                eaction = questionary.select(
+                                    f"Wo möchtest du {choosen_item} ausrüsten?",
+                                    choices=item.slots,
+                                ).unsafe_ask()
+                                Player.equip_item(choosen_item, eaction)
+                            else:
+                                Player.equip_item(choosen_item)
                             pr.Pr.dbg(f"Player Slots: {Player.slots}", 0)
                             pr.Pr.dbg(f"Player inv: {Player.inv}", 0)
                         else:

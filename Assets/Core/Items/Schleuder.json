@@ -12,7 +12,7 @@
         "useable": false,
         "equipable": true,
         "slots": [
-            "melee"
+            "ranged"
         ],
         "questitem": false,
         "rarity": "common"

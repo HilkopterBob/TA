@@ -12,7 +12,7 @@
         "useable": false,
         "equipable": true,
         "slots": [
-            "melee"
+            "torso"
         ],
         "questitem": false,
         "rarity": "rare"

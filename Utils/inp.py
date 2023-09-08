@@ -51,6 +51,7 @@ class Inp:
             "kill": "setzt die Lebenszahl des Spielers auf 0",
             "combat": "versetzt den Player in den Combatstate",
             "getdamage": "Würfelt den Schadenswert des aktuellen Items",
+            "takedamage": "Simuliert das nehmen von Schaden",
         }
 
         min_len = 0
@@ -192,6 +193,10 @@ class Inp:
                                     print(damage)
                             except Exception:
                                 Pr.dbg(f"There is no Valid Item in Slot {i}", 1)
+                        return 34
+
+                    case "takedamage":
+                        player.take_damage()  # pylint: disable=E1101
                         return 34
 
                     case _:

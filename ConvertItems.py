@@ -31,7 +31,7 @@ with open(table, encoding="UTF-8") as csvfile:
                     "effects": [],
                     "useable": bool(row[11]),
                     "equipable": bool(row[12]),
-                    "slots": ["melee"],
+                    "slots": [x.strip() for x in row[5].lower().split(",")],
                     "questitem": bool(row[14]),
                     "rarity": row[13].lower(),
                 },
