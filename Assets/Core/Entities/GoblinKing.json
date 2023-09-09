@@ -1,8 +1,8 @@
 {
     "$schema": "../../../.github/workflows/entitieschema.json",
-    "Goblin": {
-        "name": "Goblin",
-        "hp": 50,
+    "GoblinKing": {
+        "name": "GoblinKing",
+        "hp": 120,
         "wealth": 0,
         "inv": [],
         "xp": 0,
@@ -15,11 +15,11 @@
         "allowdamage": true,
         "slots": [],
         "attributes": {
-            "str": 4,
-            "dex": 8,
-            "int": 4,
-            "ini": 10,
-            "chr": 2
+            "str": 12,
+            "dex": 10,
+            "int": 8,
+            "ini": 6,
+            "chr": 4
         }
     }
 }

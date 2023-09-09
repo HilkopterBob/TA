@@ -1,25 +1,25 @@
 {
-  "$schema": "../../../.github/workflows/entitieschema.json",
-  "Goblin": {
-    "name": "",
-    "hp": 10,
-    "wealth": 10,
-    "inv": [],
-    "xp": 0,
-    "ptype": 0,
-    "geffects": [],
-    "beffects": [],
-    "eeffects": [],
-    "location": "",
-    "level": 0,
-    "allowdamage": false,
-    "slots": [],
-    "attributes": {
-      "str": 0,
-      "dex": 0,
-      "int": 0,
-      "wis": 0,
-      "chr": 0
+    "$schema": "../../../.github/workflows/entitieschema.json",
+    "GoblinFighter": {
+        "name": "GoblinFighter",
+        "hp": 80,
+        "wealth": 0,
+        "inv": [],
+        "xp": 0,
+        "ptype": 0,
+        "geffects": [],
+        "beffects": [],
+        "eeffects": [],
+        "location": "",
+        "level": 0,
+        "allowdamage": true,
+        "slots": [],
+        "attributes": {
+            "str": 8,
+            "dex": 10,
+            "int": 4,
+            "ini": 8,
+            "chr": 1
+        }
     }
-  }
 }
