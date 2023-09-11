@@ -25,7 +25,7 @@ def roll(dice=None):
 
     for _ in range(num_dice):
         droll = random.randint(1, dice)
-        Pr.dbg(f"Rolled: {droll}")
+        Pr.dbg(f"Rolled: {droll}", -1)
         roll_result += droll
     dmg = BaseDamage + roll_result
     Pr.dbg(f"Final Rollresult: {dmg}")

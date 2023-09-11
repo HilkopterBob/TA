@@ -190,7 +190,7 @@ def gameloop(player, level_list=None):
                     Actionparser.gamestate = "game"
             case "combat":
                 Pr.dbg(f"{mPlayer} Entering Combatstate")
-                combatstate(mPlayer)
+                combatstate(mPlayer, [allEntities[2], allEntities[5]])
                 Actionparser.gamestate = "game"
             case _:
                 Pr.yellow(
@@ -249,7 +249,7 @@ if __name__ == "__main__":
         0,
         allItems,
         location=allLevels[1],
-        attributes={"str": 8, "dex": 8, "int": 8, "ini": 8, "chr": 8},
+        attributes={"str": 8, "dex": 8, "int": 8, "ini": 80, "chr": 8},
     )
     hurensohn = Entity(
         "Hurensohn",

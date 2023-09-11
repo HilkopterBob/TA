@@ -26,7 +26,7 @@ class Debug:
         _curObjects = []
         for _object in listOfObjects:
             _curObjects.append(_object.name)
-        return Pr.dbg(f"Loaded {definition}: {_curObjects}")
+        return Pr.dbg(f"Loaded {definition}: {_curObjects}", -1)
 
     def stop_game():
         """Pauses the Game and Asks for Continue or Stop"""
