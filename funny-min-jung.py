@@ -249,6 +249,7 @@ if __name__ == "__main__":
         0,
         allItems,
         location=allLevels[1],
+        attributes={"str": 8, "dex": 8, "int": 8, "ini": 8, "chr": 8},
     )
     hurensohn = Entity(
         "Hurensohn",

@@ -28,8 +28,10 @@ class Entity:
         eeffects=None,
         location="Nirvana",
         level=1,
-        slots=None,
         allowdamage=True,
+        slots=None,
+        attributes=None,
+        spd=0,
     ):
         if inv is None:
             inv = []
@@ -41,6 +43,8 @@ class Entity:
             eeffects = []
         if slots is None:
             slots = []
+        if attributes is None:
+            attributes = {}
 
         self.location = location
         """Entity Location as Level Object"""
@@ -72,6 +76,10 @@ class Entity:
         """Entity Slots ["Head_slot", "Torso_slot", "Underwear", "Left_arm", "Right_arm","Left_leg", "Right_leg", "Gloves_slot","Meele Weapon", "Ranged Weapon","Quick_draw potion"]"""  # pylint:disable=C0301
         self.allowdamage = allowdamage
         """Entity allowDamage Flag as Boolean"""
+        self.attributes = attributes
+        """Attributes of Entity"""
+        self.spd = spd
+        """The Speed of the Entity in Combat, gets Calculated from INI"""
 
     @staticmethod
     def from_json(json_dct):
@@ -95,6 +103,9 @@ class Entity:
             json_dct["eeffects"],
             json_dct["location"],
             json_dct["level"],
+            json_dct["allowdamage"],
+            json_dct["slots"],
+            json_dct["attributes"],
         )
 
     def set_name(self):
