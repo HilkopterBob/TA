@@ -74,16 +74,24 @@ class AssetHandler:
         Returns:
             None: None
         """
-        st = process_time()
         _level_files = AssetHandler.getFiles(levels_folder)
 
         if not _level_files:
             Pr.dbg(f"No Levels to import from {levels_folder}", 1)
             return None
 
+        st = process_time()
         Pr.dbg(f"Importing Level(s) from: {_level_files}")
-        for _level in _level_files:
-            AssetHandler.allLevels.extend(LevelInit.load_all_levels_from_json(_level))
+        with Bar(
+            "Importing Levels...",
+            suffix="%(percent).1f%% - ETA: %(eta)ds",
+            max=len(_level_files),
+        ) as progress:
+            for _level in _level_files:
+                AssetHandler.allLevels.extend(
+                    LevelInit.load_all_levels_from_json(_level)
+                )
+                progress.next()
         et = process_time()
         importtime = et - st
         if importtime > 1:
@@ -99,17 +107,25 @@ class AssetHandler:
         Returns:
             None: None
         """
-        st = process_time()
+
         _entity_files = AssetHandler.getFiles(entities_folder)
 
         if not _entity_files:
             Pr.dbg(f"No Entities to import from {entities_folder}", 1)
             return None
 
+        st = process_time()
         Pr.dbg(f"Importing Entities: {_entity_files}")
-
-        for _entity in _entity_files:
-            AssetHandler.allEntities.extend(EntityInit.load_entities_fromjson(_entity))
+        with Bar(
+            "Importing Entities...",
+            suffix="%(percent).1f%% - ETA: %(eta)ds",
+            max=len(_entity_files),
+        ) as progress:
+            for _entity in _entity_files:
+                AssetHandler.allEntities.extend(
+                    EntityInit.load_entities_fromjson(_entity)
+                )
+                progress.next()
         et = process_time()
         importtime = et - st
         if importtime > 1:
@@ -125,16 +141,22 @@ class AssetHandler:
         Returns:
             None: None
         """
-        st = process_time()
         _items_files = AssetHandler.getFiles(items_folder)
 
         if not _items_files:
             Pr.dbg(f"No Items to import from {items_folder}", 1)
             return None
 
+        st = process_time()
         Pr.dbg(f"Importing Item(s) from: {_items_files}")
-        for _items in _items_files:
-            AssetHandler.allItems.extend(itemInit.load_all_items_from_json(_items))
+        with Bar(
+            "Importing Items...",
+            suffix="%(percent).1f%% - ETA: %(eta)ds",
+            max=len(_items_files),
+        ) as progress:
+            for _items in _items_files:
+                AssetHandler.allItems.extend(itemInit.load_all_items_from_json(_items))
+                progress.next()
         et = process_time()
         importtime = et - st
         if importtime > 1:
@@ -287,3 +309,7 @@ class AssetHandler:
                 Pr.dbg("MOD Error", 2)
                 Pr.red("MOD Integrity Check failed. See Logs for Errors.")
                 Debug.stop_game()
+
+
+def load_game():
+    pass

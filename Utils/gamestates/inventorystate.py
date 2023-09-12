@@ -45,8 +45,7 @@ def inventorystate(Player):
                                 Player.equip_item(choosen_item, eaction)
                             else:
                                 Player.equip_item(choosen_item)
-                            pr.Pr.dbg(f"Player Slots: {Player.slots}", 0)
-                            pr.Pr.dbg(f"Player inv: {Player.inv}", 0)
+                            pr.Pr.dbg(f"Player Slots: {Player.slots}", -1)
                         else:
                             break
             except Exception as e:
