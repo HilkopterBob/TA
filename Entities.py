@@ -189,6 +189,7 @@ class Entity:
         Pr.dbg(f"{self.name} taking {damage} damage")
         for i in _attacklist:
             self.change_health(i * -1)
+        return damage
 
     def add_item(self, item):
         """

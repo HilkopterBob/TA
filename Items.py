@@ -93,7 +93,7 @@ class gitem:
         Pr.dbg(f"Rolling: {self.ad} for AD")
         for _ in range(ADnum_dice):
             ADroll = random.randint(1, ADdice)
-            Pr.dbg(f"Rolled: {ADroll}")
+            Pr.dbg(f"Rolled: {ADroll}", -1)
             ADroll_result += ADroll
         ADdmg = ADBaseDamage + ADroll_result
         Pr.dbg(f"Final Rollresult for AD: {ADdmg}")
