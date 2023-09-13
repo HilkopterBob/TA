@@ -22,7 +22,7 @@ class Entity:
         wealth=100,
         xp=0,
         inv=None,
-        ptype="",
+        ptype=None,
         geffects=None,
         beffects=None,
         eeffects=None,
@@ -45,6 +45,8 @@ class Entity:
             slots = []
         if attributes is None:
             attributes = {}
+        if ptype is None:
+            ptype = []
 
         self.location = location
         """Entity Location as Level Object"""
@@ -346,7 +348,7 @@ class Entity:
                 except:
                     return False
             case _:
-                print("change_stat: WILDCARD AUSGELÖST! debuginfo:")
+                Pr.dbg("change_stat: WILDCARD AUSGELÖST! debuginfo:", 2)
                 print(vars(self))
                 print(vars(effect))
                 return False

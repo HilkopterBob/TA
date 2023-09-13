@@ -45,8 +45,8 @@
           "maximum": 100
         },
         "ptype": {
-          "type": "integer",
-          "description": "Der Typ der Entität (Friendly/Harmfull)"
+          "type": "array",
+          "description": "Der Typ der Entität"
         },
         "geffects": {
           "type": "array",

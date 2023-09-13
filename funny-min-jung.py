@@ -241,6 +241,10 @@ if __name__ == "__main__":
     AssetHandler.importItems()
     allItems = AssetHandler.allItems
 
+    # Importing Effect Assets
+    AssetHandler.importEffects()
+    allEffect = AssetHandler.allEffects
+
     # Creating seperate Player Entitiies
     mPlayer = Entity(
         "Player",

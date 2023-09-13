@@ -5,8 +5,7 @@ import json
 
 
 def cItems():
-    """Creates Items from CSV
-    """
+    """Creates Items from CSV"""
     table = "../TA/table.csv"
 
     with open(table, encoding="UTF-8") as csvfile:
@@ -49,9 +48,9 @@ def cItems():
 
         print(f"Anzahl Datensätze: {line-2}")
 
+
 def cEntities():
-    """Creates Entities from CSV
-    """
+    """Creates Entities from CSV"""
     table = "../TA/table.csv"
 
     with open(table, encoding="UTF-8") as csvfile:
@@ -67,7 +66,7 @@ def cEntities():
                         "wealth": int(row[2]),
                         "inv": [],
                         "xp": int(row[3]),
-                        "ptype": int(row[4]),
+                        "ptype": [int(x) for x in row[4].split(",")],
                         "geffects": [],
                         "beffects": [],
                         "eeffects": [],
@@ -76,12 +75,12 @@ def cEntities():
                         "allowdamage": bool(row[6]),
                         "slots": [],
                         "attributes": {
-                        "str": int(row[8]),
-                        "dex": int(row[9]),
-                        "int": int(row[10]),
-                        "ini": int(row[11]),
-                        "chr": int(row[12])
-                        }
+                            "str": int(row[8]),
+                            "dex": int(row[9]),
+                            "int": int(row[10]),
+                            "ini": int(row[11]),
+                            "chr": int(row[12]),
+                        },
                     },
                 }
 

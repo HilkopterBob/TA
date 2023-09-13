@@ -19,6 +19,7 @@ def combatstate(player, entities=None):
 
     playername = player.name
     Pr.dbg(f"{playername} entered Combatstate with {entities}")
+    _enemylist = dict(zip(Debug.getNames(entities), entities))
     entities.append(player)
     Debug.objlist(entities)
     for e in entities:
@@ -43,13 +44,21 @@ def combatstate(player, entities=None):
         match choice:
             case "Attack":
                 Actionparser.show_wip()
-                pass
+                _enemylist.update({"Zurück": "Zurück"})
+                Pr.dbg(f"{_enemylist.values()}", 2)
+                choice2 = questionary.select(
+                    "Wen möchtest du Angreifen?", choices=_enemylist.keys()
+                ).unsafe_ask()
+                if choice2 == ("Zurück"):
+                    Pr.dbg("Player choose to back off", 1)
+                Pr.dbg(f"{choice}", 2)
+                _enemylist.get(choice).take_damage(
+                    entities[0].slots[8].getDamage()
+                )  # Nonetype Object
+            case "zurück zum Spiel":
+                break
 
     ###Todo: Do Stuff after INI Calculation
-    for i in range(1, len(entities)):
-        entities[i].take_damage(  # pylint: disable=E1101
-            entities[0].slots[8].getDamage()  # pylint: disable=E1101
-        )
     for e in entities:
         Pr.dbg(f"{e.name}'s Health is now: {e.hp}")
 

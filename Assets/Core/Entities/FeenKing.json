@@ -6,7 +6,10 @@
         "wealth": 0,
         "inv": [],
         "xp": 0,
-        "ptype": 0,
+        "ptype": [
+            10,
+            17
+        ],
         "geffects": [],
         "beffects": [],
         "eeffects": [],

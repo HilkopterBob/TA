@@ -172,19 +172,25 @@ class AssetHandler:
         Returns:
             None: None
         """
-        st = process_time()
         _effects_files = AssetHandler.getFiles(effects_folder)
 
         if not _effects_files:
             Pr.dbg(f"No Effects to import from {effects_folder}", 1)
             return None
 
+        st = process_time()
         Pr.dbg(f"Importing Effects: {_effects_files}")
+        with Bar(
+            "Importing Effects...",
+            suffix="%(percent).1f%% - ETA: %(eta)ds",
+            max=len(_effects_files),
+        ) as progress:
+            for _effect in _effects_files:
+                AssetHandler.allEffects.extend(
+                    EffectInit.load_all_effects_from_json(_effect)
+                )
+                progress.next()
 
-        for _effect in _effects_files:
-            AssetHandler.allEffects.extend(
-                EffectInit.load_all_effects_from_json(_effect)
-            )
         et = process_time()
         importtime = et - st
         if importtime > 1:

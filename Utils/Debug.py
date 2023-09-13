@@ -20,13 +20,21 @@ class Debug:
 
         =return= Returns DBG Print
         """
+        return Pr.dbg(f"Loaded {definition}: {Debug.getNames(listOfObjects)}", -1)
+
+    def getNames(listOfObjects=None):
+        """Returns a List of Objectnames from list of Objects
+
+        Args:
+            listOfObjects (List, optional): List of Objects. Defaults to None.
+        """
         if listOfObjects is None:
             listOfObjects = []
 
         _curObjects = []
         for _object in listOfObjects:
             _curObjects.append(_object.name)
-        return Pr.dbg(f"Loaded {definition}: {_curObjects}", -1)
+        return _curObjects
 
     def stop_game():
         """Pauses the Game and Asks for Continue or Stop"""
