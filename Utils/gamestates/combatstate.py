@@ -50,6 +50,7 @@ def combatstate(player, entities=None):
                 ).unsafe_ask()
                 if choice2 == ("Zurück"):
                     Pr.dbg("Player choose to back off", 1)
+                    break
 
                 Pr.dbg(f"{player.name} is about to Attack {choice2}")
                 _selectedEntity = _enemylist.get(choice2)
@@ -72,7 +73,7 @@ def combatstate(player, entities=None):
                 wants_exit = True
 
         for e in entities:
-            # Add Entity Intelligence or Base Attack here to add Damage to Player to Actionstack
+            # TODO: Add Entity Intelligence or Base Attack here to add Damage to Player to Actionstack
 
             # Work Actionstack to finish CombatRound
             Pr.dbg(f"Working Actionstack for {e.name}")
@@ -84,7 +85,10 @@ def combatstate(player, entities=None):
                 Pr.dbg(f"Current Actionstack: {e.actionstack}", -1)
                 Pr.dbg(f"Current Index: {i}", -1)
                 cur_action = e.actionstack.pop(0)
-                Actionparser.callfunction(cur_action)
+                _ret = Actionparser.callfunction(cur_action)
+                if _ret is True:
+                    entities.remove(e)
+                    _enemylist.pop(e.name)
                 Pr.dbg(f"Cur_Action: {cur_action}", -1)
                 Pr.dbg(f"Length of Actionstack after Action: {len(e.actionstack)}", -1)
                 Pr.dbg(f"Current Actionstack after Action: {e.actionstack}", -1)

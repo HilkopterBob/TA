@@ -135,7 +135,7 @@ class Entity:
             self.hp += value
             if self.hp <= 0:
                 if self.allowdamage:  #  pylint: disable=R1705
-                    Pr.dbg("Entity {self} has 0 or less Health")
+                    Pr.dbg(f"Entity {self.name} has 0 or less Health")
                     return True
                 else:
                     self.hp = 1
@@ -154,6 +154,8 @@ class Entity:
 
         Args:
             value (dict): Damage that is Inflicted. Defaults to {"AD":0,"AP":0}.
+
+        =return= Returns Damage taken as Dict of AD and AP; If Entity dies from Damage this function returns TRUE
         """
         if value is None:
             value = {"AD": 0, "AP": 0}
@@ -188,7 +190,10 @@ class Entity:
         damage = dict(zip(value.keys(), _attacklist))
         Pr.dbg(f"{self.name} taking {damage} damage")
         for i in _attacklist:
-            self.change_health(i * -1)
+            _ret = self.change_health(i * -1)
+            if _ret:
+                Pr.dbg(f"{self.name} is destroyed!")
+                return _ret
         return damage
 
     def add_item(self, item):
