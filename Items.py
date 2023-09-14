@@ -101,7 +101,7 @@ class gitem:
         Pr.dbg(f"Rolling: {self.ap} for AP")
         for _ in range(APnum_dice):
             AProll = random.randint(1, APdice)
-            Pr.dbg(f"Rolled: {AProll}")
+            Pr.dbg(f"Rolled: {AProll}", -1)
             AProll_result += AProll
         APdmg = APBaseDamage + AProll_result
         Pr.dbg(f"Final Rollresult for AP: {APdmg}")

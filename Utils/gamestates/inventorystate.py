@@ -164,11 +164,7 @@ def inventorystate(Player):
                         ).unsafe_ask()
                         match choosen_choice:
                             case "ablegen":
-                                pr.Pr.dbg(f"Player Current Equip: {Player.slots}", 3)
-                                pr.Pr.dbg(f"Player inv: {Player.inv}", 3)
                                 Player.unequip_item(choosen_item)
-                                pr.Pr.dbg(f"Player New Equip: {Player.slots}", 3)
-                                pr.Pr.dbg(f"Player inv: {Player.inv}", 3)
                             case "zurück":
                                 pass
                             case _:

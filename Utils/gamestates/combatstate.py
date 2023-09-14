@@ -73,7 +73,7 @@ def combatstate(player, entities=None):
                 wants_exit = True
 
         for e in entities:
-            # TODO: Add Entity Intelligence or Base Attack here to add Damage to Player to Actionstack
+            # TODO: Add Entity Intelligence or Base Attack here to add Damage to Player to Actionstack #pylint:disable=C0301
 
             # Work Actionstack to finish CombatRound
             Pr.dbg(f"Working Actionstack for {e.name}")
