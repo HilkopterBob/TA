@@ -14,6 +14,8 @@ class Effect:
     from_json : Creates Effects from JSON
     """
 
+    __slots__ = "name", "descr", "etype", "value", "infl"
+
     def __init__(
         self,
         name="Effectname",

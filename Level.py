@@ -14,6 +14,17 @@ class Level:
     from_json : Creates Levels from JSON
     """
 
+    __slots__ = (
+        "name",
+        "descr",
+        "text",
+        "choices",
+        "inv",
+        "triggers",
+        "ltype",
+        "entitylist",
+    )
+
     def __init__(
         self,
         text=None,

@@ -15,6 +15,23 @@ class gitem:
     from_json : Creates Items from JSON
     """
 
+    __slots__ = (
+        "name",
+        "itype",
+        "description",
+        "ad",
+        "ap",
+        "hp",
+        "ar",
+        "mr",
+        "rarity",
+        "effects",
+        "usable",
+        "equipable",
+        "slots",
+        "questitem",
+    )
+
     def __init__(
         self,
         name="placeholder",

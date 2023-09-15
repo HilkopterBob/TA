@@ -15,6 +15,26 @@ class Entity:
     from_json : Creates Entities from JSON
     """
 
+    __slots__ = (
+        "name",
+        "hp",
+        "wealth",
+        "xp",
+        "inv",
+        "ptype",
+        "geffects",
+        "beffects",
+        "eeffects",
+        "effects",
+        "location",
+        "level",
+        "allowdamage",
+        "actionstack",
+        "slots",
+        "attributes",
+        "spd",
+    )
+
     def __init__(
         self,
         name="Blanko",
