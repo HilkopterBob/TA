@@ -1,27 +1,26 @@
 {
-    "$schema": "../../../.github/workflows/entitieschema.json",
-    "Ratte": {
-        "name": "Ratte",
-        "hp": 10,
-        "wealth": 0,
-        "inv": [],
-        "xp": 0,
-        "ptype": [
-            12
-        ],
-        "geffects": [],
-        "beffects": [],
-        "eeffects": [],
-        "location": "",
-        "level": 0,
-        "allowdamage": true,
-        "slots": [],
-        "attributes": {
-            "str": 1,
-            "dex": 1,
-            "int": 1,
-            "ini": 1,
-            "chr": 0
-        }
-    }
+  "$schema": "../../../.github/workflows/entitieschema.json",
+  "Ratte": {
+    "name": "Ratte",
+    "hp": 10,
+    "wealth": 0,
+    "inv": [],
+    "xp": 0,
+    "ptype": [12],
+    "geffects": [],
+    "beffects": [],
+    "eeffects": [],
+    "location": "",
+    "level": 0,
+    "allowdamage": true,
+    "slots": [],
+    "attributes": {
+      "str": 1,
+      "dex": 1,
+      "int": 1,
+      "ini": 1,
+      "chr": 0
+    },
+    "loottable": "Trial"
+  }
 }

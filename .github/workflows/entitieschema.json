@@ -101,6 +101,10 @@
               "description": "The charisma of an Entity"
             }
           }
+        },
+        "loottable": {
+          "type": "string",
+          "description": "The Loottable which should be used for this Entity"
         }
       },
       "required": [
@@ -117,7 +121,8 @@
         "level",
         "allowdamage",
         "slots",
-        "attributes"
+        "attributes",
+        "loottable"
       ]
     }
   }

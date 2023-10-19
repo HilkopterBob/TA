@@ -1,28 +1,26 @@
 {
-    "$schema": "../../../.github/workflows/entitieschema.json",
-    "Drache": {
-        "name": "Drache",
-        "hp": 200,
-        "wealth": 0,
-        "inv": [],
-        "xp": 0,
-        "ptype": [
-            1,
-            15
-        ],
-        "geffects": [],
-        "beffects": [],
-        "eeffects": [],
-        "location": "",
-        "level": 0,
-        "allowdamage": true,
-        "slots": [],
-        "attributes": {
-            "str": 15,
-            "dex": 9,
-            "int": 7,
-            "ini": 6,
-            "chr": 2
-        }
-    }
+  "$schema": "../../../.github/workflows/entitieschema.json",
+  "Drache": {
+    "name": "Drache",
+    "hp": 200,
+    "wealth": 0,
+    "inv": [],
+    "xp": 0,
+    "ptype": [1, 15],
+    "geffects": [],
+    "beffects": [],
+    "eeffects": [],
+    "location": "",
+    "level": 0,
+    "allowdamage": true,
+    "slots": [],
+    "attributes": {
+      "str": 15,
+      "dex": 9,
+      "int": 7,
+      "ini": 6,
+      "chr": 2
+    },
+    "loottable": "Trial"
+  }
 }

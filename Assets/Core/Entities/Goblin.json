@@ -1,27 +1,26 @@
 {
-    "$schema": "../../../.github/workflows/entitieschema.json",
-    "Goblin": {
-        "name": "Goblin",
-        "hp": 50,
-        "wealth": 0,
-        "inv": [],
-        "xp": 0,
-        "ptype": [
-            0
-        ],
-        "geffects": [],
-        "beffects": [],
-        "eeffects": [],
-        "location": "",
-        "level": 0,
-        "allowdamage": true,
-        "slots": [],
-        "attributes": {
-            "str": 4,
-            "dex": 8,
-            "int": 4,
-            "ini": 10,
-            "chr": 2
-        }
-    }
+  "$schema": "../../../.github/workflows/entitieschema.json",
+  "Goblin": {
+    "name": "Goblin",
+    "hp": 50,
+    "wealth": 0,
+    "inv": [],
+    "xp": 0,
+    "ptype": [0],
+    "geffects": [],
+    "beffects": [],
+    "eeffects": [],
+    "location": "",
+    "level": 0,
+    "allowdamage": true,
+    "slots": [],
+    "attributes": {
+      "str": 4,
+      "dex": 8,
+      "int": 4,
+      "ini": 10,
+      "chr": 2
+    },
+    "loottable": "Trial"
+  }
 }

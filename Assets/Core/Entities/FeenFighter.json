@@ -1,28 +1,26 @@
 {
-    "$schema": "../../../.github/workflows/entitieschema.json",
-    "FeenFighter": {
-        "name": "FeenFighter",
-        "hp": 100,
-        "wealth": 0,
-        "inv": [],
-        "xp": 0,
-        "ptype": [
-            5,
-            17
-        ],
-        "geffects": [],
-        "beffects": [],
-        "eeffects": [],
-        "location": "",
-        "level": 0,
-        "allowdamage": true,
-        "slots": [],
-        "attributes": {
-            "str": 9,
-            "dex": 9,
-            "int": 10,
-            "ini": 10,
-            "chr": 15
-        }
-    }
+  "$schema": "../../../.github/workflows/entitieschema.json",
+  "FeenFighter": {
+    "name": "FeenFighter",
+    "hp": 100,
+    "wealth": 0,
+    "inv": [],
+    "xp": 0,
+    "ptype": [5, 17],
+    "geffects": [],
+    "beffects": [],
+    "eeffects": [],
+    "location": "",
+    "level": 0,
+    "allowdamage": true,
+    "slots": [],
+    "attributes": {
+      "str": 9,
+      "dex": 9,
+      "int": 10,
+      "ini": 10,
+      "chr": 15
+    },
+    "loottable": "Trial"
+  }
 }

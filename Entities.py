@@ -5,7 +5,7 @@ Entities Module which holds 2 Classes
 """
 import json
 from Level import Level
-from Utils import Pr, Inp
+from Utils import Pr, Inp, loot
 
 
 class Entity:
@@ -33,6 +33,7 @@ class Entity:
         "slots",
         "attributes",
         "spd",
+        "loottable",
     )
 
     def __init__(
@@ -51,6 +52,7 @@ class Entity:
         allowdamage=True,
         slots=None,
         attributes=None,
+        loottable=None,
         spd=0,
     ):
         if inv is None:
@@ -67,6 +69,8 @@ class Entity:
             attributes = {}
         if ptype is None:
             ptype = []
+        if loottable is None:
+            loottable = {}
 
         self.location = location
         """Entity Location as Level Object"""
@@ -102,6 +106,8 @@ class Entity:
         """Attributes of Entity"""
         self.spd = spd
         """The Speed of the Entity in Combat, gets Calculated from INI"""
+        self.loottable = loottable
+        """The loottable attached to this Entity"""
 
     @staticmethod
     def from_json(json_dct):
@@ -113,6 +119,8 @@ class Entity:
         Returns:
             Entity: Entity
         """
+        _loottable = loot.getTable(json_dct["loottable"])
+
         return Entity(
             json_dct["name"],
             json_dct["hp"],
@@ -128,6 +136,7 @@ class Entity:
             json_dct["allowdamage"],
             json_dct["slots"],
             json_dct["attributes"],
+            _loottable,
         )
 
     def set_name(self):
@@ -212,7 +221,11 @@ class Entity:
         for i in _attacklist:
             _ret = self.change_health(i * -1)
             if _ret:
+                # TODO: Add Lootroll
                 Pr.dbg(f"{self.name} is destroyed!")
+                Pr.dbg(
+                    f"Entity Lootroll for 1 Item: {loot.roll_loot(self.loottable,1)}"
+                )
                 return _ret
         return damage
 
@@ -637,7 +650,6 @@ class EntityInit:
         """
         with open(json_file, encoding="UTF-8") as json_data:
             data = json.load(json_data)
-            Pr.dbg(data)
 
         for ename in data.keys():
             if ename == name:

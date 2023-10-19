@@ -12,6 +12,7 @@ from .config import (
     items_folder,
     checksum_file,
     root_folder,
+    loottablepath,
 )
 
 __all__ = [
@@ -26,4 +27,5 @@ __all__ = [
     "effects_folder",
     "checksum_file",
     "root_folder",
+    "loottablepath",
 ]

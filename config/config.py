@@ -29,7 +29,7 @@ def get_project_root() -> Path:
 ##Debug Variable##
 dbg = True
 dbg_level = (
-    0  # 0 ERR only | #1 WARN + ERR | #2 INFO + WARN + ERR | #3 DBG + INFO + WARN + ERR
+    3  # 0 ERR only | #1 WARN + ERR | #2 INFO + WARN + ERR | #3 DBG + INFO + WARN + ERR
 )
 sys.stdout.reconfigure(encoding="utf-8")
 ##################
@@ -46,6 +46,7 @@ items_folder = "Assets/Core/Items"
 log_file = f"logs/{today}.log"
 checksum_file = "config/integrity.md"
 root_folder = get_project_root()
+loottablepath = "Assets/Core/Loottables"
 ##################
 
 

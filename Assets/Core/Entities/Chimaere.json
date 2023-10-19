@@ -20,6 +20,7 @@
       "int": 6,
       "ini": 8,
       "chr": 2
-    }
+    },
+    "loottable": "Trial"
   }
 }

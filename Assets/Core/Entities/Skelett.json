@@ -1,27 +1,26 @@
 {
-    "$schema": "../../../.github/workflows/entitieschema.json",
-    "Skelett": {
-        "name": "Skelett",
-        "hp": 100,
-        "wealth": 0,
-        "inv": [],
-        "xp": 0,
-        "ptype": [
-            13
-        ],
-        "geffects": [],
-        "beffects": [],
-        "eeffects": [],
-        "location": "",
-        "level": 0,
-        "allowdamage": true,
-        "slots": [],
-        "attributes": {
-            "str": 6,
-            "dex": 6,
-            "int": 8,
-            "ini": 10,
-            "chr": 1
-        }
-    }
+  "$schema": "../../../.github/workflows/entitieschema.json",
+  "Skelett": {
+    "name": "Skelett",
+    "hp": 100,
+    "wealth": 0,
+    "inv": [],
+    "xp": 0,
+    "ptype": [13],
+    "geffects": [],
+    "beffects": [],
+    "eeffects": [],
+    "location": "",
+    "level": 0,
+    "allowdamage": true,
+    "slots": [],
+    "attributes": {
+      "str": 6,
+      "dex": 6,
+      "int": 8,
+      "ini": 10,
+      "chr": 1
+    },
+    "loottable": "Trial"
+  }
 }

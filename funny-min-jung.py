@@ -4,6 +4,7 @@
 from time import sleep
 
 # project imports:
+from pympler.asizeof import asizeof as getsize
 from Entities import Entity
 from Level import Level
 from Effect import Effect
@@ -286,6 +287,12 @@ if __name__ == "__main__":
     Debug.objlist(allLevels, "Levels")
     Debug.objlist(allEntities, "Entities")
     Debug.objlist(allItems, "Items")
+
+    Pr.dbg(f"Speicherbedarf Levels: {getsize(Level())} B", 3)
+    Pr.dbg(f"Speicherbedarf Items: {getsize(gitem())} B", 3)
+    Pr.dbg(f"Speicherbedarf Entities: {getsize(Entity())} B", 3)
+    Pr.dbg(f"Speicherbedarf Effects: {getsize(Effect())} B", 3)
+
     # Fill Player iventory with Placeholder Items
     while len(mPlayer.slots) < 11:
         mPlayer.slots.append("placeholder")
