@@ -2,6 +2,7 @@
 """
 import os
 import sys
+from multiprocessing import Pool
 from hashlib import sha256
 from time import sleep, process_time
 from progress.bar import Bar
@@ -153,8 +154,13 @@ class AssetHandler:
             suffix="%(percent).1f%% - ETA: %(eta)ds",
             max=len(_items_files),
         ) as progress:
-            for _items in _items_files:
-                AssetHandler.allItems.extend(itemInit.load_all_items_from_json(_items))
+            with Pool() as pool:
+                results = pool.imap(itemInit.load_all_items_from_json, _items_files)
+
+                for items in results:
+                    AssetHandler.allItems.extend(items)
+                # for _items in _items_files:
+                #   AssetHandler.allItems.extend(itemInit.load_all_items_from_json(_items))
                 progress.next()
         et = process_time()
         importtime = et - st
