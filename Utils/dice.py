@@ -15,7 +15,7 @@ def roll(dice=None):
     """
     if dice is None:
         Pr.Dbg("No Dice String given", 2)
-        return
+        return 0
 
     Pr.dbg(f"Rolling: {dice}")
     roll_result = 0

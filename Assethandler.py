@@ -2,11 +2,9 @@
 """
 import os
 import sys
-from tqdm import tqdm
-from multiprocessing import Pool
 from hashlib import sha256
 from time import sleep, process_time
-from progress.bar import Bar
+from tqdm import tqdm
 from Level import LevelInit
 from Entities import EntityInit
 from Effect import EffectInit
@@ -19,7 +17,6 @@ from config import (
     checksum_file,
     dbg,
     root_folder,
-    max_processes,
 )
 from Utils.pr import Pr
 from Utils import Debug
@@ -320,4 +317,4 @@ class AssetHandler:
 
 
 def load_game():
-    pass
+    """Function to init the whole Game; TODO: Build this"""

@@ -43,7 +43,7 @@ def interact_with_level(player, level, level_list):
     Pr.dbg(f"Current Choices: {level.choices}", -1)
 
     if printed:
-        action = int(Inp.inp(mPlayer)) - 1
+        action = int(Inp.inp(mPlayer)) - 1  # pylint: disable=E0601
         if action == 33:
             Pr.dbg("Break!")
             return
@@ -191,7 +191,9 @@ def gameloop(player, level_list=None):
                     Actionparser.gamestate = "game"
             case "combat":
                 Pr.dbg(f"{mPlayer} Entering Combatstate")
-                combatstate(mPlayer, [allEntities[2], allEntities[5]])
+                combatstate(
+                    mPlayer, [allEntities[2], allEntities[5]]  # pylint: disable=E0601
+                )
                 Actionparser.gamestate = "game"
             case _:
                 Pr.yellow(

@@ -123,7 +123,7 @@ class gitem:
         APdmg = APBaseDamage + AProll_result
         Pr.dbg(f"Final Rollresult for AP: {APdmg}")
 
-        return dict(AD=ADdmg, AP=APdmg)
+        return {"AD": ADdmg, "AP": APdmg}
 
     @staticmethod
     def from_json(json_dct, iname):

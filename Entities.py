@@ -158,7 +158,7 @@ class Entity:
         """
         if table is None:
             return None
-        if table is "":
+        if table == "":
             return None
 
         _json_file = aitablepath + "/" + table + ".json"
@@ -218,7 +218,8 @@ class Entity:
         Args:
             value (dict): Damage that is Inflicted. Defaults to {"AD":0,"AP":0}.
 
-        =return= Returns Damage taken as Dict of AD and AP; If Entity dies from Damage this function returns TRUE
+        =return= Returns Damage taken as Dict of AD and AP;
+                 If Entity dies from Damage this function returns TRUE
         """
         if value is None:
             value = {"AD": 0, "AP": 0}
