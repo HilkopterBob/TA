@@ -2,6 +2,7 @@
 """
 import os
 import sys
+from tqdm import tqdm
 from multiprocessing import Pool
 from hashlib import sha256
 from time import sleep, process_time
@@ -18,6 +19,7 @@ from config import (
     checksum_file,
     dbg,
     root_folder,
+    max_processes,
 )
 from Utils.pr import Pr
 from Utils import Debug
@@ -82,16 +84,15 @@ class AssetHandler:
 
         st = process_time()
         Pr.dbg(f"Importing Level(s) from: {_level_files}")
-        with Bar(
-            "Importing Levels...",
-            suffix="%(percent).1f%% - ETA: %(eta)ds",
-            max=len(_level_files),
-        ) as progress:
-            for _level in _level_files:
-                AssetHandler.allLevels.extend(
-                    LevelInit.load_all_levels_from_json(_level)
-                )
-                progress.next()
+
+        for _level in tqdm(
+            _level_files,
+            desc="Importing Levels...",
+            ncols=100,
+            bar_format="{l_bar}{bar}| {n_fmt}/{total_fmt} [ETA: {remaining_s:.2f}s]",
+        ):
+            AssetHandler.allLevels.extend(LevelInit.load_all_levels_from_json(_level))
+
         et = process_time()
         importtime = et - st
         if importtime > 1:
@@ -116,16 +117,15 @@ class AssetHandler:
 
         st = process_time()
         Pr.dbg(f"Importing Entities: {_entity_files}")
-        with Bar(
-            "Importing Entities...",
-            suffix="%(percent).1f%% - ETA: %(eta)ds",
-            max=len(_entity_files),
-        ) as progress:
-            for _entity in _entity_files:
-                AssetHandler.allEntities.extend(
-                    EntityInit.load_entities_fromjson(_entity)
-                )
-                progress.next()
+
+        for _entity in tqdm(
+            _entity_files,
+            desc="Importing Entities...",
+            ncols=100,
+            bar_format="{l_bar}{bar}| {n_fmt}/{total_fmt} [ETA: {remaining_s:.2f}s]",
+        ):
+            AssetHandler.allEntities.extend(EntityInit.load_entities_fromjson(_entity))
+
         et = process_time()
         importtime = et - st
         if importtime > 1:
@@ -149,19 +149,15 @@ class AssetHandler:
 
         st = process_time()
         Pr.dbg(f"Importing Item(s) from: {_items_files}")
-        with Bar(
-            "Importing Items...",
-            suffix="%(percent).1f%% - ETA: %(eta)ds",
-            max=len(_items_files),
-        ) as progress:
-            with Pool() as pool:
-                results = pool.imap(itemInit.load_all_items_from_json, _items_files)
 
-                for items in results:
-                    AssetHandler.allItems.extend(items)
-                # for _items in _items_files:
-                #   AssetHandler.allItems.extend(itemInit.load_all_items_from_json(_items))
-                progress.next()
+        for _items in tqdm(
+            _items_files,
+            desc="Importing Items...",
+            ncols=100,
+            bar_format="{l_bar}{bar}| {n_fmt}/{total_fmt} [ETA: {remaining_s:.2f}s]",
+        ):
+            AssetHandler.allItems.extend(itemInit.load_all_items_from_json(_items))
+
         et = process_time()
         importtime = et - st
         if importtime > 1:
@@ -185,16 +181,16 @@ class AssetHandler:
 
         st = process_time()
         Pr.dbg(f"Importing Effects: {_effects_files}")
-        with Bar(
-            "Importing Effects...",
-            suffix="%(percent).1f%% - ETA: %(eta)ds",
-            max=len(_effects_files),
-        ) as progress:
-            for _effect in _effects_files:
-                AssetHandler.allEffects.extend(
-                    EffectInit.load_all_effects_from_json(_effect)
-                )
-                progress.next()
+
+        for _effect in tqdm(
+            _effects_files,
+            desc="Importing Effects...",
+            ncols=100,
+            bar_format="{l_bar}{bar}| {n_fmt}/{total_fmt} [ETA: {remaining_s:.2f}s]",
+        ):
+            AssetHandler.allEffects.extend(
+                EffectInit.load_all_effects_from_json(_effect)
+            )
 
         et = process_time()
         importtime = et - st
@@ -267,26 +263,27 @@ class AssetHandler:
                         _modFiles.append(os.path.join(root, name))
                     else:
                         _coreFiles.append(os.path.join(root, name))
-        with Bar(
-            "Checking File integrity...",
-            suffix="%(percent).1f%% - ETA: %(eta)ds",
-            max=len(_coreFiles) + len(_DLCFiles) + len(_modFiles),
+        with tqdm(
+            total=len(_coreFiles) + len(_DLCFiles) + len(_modFiles),
+            desc="Checking File Integrity...",
+            ncols=100,
+            bar_format="{l_bar}{bar}| {n_fmt}/{total_fmt} [ETA: {remaining_s:.2f}s]",
         ) as progress:
             for gfile in _coreFiles:
                 sleep(0.02)
                 if AssetHandler.check_integrity(gfile):
-                    progress.next()
+                    progress.update()
                 else:
                     # Go on or break
-                    progress.next()
+                    progress.update()
                     _success = 1
             for gfile in _DLCFiles:
                 sleep(0.1)
                 if AssetHandler.check_integrity(gfile):
-                    progress.next()
+                    progress.update()
                 else:
                     # Go on or break
-                    progress.next()
+                    progress.update()
                     _success = 2
                     # Debug.stop_game_on_exception("File Integrity Check Failed")
                     # -> Output DLC wurde gefunden aber Files corrupt
@@ -295,10 +292,10 @@ class AssetHandler:
             for gfile in _modFiles:
                 sleep(0.1)
                 if AssetHandler.check_integrity(gfile):
-                    progress.next()
+                    progress.update()
                 else:
                     # Go on or break
-                    progress.next()
+                    progress.update()
                     _success = 3
                     # Debug.stop_game_on_exception("File Integrity Check Failed")
         if dbg:

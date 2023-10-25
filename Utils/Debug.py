@@ -32,6 +32,7 @@ class Debug:
             listOfObjects = []
 
         _curObjects = []
+
         for _object in listOfObjects:
             _curObjects.append(_object.name)
         return _curObjects

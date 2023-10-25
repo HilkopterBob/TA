@@ -6,6 +6,7 @@ Entities Module which holds 2 Classes
 import json
 from Level import Level
 from Utils import Pr, Inp, loot
+from config import aitablepath
 
 
 class Entity:
@@ -34,6 +35,7 @@ class Entity:
         "attributes",
         "spd",
         "loottable",
+        "ai",
     )
 
     def __init__(
@@ -53,6 +55,7 @@ class Entity:
         slots=None,
         attributes=None,
         loottable=None,
+        ai=None,
         spd=0,
     ):
         if inv is None:
@@ -71,6 +74,8 @@ class Entity:
             ptype = []
         if loottable is None:
             loottable = {}
+        if ai is None:
+            ai = ""
 
         self.location = location
         """Entity Location as Level Object"""
@@ -108,6 +113,8 @@ class Entity:
         """The Speed of the Entity in Combat, gets Calculated from INI"""
         self.loottable = loottable
         """The loottable attached to this Entity"""
+        self.ai = self.get_ai(ai)
+        """The used AI Parameters for this Entity"""
 
     @staticmethod
     def from_json(json_dct):
@@ -119,7 +126,7 @@ class Entity:
         Returns:
             Entity: Entity
         """
-        _loottable = loot.getTable(json_dct["loottable"])
+        _loottable = loot.getLootTable(json_dct["loottable"])
 
         return Entity(
             json_dct["name"],
@@ -137,7 +144,30 @@ class Entity:
             json_dct["slots"],
             json_dct["attributes"],
             _loottable,
+            json_dct["ai"],
         )
+
+    def get_ai(self, table):
+        """Returns Content of Loottable given by Name
+
+        Args:
+            name (String): Name of the Loottable that should be used
+
+        Returns:
+            Dict: Loottable | None if Error
+        """
+        if table is None:
+            return None
+        if table is "":
+            return None
+
+        _json_file = aitablepath + "/" + table + ".json"
+
+        Pr.dbg(f"Loading AI Params {_json_file}", -1)
+
+        with open(_json_file, encoding="UTF-8") as json_data:
+            data = json.load(json_data)
+        return data
 
     def set_name(self):
         """
@@ -177,6 +207,10 @@ class Entity:
             return False
         except:
             return False
+
+    def act(self):
+        """Function for Entity Intelligence"""
+        Pr.dbg(f"Entity {self.name} is acting here!")
 
     def take_damage(self, value=None):
         """Adds Damage to the Entity and Calculates health loss based on Armor and Resistance

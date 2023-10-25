@@ -58,6 +58,7 @@ def cEntities():
         line = 0
         for row in csv_reader:
             if line > 1:
+                print(row[14])
                 data = {
                     "$schema": "../../../.github/workflows/entitieschema.json",
                     row[0]: {
@@ -81,12 +82,16 @@ def cEntities():
                             "ini": int(row[11]),
                             "chr": int(row[12]),
                         },
+                        "loottable": row[13],
+                        "ai": row[14],
                     },
                 }
 
                 json_object = json.dumps(data, indent=4)
 
-                with open(f"../TA/Test/{row[0]}.json", "w", encoding="UTF8") as outfile:
+                with open(
+                    f"../TA/Core/Entities/{row[0]}.json", "w", encoding="UTF8"
+                ) as outfile:
                     outfile.write(json_object)
             line += 1
 

@@ -13,6 +13,8 @@ from .config import (
     checksum_file,
     root_folder,
     loottablepath,
+    max_processes,
+    aitablepath,
 )
 
 __all__ = [
@@ -28,4 +30,6 @@ __all__ = [
     "checksum_file",
     "root_folder",
     "loottablepath",
+    "max_processes",
+    "aitablepath",
 ]

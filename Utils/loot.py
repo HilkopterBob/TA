@@ -32,7 +32,7 @@ def roll_loot(loottable=None, amount=1):
     return random.choices(_lootdict, weights=_weights, k=amount)
 
 
-def getTable(name):
+def getLootTable(name):
     """Returns Content of Loottable given by Name
 
     Args:
@@ -47,6 +47,27 @@ def getTable(name):
     _json_file = loottablepath + "/" + name + ".json"
 
     Pr.dbg(f"Loading Loottable {_json_file}", -1)
+
+    with open(_json_file, encoding="UTF-8") as json_data:
+        data = json.load(json_data)
+    return data
+
+
+def importAi(name):
+    """Returns Content of Loottable given by Name
+
+    Args:
+        name (String): Name of the Loottable that should be used
+
+    Returns:
+        Dict: Loottable | None if Error
+    """
+    if name is None:
+        return None
+
+    _json_file = loottablepath + "/" + name + ".json"
+
+    Pr.dbg(f"Loading AI Params {_json_file}", -1)
 
     with open(_json_file, encoding="UTF-8") as json_data:
         data = json.load(json_data)

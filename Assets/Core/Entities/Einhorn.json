@@ -21,6 +21,7 @@
       "ini": 15,
       "chr": 15
     },
-    "loottable": "Trial"
+    "loottable": "Trial",
+    "ai": "Trial"
   }
 }
