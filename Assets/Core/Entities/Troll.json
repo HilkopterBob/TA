@@ -1,0 +1,27 @@
+{
+  "$schema": "../../../.github/workflows/entitieschema.json",
+  "Troll": {
+    "name": "Troll",
+    "hp": 130,
+    "wealth": 0,
+    "inv": [],
+    "xp": 0,
+    "ptype": [16],
+    "geffects": [],
+    "beffects": [],
+    "eeffects": [],
+    "location": "",
+    "level": 0,
+    "allowdamage": true,
+    "slots": [],
+    "attributes": {
+      "str": 10,
+      "dex": 6,
+      "int": 1,
+      "ini": 4,
+      "chr": 4
+    },
+    "loottable": "Trial",
+    "ai": "Trial"
+  }
+}

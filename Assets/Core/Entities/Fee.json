@@ -1,0 +1,27 @@
+{
+  "$schema": "../../../.github/workflows/entitieschema.json",
+  "Fee": {
+    "name": "Fee",
+    "hp": 100,
+    "wealth": 0,
+    "inv": [],
+    "xp": 0,
+    "ptype": [17],
+    "geffects": [],
+    "beffects": [],
+    "eeffects": [],
+    "location": "",
+    "level": 0,
+    "allowdamage": true,
+    "slots": [],
+    "attributes": {
+      "str": 8,
+      "dex": 9,
+      "int": 10,
+      "ini": 8,
+      "chr": 12
+    },
+    "loottable": "Trial",
+    "ai": "Trial"
+  }
+}

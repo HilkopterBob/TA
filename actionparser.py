@@ -46,7 +46,6 @@ class Actionparser:
             attr = []
 
         _call = getattr(Actionparser, attr[0])
-        Pr.dbg(f"{_call}")
         return _call(attr[1])
 
     def close_game(attributes=None):
@@ -308,6 +307,29 @@ class Actionparser:
         except:
             return 1
 
+    def take_damage(attributes=None):
+        """Calls the take_damage Function with arguments
+
+        Args:
+            attr (list, optional): Arguments passed. Defaults to [].
+
+        Returns:
+            Integer: 1 on Error
+            Dict: Damage in Format {"AD":DMG, "AP":DMG}
+        """
+        Pr.dbg(f"Call: {attributes}")
+
+        if attributes is None:
+            attributes = []
+
+        try:
+            _entity = attributes[0]
+            _value = attributes[1]
+            _dmg = _entity.take_damage(_value)
+            return _dmg
+        except:
+            return 1
+
     def check_level_up(attributes=None):
         """Calls the check_level_up Function with arguments
 
@@ -346,6 +368,7 @@ class Actionparser:
             return 1
 
     def show_wip(*args):
-        """shows wip message
-        """
-        Pr.headline("Work In Progress.\nCheck this feature in a later update.\n-the Devs ♥")
+        """shows wip message"""
+        Pr.headline(
+            "Work In Progress.\nCheck this feature in a later update.\n-the Devs ♥"
+        )

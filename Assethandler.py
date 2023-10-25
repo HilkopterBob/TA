@@ -4,7 +4,7 @@ import os
 import sys
 from hashlib import sha256
 from time import sleep, process_time
-from progress.bar import Bar
+from tqdm import tqdm
 from Level import LevelInit
 from Entities import EntityInit
 from Effect import EffectInit
@@ -44,7 +44,6 @@ class AssetHandler:
             List: List of Paths to Files
         """
         Pr.dbg(f"Gathering Assets from: {folder}")
-        # TODO: find out the problem pylint has
         _folder_name = folder.split("/")[2]  # pylint: disable=E1101
         st = process_time()
         _file_list = []
@@ -74,16 +73,23 @@ class AssetHandler:
         Returns:
             None: None
         """
-        st = process_time()
         _level_files = AssetHandler.getFiles(levels_folder)
 
         if not _level_files:
             Pr.dbg(f"No Levels to import from {levels_folder}", 1)
             return None
 
+        st = process_time()
         Pr.dbg(f"Importing Level(s) from: {_level_files}")
-        for _level in _level_files:
+
+        for _level in tqdm(
+            _level_files,
+            desc="Importing Levels...",
+            ncols=100,
+            bar_format="{l_bar}{bar}| {n_fmt}/{total_fmt} [ETA: {remaining_s:.2f}s]",
+        ):
             AssetHandler.allLevels.extend(LevelInit.load_all_levels_from_json(_level))
+
         et = process_time()
         importtime = et - st
         if importtime > 1:
@@ -99,17 +105,24 @@ class AssetHandler:
         Returns:
             None: None
         """
-        st = process_time()
+
         _entity_files = AssetHandler.getFiles(entities_folder)
 
         if not _entity_files:
             Pr.dbg(f"No Entities to import from {entities_folder}", 1)
             return None
 
+        st = process_time()
         Pr.dbg(f"Importing Entities: {_entity_files}")
 
-        for _entity in _entity_files:
+        for _entity in tqdm(
+            _entity_files,
+            desc="Importing Entities...",
+            ncols=100,
+            bar_format="{l_bar}{bar}| {n_fmt}/{total_fmt} [ETA: {remaining_s:.2f}s]",
+        ):
             AssetHandler.allEntities.extend(EntityInit.load_entities_fromjson(_entity))
+
         et = process_time()
         importtime = et - st
         if importtime > 1:
@@ -125,16 +138,23 @@ class AssetHandler:
         Returns:
             None: None
         """
-        st = process_time()
         _items_files = AssetHandler.getFiles(items_folder)
 
         if not _items_files:
             Pr.dbg(f"No Items to import from {items_folder}", 1)
             return None
 
+        st = process_time()
         Pr.dbg(f"Importing Item(s) from: {_items_files}")
-        for _items in _items_files:
+
+        for _items in tqdm(
+            _items_files,
+            desc="Importing Items...",
+            ncols=100,
+            bar_format="{l_bar}{bar}| {n_fmt}/{total_fmt} [ETA: {remaining_s:.2f}s]",
+        ):
             AssetHandler.allItems.extend(itemInit.load_all_items_from_json(_items))
+
         et = process_time()
         importtime = et - st
         if importtime > 1:
@@ -150,19 +170,25 @@ class AssetHandler:
         Returns:
             None: None
         """
-        st = process_time()
         _effects_files = AssetHandler.getFiles(effects_folder)
 
         if not _effects_files:
             Pr.dbg(f"No Effects to import from {effects_folder}", 1)
             return None
 
+        st = process_time()
         Pr.dbg(f"Importing Effects: {_effects_files}")
 
-        for _effect in _effects_files:
+        for _effect in tqdm(
+            _effects_files,
+            desc="Importing Effects...",
+            ncols=100,
+            bar_format="{l_bar}{bar}| {n_fmt}/{total_fmt} [ETA: {remaining_s:.2f}s]",
+        ):
             AssetHandler.allEffects.extend(
                 EffectInit.load_all_effects_from_json(_effect)
             )
+
         et = process_time()
         importtime = et - st
         if importtime > 1:
@@ -234,26 +260,27 @@ class AssetHandler:
                         _modFiles.append(os.path.join(root, name))
                     else:
                         _coreFiles.append(os.path.join(root, name))
-        with Bar(
-            "Checking File integrity...",
-            suffix="%(percent).1f%% - ETA: %(eta)ds",
-            max=len(_coreFiles) + len(_DLCFiles) + len(_modFiles),
+        with tqdm(
+            total=len(_coreFiles) + len(_DLCFiles) + len(_modFiles),
+            desc="Checking File Integrity...",
+            ncols=100,
+            bar_format="{l_bar}{bar}| {n_fmt}/{total_fmt} [ETA: {remaining_s:.2f}s]",
         ) as progress:
             for gfile in _coreFiles:
-                sleep(0.1)
+                sleep(0.02)
                 if AssetHandler.check_integrity(gfile):
-                    progress.next()
+                    progress.update()
                 else:
                     # Go on or break
-                    progress.next()
+                    progress.update()
                     _success = 1
             for gfile in _DLCFiles:
                 sleep(0.1)
                 if AssetHandler.check_integrity(gfile):
-                    progress.next()
+                    progress.update()
                 else:
                     # Go on or break
-                    progress.next()
+                    progress.update()
                     _success = 2
                     # Debug.stop_game_on_exception("File Integrity Check Failed")
                     # -> Output DLC wurde gefunden aber Files corrupt
@@ -262,10 +289,10 @@ class AssetHandler:
             for gfile in _modFiles:
                 sleep(0.1)
                 if AssetHandler.check_integrity(gfile):
-                    progress.next()
+                    progress.update()
                 else:
                     # Go on or break
-                    progress.next()
+                    progress.update()
                     _success = 3
                     # Debug.stop_game_on_exception("File Integrity Check Failed")
         if dbg:
@@ -287,3 +314,7 @@ class AssetHandler:
                 Pr.dbg("MOD Error", 2)
                 Pr.red("MOD Integrity Check failed. See Logs for Errors.")
                 Debug.stop_game()
+
+
+def load_game():
+    """Function to init the whole Game; TODO: Build this"""

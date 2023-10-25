@@ -4,6 +4,7 @@ Entities Module which holds 2 Classes
     Entityinit()
 """
 import json
+import random
 from Utils import Pr
 
 
@@ -13,6 +14,23 @@ class gitem:
     Contains Functions:
     from_json : Creates Items from JSON
     """
+
+    __slots__ = (
+        "name",
+        "itype",
+        "description",
+        "ad",
+        "ap",
+        "hp",
+        "ar",
+        "mr",
+        "rarity",
+        "effects",
+        "usable",
+        "equipable",
+        "slots",
+        "questitem",
+    )
 
     def __init__(
         self,
@@ -37,23 +55,75 @@ class gitem:
             slots = []
 
         self.name = name
+        """Name of Item as String"""
         self.itype = itype
+        """Type of Item as String"""
         self.description = description
+        """Description of the Items as String"""
         self.ad = ad
+        """The Physical Attack Damage of the Item as String"""
         self.ap = ap
+        """The Magical Attack Power of the Item as String"""
         self.hp = hp
+        """The Hitpoints of the Item as Integer"""
         self.ar = ar
+        """The Physical Resistance to Damage of the Item as Integer"""
         self.mr = mr
+        """The Magical Resistance to Damage of the Item as Integer"""
         self.rarity = rarity
+        """The Rarity Level of the Item as String"""
         self.effects = effects
+        """The Effects on the Items as Array of Objects"""
         self.usable = useable
+        """If the Item is useable(consumable) as Boolean"""
         self.equipable = equipable
+        """If the Item is equipable as Boolean"""
         self.slots = slots
+        """The Slots where the Item can be Equipped as Array of Slots"""
         self.questitem = questitem
+        """If the Item as a Questrelatet Item as Boolean"""
 
     def get(self, thing: str, *args):  # pylint: disable=W0613
         """compatibility function for questify"""
         return self.name
+
+    def getDamage(self):
+        """Return Damage Dict for Item in Format
+        {
+            "AD":ADDamage,
+            "AP":APDamage
+        }
+        Ease of Access:
+            AD = Item.getDamage().get('AD')
+            AP = Item.getDamage().get('AP')
+        """
+        ADroll_result = 0
+        ADnum_dice = int(self.ad.split("w")[0])
+        ADBaseDamage = int(self.ad.split("+")[1])
+        ADdice = int(self.ad.split("w")[1].split("+")[0])
+
+        AProll_result = 0
+        APnum_dice = int(self.ap.split("w")[0])
+        APBaseDamage = int(self.ap.split("+")[1])
+        APdice = int(self.ap.split("w")[1].split("+")[0])
+
+        Pr.dbg(f"Rolling: {self.ad} for AD")
+        for _ in range(ADnum_dice):
+            ADroll = random.randint(1, ADdice)
+            Pr.dbg(f"Rolled: {ADroll}", -1)
+            ADroll_result += ADroll
+        ADdmg = ADBaseDamage + ADroll_result
+        Pr.dbg(f"Final Rollresult for AD: {ADdmg}")
+
+        Pr.dbg(f"Rolling: {self.ap} for AP")
+        for _ in range(APnum_dice):
+            AProll = random.randint(1, APdice)
+            Pr.dbg(f"Rolled: {AProll}", -1)
+            AProll_result += AProll
+        APdmg = APBaseDamage + AProll_result
+        Pr.dbg(f"Final Rollresult for AP: {APdmg}")
+
+        return {"AD": ADdmg, "AP": APdmg}
 
     @staticmethod
     def from_json(json_dct, iname):

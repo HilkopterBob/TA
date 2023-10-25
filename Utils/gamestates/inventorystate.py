@@ -37,11 +37,15 @@ def inventorystate(Player):
                             choices=["ja", "nein"],
                         ).unsafe_ask()
                         if action == "ja":
-                            pr.Pr.dbg(f"Player Slots: {Player.slots}", 0)
-                            pr.Pr.dbg(f"Player inv: {Player.inv}", 0)
-                            Player.equip_item(choosen_item)
-                            pr.Pr.dbg(f"Player Slots: {Player.slots}", 0)
-                            pr.Pr.dbg(f"Player inv: {Player.inv}", 0)
+                            if len(item.slots) > 1:
+                                eaction = questionary.select(
+                                    f"Wo möchtest du {choosen_item} ausrüsten?",
+                                    choices=item.slots,
+                                ).unsafe_ask()
+                                Player.equip_item(choosen_item, eaction)
+                            else:
+                                Player.equip_item(choosen_item)
+                            pr.Pr.dbg(f"Player Slots: {Player.slots}", -1)
                         else:
                             break
             except Exception as e:
@@ -53,6 +57,7 @@ def inventorystate(Player):
         tools = []
         potions = []
         misc = []
+        armor = []
         for item in Player.inv:
             if item.itype == "weapon":
                 weapons.append(item.name)
@@ -62,15 +67,20 @@ def inventorystate(Player):
                 potions.append(item.name)
             if item.itype == "misc":
                 misc.append(item.name)
+            if item.itype == "armor":
+                armor.append(item.name)
+
         weapons.extend(default_choice_items)
         tools.extend(default_choice_items)
         potions.extend(default_choice_items)
         misc.extend(default_choice_items)
+        armor.extend(default_choice_items)
 
         inventory_space = questionary.select(
             "Choose 1Type:",
             choices=[
                 "Weapons",
+                "Armor",
                 "Tools",
                 "Potions",
                 "Misc",
@@ -90,6 +100,19 @@ def inventorystate(Player):
                 else:
                     choosen_item = questionary.select(
                         """Du hast momentan keine Waffen im Inventar.
+                    Hast du sie vielleicht grade ausgerüstet?""",
+                        choices=["zurück"],
+                    ).unsafe_ask()
+            case "Armor":
+                if len(armor) != 0:
+                    choosen_item = questionary.select(
+                        "Armor", choices=armor
+                    ).unsafe_ask()
+                    if choosen_item != "zurück":
+                        item_inv_helper(Player, choosen_item)
+                else:
+                    choosen_item = questionary.select(
+                        """Du hast momentan keine Ausrüstung im Inventar.
                     Hast du sie vielleicht grade ausgerüstet?""",
                         choices=["zurück"],
                     ).unsafe_ask()
@@ -141,11 +164,7 @@ def inventorystate(Player):
                         ).unsafe_ask()
                         match choosen_choice:
                             case "ablegen":
-                                pr.Pr.dbg(f"Player Current Equip: {Player.slots}", 3)
-                                pr.Pr.dbg(f"Player inv: {Player.inv}", 3)
                                 Player.unequip_item(choosen_item)
-                                pr.Pr.dbg(f"Player New Equip: {Player.slots}", 3)
-                                pr.Pr.dbg(f"Player inv: {Player.inv}", 3)
                             case "zurück":
                                 pass
                             case _:

@@ -2,10 +2,10 @@
   "$schema": "../../../.github/workflows/itemschema.json",
   "Anderthalbhaender": {
     "type": "weapon",
-    "description": "Ein einfaches Schwert",
+    "description": "",
     "ad": "2w6+0",
     "ap": "0w0+0",
-    "hp": 5,
+    "hp": 0,
     "ar": 0,
     "mr": 0,
     "effects": [],

@@ -50,6 +50,9 @@ class Inp:
             "changegamestate": "wechselt den Gamestate",
             "changehealth": "ändert die Lebenzzahl des Spielers [+/-]",
             "kill": "setzt die Lebenszahl des Spielers auf 0",
+            "combat": "versetzt den Player in den Combatstate",
+            "getdamage": "Würfelt den Schadenswert des aktuellen Items",
+            "takedamage": "Simuliert einen Angriff gegen sich selbst mit der Primärwaffe",
         }
 
         min_len = 0
@@ -145,6 +148,12 @@ class Inp:
                         )
                         return 34
 
+                    case "combat":
+                        player.actionstack.insert(  # pylint: disable=E1101
+                            0, ["change_gamestate", ["combat"]]
+                        )
+                        return 34
+
                     case "save":
                         print(
                             Center.XCenter(
@@ -169,6 +178,30 @@ class Inp:
                         sleep(2)
                         return 34
 
+                    case "getdamage":
+                        damage = 0
+                        for i in range(7, 10):
+                            try:
+                                if (
+                                    player.slots[i].itype  # pylint: disable=E1101
+                                    != "weapon"
+                                ):
+                                    Pr.dbg(f"There is no Weapon Item in Slot {i}", 1)
+                                else:
+                                    damage = player.slots[  # pylint: disable=E1101
+                                        i
+                                    ].getDamage()
+                                    print(damage)
+                            except Exception:
+                                Pr.dbg(f"There is no Valid Item in Slot {i}", 1)
+                        return 34
+
+                    case "takedamage":
+                        player.take_damage(  # pylint: disable=E1101
+                            player.slots[8].getDamage()  # pylint: disable=E1101
+                        )
+                        return 34
+
                     case _:
                         return 34
 
@@ -179,6 +212,6 @@ class Inp:
         except ValueError as e:
             Pr.a(f"Fehler bei Eingabe: {e}")
             return 34
-        except Exception as e:
-            Pr.a(f"Unbekannter Fehler beim Input: {e}")
-            return 34
+        # except Exception as e:
+        #   Pr.a(f"Unbekannter Fehler beim Input: {e}")
+        #  return 34

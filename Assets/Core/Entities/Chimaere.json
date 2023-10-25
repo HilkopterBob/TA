@@ -1,0 +1,27 @@
+{
+  "$schema": "../../../.github/workflows/entitieschema.json",
+  "Chimaere": {
+    "name": "Chimäre",
+    "hp": 110,
+    "wealth": 0,
+    "inv": [],
+    "xp": 0,
+    "ptype": [5],
+    "geffects": [],
+    "beffects": [],
+    "eeffects": [],
+    "location": "",
+    "level": 0,
+    "allowdamage": true,
+    "slots": [],
+    "attributes": {
+      "str": 9,
+      "dex": 8,
+      "int": 6,
+      "ini": 8,
+      "chr": 2
+    },
+    "loottable": "Trial",
+    "ai": "Trial"
+  }
+}

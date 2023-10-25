@@ -15,6 +15,17 @@ class Pr:
     """
 
     # ===== Color Definitions ===== #
+    def purple(text):
+        """Prints Green Text
+
+        Args:
+            text (String): Text to be Printed
+
+        Returns:
+            Print: String
+        """
+        return print(Colorate.Color(Colors.purple, f"{text}", True))
+
     def green(text):
         """Prints Green Text
 
@@ -144,13 +155,14 @@ class Pr:
             Prints Debug Information into Console
         Args:
             text (str): Text to be Displayed. Defaults to "".
-            errlvl (int): Errorlevel 0=Inf, 1=Warn, 2=Err, 3=Highlight. Defaults to 0.
+            errlvl (int): Errorlevel -1=Dbg, 0=Inf, 1=Warn, 2=Err, 3=Highlight. Defaults to 0.
         """
 
         module = inspect.currentframe().f_back.f_globals["__name__"]
         function = inspect.stack()[1].function
         line_number = inspect.stack()[1].lineno
 
+        stack_1 = f"[{line_number}] DBG - {module} - {function}: "
         stack0 = f"[{line_number}] INFO - {module} - {function}: "
         stack1 = f"[{line_number}] WARN - {module} - {function}: "
         stack2 = f"[{line_number}] ERR - {module} - {function}: "
@@ -159,6 +171,14 @@ class Pr:
         timestamp = datetime.now().strftime("%H:%M:%S")
 
         match errlvl:
+            case -1:  # Debug
+                logstr = f"{stack_1}{message}"
+                if dbg_level >= 3:
+                    if dbg:
+                        print(
+                            f'{info("")} {good("")} \
+                                    {str(purple(stack_1))} {message}'
+                        )
             case 0:  # Informational
                 logstr = f"{stack0}{message}"
                 if dbg_level >= 2:

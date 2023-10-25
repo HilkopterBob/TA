@@ -1,0 +1,27 @@
+{
+  "$schema": "../../../.github/workflows/entitieschema.json",
+  "Daemon": {
+    "name": "Dämon",
+    "hp": 200,
+    "wealth": 0,
+    "inv": [],
+    "xp": 0,
+    "ptype": [13, 16],
+    "geffects": [],
+    "beffects": [],
+    "eeffects": [],
+    "location": "",
+    "level": 0,
+    "allowdamage": true,
+    "slots": [],
+    "attributes": {
+      "str": 10,
+      "dex": 8,
+      "int": 6,
+      "ini": 6,
+      "chr": 6
+    },
+    "loottable": "Trial",
+    "ai": "Trial"
+  }
+}

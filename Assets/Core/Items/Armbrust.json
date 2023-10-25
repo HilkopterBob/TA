@@ -1,0 +1,20 @@
+{
+    "$schema": "../../../.github/workflows/itemschema.json",
+    "Armbrust": {
+        "type": "weapon",
+        "description": "",
+        "ad": "2w6+4",
+        "ap": "0w0+0",
+        "hp": 0,
+        "ar": 0,
+        "mr": 0,
+        "effects": [],
+        "useable": false,
+        "equipable": true,
+        "slots": [
+            "ranged"
+        ],
+        "questitem": false,
+        "rarity": "uncommon"
+    }
+}

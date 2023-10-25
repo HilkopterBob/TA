@@ -1,0 +1,27 @@
+{
+  "$schema": "../../../.github/workflows/entitieschema.json",
+  "Zyklop": {
+    "name": "Zyklop",
+    "hp": 110,
+    "wealth": 0,
+    "inv": [],
+    "xp": 0,
+    "ptype": [0],
+    "geffects": [],
+    "beffects": [],
+    "eeffects": [],
+    "location": "",
+    "level": 0,
+    "allowdamage": true,
+    "slots": [],
+    "attributes": {
+      "str": 12,
+      "dex": 5,
+      "int": 4,
+      "ini": 3,
+      "chr": 1
+    },
+    "loottable": "Trial",
+    "ai": "Trial"
+  }
+}

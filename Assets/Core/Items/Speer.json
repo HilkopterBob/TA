@@ -1,0 +1,20 @@
+{
+    "$schema": "../../../.github/workflows/itemschema.json",
+    "Speer": {
+        "type": "weapon",
+        "description": "",
+        "ad": "1w10+5",
+        "ap": "0w0+0",
+        "hp": 0,
+        "ar": 0,
+        "mr": 0,
+        "effects": [],
+        "useable": false,
+        "equipable": true,
+        "slots": [
+            "melee"
+        ],
+        "questitem": false,
+        "rarity": "common"
+    }
+}

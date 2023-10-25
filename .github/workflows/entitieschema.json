@@ -26,7 +26,7 @@
           "type": "integer",
           "description": "Die Lebenspunkte der Entität",
           "minimum": 0,
-          "maximum": 100
+          "maximum": 200
         },
         "wealth": {
           "type": "integer",
@@ -45,8 +45,8 @@
           "maximum": 100
         },
         "ptype": {
-          "type": "integer",
-          "description": "Der Typ der Entität (Friendly/Harmfull)"
+          "type": "array",
+          "description": "Der Typ der Entität"
         },
         "geffects": {
           "type": "array",
@@ -75,6 +75,36 @@
         "slots": {
           "type": "array",
           "description": "Array Containing Equipped Items"
+        },
+        "attributes": {
+          "type": "object",
+          "description": "Contains all Entity Attributes",
+          "properties": {
+            "str": {
+              "type": "integer",
+              "description": "The strength of an Entity"
+            },
+            "dex": {
+              "type": "integer",
+              "description": "The dexterity of an Entity"
+            },
+            "int": {
+              "type": "integer",
+              "description": "The intelligence of an Entity"
+            },
+            "ini": {
+              "type": "integer",
+              "description": "The initiative of an Entity"
+            },
+            "chr": {
+              "type": "integer",
+              "description": "The charisma of an Entity"
+            }
+          }
+        },
+        "loottable": {
+          "type": "string",
+          "description": "The Loottable which should be used for this Entity"
         }
       },
       "required": [
@@ -90,7 +120,9 @@
         "location",
         "level",
         "allowdamage",
-        "slots"
+        "slots",
+        "attributes",
+        "loottable"
       ]
     }
   }

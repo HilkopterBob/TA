@@ -5,7 +5,8 @@ Entities Module which holds 2 Classes
 """
 import json
 from Level import Level
-from Utils import Pr, Inp
+from Utils import Pr, Inp, loot
+from config import aitablepath
 
 
 class Entity:
@@ -15,6 +16,28 @@ class Entity:
     from_json : Creates Entities from JSON
     """
 
+    __slots__ = (
+        "name",
+        "hp",
+        "wealth",
+        "xp",
+        "inv",
+        "ptype",
+        "geffects",
+        "beffects",
+        "eeffects",
+        "effects",
+        "location",
+        "level",
+        "allowdamage",
+        "actionstack",
+        "slots",
+        "attributes",
+        "spd",
+        "loottable",
+        "ai",
+    )
+
     def __init__(
         self,
         name="Blanko",
@@ -22,14 +45,18 @@ class Entity:
         wealth=100,
         xp=0,
         inv=None,
-        ptype="",
+        ptype=None,
         geffects=None,
         beffects=None,
         eeffects=None,
         location="Nirvana",
         level=1,
-        slots=None,
         allowdamage=True,
+        slots=None,
+        attributes=None,
+        loottable=None,
+        ai=None,
+        spd=0,
     ):
         if inv is None:
             inv = []
@@ -41,27 +68,53 @@ class Entity:
             eeffects = []
         if slots is None:
             slots = []
+        if attributes is None:
+            attributes = {}
+        if ptype is None:
+            ptype = []
+        if loottable is None:
+            loottable = {}
+        if ai is None:
+            ai = ""
 
         self.location = location
+        """Entity Location as Level Object"""
         self.name = name
+        """Entity Name as String"""
         self.hp = health
+        """Entity Health Points as Integer"""
         self.wealth = wealth
+        """Entity Wealth Points as Integer"""
         self.level = level
+        """Entity Level as Integer"""
         self.xp = xp
+        """Entity Experience Points as Integer"""
         self.inv = inv
+        """Entity Inventory as Array"""
         self.ptype = ptype
+        """Entity Type as String [Types= "good","bad","neutral"]"""
         self.geffects = geffects
+        """List of positive Effects for Entity as Array of Objects"""
         self.beffects = beffects
+        """List of negative Effects for Entity as Array of Objects"""
         self.eeffects = eeffects
+        """List of evil Effects for Entity (Mainly Boss Effects) as Array of Objects"""
         self.effects = [[self.geffects], [self.beffects], [self.eeffects]]
+        """Entities list of effects to be applied as Array of Arrays Containing [gEffects, bEffects, eEffects]"""  # pylint:disable=C0301
         self.actionstack = []
-        self.slots = (
-            slots  # ["Head_slot", "Torso_slot", "Underwear", "Left_arm", "Right_arm",
-        )
-        # "Left_leg", "Right_leg", "Gloves_slot",
-        # "Meele Weapon", "Ranged Weapon",
-        # "Quick_draw potion"]
+        """Current Queue of actions for entity as Array"""
+        self.slots = slots
+        """Entity Slots ["Head_slot", "Torso_slot", "Underwear", "Left_arm", "Right_arm","Left_leg", "Right_leg", "Gloves_slot","Meele Weapon", "Ranged Weapon","Quick_draw potion"]"""  # pylint:disable=C0301
         self.allowdamage = allowdamage
+        """Entity allowDamage Flag as Boolean"""
+        self.attributes = attributes
+        """Attributes of Entity"""
+        self.spd = spd
+        """The Speed of the Entity in Combat, gets Calculated from INI"""
+        self.loottable = loottable
+        """The loottable attached to this Entity"""
+        self.ai = self.get_ai(ai)
+        """The used AI Parameters for this Entity"""
 
     @staticmethod
     def from_json(json_dct):
@@ -73,6 +126,8 @@ class Entity:
         Returns:
             Entity: Entity
         """
+        _loottable = loot.getLootTable(json_dct["loottable"])
+
         return Entity(
             json_dct["name"],
             json_dct["hp"],
@@ -85,7 +140,34 @@ class Entity:
             json_dct["eeffects"],
             json_dct["location"],
             json_dct["level"],
+            json_dct["allowdamage"],
+            json_dct["slots"],
+            json_dct["attributes"],
+            _loottable,
+            json_dct["ai"],
         )
+
+    def get_ai(self, table):
+        """Returns Content of Loottable given by Name
+
+        Args:
+            name (String): Name of the Loottable that should be used
+
+        Returns:
+            Dict: Loottable | None if Error
+        """
+        if table is None:
+            return None
+        if table == "":
+            return None
+
+        _json_file = aitablepath + "/" + table + ".json"
+
+        Pr.dbg(f"Loading AI Params {_json_file}", -1)
+
+        with open(_json_file, encoding="UTF-8") as json_data:
+            data = json.load(json_data)
+        return data
 
     def set_name(self):
         """
@@ -111,8 +193,8 @@ class Entity:
         try:
             self.hp += value
             if self.hp <= 0:
-                if self.allowdamage: #  pylint: disable=R1705
-                    Pr.dbg("Entity {self} has 0 or less Health")
+                if self.allowdamage:  #  pylint: disable=R1705
+                    Pr.dbg(f"Entity {self.name} has 0 or less Health")
                     return True
                 else:
                     self.hp = 1
@@ -125,6 +207,62 @@ class Entity:
             return False
         except:
             return False
+
+    def act(self):
+        """Function for Entity Intelligence"""
+        Pr.dbg(f"Entity {self.name} is acting here!")
+
+    def take_damage(self, value=None):
+        """Adds Damage to the Entity and Calculates health loss based on Armor and Resistance
+
+        Args:
+            value (dict): Damage that is Inflicted. Defaults to {"AD":0,"AP":0}.
+
+        =return= Returns Damage taken as Dict of AD and AP;
+                 If Entity dies from Damage this function returns TRUE
+        """
+        if value is None:
+            value = {"AD": 0, "AP": 0}
+        Pr.dbg(f"{self.name} is about to take {value} damage")
+        resistance = {}
+        ar = 0
+        mr = 0
+        for i in range(0, 8):
+            try:
+                if self.slots[i].itype != "armor":  # pylint: disable=E1101
+                    Pr.dbg(f"There is no Armor Item in Slot {i}")
+                else:
+                    ar += self.slots[i].ar  # pylint: disable=E1101
+                    mr += self.slots[i].mr  # pylint: disable=E1101
+                    resistance = {"AR": ar, "MR": mr}
+            except Exception:
+                Pr.dbg(f"There is no Valid Item in Slot {i}", 1)
+
+        if not resistance:
+            resistance = {"AR": 0, "MR": 0}
+
+        attacklist = list(value.values())
+        resistancelist = list(resistance.values())
+        Pr.dbg(f"{self.name} has {resistance} defence")
+        _attacklist = []
+        for c, v in enumerate(attacklist):
+            if v != 0:
+                _attack = v * (v / (v + resistancelist[c]))
+            else:
+                _attack = v
+            _attacklist.append(round(_attack, 1))
+        damage = dict(zip(value.keys(), _attacklist))
+        Pr.dbg(f"{self.name} taking {damage} damage")
+        for i in _attacklist:
+            _ret = self.change_health(i * -1)
+            if _ret:
+                # TODO: Add Lootroll
+                Pr.dbg(f"{self.name} is destroyed!")
+                Pr.dbg(
+                    f"Entity Lootroll for 1 Item: {loot.roll_loot(self.loottable,1)}"
+                )
+                return _ret
+        return damage
 
     def add_item(self, item):
         """
@@ -284,7 +422,7 @@ class Entity:
                 except:
                     return False
             case _:
-                print("change_stat: WILDCARD AUSGELÖST! debuginfo:")
+                Pr.dbg("change_stat: WILDCARD AUSGELÖST! debuginfo:", 2)
                 print(vars(self))
                 print(vars(effect))
                 return False
@@ -415,12 +553,16 @@ class Entity:
         if consumable.itype == "Food":
             self.change_health(consumable.dmg)
 
-    def equip_item(self, item_name):
+    def equip_item(self, item_name, slot=""):
         """enables equiping of eqipment"""
         for item in self.inv:
             if item.name == item_name:
                 cur_item = item
-        match cur_item.slots[0]:
+        if slot == "":
+            slot = cur_item.slots[0]
+
+        Pr.dbg(f"Equipping {item_name} in {slot}", -1)
+        match slot:
             case "head":
                 if self.slots[0]:
                     if self.slots[0] != "placeholder":
@@ -543,7 +685,6 @@ class EntityInit:
         """
         with open(json_file, encoding="UTF-8") as json_data:
             data = json.load(json_data)
-            Pr.dbg(data)
 
         for ename in data.keys():
             if ename == name:
