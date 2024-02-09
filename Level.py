@@ -252,12 +252,12 @@ class Level:
         return
 
     def onLevelCreate(self):
-        Logger.log(f"Created Instance of Level: {self}({self.name})", 2)
+        Logger.log(f"Created Instance of Level: {self}({self.name})", 0)
         return
 
     def onEntityJoin(self, entity):
         Logger.log(
-            f"Entity:{entity}({entity.name}) joined Level: {self}({self.name})", 2
+            f"Entity:{entity}({entity.name}) joined Level: {self}({self.name})", 1
         )
         if entity.isPlayer:
             if len(self.entitylist) > 1:

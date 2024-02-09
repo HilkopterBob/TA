@@ -3,6 +3,7 @@ Entities Module which holds 2 Classes
     Entity()
     Entityinit()
 """
+
 import json
 import random
 from Level import Level
@@ -314,20 +315,20 @@ class Entity:
         if self.isPlayer:
             Pr.n(f"Du wirst von {inflicter.name} angegriffen.")
 
-        Logger.log(f"{self.name} is about to take {value} damage from {inflicter}")
+        Logger.log(f"{self.name} is about to take {value} damage from {inflicter}", 1)
 
         # ToDo: Fix order in which damage is inflicted / actionstack is worked
 
         for i in range(0, 8):
             try:
                 if self.slots[i].itype != "armor":  # pylint: disable=E1101
-                    Logger.log(f"There is no Armor Item in Slot {i}")
+                    Logger.log(f"There is no Armor Item in Slot {i}", 0)
                 else:
                     ar += self.slots[i].ar  # pylint: disable=E1101
                     mr += self.slots[i].mr  # pylint: disable=E1101
                     resistance = {"AR": ar, "MR": mr}
             except Exception:
-                Logger.log(f"There is no Valid Item in Slot {i}", 1)
+                Logger.log(f"There is no Valid Item in Slot {i}", 0)
 
         if not resistance:
             resistance = {"AR": 0, "MR": 0}

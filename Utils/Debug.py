@@ -1,12 +1,12 @@
 """Debug Module
 """
+
 import sys
 from pystyle import Colors, Colorate
 from Utils import Pr, Inp
 
 
 class Debug:
-
     """
     Utility class for custom debuging
     """
@@ -20,7 +20,9 @@ class Debug:
 
         =return= Returns DBG Print
         """
-        return Pr.dbg(f"Loaded {definition}: {Debug.getNames(listOfObjects)}", -1)
+        from Utils.logger import Logger  # pylint: disable=C0415
+
+        return Logger.log(f"Loaded {definition}: {Debug.getNames(listOfObjects)}", -1)
 
     def getNames(listOfObjects=None):
         """Returns a List of Objectnames from list of Objects
