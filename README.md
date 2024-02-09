@@ -27,7 +27,7 @@ Open the Docs.md
     - Trading
     - loot
     - bosskampf
-
+    - Wettbüro (Entity Teamfight)
 
 
 ### Support

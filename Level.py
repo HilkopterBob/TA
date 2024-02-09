@@ -4,7 +4,7 @@ Levels Module which holds 2 Classes
     Levelinit()
 """
 import json
-from Utils import Pr
+from Utils import Pr, Logger
 
 
 class Level:
@@ -92,10 +92,10 @@ class Level:
         """
         match ctype:
             case "+":
-                Pr.dbg(
+                Logger.log(
                     f"Entitylist of Level {Level.levelname(self)}: {self.entitylist}"
                 )
-                Pr.dbg(f"Trying to add {entity.name} to {Level.levelname(self)}")
+                Logger.log(f"Trying to add {entity.name} to {Level.levelname(self)}")
                 try:
                     for e in self.entitylist:
                         if e.name == entity.name:
@@ -106,34 +106,38 @@ class Level:
                                             and thus cannot be added."
                             )
                     self.entitylist.append(entity)
-                    Pr.dbg(f"{entity.name} got added to Level {Level.levelname(self)}")
-                    Pr.dbg(
+                    Logger.log(
+                        f"{entity.name} got added to Level {Level.levelname(self)}"
+                    )
+                    Logger.log(
                         f"Entitylist of Level {Level.levelname(self)}: {self.entitylist}"
                     )
                     return True
                 except Exception as e:
-                    Pr.dbg(e, 1)
+                    Logger.log(e, 1)
                     return False
             case "-":
-                Pr.dbg(
+                Logger.log(
                     f"Entitylist of Level {Level.levelname(self)}: {self.entitylist}"
                 )
-                Pr.dbg(f"Trying to remove {entity.name} from {Level.levelname(self)}")
+                Logger.log(
+                    f"Trying to remove {entity.name} from {Level.levelname(self)}"
+                )
                 try:
                     self.entitylist = list(
                         filter(lambda e: e.name != entity.name, self.entitylist)
                     )
-                    Pr.dbg(
+                    Logger.log(
                         f"{entity.name} got removed from Level {Level.levelname(self)}"
                     )
-                    Pr.dbg(
+                    Logger.log(
                         f"Entitylist of Level {Level.levelname(self)}: {self.entitylist}"
                     )
                     return True
                 except:
                     return False
             case _:
-                return Pr.dbg("got no right ctype. choose between + and -", 1)
+                return Logger.log("got no right ctype. choose between + and -", 1)
 
     def printDesc(self):
         """Prints Level Description to User"""
@@ -193,7 +197,7 @@ class Level:
         try:
             return lobject.name
         except Exception as e:
-            Pr.dbg(f"ERR: {e}", 2)
+            Logger.log(f"ERR: {e}", 2)
             return None
 
 
@@ -219,7 +223,7 @@ class LevelInit:
             _curLevels = []
         curLevels = _curLevels
 
-        Pr.dbg(f"Loading Levels from: {json_file}")
+        Logger.log(f"Loading Levels from: {json_file}")
 
         if json_file:
             if not isinstance(json_file, dict):
@@ -254,5 +258,5 @@ class LevelInit:
             for lname in data.keys():
                 if name == lname:
                     return Level.from_json(data[lname], lname)
-            Pr.dbg(f"Levelname: {Pr.cyan(name)} not found!", 1)
+            Logger.log(f"Levelname: {Pr.cyan(name)} not found!", 1)
         return False

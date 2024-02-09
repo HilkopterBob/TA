@@ -9,7 +9,7 @@ from Entities import Entity
 from Level import Level
 from Effect import Effect
 from Items import gitem
-from Utils import Pr, Debug, Inp
+from Utils import Pr, Inp, Logger
 from Utils.gamestates.inventorystate import inventorystate
 from Utils.gamestates.combatstate import combatstate
 from actionparser import Actionparser
@@ -21,13 +21,13 @@ def interact_with_level(player, level, level_list):
     ##### ##### prints out choices and gets user input if choices got printed ##### #####
     printed = False
     i = 1
-    Pr.dbg(f"Player: {player.name}, in Level: {level.name}")
+    Logger.log(f"Player: {player.name}, in Level: {level.name}")
     if level.name == "Menu":
         Pr.n("\n" * 5)
         Pr.headline(level.descr)
         Pr.n("\n" * 2)
     else:
-        Pr.dbg("HUD")
+        Logger.log("HUD")
         hud(player)
         # pr.n(level.descr)
 
@@ -40,21 +40,21 @@ def interact_with_level(player, level, level_list):
         print(f"{availableChoices.index(choice)+1}. {choice}")
     printed = True
 
-    Pr.dbg(f"Current Choices: {level.choices}", -1)
+    Logger.log(f"Current Choices: {level.choices}", -1)
 
     if printed:
         action = int(Inp.inp(mPlayer)) - 1  # pylint: disable=E0601
         if action == 33:
-            Pr.dbg("Break!")
+            Logger.log("Break!")
             return
     ##### ##### Reads triggers and action calls in level.text[dicts] ##### #####
-    # Pr.dbg("*"*20
+    # Logger.log("*"*20
     # pr.n(level.text[action][0])
-    # Pr.dbg("*"*20)
+    # Logger.log("*"*20)
     ####Is doing nothing ?
 
     # Selecting index from available Actions
-    Pr.dbg(f"Available Actions: {level.getAvailableChoices()}")
+    Logger.log(f"Available Actions: {level.getAvailableChoices()}", -1)
 
     # Sehr falsch, Index Choice 2 wird text 1 zugeordnet
     availableChoicesDict = dict(zip(availableChoices, level.text))
@@ -91,24 +91,25 @@ def interact_with_level(player, level, level_list):
                                         ],
                                     ]
                             else:
-                                Pr.dbg(f"No Action in Keys: {_currentAction}", 1)
+                                Logger.log(f"No Action in Keys: {_currentAction}", 1)
                                 # Do Trigger Stuff
                                 # Letzter eintrag aus actions = immer Trigger.
                                 # Supported nur einen Trigger!!!
                                 touched_trigger = actions[-1]
                                 level_triggers_list = level.triggers
-                                Pr.dbg(level_triggers_list, 2)
+                                Logger.log(level_triggers_list, 2)
                                 for index, l_trigger in enumerate(level_triggers_list):
                                     if l_trigger.keys() == touched_trigger.keys():
                                         level_triggers_list[index] = touched_trigger
-                            Pr.dbg(
-                                f"Add {actiontoadd} to Actionstack for entity: {mPlayer}"
+                            Logger.log(
+                                f"Add {actiontoadd} to Actionstack for entity: {mPlayer}",
+                                -1,
                             )
                             mPlayer.actionstack.append(actiontoadd)
                         except Exception as e:
-                            Pr.dbg(f"ERR: {e}", 2)
+                            Logger.log(f"ERR: {e}", 2)
                     except Exception:
-                        Pr.dbg(f"CurrentAction: {_currentAction}", 2)
+                        Logger.log(f"CurrentAction: {_currentAction}", 2)
     else:
         Pr.n(
             f"Bitte gebe eine Zahl kleiner gleich {len(availableChoicesDict.keys())} ein!"
@@ -149,48 +150,54 @@ def gameloop(player, level_list=None):
     while True:
         for level in level_list:
             if str(level.name) == str(Level.levelname(player.location)):
-                Pr.dbg(
+                Logger.log(
                     f"Player location ({Level.levelname(player.location)}) "
                     f"is equal to Level ({level.name}), "
                 )
                 if not player in level.entitylist:
-                    Pr.dbg(
+                    Logger.log(
                         f"{player.name} not in {level.name} "
                         f"- adding {player.name} to {level.name} entitylist",
                         1,
                     )
                     level.change_entity_list("+", player)
-                Pr.dbg(f"Setting CurrentLevel to Level: {Level.levelname(level)}")
+                Logger.log(f"Setting CurrentLevel to Level: {Level.levelname(level)}")
                 current_level = level
 
         # Loop through all Entities in CurrentLevel and Apply Actionstack
         if Actionparser.gamestate == "game":
             for e in current_level.entitylist:
                 for action in e.actionstack:
-                    Pr.dbg(action)
+                    Logger.log(action)
                     Actionparser.callfunction(action)
                     e.actionstack.remove(action)
 
         match Actionparser.gamestate:
             case "loading":
-                Pr.dbg(f"Gamestate is now {Actionparser.gamestate}")
+                Logger.log(f"Gamestate is now {Actionparser.gamestate}")
                 # loding steps
                 Actionparser.gamestate = "game"
             case "game":
-                Pr.dbg(f"Gamestate is now {Actionparser.gamestate}")
+                Logger.log(f"Gamestate is now {Actionparser.gamestate}")
                 interact_with_level(player, current_level, level_list)
                 Actionparser.gamestate = Actionparser.gamestate
             case "inv":
                 if Actionparser.gamestate == "game" or player.location.name == "Menu":
-                    Pr.dbg('Gamestate "inv" not available from here!', 1)
+                    Logger.log('Gamestate "inv" not available from here!', 1)
                     Pr.yellow('Gamestate "inv" kann hier nicht geöffnet werden!')
                     Actionparser.gamestate = "game"
                 else:
-                    Pr.dbg(f"Gamestate is now {Actionparser.gamestate}")
+                    Logger.log(f"Gamestate is now {Actionparser.gamestate}")
                     inventorystate(mPlayer)
                     Actionparser.gamestate = "game"
             case "combat":
-                Pr.dbg(f"{mPlayer} Entering Combatstate")
+                Logger.log(f"{mPlayer} Entering Combatstate")
+                allEntities[2].change_location(
+                    allEntities[2].location, mPlayer.location
+                )
+                allEntities[5].change_location(
+                    allEntities[5].location, mPlayer.location
+                )
                 combatstate(
                     mPlayer, [allEntities[2], allEntities[5]]  # pylint: disable=E0601
                 )
@@ -199,7 +206,7 @@ def gameloop(player, level_list=None):
                 Pr.yellow(
                     f'Der Gamestate "{Actionparser.gamestate}" ist nicht bekannt.'
                 )
-                Pr.dbg(f"Gamestate {Actionparser.gamestate} unknown", 1)
+                Logger.log(f"Gamestate {Actionparser.gamestate} unknown", 1)
                 Actionparser.gamestate = "game"
 
         player.check_level_up()
@@ -210,22 +217,24 @@ def gameloop(player, level_list=None):
         lap = lap + 1
 
         # Loop through all Entities in CurrentLevel and Apply Actionstack
-        Pr.dbg(f"Entitylist: {current_level.entitylist}", -1)
+        Logger.log(f"Entitylist: {current_level.entitylist}", -1)
         for e in current_level.entitylist:
-            Pr.dbg(f"Working Actionstack for {e.name}")
-            Pr.dbg(f"Actionstack: {e.actionstack}")
+            Logger.log(f"Working Actionstack for {e.name}", 1)
+            Logger.log(f"Actionstack: {e.actionstack}")
             # Work through actionstack of Entity and process actions
             for i in range(0, len(e.actionstack)):
-                Pr.dbg("#" * 50, -1)
-                Pr.dbg(f"Length of Actionstack: {len(e.actionstack)}", -1)
-                Pr.dbg(f"Current Actionstack: {e.actionstack}", -1)
-                Pr.dbg(f"Current Index: {i}", -1)
+                Logger.log("#" * 50, -1)
+                Logger.log(f"Length of Actionstack: {len(e.actionstack)}", -1)
+                Logger.log(f"Current Actionstack: {e.actionstack}", -1)
+                Logger.log(f"Current Index: {i}", -1)
                 cur_action = e.actionstack.pop(0)
                 Actionparser.callfunction(cur_action)
-                Pr.dbg(f"Cur_Action: {cur_action}", -1)
-                Pr.dbg(f"Length of Actionstack after Action: {len(e.actionstack)}", -1)
-                Pr.dbg(f"Current Actionstack after Action: {e.actionstack}", -1)
-                Pr.dbg("#" * 50, -1)
+                Logger.log(f"Cur_Action: {cur_action}", -1)
+                Logger.log(
+                    f"Length of Actionstack after Action: {len(e.actionstack)}", -1
+                )
+                Logger.log(f"Current Actionstack after Action: {e.actionstack}", -1)
+                Logger.log("#" * 50, -1)
 
 
 if __name__ == "__main__":
@@ -257,22 +266,8 @@ if __name__ == "__main__":
         allItems,
         location=allLevels[1],
         attributes={"str": 8, "dex": 8, "int": 8, "ini": 80, "chr": 8},
+        isPlayer=True,
     )
-    hurensohn = Entity(
-        "Hurensohn",
-        100,
-        100,
-        0,
-        [
-            gitem(
-                "Item1",
-                "weapon",
-            ),
-            gitem("item2", "misc"),
-        ],
-        location="Wiese",
-    )
-
     # Creating seperate Effects
     kopfschmerz = Effect("Kopfschmerz", "Kopfschmerzen halt.", "bad", -1, "hp")
     heilung = Effect("heilung", "Nö", "good", 5, "hp")
@@ -286,14 +281,14 @@ if __name__ == "__main__":
     mPlayer.actionstack.insert(0, ["change_gamestate", ["game"]])
 
     # List all Loaded Levels and Entities
-    Debug.objlist(allLevels, "Levels")
-    Debug.objlist(allEntities, "Entities")
-    Debug.objlist(allItems, "Items")
+    # Debug.objlist(allLevels, "Levels")
+    # Debug.objlist(allEntities, "Entities")
+    # Debug.objlist(allItems, "Items")
 
-    Pr.dbg(f"Speicherbedarf Levels: {getsize(Level())} B", 3)
-    Pr.dbg(f"Speicherbedarf Items: {getsize(gitem())} B", 3)
-    Pr.dbg(f"Speicherbedarf Entities: {getsize(Entity())} B", 3)
-    Pr.dbg(f"Speicherbedarf Effects: {getsize(Effect())} B", 3)
+    Logger.log(f"Speicherbedarf Levels: {getsize(Level())} B", 3)
+    Logger.log(f"Speicherbedarf Items: {getsize(gitem())} B", 3)
+    Logger.log(f"Speicherbedarf Entities: {getsize(Entity())} B", 3)
+    Logger.log(f"Speicherbedarf Effects: {getsize(Effect())} B", 3)
 
     # Fill Player iventory with Placeholder Items
     while len(mPlayer.slots) < 11:

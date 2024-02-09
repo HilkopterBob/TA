@@ -2,10 +2,10 @@
 """
 # pylint: disable=W,E
 import inspect
-from datetime import datetime
+from datetime import datetime, date
 from pystyle import Colors, Colorate, Box, Center, Write
 from huepy import *
-from config import dbg, log_file, dbg_level
+from config import dbg, log_file, dbg_level, logbymodule, exclude_dbg_lvl
 
 
 class Pr:
@@ -157,6 +157,9 @@ class Pr:
             text (str): Text to be Displayed. Defaults to "".
             errlvl (int): Errorlevel -1=Dbg, 0=Inf, 1=Warn, 2=Err, 3=Highlight. Defaults to 0.
         """
+        # TODO: Rewrite Logging Module to have LOG Object which can be altered and gets Printed
+
+        today = date.today().strftime("%d-%m-%Y")
 
         module = inspect.currentframe().f_back.f_globals["__name__"]
         function = inspect.stack()[1].function
@@ -173,6 +176,8 @@ class Pr:
         match errlvl:
             case -1:  # Debug
                 logstr = f"{stack_1}{message}"
+                if exclude_dbg_lvl:
+                    logstr = None
                 if dbg_level >= 3:
                     if dbg:
                         print(
@@ -216,7 +221,15 @@ class Pr:
                         )
 
         with open(log_file, "a") as log:
-            log.write(f"{timestamp} - {logstr}\n")
+            if logstr:
+                log.write(f"{timestamp} - {logstr}\n")
+
+        if logbymodule:
+            _log_file = log_file.split("/")
+            _log_file.insert(1, f"/{module} - ")
+            _log_file = "".join(_log_file)
+            with open(_log_file, "a") as log:
+                log.write(f"{timestamp} - {logstr}\n")
 
     def headline(text=""):
         """Prints Headlines
@@ -228,27 +241,3 @@ class Pr:
             Print: String
         """
         print(Center.XCenter(Box.Lines(text)))
-
-    def showcase():
-        """Prints all the print functions
-
-        Args:
-            text (String): Text to be Printed
-
-        Returns:
-            Print: String
-        """
-        Pr.n("Das ist die standard Printanweisung")
-        Pr.a("Allerts!")
-        Pr.b("Bad shit")
-        Pr.i("Information")
-        Pr.g("Good")
-        Pr.q("Quest(ion)")
-        Pr.dbg("InfoLevel Debug")
-        Pr.dbg("WarningLevel Debug", 1)
-        Pr.dbg("ErrorLevel Debug", 2)
-        Pr.green("Green Text")
-        Pr.yellow("Yellow Text")
-        Pr.red("Red Text")
-        Pr.blue("Blue Text")
-        Pr.cyan("Cyan Text")

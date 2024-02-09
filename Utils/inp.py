@@ -6,6 +6,7 @@ from os import listdir
 from os import path
 from pystyle import Colors, Write, Center, Box
 from Utils.pr import Pr
+from Utils.logger import Logger
 from config import dbg, levels_folder
 
 # from Utils import Debug as Dbg
@@ -142,7 +143,7 @@ class Inp:
 
                     case "inv":
                         # TODO: Pylint fix
-                        Pr.dbg(f"{player}")
+                        Logger.log(f"{player}", -1)
                         player.actionstack.insert(  # pylint: disable=E1101
                             0, ["change_gamestate", ["inv"]]
                         )
@@ -186,14 +187,16 @@ class Inp:
                                     player.slots[i].itype  # pylint: disable=E1101
                                     != "weapon"
                                 ):
-                                    Pr.dbg(f"There is no Weapon Item in Slot {i}", 1)
+                                    Logger.log(
+                                        f"There is no Weapon Item in Slot {i}", 1
+                                    )
                                 else:
                                     damage = player.slots[  # pylint: disable=E1101
                                         i
                                     ].getDamage()
                                     print(damage)
                             except Exception:
-                                Pr.dbg(f"There is no Valid Item in Slot {i}", 1)
+                                Logger.log(f"There is no Valid Item in Slot {i}", 1)
                         return 34
 
                     case "takedamage":
