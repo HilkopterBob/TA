@@ -1,5 +1,6 @@
 """Defines Input Method for User - exact copy of Inputparser-Module
 """
+
 import re
 from time import sleep
 from os import listdir

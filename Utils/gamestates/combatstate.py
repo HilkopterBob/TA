@@ -1,5 +1,6 @@
 """Combatstate
 """
+
 import questionary
 from Utils import Pr, dice, Debug, Logger
 from actionparser import Actionparser
@@ -13,11 +14,16 @@ def combatstate(player, entities=None):
     """
     if entities is None:
         entities = []
+        Logger.log("No Entities are here to fight", 2)
+        return
     if player is None:
         Logger.log("No Player is given.", 2)
         return
 
     wants_exit = False
+
+    # Remove Player from Entitylist
+    del entities[entities.index(player)]
 
     playername = player.name
     Logger.log(f"{playername} entered Combatstate with {entities}", 1)

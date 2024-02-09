@@ -29,6 +29,7 @@
     "ltype": "friedlich",
     "descr": "Du folgst dem Weg bis zu einer Kreuzung.",
     "entitylist": [],
+    "entityspawn": { "Chimaere": 1, "Drache": 0.5 },
     "triggers": []
   }
 }

@@ -1,5 +1,6 @@
 """Util for Dice Rolling
 """
+
 import random
 import json
 from Utils import Logger
@@ -28,11 +29,11 @@ def roll_loot(loottable=None, amount=1):
     _lootdict = list(loottable.keys())
     _weights = list(loottable.values())
 
-    Logger.log(f"Getting {amount} Items from Loottable: {loottable}", 0)
+    Logger.log(f"Getting {amount} Items from Loottable: {loottable}", -1)
     _loot = random.choices(_lootdict, weights=_weights, k=amount)
     _lootret = []
     for item in _loot:
-        Logger.log(f"Loading item {item} from Assets", 1)
+        Logger.log(f"Loading item {item} from Assets", 0)
         _lootret.append(
             itemInit.load_item_by_name_from_json(f"{items_folder}\\{item}.json", item)
         )

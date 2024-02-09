@@ -2,6 +2,7 @@
 Actionparser Module which holds 1 Class
     Actionparser()
 """
+
 import sys
 from Effect import EffectInit
 from config import config

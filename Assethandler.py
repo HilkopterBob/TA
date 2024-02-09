@@ -1,5 +1,6 @@
 """Assethandler for importing needed Assets
 """
+
 import os
 import sys
 from hashlib import sha256

@@ -1,5 +1,6 @@
 """Main Module for Textadventure
 """
+
 # std imports:
 from time import sleep
 
@@ -102,8 +103,7 @@ def interact_with_level(player, level, level_list):
                                     if l_trigger.keys() == touched_trigger.keys():
                                         level_triggers_list[index] = touched_trigger
                             Logger.log(
-                                f"Add {actiontoadd} to Actionstack for entity: {mPlayer}",
-                                -1,
+                                f"Add {actiontoadd} to Actionstack for entity: {mPlayer}"
                             )
                             mPlayer.actionstack.append(actiontoadd)
                         except Exception as e:
@@ -191,16 +191,11 @@ def gameloop(player, level_list=None):
                     inventorystate(mPlayer)
                     Actionparser.gamestate = "game"
             case "combat":
+                Logger.log(f"Gamestate is now {Actionparser.gamestate}")
                 Logger.log(f"{mPlayer} Entering Combatstate")
-                allEntities[2].change_location(
-                    allEntities[2].location, mPlayer.location
-                )
-                allEntities[5].change_location(
-                    allEntities[5].location, mPlayer.location
-                )
                 combatstate(
-                    mPlayer, [allEntities[2], allEntities[5]]  # pylint: disable=E0601
-                )
+                    mPlayer, mPlayer.location.entitylist
+                )  # pylint: disable=E0601
                 Actionparser.gamestate = "game"
             case _:
                 Pr.yellow(

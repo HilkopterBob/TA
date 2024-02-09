@@ -1,5 +1,6 @@
 """Configuration for Textadventure
 """
+
 import sys
 import os.path
 from datetime import date
