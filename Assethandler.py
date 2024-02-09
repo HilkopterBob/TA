@@ -19,7 +19,7 @@ from config import (
     root_folder,
 )
 from Utils.pr import Pr
-from Utils import Debug
+from Utils import Debug, Logger
 
 
 class AssetHandler:
@@ -43,7 +43,7 @@ class AssetHandler:
         Returns:
             List: List of Paths to Files
         """
-        Pr.dbg(f"Gathering Assets from: {folder}")
+        Logger.log(f"Gathering Assets from: {folder}")
         _folder_name = folder.split("/")[2]  # pylint: disable=E1101
         st = process_time()
         _file_list = []
@@ -52,19 +52,21 @@ class AssetHandler:
             if filename.endswith(".json"):
                 _asset = os.path.join(folder, filename)
                 if AssetHandler.check_integrity(_asset):
-                    Pr.dbg(f"Found Asset: {_asset}")
+                    Logger.log(f"Found Asset: {_asset}")
                     _file_list.append(_asset)
                 else:
                     Debug.stop_game_on_exception("File Integrity Check Failed")
             else:
-                Pr.dbg(f"{os.path.join(folder, filename)} is no valid Asset File", 2)
+                Logger.log(
+                    f"{os.path.join(folder, filename)} is no valid Asset File", 2
+                )
         et = process_time()
         importtime = et - st
         if importtime > 1:
             dbglevel = 2
         else:
             dbglevel = 1
-        Pr.dbg(f"Gathering {_folder_name} took: {importtime*1000}ms", dbglevel)
+        Logger.log(f"Gathering {_folder_name} took: {importtime*1000}ms", dbglevel)
         return _file_list
 
     def importLevels():
@@ -76,11 +78,11 @@ class AssetHandler:
         _level_files = AssetHandler.getFiles(levels_folder)
 
         if not _level_files:
-            Pr.dbg(f"No Levels to import from {levels_folder}", 1)
+            Logger.log(f"No Levels to import from {levels_folder}", 1)
             return None
 
         st = process_time()
-        Pr.dbg(f"Importing Level(s) from: {_level_files}")
+        Logger.log(f"Importing Level(s) from: {_level_files}")
 
         for _level in tqdm(
             _level_files,
@@ -96,7 +98,7 @@ class AssetHandler:
             dbglevel = 2
         else:
             dbglevel = 1
-        Pr.dbg(f"Importing Levels took: {importtime*1000}ms", dbglevel)
+        Logger.log(f"Importing Levels took: {importtime*1000}ms", dbglevel)
         return None
 
     def importEntities():
@@ -109,11 +111,11 @@ class AssetHandler:
         _entity_files = AssetHandler.getFiles(entities_folder)
 
         if not _entity_files:
-            Pr.dbg(f"No Entities to import from {entities_folder}", 1)
+            Logger.log(f"No Entities to import from {entities_folder}", 1)
             return None
 
         st = process_time()
-        Pr.dbg(f"Importing Entities: {_entity_files}")
+        Logger.log(f"Importing Entities: {_entity_files}")
 
         for _entity in tqdm(
             _entity_files,
@@ -129,7 +131,7 @@ class AssetHandler:
             dbglevel = 2
         else:
             dbglevel = 1
-        Pr.dbg(f"Importing Entities took: {importtime*1000}ms", dbglevel)
+        Logger.log(f"Importing Entities took: {importtime*1000}ms", dbglevel)
         return None
 
     def importItems():
@@ -141,11 +143,11 @@ class AssetHandler:
         _items_files = AssetHandler.getFiles(items_folder)
 
         if not _items_files:
-            Pr.dbg(f"No Items to import from {items_folder}", 1)
+            Logger.log(f"No Items to import from {items_folder}", 1)
             return None
 
         st = process_time()
-        Pr.dbg(f"Importing Item(s) from: {_items_files}")
+        Logger.log(f"Importing Item(s) from: {_items_files}")
 
         for _items in tqdm(
             _items_files,
@@ -161,7 +163,7 @@ class AssetHandler:
             dbglevel = 2
         else:
             dbglevel = 1
-        Pr.dbg(f"Importing Items took: {importtime*1000}ms", dbglevel)
+        Logger.log(f"Importing Items took: {importtime*1000}ms", dbglevel)
         return None
 
     def importEffects():
@@ -173,11 +175,11 @@ class AssetHandler:
         _effects_files = AssetHandler.getFiles(effects_folder)
 
         if not _effects_files:
-            Pr.dbg(f"No Effects to import from {effects_folder}", 1)
+            Logger.log(f"No Effects to import from {effects_folder}", 1)
             return None
 
         st = process_time()
-        Pr.dbg(f"Importing Effects: {_effects_files}")
+        Logger.log(f"Importing Effects: {_effects_files}")
 
         for _effect in tqdm(
             _effects_files,
@@ -195,7 +197,7 @@ class AssetHandler:
             dbglevel = 2
         else:
             dbglevel = 1
-        Pr.dbg(f"Importing Effects took: {importtime*1000}ms", dbglevel)
+        Logger.log(f"Importing Effects took: {importtime*1000}ms", dbglevel)
         return None
 
     def check_integrity(file):
@@ -228,8 +230,8 @@ class AssetHandler:
 
         # Checks if Calculated Checksum is in Checksums File
         if checksum not in checksums:
-            Pr.dbg(f"Integrity Check Failed for File: {file}", 2)
-            Pr.dbg(f"Checksum of File {file}: {checksum}")
+            Logger.log(f"Integrity Check Failed for File: {file}", 2)
+            Logger.log(f"Checksum of File {file}: {checksum}")
             return False
         return True
 
@@ -299,19 +301,19 @@ class AssetHandler:
             _success = 0
         match _success:
             case 0:
-                Pr.dbg("File Integrity Check passed", 1)
+                Logger.log("File Integrity Check passed", 1)
             case 1:
-                Pr.dbg("Critical Error on integrity Check. Exiting Game!", 2)
+                Logger.log("Critical Error on integrity Check. Exiting Game!", 2)
                 Pr.red(
                     "File Integrity Check failed. See Logs for Errors. Exiting Game..."
                 )
                 sys.exit()
             case 2:
-                Pr.dbg("DLC Error", 2)
+                Logger.log("DLC Error", 2)
                 Pr.red("DLC Integrity Check failed. See Logs for Errors.")
                 Debug.stop_game()
             case 3:
-                Pr.dbg("MOD Error", 2)
+                Logger.log("MOD Error", 2)
                 Pr.red("MOD Integrity Check failed. See Logs for Errors.")
                 Debug.stop_game()
 

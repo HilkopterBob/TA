@@ -105,6 +105,14 @@
         "loottable": {
           "type": "string",
           "description": "The Loottable which should be used for this Entity"
+        },
+        "ai": {
+          "type": "string",
+          "description": "Path to AI File"
+        },
+        "isPlayer": {
+          "type": "boolean",
+          "description": "Is this Entity the Player"
         }
       },
       "required": [

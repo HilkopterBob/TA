@@ -6,7 +6,7 @@ import sys
 from Effect import EffectInit
 from config import config
 from Level import Level
-from Utils import Pr
+from Utils import Logger, Pr
 
 
 class Actionparser:
@@ -40,7 +40,7 @@ class Actionparser:
         Returns:
             Integer: 1 on Error, else 0
         """
-        Pr.dbg(f"Call: {attr}")
+        Logger.log(f"Call: {attr}")
 
         if attr is None:
             attr = []
@@ -54,7 +54,7 @@ class Actionparser:
         Args:
             attributes (None, optional):
         """
-        Pr.dbg("Closing game")
+        Logger.log("Closing game")
         sys.exit()
 
     def add_effect(attributes=None):
@@ -66,7 +66,7 @@ class Actionparser:
         Returns:
             Integer: 1 on Error, else 0
         """
-        Pr.dbg(f"Call: {attributes}")
+        Logger.log(f"Call: {attributes}")
 
         if attributes is None:
             attributes = []
@@ -91,14 +91,13 @@ class Actionparser:
         Returns:
             Integer: 1 on Error, else 0
         """
-        Pr.dbg(f"Call: {attributes}")
+        Logger.log(f"Call: {attributes}")
 
         if attributes is None:
             attributes = []
 
         try:
-            Pr.hello()
-            Pr.dbg(attributes)
+            Logger.log(attributes)
             _entity = attributes[0]
             _entity.let_effects_take_effect([attributes[1]])
             return 0
@@ -114,7 +113,7 @@ class Actionparser:
         Returns:
             Integer: 1 on Error, else 0
         """
-        Pr.dbg(f"Call: {attributes}")
+        Logger.log(f"Call: {attributes}")
 
         if attributes is None:
             attributes = []
@@ -122,14 +121,14 @@ class Actionparser:
             _entity = attributes[0]
             _old_level = attributes[1]
             _new_level = attributes[2]
-            Pr.dbg(
+            Logger.log(
                 f"Trying to Change {_entity} location "
                 f"from {Level.levelname(_old_level)} to {Level.levelname(_new_level)}"
             )
             _entity.change_location(_old_level, _new_level)
             return 0
         except Exception as e:
-            Pr.dbg(f"ERR: {e}", 1)
+            Logger.log(f"ERR: {e}", 1)
             return 1
 
     def set_name(attributes=None):
@@ -141,7 +140,7 @@ class Actionparser:
         Returns:
             Integer: 1 on Error, else 0
         """
-        Pr.dbg(f"Call: {attributes}")
+        Logger.log(f"Call: {attributes}")
 
         if attributes is None:
             attributes = []
@@ -162,7 +161,7 @@ class Actionparser:
         Returns:
             Integer: 1 on Error, else 0
         """
-        Pr.dbg(f"Call: {attributes}")
+        Logger.log(f"Call: {attributes}")
 
         if attributes is None:
             attributes = []
@@ -184,7 +183,7 @@ class Actionparser:
         Returns:
             Integer: 1 on Error, else 0
         """
-        Pr.dbg(f"Call: {attributes}")
+        Logger.log(f"Call: {attributes}")
 
         if attributes is None:
             attributes = []
@@ -206,7 +205,7 @@ class Actionparser:
         Returns:
             Integer: 1 on Error, else 0
         """
-        Pr.dbg(f"Call: {attributes}")
+        Logger.log(f"Call: {attributes}")
 
         if attributes is None:
             attributes = []
@@ -228,7 +227,7 @@ class Actionparser:
         Returns:
             Integer: 1 on Error, else 0
         """
-        Pr.dbg(f"Call: {attributes}")
+        Logger.log(f"Call: {attributes}")
 
         if attributes is None:
             attributes = []
@@ -251,7 +250,7 @@ class Actionparser:
         Returns:
             Integer: 1 on Error, else 0
         """
-        Pr.dbg(f"Call: {attributes}")
+        Logger.log(f"Call: {attributes}")
 
         if attributes is None:
             attributes = []
@@ -272,7 +271,7 @@ class Actionparser:
         Returns:
             Integer: 1 on Error, else 0
         """
-        Pr.dbg(f"Call: {attributes}")
+        Logger.log(f"Call: {attributes}")
 
         if attributes is None:
             attributes = []
@@ -294,7 +293,7 @@ class Actionparser:
         Returns:
             Integer: 1 on Error, else 0
         """
-        Pr.dbg(f"Call: {attributes}")
+        Logger.log(f"Call: {attributes}")
 
         if attributes is None:
             attributes = []
@@ -317,7 +316,7 @@ class Actionparser:
             Integer: 1 on Error
             Dict: Damage in Format {"AD":DMG, "AP":DMG}
         """
-        Pr.dbg(f"Call: {attributes}")
+        Logger.log(f"Call: {attributes}")
 
         if attributes is None:
             attributes = []
@@ -325,7 +324,8 @@ class Actionparser:
         try:
             _entity = attributes[0]
             _value = attributes[1]
-            _dmg = _entity.take_damage(_value)
+            _inflicter = attributes[2]
+            _dmg = _entity.take_damage(_value, _inflicter)
             return _dmg
         except:
             return 1
@@ -339,7 +339,7 @@ class Actionparser:
         Returns:
             Integer: 1 on Error, else 0
         """
-        Pr.dbg(f"Call: {attributes}")
+        Logger.log(f"Call: {attributes}")
 
         if attributes is None:
             attributes = []
@@ -359,10 +359,10 @@ class Actionparser:
 
         try:
             newgamestate = attributes[0]
-            Pr.dbg(f"Old Gamestate: {Actionparser.gamestate}")
+            Logger.log(f"Old Gamestate: {Actionparser.gamestate}")
             Actionparser.gamestate = newgamestate
-            Pr.dbg(f"Changing Gamestate to {newgamestate}")
-            Pr.dbg(f"New Gamestate: {Actionparser.gamestate}")
+            Logger.log(f"Changing Gamestate to {newgamestate}")
+            Logger.log(f"New Gamestate: {Actionparser.gamestate}")
             return 0
         except:
             return 1

@@ -175,3 +175,8 @@ head, torso, underwear, left_arm, right_arm, left_leg, right_leg, gloves, meele,
 
 ## Effects
 ## Utils
+
+
+
+# Ideas:
+Add Wettbüro (Entitys können in Teams kämpfen)

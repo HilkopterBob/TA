@@ -2,8 +2,9 @@
 """
 import random
 import json
-from Utils.pr import Pr
-from config import loottablepath
+from Utils import Logger
+from config import loottablepath, items_folder
+from Items import itemInit
 
 
 def roll_loot(loottable=None, amount=1):
@@ -18,18 +19,24 @@ def roll_loot(loottable=None, amount=1):
     """
 
     if amount < 1:
-        Pr.dbg(f"Amount is {amount}", 3)
+        Logger.log(f"Amount is {amount}", 3)
         return 1
     if loottable is None:
-        Pr.dbg("No Loottable to get Items from", 3)
+        Logger.log("No Loottable to get Items from", 3)
         return 1
 
     _lootdict = list(loottable.keys())
     _weights = list(loottable.values())
 
-    Pr.dbg(f"Getting {amount} Items from Loottable: {loottable}", -1)
-
-    return random.choices(_lootdict, weights=_weights, k=amount)
+    Logger.log(f"Getting {amount} Items from Loottable: {loottable}", -1)
+    _loot = random.choices(_lootdict, weights=_weights, k=amount)
+    _lootret = []
+    for item in _loot:
+        Logger.log(f"Loading item {item} from Assets", 0)
+        _lootret.append(
+            itemInit.load_item_by_name_from_json(f"{items_folder}\\{item}.json", item)
+        )
+    return _lootret
 
 
 def getLootTable(name):
@@ -46,7 +53,7 @@ def getLootTable(name):
 
     _json_file = loottablepath + "/" + name + ".json"
 
-    Pr.dbg(f"Loading Loottable {_json_file}", -1)
+    Logger.log(f"Loading Loottable {_json_file}", -1)
 
     with open(_json_file, encoding="UTF-8") as json_data:
         data = json.load(json_data)
@@ -67,7 +74,7 @@ def importAi(name):
 
     _json_file = loottablepath + "/" + name + ".json"
 
-    Pr.dbg(f"Loading AI Params {_json_file}", -1)
+    Logger.log(f"Loading AI Params {_json_file}", -1)
 
     with open(_json_file, encoding="UTF-8") as json_data:
         data = json.load(json_data)

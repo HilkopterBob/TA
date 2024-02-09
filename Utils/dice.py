@@ -1,7 +1,7 @@
 """Util for Dice Rolling
 """
 import random
-from Utils.pr import Pr
+from Utils import Logger
 
 
 def roll(dice=None):
@@ -14,10 +14,10 @@ def roll(dice=None):
         int: Final roll Result
     """
     if dice is None:
-        Pr.Dbg("No Dice String given", 2)
+        Logger.log("No Dice String given", 2)
         return 0
 
-    Pr.dbg(f"Rolling: {dice}")
+    Logger.log(f"Rolling: {dice}")
     roll_result = 0
     num_dice = int(dice.split("w")[0])
     BaseDamage = int(dice.split("+")[1])
@@ -25,8 +25,8 @@ def roll(dice=None):
 
     for _ in range(num_dice):
         droll = random.randint(1, dice)
-        Pr.dbg(f"Rolled: {droll}", -1)
+        Logger.log(f"Rolled: {droll}", -1)
         roll_result += droll
     dmg = BaseDamage + roll_result
-    Pr.dbg(f"Final Rollresult: {dmg}")
+    Logger.log(f"Final Rollresult: {dmg}")
     return dmg

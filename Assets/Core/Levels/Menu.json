@@ -7,8 +7,8 @@
         { "action": "change_location", "new_level_name": "Wiese" },
         { "action": "add_effect", "effect_name": "Kopfschmerz" }
       ],
-      ["", { "action": "show_wip", "TODO: ":"FIX"}],
-      ["", { "action": "show_wip", "TODO: ":"FIX"}],
+      ["", { "action": "show_wip", "TODO: ": "FIX" }],
+      ["", { "action": "show_wip", "TODO: ": "FIX" }],
       ["", { "action": "close_game", "temporaryfix": "temporaryfix" }],
       [
         "",
@@ -28,6 +28,7 @@
     "ltype": "neutral",
     "descr": "Hauptmenü",
     "entitylist": [],
+    "entityspawn": [],
     "triggers": []
   }
 }

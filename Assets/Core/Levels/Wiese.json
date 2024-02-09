@@ -29,6 +29,7 @@
       "In der Ferne siehst du die Umrisse einer Stadt."
     ],
     "entitylist": [],
+    "entityspawn": [],
     "triggers": [{ "umgesehen": false }, { "Kopfschmerzen": true }]
   }
 }

@@ -5,7 +5,7 @@ Entities Module which holds 2 Classes
 """
 import json
 import random
-from Utils import Pr
+from Utils import Logger, tcolors
 
 
 class gitem:
@@ -107,21 +107,21 @@ class gitem:
         APBaseDamage = int(self.ap.split("+")[1])
         APdice = int(self.ap.split("w")[1].split("+")[0])
 
-        Pr.dbg(f"Rolling: {self.ad} for AD")
+        Logger.log(f"Rolling: {self.ad} for AD")
         for _ in range(ADnum_dice):
             ADroll = random.randint(1, ADdice)
-            Pr.dbg(f"Rolled: {ADroll}", -1)
+            Logger.log(f"Rolled: {ADroll}", -1)
             ADroll_result += ADroll
         ADdmg = ADBaseDamage + ADroll_result
-        Pr.dbg(f"Final Rollresult for AD: {ADdmg}")
+        Logger.log(f"Final Rollresult for AD: {ADdmg}")
 
-        Pr.dbg(f"Rolling: {self.ap} for AP")
+        Logger.log(f"Rolling: {self.ap} for AP")
         for _ in range(APnum_dice):
             AProll = random.randint(1, APdice)
-            Pr.dbg(f"Rolled: {AProll}", -1)
+            Logger.log(f"Rolled: {AProll}", -1)
             AProll_result += AProll
         APdmg = APBaseDamage + AProll_result
-        Pr.dbg(f"Final Rollresult for AP: {APdmg}")
+        Logger.log(f"Final Rollresult for AP: {APdmg}")
 
         return {"AD": ADdmg, "AP": APdmg}
 
@@ -172,7 +172,7 @@ class itemInit:
         """
         curItems = []
 
-        Pr.dbg(f"Loading Items from: {json_file}")
+        Logger.log(f"Loading Items from: {json_file}")
 
         if not isinstance(json_file, dict):
             with open(json_file, encoding="UTF-8") as json_data:
@@ -200,5 +200,5 @@ class itemInit:
             if iname == name:
                 return gitem.from_json(data[iname], iname)
 
-        Pr.dbg(f"Itemname: {Pr.cyan(name)} not found!", 1)
+        Logger.log(f"Itemname: {tcolors.cyan(name)} not found!", 1)
         return False

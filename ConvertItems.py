@@ -84,6 +84,8 @@ def cEntities():
                         },
                         "loottable": row[13],
                         "ai": row[14],
+                        "isPlayer": row[15],
+                        "Team": row[16],
                     },
                 }
 

@@ -22,6 +22,8 @@
       "chr": 8
     },
     "loottable": "Trial",
-    "ai": ""
+    "ai": "",
+    "isPlayer": true,
+    "Team": 0
   }
 }

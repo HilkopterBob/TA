@@ -4,7 +4,7 @@ Effects Module which holds 2 Classes
     EffectInit()
 """
 import json
-from Utils import Pr
+from Utils import Logger, tcolors
 
 
 class Effect:
@@ -97,5 +97,5 @@ class EffectInit:
             if name == ename:
                 return Effect.from_json(data[ename], ename)
 
-        Pr.dbg(f"Effect: {Pr.cyan(name)} not found!", 1)
+        Logger.log(f"Effect: {tcolors.cyan(name)} not found!", 1)
         return False

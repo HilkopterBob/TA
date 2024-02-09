@@ -3,8 +3,11 @@ Levels Module which holds 2 Classes
     Level()
     Levelinit()
 """
+
 import json
-from Utils import Pr
+import random
+from Utils import Pr, Logger
+from config import entities_folder
 
 
 class Level:
@@ -23,6 +26,7 @@ class Level:
         "triggers",
         "ltype",
         "entitylist",
+        "entityspawn",
     )
 
     def __init__(
@@ -34,6 +38,7 @@ class Level:
         ltype="Testtype",
         descr="Standartdescription du Sohn einer Dirne",
         entitylist=None,
+        entityspawn=None,
         triggers=None,
     ):
         if text is None:
@@ -46,6 +51,8 @@ class Level:
             entitylist = []
         if triggers is None:
             triggers = []
+        if entityspawn is None:
+            entityspawn = []
 
         self.name = name
         self.descr = descr
@@ -55,6 +62,10 @@ class Level:
         self.triggers = triggers
         self.ltype = ltype
         self.entitylist = entitylist
+        self.entityspawn = entityspawn
+
+        self.onLevelCreate()
+        self.populate()
 
     @staticmethod
     def from_json(json_dct, lname):
@@ -75,6 +86,7 @@ class Level:
             json_dct["ltype"],
             json_dct["descr"],
             json_dct["entitylist"],
+            json_dct["entityspawn"],
             json_dct["triggers"],
         )
 
@@ -92,10 +104,10 @@ class Level:
         """
         match ctype:
             case "+":
-                Pr.dbg(
+                Logger.log(
                     f"Entitylist of Level {Level.levelname(self)}: {self.entitylist}"
                 )
-                Pr.dbg(f"Trying to add {entity.name} to {Level.levelname(self)}")
+                Logger.log(f"Trying to add {entity.name} to {Level.levelname(self)}")
                 try:
                     for e in self.entitylist:
                         if e.name == entity.name:
@@ -106,34 +118,40 @@ class Level:
                                             and thus cannot be added."
                             )
                     self.entitylist.append(entity)
-                    Pr.dbg(f"{entity.name} got added to Level {Level.levelname(self)}")
-                    Pr.dbg(
+                    self.onEntityJoin(entity)
+                    Logger.log(
+                        f"{entity.name} got added to Level {Level.levelname(self)}"
+                    )
+                    Logger.log(
                         f"Entitylist of Level {Level.levelname(self)}: {self.entitylist}"
                     )
                     return True
                 except Exception as e:
-                    Pr.dbg(e, 1)
+                    Logger.log(e, 4)
                     return False
             case "-":
-                Pr.dbg(
+                Logger.log(
                     f"Entitylist of Level {Level.levelname(self)}: {self.entitylist}"
                 )
-                Pr.dbg(f"Trying to remove {entity.name} from {Level.levelname(self)}")
+                Logger.log(
+                    f"Trying to remove {entity.name} from {Level.levelname(self)}"
+                )
                 try:
                     self.entitylist = list(
                         filter(lambda e: e.name != entity.name, self.entitylist)
                     )
-                    Pr.dbg(
+                    self.onEntityLeave(entity)
+                    Logger.log(
                         f"{entity.name} got removed from Level {Level.levelname(self)}"
                     )
-                    Pr.dbg(
+                    Logger.log(
                         f"Entitylist of Level {Level.levelname(self)}: {self.entitylist}"
                     )
                     return True
                 except:
                     return False
             case _:
-                return Pr.dbg("got no right ctype. choose between + and -", 1)
+                return Logger.log("got no right ctype. choose between + and -", 1)
 
     def printDesc(self):
         """Prints Level Description to User"""
@@ -193,8 +211,66 @@ class Level:
         try:
             return lobject.name
         except Exception as e:
-            Pr.dbg(f"ERR: {e}", 2)
+            Logger.log(f"ERR: {e}", 2)
             return None
+
+    def populate(self):
+        """Populates the Level with Entities from Spawnlist
+
+        Returns:
+            Array: List of Entities
+        """
+        from Entities import EntityInit
+
+        _entitiestospawn = self.entityspawn
+
+        if _entitiestospawn is None or len(_entitiestospawn) < 1:
+            Logger.log("No Entities to Spawn in this Level", 2)
+            return 1
+
+        _amount = random.randrange(1, len(_entitiestospawn))
+        Logger.log(f"Entities to spawn: {_entitiestospawn}, Amount: {_amount}")
+
+        _dict = list(_entitiestospawn.keys())
+        _weights = list(_entitiestospawn.values())
+
+        Logger.log(f"Trying to Spawn {_amount} Entities", 1)
+        _entity = random.choices(_dict, weights=_weights, k=_amount)
+        _entityreturn = []
+
+        for i in _entity:
+            Logger.log(f"Loading Entity {i} from Assets", 0)
+            _entityreturn.append(
+                EntityInit.load_entities_by_name_from_json(
+                    f"{entities_folder}\\{i}.json", i
+                )
+            )
+
+        for e in _entityreturn:
+            Logger.log(f"Adding spawned Entity({e}|{e.name}) to Level({self.name})", 1)
+            self.change_entity_list("+", e)
+        return
+
+    def onLevelCreate(self):
+        Logger.log(f"Created Instance of Level: {self}({self.name})", 2)
+        return
+
+    def onEntityJoin(self, entity):
+        Logger.log(
+            f"Entity:{entity}({entity.name}) joined Level: {self}({self.name})", 2
+        )
+        if entity.isPlayer:
+            if len(self.entitylist) > 1:
+                # ToDo: Add Chance to put Player into Combat
+                # ToDo: Change Chance based on Entity hostility
+                entity.actionstack.insert(  # pylint: disable=E1101
+                    0, ["change_gamestate", ["combat"]]
+                )
+        return
+
+    def onEntityLeave(self, entity):
+        Logger.log(f"Entity:{entity}({entity.name}) left Level: {self}({self.name})", 2)
+        return
 
 
 class LevelInit:
@@ -219,7 +295,7 @@ class LevelInit:
             _curLevels = []
         curLevels = _curLevels
 
-        Pr.dbg(f"Loading Levels from: {json_file}")
+        Logger.log(f"Loading Levels from: {json_file}")
 
         if json_file:
             if not isinstance(json_file, dict):
@@ -254,5 +330,5 @@ class LevelInit:
             for lname in data.keys():
                 if name == lname:
                     return Level.from_json(data[lname], lname)
-            Pr.dbg(f"Levelname: {Pr.cyan(name)} not found!", 1)
+            Logger.log(f"Levelname: {Pr.cyan(name)} not found!", 1)
         return False

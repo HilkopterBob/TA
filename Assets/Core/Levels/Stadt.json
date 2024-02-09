@@ -29,6 +29,7 @@
     "ltype": "friedlich",
     "descr": "Du Folgst den Weg bis zu einer großen Stadt",
     "entitylist": [],
+    "entityspawn": [],
     "triggers": [{ "umgesehen": false }],
     "child_levels": {
       "Pub": {
@@ -55,6 +56,7 @@
         "ltype": "friedlich",
         "descr": "Ein gemütliches Pub mit einer aufmerksammen Bedienung",
         "entitylist": [],
+        "entityspawn": [],
         "triggers": [],
         "child_levels": {
           "Tisch": {
@@ -64,6 +66,7 @@
             "ltype": "friedlich",
             "descr": "Ein Tisch",
             "entitylist": [],
+            "entityspawn": [],
             "triggers": []
           },
           "Zimmer": {
@@ -73,6 +76,7 @@
             "ltype": "friedlich",
             "descr": "Ein Zimmer",
             "entitylist": [],
+            "entityspawn": [],
             "triggers": []
           }
         }
@@ -107,6 +111,7 @@
         "ltype": "friedlich",
         "descr": "Du betritst die Markhalle im inneren hersch ein reges Gewimmel",
         "entitylist": [],
+        "entityspawn": [],
         "triggers": [{ "umgesehen": false }],
         "child_levels": {
           "Kräuterhändler": {
@@ -121,6 +126,7 @@
             "ltype": "friedlich",
             "descr": "Ein Kräuterstand mit vielen verschiedenen Artikeln",
             "entitylist": [],
+            "entityspawn": [],
             "triggers": []
           },
           "Schmied": {
@@ -136,6 +142,7 @@
             "ltype": "friedlich",
             "descr": "Der Schmied bietet viele verschiedene Waffen und Rüstungen",
             "entitylist": [],
+            "entityspawn": [],
             "triggers": []
           }
         }

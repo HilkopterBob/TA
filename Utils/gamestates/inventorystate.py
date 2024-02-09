@@ -1,7 +1,7 @@
 """implementation of inventory
 """
 import questionary
-from Utils import pr
+from Utils import Logger
 
 
 def inventorystate(Player):
@@ -24,11 +24,15 @@ def inventorystate(Player):
                             choices=["ja", "nein"],
                         ).unsafe_ask()
                         if action == "ja":
-                            pr.Pr.dbg(f"Player Health:                  {Player.hp}", 3)
-                            pr.Pr.dbg(f"Player inv:                 {Player.inv}", 3)
+                            Logger.log(
+                                f"Player Health:                  {Player.hp}", 3
+                            )
+                            Logger.log(f"Player inv:                 {Player.inv}", 3)
                             Player.consume_item(choosen_item)
-                            pr.Pr.dbg(f"Player Health:                  {Player.hp}", 3)
-                            pr.Pr.dbg(f"Player inv:                 {Player.inv}", 3)
+                            Logger.log(
+                                f"Player Health:                  {Player.hp}", 3
+                            )
+                            Logger.log(f"Player inv:                 {Player.inv}", 3)
                         else:
                             break
                     if item.equipable:
@@ -45,12 +49,12 @@ def inventorystate(Player):
                                 Player.equip_item(choosen_item, eaction)
                             else:
                                 Player.equip_item(choosen_item)
-                            pr.Pr.dbg(f"Player Slots: {Player.slots}", -1)
+                            Logger.log(f"Player Slots: {Player.slots}", -1)
                         else:
                             break
             except Exception as e:
-                pr.Pr.dbg(e)
-                pr.Pr.dbg(item)
+                Logger.log(e)
+                Logger.log(item)
 
     while not wants_exit:
         weapons = []
@@ -168,7 +172,7 @@ def inventorystate(Player):
                             case "zurück":
                                 pass
                             case _:
-                                pr.Pr.dbg(
+                                Logger.log(
                                     "Ein Unerlaubtes Menüitem wurde unter"
                                     ">>Inv>>Equip>> ausgewählt.",
                                     2,
@@ -184,7 +188,9 @@ def inventorystate(Player):
             case "zurück":
                 pass
             case _:
-                pr.Pr.dbg("Ein Unerlaubtes Menüitem wurde unter >>Inv>> ausgewählt.", 2)
+                Logger.log(
+                    "Ein Unerlaubtes Menüitem wurde unter >>Inv>> ausgewählt.", 2
+                )
 
         if wants_exit:
             break
