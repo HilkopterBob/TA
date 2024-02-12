@@ -1,7 +1,7 @@
 {
   "$schema": "../../../.github/workflows/entitieschema.json",
   "ZwergenKoenig": {
-    "name": "ZwergenKönig",
+    "name": "ZwergenKoenig",
     "hp": 80,
     "wealth": 0,
     "inv": [],

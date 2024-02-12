@@ -67,6 +67,13 @@ class Level:
         self.onLevelCreate()
         self.populate()
 
+    def __str__(self):
+        return f"{self.name}"
+
+    # Commented out for readability in Logfile - need to find a workaround
+    # def __repr__(self):
+    #    return f"[{self.__class__.__module__}.{self.__class__.__name__}([{self.text}],[{self.choices}],'{self.name}',[{self.inv}],'{self.ltype}','{self.descr}',[{self.entitylist}],[{self.entityspawn}],[{self.triggers}]) at <{hex(id(self))}>]"  # pylint:disable=C0301
+
     @staticmethod
     def from_json(json_dct, lname):
         """Creates a Level from JSON
@@ -105,25 +112,23 @@ class Level:
         match ctype:
             case "+":
                 Logger.log(
-                    f"Entitylist of Level {Level.levelname(self)}: {self.entitylist}"
+                    f"Entitylist of Level {self}: {[str(x) for x in self.entitylist]}"
                 )
-                Logger.log(f"Trying to add {entity.name} to {Level.levelname(self)}")
+                Logger.log(f"Trying to add {entity} to {self}")
                 try:
                     for e in self.entitylist:
                         if e.name == entity.name:
                             raise Exception(
-                                f"{Pr.cyan(entity.name)} \
+                                f"{entity} \
                                             is already in entitielist of Level \
-                                            {Pr.cyan(self.name)} \
+                                            {self} \
                                             and thus cannot be added."
                             )
                     self.entitylist.append(entity)
                     self.onEntityJoin(entity)
+                    Logger.log(f"{entity} got added to Level {self}")
                     Logger.log(
-                        f"{entity.name} got added to Level {Level.levelname(self)}"
-                    )
-                    Logger.log(
-                        f"Entitylist of Level {Level.levelname(self)}: {self.entitylist}"
+                        f"Entitylist of Level {self}: {[str(x) for x in self.entitylist]}"
                     )
                     return True
                 except Exception as e:
@@ -131,21 +136,17 @@ class Level:
                     return False
             case "-":
                 Logger.log(
-                    f"Entitylist of Level {Level.levelname(self)}: {self.entitylist}"
+                    f"Entitylist of Level {self}: {[str(x) for x in self.entitylist]}"
                 )
-                Logger.log(
-                    f"Trying to remove {entity.name} from {Level.levelname(self)}"
-                )
+                Logger.log(f"Trying to remove {entity.name} from {self}")
                 try:
                     self.entitylist = list(
                         filter(lambda e: e.name != entity.name, self.entitylist)
                     )
                     self.onEntityLeave(entity)
+                    Logger.log(f"{entity.name} got removed from Level {self}")
                     Logger.log(
-                        f"{entity.name} got removed from Level {Level.levelname(self)}"
-                    )
-                    Logger.log(
-                        f"Entitylist of Level {Level.levelname(self)}: {self.entitylist}"
+                        f"Entitylist of Level {self}: {[str(x) for x in self.entitylist]}"
                     )
                     return True
                 except:
@@ -247,13 +248,13 @@ class Level:
             )
 
         for e in _entityreturn:
-            Logger.log(f"Adding spawned Entity({e}|{e.name}) to Level({self.name})", 1)
+            Logger.log(f"Adding spawned Entity {e} to Level", 1)
             self.change_entity_list("+", e)
         return
 
     def onLevelCreate(self):
         """This is called whenever an Level is created"""
-        Logger.log(f"Created Instance of Level: {self}({self.name})", 0)
+        Logger.log(f"Created Instance of Level: {self}", 0)
         return
 
     def onEntityJoin(self, entity):
@@ -262,16 +263,14 @@ class Level:
         Args:
             entity (entity): Entity which is joining the Level
         """
-        Logger.log(
-            f"Entity:{entity}({entity.name}) joined Level: {self}({self.name})", 1
-        )
+        Logger.log(f"Entity:{entity} joined Level: {self}", 0)
         if entity.isPlayer:
             if len(self.entitylist) > 1:
                 # ToDo: Add Chance to put Player into Combat
                 # ToDo: Change Chance based on Entity hostility
                 Logger.log(f"Entitylist of Level: {self.entitylist}", -1)
 
-                Pr.n(f"Du wirst von {self.entitylist[0].name} angegriffen!")
+                Pr.n(f"Du wirst von {self.entitylist[0]} angegriffen!")
 
                 entity.actionstack.insert(  # pylint: disable=E1101
                     0, ["change_gamestate", ["combat"]]
@@ -284,7 +283,7 @@ class Level:
         Args:
             entity (entity): Entity which is leaving the Level
         """
-        Logger.log(f"Entity:{entity}({entity.name}) left Level: {self}({self.name})", 2)
+        Logger.log(f"Entity:{entity} left Level: {self}", 0)
         return
 
 
@@ -345,5 +344,5 @@ class LevelInit:
             for lname in data.keys():
                 if name == lname:
                     return Level.from_json(data[lname], lname)
-            Logger.log(f"Levelname: {Pr.cyan(name)} not found!", 1)
+            Logger.log(f"Levelname: {name} not found!", 1)
         return False

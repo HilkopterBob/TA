@@ -3,6 +3,7 @@
 
 import os
 import sys
+import json
 from hashlib import sha256
 from time import sleep, process_time
 from tqdm import tqdm
@@ -34,6 +35,7 @@ class AssetHandler:
     allEntities = []
     allEffects = []
     allItems = []
+    allAssets = []
 
     def getFiles(folder):
         """Gets all Json Files from a Folder
@@ -201,6 +203,38 @@ class AssetHandler:
         Logger.log(f"Importing Effects took: {importtime*1000}ms", dbglevel)
         return None
 
+    def importAssets():
+        """Import Assets from Assetpack
+
+        Returns:
+            None: None
+        """
+        _level_files = AssetHandler.getFiles(levels_folder)
+
+        if not _level_files:
+            Logger.log(f"No Levels to import from {levels_folder}", 1)
+            return None
+
+        st = process_time()
+        Logger.log(f"Importing Level(s) from: {_level_files}", 1)
+
+        for _level in tqdm(
+            _level_files,
+            desc="Importing Levels...",
+            ncols=100,
+            bar_format="{l_bar}{bar}| {n_fmt}/{total_fmt} [ETA: {remaining_s:.2f}s]",
+        ):
+            AssetHandler.allLevels.extend(LevelInit.load_all_levels_from_json(_level))
+
+        et = process_time()
+        importtime = et - st
+        if importtime > 1:
+            dbglevel = 2
+        else:
+            dbglevel = 1
+        Logger.log(f"Importing Levels took: {importtime*1000}ms", dbglevel)
+        return None
+
     def check_integrity(file):
         """Checks File SHA256 Sum against Integrity File
 
@@ -321,3 +355,78 @@ class AssetHandler:
 
 def load_game():
     """Function to init the whole Game; TODO: Build this"""
+    rootdir = "..\TA\Assets"
+    Assetpacks = []
+    for subdir, dirs, files in os.walk(rootdir):
+        for file in files:
+            # print os.path.join(subdir, file)
+            filepath = subdir + os.sep + file
+
+            if filepath.endswith("meta.conf"):
+                with open(filepath, "r", encoding="UTF-8") as f:
+                    json_object = json.loads(f.read())
+                    Assetpacks.append(json_object)
+
+    for _assetpack in Assetpacks:
+        name = next(iter(_assetpack))
+        _newAsset = Assetpack(
+            name,
+            _assetpack[name]["creator"],
+            _assetpack[name]["version"],
+            _assetpack[name]["root"],
+            _assetpack[name]["content"],
+        )
+
+
+class Assetpack:
+
+    __slots__ = ("name", "creator", "version", "root", "content")
+
+    def __init__(self, name="", creator="", version=0, root="", content=None):
+        if content is None:
+            content = {}
+
+        self.name = name
+        self.creator = creator
+        self.version = version
+        self.root = root
+        self.content = content
+
+        if self.validate():
+            Logger.log(f"Assetpack {self} has been verified!", 1)
+
+    def __str__(self):
+        return f"{self.name}"
+
+    def validate(self):
+        """Checks File SHA256 Sum
+        Returns:
+            Bool: True if integrity is Verified, otherwise False
+        """
+        errors = False
+        # Calculates SHA256 Checksum for given File
+        for _file in self.content.keys():
+            _filepath = self.root + "\\" + _file
+
+            sha256sum = sha256()
+
+            with open(_filepath, "rb") as f:
+                data_chunk = f.read(1024)
+                while data_chunk:
+                    sha256sum.update(data_chunk)
+                    data_chunk = f.read(1024)
+            checksum = sha256sum.hexdigest()
+            if self.content[_file] != checksum:
+                errors = True
+                Logger.log(
+                    f"Checksum wrong for file {_file} : {checksum} != {self.content[_file]}",
+                    2,
+                )
+            else:
+                Logger.log(
+                    f"Asset verified: {_file} : {checksum} = {self.content[_file]}", 0
+                )
+        if errors:
+            return False
+        else:
+            return True

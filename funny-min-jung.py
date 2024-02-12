@@ -14,7 +14,7 @@ from Utils import Pr, Inp, Logger
 from Utils.gamestates.inventorystate import inventorystate
 from Utils.gamestates.combatstate import combatstate
 from actionparser import Actionparser
-from Assethandler import AssetHandler
+from Assethandler import AssetHandler, load_game
 
 
 def interact_with_level(player, level, level_list):
@@ -149,9 +149,9 @@ def gameloop(player, level_list=None):
     # Entering Gameloop
     while True:
         for level in level_list:
-            if str(level.name) == str(Level.levelname(player.location)):
+            if str(level.name) == str(player.location):
                 Logger.log(
-                    f"Player location ({Level.levelname(player.location)}) "
+                    f"Player location ({player.location}) "
                     f"is equal to Level ({level.name}), "
                 )
                 if not player in level.entitylist:
@@ -161,7 +161,7 @@ def gameloop(player, level_list=None):
                         1,
                     )
                     level.change_entity_list("+", player)
-                Logger.log(f"Setting CurrentLevel to Level: {Level.levelname(level)}")
+                Logger.log(f"Setting CurrentLevel to Level: {level}")
                 current_level = level
 
         # Loop through all Entities in CurrentLevel and Apply Actionstack
@@ -212,9 +212,9 @@ def gameloop(player, level_list=None):
         lap = lap + 1
 
         # Loop through all Entities in CurrentLevel and Apply Actionstack
-        Logger.log(f"Entitylist: {current_level.entitylist}", -1)
+        Logger.log(f"Entitylist: {[str(x) for x in current_level.entitylist]}", -1)
         for e in current_level.entitylist:
-            Logger.log(f"Working Actionstack for {e.name}", 1)
+            Logger.log(f"Working Actionstack for {e}", 1)
             Logger.log(f"Actionstack: {e.actionstack}")
             # Work through actionstack of Entity and process actions
             for i in range(0, len(e.actionstack)):
@@ -233,6 +233,10 @@ def gameloop(player, level_list=None):
 
 
 if __name__ == "__main__":
+
+    # Test loadgame Function
+    load_game()
+    quit()
     # Checking Game File Integrity
     AssetHandler.CheckGameIntegrity()
 

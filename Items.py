@@ -3,6 +3,7 @@ Entities Module which holds 2 Classes
     Entity()
     Entityinit()
 """
+
 import json
 import random
 from Utils import Logger, tcolors
@@ -26,7 +27,7 @@ class gitem:
         "mr",
         "rarity",
         "effects",
-        "usable",
+        "useable",
         "equipable",
         "slots",
         "questitem",
@@ -74,7 +75,7 @@ class gitem:
         """The Rarity Level of the Item as String"""
         self.effects = effects
         """The Effects on the Items as Array of Objects"""
-        self.usable = useable
+        self.useable = useable
         """If the Item is useable(consumable) as Boolean"""
         self.equipable = equipable
         """If the Item is equipable as Boolean"""
@@ -124,6 +125,13 @@ class gitem:
         Logger.log(f"Final Rollresult for AP: {APdmg}")
 
         return {"AD": ADdmg, "AP": APdmg}
+
+    def __str__(self):
+        return f"{self.name}"
+
+    # Commented out for readability in Logfile - need to find a workaround
+    # def __repr__(self):
+    #    return f"[{self.__class__.__module__}.{self.__class__.__name__}('{self.name}','{self.itype}','{self.description}',{self.ad},{self.ap},{self.hp},{self.ar},{self.mr},'{self.rarity}',[{self.effects}],{self.useable},{self.equipable},[{self.slots}],{self.questitem}) at <{hex(id(self))}>]"  # pylint:disable=C0301
 
     @staticmethod
     def from_json(json_dct, iname):

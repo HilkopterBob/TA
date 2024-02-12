@@ -134,6 +134,13 @@ class Entity:
         self.Team = Team
         """Defines the Team this Entity is on"""
 
+    def __str__(self):
+        return f"{self.name}"
+
+    # Commented out for readability in Logfile - need to find a workaround
+    # def __repr__(self):
+    #    return f"[{self.__class__.__module__}.{self.__class__.__name__}('{self.name}',{self.hp},{self.wealth},{self.xp},[{self.inv}],[{self.ptype}],[{self.geffects}],[{self.beffects}],[{self.eeffects}],'{self.location}',{self.level},{self.allowdamage},[{self.slots}],{self.attributes},{self.loottable},{self.ai},{self.spd},{self.isPlayer},{self.Team},{self.maxHealth}) at <{hex(id(self))}>]"  # pylint:disable=C0301
+
     @staticmethod
     def from_json(json_dct):
         """Creates an Entiy from given JSON
@@ -303,7 +310,7 @@ class Entity:
             value (dict): Damage that is Inflicted. Defaults to {"AD":0,"AP":0}.
 
         =return= Returns Damage taken as Dict of AD and AP;
-                 If Entity dies from Damage this function returns TRUE
+                If Entity dies from Damage this function returns TRUE
         """
         if value is None:
             value = {"AD": 0, "AP": 0}

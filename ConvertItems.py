@@ -1,7 +1,10 @@
 """Helper Script to Generate Stuff from CSV
 """
+
 import csv
 import json
+import os
+from hashlib import sha256
 
 
 def cItems():
@@ -100,4 +103,47 @@ def cEntities():
         print(f"Anzahl Datensätze: {line-2}")
 
 
-cEntities()
+def getChecksum(file):
+    # Calculates SHA256 Checksum for given File
+    sha256sum = sha256()
+    with open(file, "rb") as f:
+        data_chunk = f.read(1024)
+        while data_chunk:
+            sha256sum.update(data_chunk)
+            data_chunk = f.read(1024)
+
+    checksum = sha256sum.hexdigest()
+
+    # Checks if Calculated Checksum is in Checksums File
+    return checksum
+
+
+def CreateContentPack(folder):
+
+    items = 0
+    content = {}
+    for subdir, dirs, files in os.walk(folder):
+        for file in files:
+            filepath = subdir + os.sep + file
+
+            if filepath.endswith(".json"):
+                print(filepath)
+                content[file] = getChecksum(filepath)
+                items += 1
+
+    data = {
+        "CoreEntities": {
+            "creator": "TheDevs",
+            "version": 1.0,
+            "root": folder,
+            "content": content,
+        }
+    }
+
+    json_object = json.dumps(data, indent=4)
+
+    with open("meta.conf", "w", encoding="UTF8") as f:
+        f.write(json_object)
+
+
+CreateContentPack("..\TA\Assets\Core\Entities")
