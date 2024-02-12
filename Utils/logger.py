@@ -1,6 +1,8 @@
 """Logger for Logging Stuff"""
+
 # pylint: disable=W,E,C0301
 import inspect
+import time
 from datetime import datetime
 from Utils.tcolors import *
 from config import (
@@ -37,7 +39,6 @@ class Logger:
         function = inspect.stack()[1].function
         line_number = inspect.stack()[1].lineno
         message = str(text)
-        timestamp = datetime.now().strftime("%H:%M:%S")
 
         logmessage = Log(message, errlvl, module, function, line_number)
 
@@ -59,6 +60,23 @@ class Logger:
                         log.write(logmessage.raw)
                     return 0
         return 1
+
+    def time(func):
+        """Timing Decorator Function
+
+        Args:
+            func (function): Function which should be timed
+        """
+
+        def wrapper(*args, **kwargs):
+            start = time.time()
+            val = func(*args, **kwargs)
+            Logger.log(
+                f"Functioncall: {func} took {time.time()-start}s to execute", 1
+            )  # ToDo: Curerntly Loglevel is fixed - Change this!
+            return val
+
+        return wrapper
 
 
 class Log:
