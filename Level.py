@@ -220,7 +220,7 @@ class Level:
         Returns:
             Array: List of Entities
         """
-        from Entities import EntityInit
+        from Entities import EntityInit  # pylint: disable=C0415
 
         _entitiestospawn = self.entityspawn
 
@@ -252,10 +252,16 @@ class Level:
         return
 
     def onLevelCreate(self):
+        """This is called whenever an Level is created"""
         Logger.log(f"Created Instance of Level: {self}({self.name})", 0)
         return
 
     def onEntityJoin(self, entity):
+        """This is called whenever an Entity joins a Level
+
+        Args:
+            entity (entity): Entity which is joining the Level
+        """
         Logger.log(
             f"Entity:{entity}({entity.name}) joined Level: {self}({self.name})", 1
         )
@@ -263,12 +269,21 @@ class Level:
             if len(self.entitylist) > 1:
                 # ToDo: Add Chance to put Player into Combat
                 # ToDo: Change Chance based on Entity hostility
+                Logger.log(f"Entitylist of Level: {self.entitylist}", -1)
+
+                Pr.n(f"Du wirst von {self.entitylist[0].name} angegriffen!")
+
                 entity.actionstack.insert(  # pylint: disable=E1101
                     0, ["change_gamestate", ["combat"]]
                 )
         return
 
     def onEntityLeave(self, entity):
+        """This is called whenever an Entity Leaves a Level
+
+        Args:
+            entity (entity): Entity which is leaving the Level
+        """
         Logger.log(f"Entity:{entity}({entity.name}) left Level: {self}({self.name})", 2)
         return
 

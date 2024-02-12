@@ -288,5 +288,6 @@ if __name__ == "__main__":
     # Fill Player iventory with Placeholder Items
     while len(mPlayer.slots) < 11:
         mPlayer.slots.append("placeholder")
+
     # Run Game
     gameloop(mPlayer, allLevels)

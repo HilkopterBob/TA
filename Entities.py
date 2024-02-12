@@ -247,11 +247,13 @@ class Entity:
     def act(self):
         """Function for Entity Intelligence"""
         if not self.location:
-            Logger.log(f"Location for Entity {self} is not set Correctly", 2)
+            Logger.log(
+                f"Location for Entity {self}({self.name}) is not set Correctly", 2
+            )
             return
         _entitylist = self.location.entitylist
         Logger.log(f"Entitylist: {_entitylist}")
-        Logger.log(f"Entity {self.name} is acting here!")
+        Logger.log(f"Entity {self}({self.name}) is acting here!")
         match (AI.calcbehaviour(self)):
             case 0:
                 Logger.log("Entity would Flee")
