@@ -71,9 +71,15 @@ class Logger:
         def wrapper(*args, **kwargs):
             start = time.time()
             val = func(*args, **kwargs)
-            Logger.log(
-                f"Functioncall: {func} took {time.time()-start}s to execute", 1
-            )  # ToDo: Curerntly Loglevel is fixed - Change this!
+            _time = time.time() - start
+            if _time > 1:
+                Logger.log(
+                    f"Functioncall: {func} took {_time}s to execute", 1
+                )  # ToDo: Curerntly Loglevel is fixed - Change this!
+            else:
+                Logger.log(
+                    f"Functioncall: {func} took {_time}s to execute", 2
+                )  # ToDo: Curerntly Loglevel is fixed - Change this!
             return val
 
         return wrapper

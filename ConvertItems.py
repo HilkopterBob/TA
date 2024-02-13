@@ -122,19 +122,40 @@ def CreateContentPack(folder):
 
     items = 0
     content = {}
+    content["Items"] = {}
+    content["Entities"] = {}
+    content["Levels"] = {}
+    content["Effects"] = {}
+    content["Loottables"] = {}
+    content["AI"] = {}
+
+    name = str.split(folder, "\\")[-1]
     for subdir, dirs, files in os.walk(folder):
         for file in files:
             filepath = subdir + os.sep + file
 
             if filepath.endswith(".json"):
                 print(filepath)
-                content[file] = getChecksum(filepath)
+                match str.split(filepath, "\\")[-2]:
+                    case "Items":
+                        content["Items"][file] = getChecksum(filepath)
+                    case "Entities":
+                        content["Entities"][file] = getChecksum(filepath)
+                    case "Levels":
+                        content["Levels"][file] = getChecksum(filepath)
+                    case "Effects":
+                        content["Effects"][file] = getChecksum(filepath)
+                    case "Loottables":
+                        content["Loottables"][file] = getChecksum(filepath)
+                    case "AI":
+                        content["AI"][file] = getChecksum(filepath)
                 items += 1
 
     data = {
-        "CoreEntities": {
+        name: {
             "creator": "TheDevs",
             "version": 1.0,
+            "description": "The Core Assets of the Game",
             "root": folder,
             "content": content,
         }
@@ -146,4 +167,4 @@ def CreateContentPack(folder):
         f.write(json_object)
 
 
-CreateContentPack("..\TA\Assets\Core\Entities")
+CreateContentPack("..\TA\Assets\Core")

@@ -236,24 +236,24 @@ if __name__ == "__main__":
 
     # Test loadgame Function
     load_game()
-    quit()
+
     # Checking Game File Integrity
-    AssetHandler.CheckGameIntegrity()
+    # AssetHandler.CheckGameIntegrity()
 
     # Importing Level Assets
-    AssetHandler.importLevels()
+    # AssetHandler.importLevels()
     allLevels = AssetHandler.allLevels
 
     # Importing Entity Assets
-    AssetHandler.importEntities()
+    # AssetHandler.importEntities()
     allEntities = AssetHandler.allEntities
 
     # importing Item Assets
-    AssetHandler.importItems()
+    # AssetHandler.importItems()
     allItems = AssetHandler.allItems
 
     # Importing Effect Assets
-    AssetHandler.importEffects()
+    # AssetHandler.importEffects()
     allEffect = AssetHandler.allEffects
 
     # Creating seperate Player Entitiies

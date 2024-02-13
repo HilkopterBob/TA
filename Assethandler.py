@@ -12,10 +12,6 @@ from Entities import EntityInit
 from Effect import EffectInit
 from Items import itemInit
 from config import (
-    levels_folder,
-    entities_folder,
-    effects_folder,
-    items_folder,
     checksum_file,
     dbg,
     root_folder,
@@ -35,9 +31,11 @@ class AssetHandler:
     allEntities = []
     allEffects = []
     allItems = []
-    allAssets = []
+    Assetpacks = []
 
-    def getFiles(folder):
+    def getFiles(
+        folder,
+    ):  # ToDo: Files are Gathered twice because of new Assetpack structure; Change GetFiles so it does not Gather Files but instead reads from Assetpack where the Files are
         """Gets all Json Files from a Folder
 
         Args:
@@ -47,7 +45,7 @@ class AssetHandler:
             List: List of Paths to Files
         """
         Logger.log(f"Gathering Assets from: {folder}", 1)
-        _folder_name = folder.split("/")[2]  # pylint: disable=E1101
+        _folder_name = folder.split("\\")[2]  # pylint: disable=E1101
         st = process_time()
         _file_list = []
         for file in os.listdir(folder):
@@ -72,16 +70,16 @@ class AssetHandler:
         Logger.log(f"Gathering {_folder_name} took: {importtime*1000}ms", dbglevel)
         return _file_list
 
-    def importLevels():
+    def importLevels(_levels_folder):
         """Imports Levels from Assets
 
         Returns:
             None: None
         """
-        _level_files = AssetHandler.getFiles(levels_folder)
+        _level_files = AssetHandler.getFiles(_levels_folder)
 
         if not _level_files:
-            Logger.log(f"No Levels to import from {levels_folder}", 1)
+            Logger.log(f"No Levels to import from {_levels_folder}", 1)
             return None
 
         st = process_time()
@@ -104,17 +102,17 @@ class AssetHandler:
         Logger.log(f"Importing Levels took: {importtime*1000}ms", dbglevel)
         return None
 
-    def importEntities():
+    def importEntities(_entities_folder):
         """Imports Entities from Assets
 
         Returns:
             None: None
         """
 
-        _entity_files = AssetHandler.getFiles(entities_folder)
+        _entity_files = AssetHandler.getFiles(_entities_folder)
 
         if not _entity_files:
-            Logger.log(f"No Entities to import from {entities_folder}", 1)
+            Logger.log(f"No Entities to import from {_entities_folder}", 1)
             return None
 
         st = process_time()
@@ -137,16 +135,16 @@ class AssetHandler:
         Logger.log(f"Importing Entities took: {importtime*1000}ms", dbglevel)
         return None
 
-    def importItems():
+    def importItems(_items_folder):
         """Imports Items from Assets
 
         Returns:
             None: None
         """
-        _items_files = AssetHandler.getFiles(items_folder)
+        _items_files = AssetHandler.getFiles(_items_folder)
 
         if not _items_files:
-            Logger.log(f"No Items to import from {items_folder}", 1)
+            Logger.log(f"No Items to import from {_items_folder}", 1)
             return None
 
         st = process_time()
@@ -169,16 +167,16 @@ class AssetHandler:
         Logger.log(f"Importing Items took: {importtime*1000}ms", dbglevel)
         return None
 
-    def importEffects():
+    def importEffects(_effects_folder):
         """Imports Effects from Assets
 
         Returns:
             None: None
         """
-        _effects_files = AssetHandler.getFiles(effects_folder)
+        _effects_files = AssetHandler.getFiles(_effects_folder)
 
         if not _effects_files:
-            Logger.log(f"No Effects to import from {effects_folder}", 1)
+            Logger.log(f"No Effects to import from {_effects_folder}", 1)
             return None
 
         st = process_time()
@@ -201,38 +199,6 @@ class AssetHandler:
         else:
             dbglevel = 1
         Logger.log(f"Importing Effects took: {importtime*1000}ms", dbglevel)
-        return None
-
-    def importAssets():
-        """Import Assets from Assetpack
-
-        Returns:
-            None: None
-        """
-        _level_files = AssetHandler.getFiles(levels_folder)
-
-        if not _level_files:
-            Logger.log(f"No Levels to import from {levels_folder}", 1)
-            return None
-
-        st = process_time()
-        Logger.log(f"Importing Level(s) from: {_level_files}", 1)
-
-        for _level in tqdm(
-            _level_files,
-            desc="Importing Levels...",
-            ncols=100,
-            bar_format="{l_bar}{bar}| {n_fmt}/{total_fmt} [ETA: {remaining_s:.2f}s]",
-        ):
-            AssetHandler.allLevels.extend(LevelInit.load_all_levels_from_json(_level))
-
-        et = process_time()
-        importtime = et - st
-        if importtime > 1:
-            dbglevel = 2
-        else:
-            dbglevel = 1
-        Logger.log(f"Importing Levels took: {importtime*1000}ms", dbglevel)
         return None
 
     def check_integrity(file):
@@ -355,11 +321,10 @@ class AssetHandler:
 
 def load_game():
     """Function to init the whole Game; TODO: Build this"""
-    rootdir = "..\TA\Assets"
+    rootdir = "..\\TA\\Assets"
     Assetpacks = []
     for subdir, dirs, files in os.walk(rootdir):
         for file in files:
-            # print os.path.join(subdir, file)
             filepath = subdir + os.sep + file
 
             if filepath.endswith("meta.conf"):
@@ -373,60 +338,121 @@ def load_game():
             name,
             _assetpack[name]["creator"],
             _assetpack[name]["version"],
+            _assetpack[name]["description"],
             _assetpack[name]["root"],
             _assetpack[name]["content"],
         )
+    for _assetpack in AssetHandler.Assetpacks:
+        for _ctype in _assetpack.content.keys():
+            match _ctype:
+                case "Entities":
+                    AssetHandler.importEntities(_assetpack.root + "\\" + _ctype)
+                case "Levels":
+                    AssetHandler.importLevels(_assetpack.root + "\\" + _ctype)
+                case "Items":
+                    AssetHandler.importItems(_assetpack.root + "\\" + _ctype)
+                case "Effects":
+                    AssetHandler.importEffects(_assetpack.root + "\\" + _ctype)
 
 
 class Assetpack:
+    """Assetpacks which are loaded during Game Init containing all the Game Assets"""
 
-    __slots__ = ("name", "creator", "version", "root", "content")
+    __slots__ = (
+        "name",
+        "creator",
+        "version",
+        "description",
+        "root",
+        "content",
+        "levels",
+        "entities",
+        "items",
+        "effects",
+        "loottables",
+        "ai",
+        "unknown",
+        "valid",
+    )
 
-    def __init__(self, name="", creator="", version=0, root="", content=None):
+    def __init__(
+        self, name="", creator="", version=0, description="", root="", content=None
+    ):
         if content is None:
             content = {}
 
         self.name = name
         self.creator = creator
         self.version = version
+        self.description = description
         self.root = root
         self.content = content
+        self.levels = []
+        self.entities = []
+        self.items = []
+        self.effects = []
+        self.loottables = []
+        self.ai = []
+        self.unknown = []
+        self.valid = False
 
-        if self.validate():
-            Logger.log(f"Assetpack {self} has been verified!", 1)
+        if not self.validate():
+            Logger.log(f"Assetpack {self} could not be verified!", 2)
+            return
 
     def __str__(self):
         return f"{self.name}"
 
+    @Logger.time
     def validate(self):
         """Checks File SHA256 Sum
         Returns:
             Bool: True if integrity is Verified, otherwise False
         """
         errors = False
-        # Calculates SHA256 Checksum for given File
-        for _file in self.content.keys():
-            _filepath = self.root + "\\" + _file
 
-            sha256sum = sha256()
+        for ctype in self.content.keys():
+            for _file in self.content[ctype].keys():
+                _filepath = self.root + "\\" + ctype + "\\" + _file
 
-            with open(_filepath, "rb") as f:
-                data_chunk = f.read(1024)
-                while data_chunk:
-                    sha256sum.update(data_chunk)
+                sha256sum = sha256()
+
+                with open(_filepath, "rb") as f:
                     data_chunk = f.read(1024)
-            checksum = sha256sum.hexdigest()
-            if self.content[_file] != checksum:
-                errors = True
-                Logger.log(
-                    f"Checksum wrong for file {_file} : {checksum} != {self.content[_file]}",
-                    2,
-                )
-            else:
-                Logger.log(
-                    f"Asset verified: {_file} : {checksum} = {self.content[_file]}", 0
-                )
+                    while data_chunk:
+                        sha256sum.update(data_chunk)
+                        data_chunk = f.read(1024)
+                checksum = sha256sum.hexdigest()
+                if self.content[ctype][_file] != checksum:
+                    errors = True
+                    Logger.log(
+                        f"Checksum wrong for file {_file} : <{checksum}> expected: <{self.content[ctype][_file]}>",
+                        2,
+                    )
+                else:
+                    Logger.log(
+                        f"Asset verified: {_file} : {checksum} = {self.content[ctype][_file]}",
+                        0,
+                    )
+                    match ctype:
+                        case "Entities":
+                            self.entities.append(_file)
+                        case "Items":
+                            self.items.append(_file)
+                        case "Effects":
+                            self.effects.append(_file)
+                        case "Levels":
+                            self.levels.append(_file)
+                        case "Loottables":
+                            self.loottables.append(_file)
+                        case "AI":
+                            self.ai.append(_file)
+                        case _:
+                            self.unknown.append(_file)
         if errors:
+            self.valid = False
             return False
         else:
+            self.valid = True
+            AssetHandler.Assetpacks.append(self)
             return True
