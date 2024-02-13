@@ -28,7 +28,7 @@ class AssetHandler:
 
     def getFiles(
         folder,
-    ):  # ToDo: Files are Gathered twice because of new Assetpack structure; Change GetFiles so it does not Gather Files but instead reads from Assetpack where the Files are
+    ):  # TODO: Files are Gathered twice because of new Assetpack structure; Change GetFiles so it does not Gather Files but instead reads from Assetpack where the Files are
         """Gets all Json Files from a Folder
 
         Args:

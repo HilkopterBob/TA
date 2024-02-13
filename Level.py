@@ -130,6 +130,11 @@ class Level:
                     Logger.log(
                         f"Entitylist of Level {self}: {[str(x) for x in self.entitylist]}"
                     )
+                    Logger.log(
+                        f"Changing Entity Location Var from Level for Entity: {entity}",
+                        2,
+                    )
+                    entity.location = self
                     return True
                 except Exception as e:
                     Logger.log(e, 4)
@@ -266,8 +271,8 @@ class Level:
         Logger.log(f"Entity:{entity} joined Level: {self}", 0)
         if entity.isPlayer:
             if len(self.entitylist) > 1:
-                # ToDo: Add Chance to put Player into Combat
-                # ToDo: Change Chance based on Entity hostility
+                # TODO: Add Chance to put Player into Combat
+                # TODO: Change Chance based on Entity hostility
                 Logger.log(f"Entitylist of Level: {self.entitylist}", -1)
 
                 Pr.n(f"Du wirst von {self.entitylist[0]} angegriffen!")

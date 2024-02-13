@@ -255,7 +255,8 @@ class Entity:
         """Function for Entity Intelligence"""
         if not self.location:
             Logger.log(
-                f"Location for Entity {self}({self.name}) is not set Correctly", 2
+                f"Location for Entity {self}({self.name}) is not set Correctly: {self.location}",
+                2,
             )
             return
         _entitylist = self.location.entitylist
@@ -326,7 +327,7 @@ class Entity:
 
         Logger.log(f"{self.name} is about to take {value} damage from {inflicter}", 1)
 
-        # ToDo: Fix order in which damage is inflicted / actionstack is worked
+        # TODO: Fix order in which damage is inflicted / actionstack is worked
 
         for i in range(0, 8):
             try:
@@ -362,7 +363,7 @@ class Entity:
             _ret = self.change_health(i * -1)
             if _ret:
                 Logger.log(f"{self.name} is destroyed!")
-                # ToDo: remove Entity from Entitylist so it doesn't get counted in action parsing
+                # TODO: remove Entity from Entitylist so it doesn't get counted in action parsing
                 self.actionstack = []
                 try:
                     _loot = loot.roll_loot(self.loottable, 1)

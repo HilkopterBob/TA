@@ -1,10 +1,10 @@
 """AI Module
 """
+
 from Utils.logger import Logger
 
 
 class AI:
-
     """
     Utility Class AI Decisions
     """
@@ -22,7 +22,7 @@ class AI:
             9 - Entity is Player so we skip
         """
 
-        difficulty = 1  # ToDo: Load from Config
+        difficulty = 1  # TODO: Load from Config
 
         if _entity.isPlayer:
             return 9

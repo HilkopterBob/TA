@@ -1,5 +1,6 @@
 """implementation of inventory
 """
+
 import questionary
 from Utils import Logger
 
@@ -18,7 +19,7 @@ def inventorystate(Player):
         for item in Player.inv:
             try:
                 if choosen_item == item.name:
-                    if item.usable:
+                    if item.useable:
                         action = questionary.select(
                             f"Möchtest du {choosen_item} verbrauchen?",
                             choices=["ja", "nein"],

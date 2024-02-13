@@ -167,4 +167,4 @@ def CreateContentPack(folder):
         f.write(json_object)
 
 
-CreateContentPack("..\TA\Assets\Core")
+CreateContentPack("..\\TA\\Assets\\Core")

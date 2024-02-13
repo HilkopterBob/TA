@@ -88,9 +88,9 @@ LogPrefix = {
 ###ENV Variables##
 items_file = "config/items.json"
 effects_file = "config/effects.json"
-entities_folder = "Assets/Core/Entities"  # ToDo: Remove
-items_folder = "Assets/Core/Items"  # ToDo: Remove
-loottablepath = "Assets/Core/Loottables"  # ToDo: Remove
+entities_folder = "Assets/Core/Entities"  # TODO: Remove
+items_folder = "Assets/Core/Items"  # TODO: Remove
+loottablepath = "Assets/Core/Loottables"  # TODO: Remove
 aitablepath = "Assets/Core/AI"
 log_file = f"logs/{today}.log"
 root_folder = get_project_root()
