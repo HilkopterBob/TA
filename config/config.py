@@ -88,15 +88,12 @@ LogPrefix = {
 ###ENV Variables##
 items_file = "config/items.json"
 effects_file = "config/effects.json"
-levels_folder = "Assets/Core/Levels"
-entities_folder = "Assets/Core/Entities"
-effects_folder = "Assets/Core/Effects"
-items_folder = "Assets/Core/Items"
-log_file = f"logs/{today}.log"
-checksum_file = "config/integrity.md"
-root_folder = get_project_root()
-loottablepath = "Assets/Core/Loottables"
+entities_folder = "Assets/Core/Entities"  # ToDo: Remove
+items_folder = "Assets/Core/Items"  # ToDo: Remove
+loottablepath = "Assets/Core/Loottables"  # ToDo: Remove
 aitablepath = "Assets/Core/AI"
+log_file = f"logs/{today}.log"
+root_folder = get_project_root()
 ##################
 
 ##################

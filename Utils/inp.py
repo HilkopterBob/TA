@@ -3,12 +3,10 @@
 
 import re
 from time import sleep
-from os import listdir
-from os import path
 from pystyle import Colors, Write, Center, Box
 from Utils.pr import Pr
 from Utils.logger import Logger
-from config import dbg, levels_folder
+from config import dbg
 
 # from Utils import Debug as Dbg
 
@@ -19,21 +17,6 @@ class Inp:
     """
     Utility Class for getting custom input prompts
     """
-
-    def assetlist(asset=None):
-        """
-        listing all assets of one type
-        """
-        match asset:
-            case "level":
-                fileList = listdir(levels_folder)
-                levelList = [
-                    path.splitext(file)[0]
-                    for file in fileList
-                    if file.lower().endswith(".json")
-                ]
-
-                return levelList
 
     def inp(
         player="", text="", yes_no_flag=False
