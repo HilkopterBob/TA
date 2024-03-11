@@ -17,6 +17,7 @@ from config import (
     LogPrefix,
     LogColors,
     DefaultLogLevel,
+    ShowOnlyLogText,
 )
 
 
@@ -44,7 +45,10 @@ class Logger:
 
         if consoleLogging:
             if logmessage.loglevel >= consoleLogLevel:
-                print(logmessage)
+                if ShowOnlyLogText:
+                    print(logmessage.stronly)
+                else:
+                    print(logmessage)
 
         if fileLogging:
             if logmessage.loglevel >= FileLogLevel:
@@ -96,6 +100,7 @@ class Log:
         "line_number",
         "timestamp",
         "raw",
+        "stronly",
     )
 
     def __init__(
@@ -106,6 +111,7 @@ class Log:
         function=None,
         line_number=None,
         raw=None,
+        stronly="",
     ):
         if module is None:
             module = ""
@@ -130,6 +136,8 @@ class Log:
         """The Timestamp of the logged Message"""
         self.raw = f"{self.timestamp} - [{self.line_number}] {logLevels[self.loglevel]} - {self.module} - {self.function}: {self.logstr}\n"
         """Logmessage in Raw format"""
+        self.stronly = f"{LogColors[self.loglevel](self.logstr)}"
+        """Colorized LogMessage Only"""
 
     def __str__(self) -> str:
         stack = f"[{self.line_number}] {logLevels[self.loglevel]:<7} - {self.module}.{self.function} : "

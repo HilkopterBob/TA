@@ -43,6 +43,7 @@ logging = True  # Enable Logging
 fileLogging = True  # Enables Logging to File
 consoleLogging = True  # Enable Logging Output in Console
 LogByModule = False  # Create a Logfile for each Module only
+ShowOnlyLogText = True  # Only Prints the Log Text(colored) in Console
 
 logLevels = {
     -1: "DBG",
@@ -53,10 +54,10 @@ logLevels = {
     4: "FATAL",
 }  # Define of Loglevels
 
-DefaultLogLevel = 0
+DefaultLogLevel = -1
 
 consoleLogLevel = (
-    2  # Choose Log Level shown in Console (Higher Levels are always included)
+    -1  # Choose Log Level shown in Console (Higher Levels are always included)
 )
 
 FileLogLevel = (
@@ -86,11 +87,11 @@ LogPrefix = {
 
 ##################
 ###ENV Variables##
-items_file = "config/items.json"
-effects_file = "config/effects.json"
-entities_folder = "Assets/Core/Entities"  # TODO: Remove
-items_folder = "Assets/Core/Items"  # TODO: Remove
-loottablepath = "Assets/Core/Loottables"  # TODO: Remove
+items_file = "config\items.json"
+effects_file = "config\effects.json"
+entities_folder = "Assets\Core\Entities"  # TODO: Remove
+items_folder = "Assets\Core\Items"  # TODO: Remove
+loottablepath = "Assets\Core\Loottables"  # TODO: Remove
 aitablepath = "Assets/Core/AI"
 log_file = f"logs/{today}.log"
 root_folder = get_project_root()
