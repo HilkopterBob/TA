@@ -43,6 +43,7 @@ logging = True  # Enable Logging
 fileLogging = True  # Enables Logging to File
 consoleLogging = True  # Enable Logging Output in Console
 LogByModule = False  # Create a Logfile for each Module only
+ShowOnlyLogText = True  # Only Prints the Log Text(colored) in Console
 
 logLevels = {
     -1: "DBG",

@@ -24,6 +24,7 @@ from .config import (
     LogColors,
     LogPrefix,
     DefaultLogLevel,
+    ShowOnlyLogText,
 )
 
 __all__ = [
@@ -49,4 +50,5 @@ __all__ = [
     "LogColors",
     "LogPrefix",
     "DefaultLogLevel",
+    "ShowOnlyLogText",
 ]
