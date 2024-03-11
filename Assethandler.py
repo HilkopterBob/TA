@@ -194,7 +194,7 @@ class AssetHandler:
 
 def load_game():
     """Function to init the whole Game; TODO: Build this"""
-    rootdir = "..\\TA\\Assets"
+    rootdir = "..\\TA\\Assets".replace("\\", os.sep)
     Assetpacks = []
     for subdir, dirs, files in os.walk(rootdir):
         for file in files:
@@ -219,13 +219,21 @@ def load_game():
         for _ctype in _assetpack.content.keys():
             match _ctype:
                 case "Entities":
-                    AssetHandler.importEntities(_assetpack.root + "\\" + _ctype)
+                    AssetHandler.importEntities(
+                        _assetpack.root + "\\".replace("\\", os.sep) + _ctype
+                    )
                 case "Levels":
-                    AssetHandler.importLevels(_assetpack.root + "\\" + _ctype)
+                    AssetHandler.importLevels(
+                        _assetpack.root + "\\".replace("\\", os.sep) + _ctype
+                    )
                 case "Items":
-                    AssetHandler.importItems(_assetpack.root + "\\" + _ctype)
+                    AssetHandler.importItems(
+                        _assetpack.root + "\\".replace("\\", os.sep) + _ctype
+                    )
                 case "Effects":
-                    AssetHandler.importEffects(_assetpack.root + "\\" + _ctype)
+                    AssetHandler.importEffects(
+                        _assetpack.root + "\\".replace("\\", os.sep) + _ctype
+                    )
 
 
 class Assetpack:
@@ -286,7 +294,13 @@ class Assetpack:
 
         for ctype in self.content.keys():
             for _file in self.content[ctype].keys():
-                _filepath = self.root + "\\" + ctype + "\\" + _file
+                _filepath = (
+                    self.root
+                    + "\\".replace("\\", os.sep)
+                    + ctype
+                    + "\\".replace("\\", os.sep)
+                    + _file
+                )
 
                 sha256sum = sha256()
 

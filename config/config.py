@@ -3,6 +3,7 @@
 
 import sys
 import os.path
+import os
 from datetime import date
 from pathlib import Path
 from Utils.tcolors import white, red, yellow, purple, cyan, green
@@ -87,13 +88,13 @@ LogPrefix = {
 
 ##################
 ###ENV Variables##
-items_file = "config\items.json"
-effects_file = "config\effects.json"
-entities_folder = "Assets\Core\Entities"  # TODO: Remove
-items_folder = "Assets\Core\Items"  # TODO: Remove
-loottablepath = "Assets\Core\Loottables"  # TODO: Remove
-aitablepath = "Assets/Core/AI"
-log_file = f"logs/{today}.log"
+items_file = "config\\items.json".replace("\\", os.sep)
+effects_file = "config\\effects.json".replace("\\", os.sep)
+entities_folder = "Assets\\Core\\Entities".replace("\\", os.sep)  # TODO: Remove
+items_folder = "Assets\\Core\\Items".replace("\\", os.sep)  # TODO: Remove
+loottablepath = "Assets\\Core\\Loottables".replace("\\", os.sep)  # TODO: Remove
+aitablepath = "Assets\\Core\\AI".replace("\\", os.sep)
+log_file = f"logs\\{today}.log".replace("\\", os.sep)
 root_folder = get_project_root()
 ##################
 
