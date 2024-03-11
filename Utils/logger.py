@@ -132,5 +132,5 @@ class Log:
         """Logmessage in Raw format"""
 
     def __str__(self) -> str:
-        stack = f"[{self.line_number}] {logLevels[self.loglevel]} - {self.module} - {self.function}: "
+        stack = f"[{self.line_number}] {logLevels[self.loglevel]:<7} - {self.module}.{self.function} : "
         return f"{LogPrefix[self.loglevel]} {LogColors[self.loglevel](stack)} {self.logstr}"
