@@ -234,8 +234,6 @@ def gameloop(player, level_list=None):
 
 if __name__ == "__main__":
 
-    Logger.log("Test")
-
     # Test loadgame Function
     load_game()
 

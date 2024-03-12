@@ -26,9 +26,7 @@ class AssetHandler:
     allItems = []
     Assetpacks = []
 
-    def getFiles(
-        folder,
-    ):  # TODO: Files are Gathered twice because of new Assetpack structure; Change GetFiles so it does not Gather Files but instead reads from Assetpack where the Files are
+    def getFiles(folder):
         """Gets all Json Files from a Folder
 
         Args:
@@ -193,7 +191,7 @@ class AssetHandler:
 
 
 def load_game():
-    """Function to init the whole Game; TODO: Build this"""
+    """Function to init the whole Game"""
     rootdir = "..\\TA\\Assets".replace("\\", os.sep)
     Assetpacks = []
     for subdir, dirs, files in os.walk(rootdir):
@@ -234,6 +232,10 @@ def load_game():
                     AssetHandler.importEffects(
                         _assetpack.root + "\\".replace("\\", os.sep) + _ctype
                     )
+    ###Validation
+    if not AssetHandler.Assetpacks:
+        Logger.log("No Assetpacks found! Skipping Game init", 4)
+        quit()
 
 
 class Assetpack:
