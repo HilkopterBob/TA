@@ -268,7 +268,7 @@ class Assetpack:
         self.creator = creator
         self.version = version
         self.description = description
-        self.root = root
+        self.root = root.replace("\\", os.sep)
         self.content = content
         self.levels = []
         self.entities = []
