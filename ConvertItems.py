@@ -168,3 +168,4 @@ def CreateContentPack(folder):
 
 
 CreateContentPack("..\\TA\\Assets\\Core")
+# Test
