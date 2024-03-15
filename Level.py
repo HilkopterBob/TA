@@ -6,8 +6,10 @@ Levels Module which holds 2 Classes
 
 import json
 import random
+import os
 from Utils import Pr, Logger
 from config import entities_folder
+
 
 
 class Level:
@@ -248,7 +250,7 @@ class Level:
             Logger.log(f"Loading Entity {i} from Assets", 0)
             _entityreturn.append(
                 EntityInit.load_entities_by_name_from_json(
-                    f"{entities_folder}\\{i}.json", i
+                    f"{entities_folder}{os.sep}{i}.json", i
                 )
             )
 

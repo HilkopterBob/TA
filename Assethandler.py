@@ -36,7 +36,7 @@ class AssetHandler:
             List: List of Paths to Files
         """
         Logger.log(f"Gathering Assets from: {folder}", 1)
-        _folder_name = folder.split("\\")[2]  # pylint: disable=E1101
+        _folder_name = folder.split(os.sep)[2]  # pylint: disable=E1101
         st = process_time()
         _file_list = []
         for file in os.listdir(folder):

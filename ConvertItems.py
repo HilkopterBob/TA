@@ -129,14 +129,14 @@ def CreateContentPack(folder):
     content["Loottables"] = {}
     content["AI"] = {}
 
-    name = str.split(folder, "\\")[-1]
+    name = str.split(folder, os.sep)[-1]
     for subdir, dirs, files in os.walk(folder):
         for file in files:
             filepath = subdir + os.sep + file
 
             if filepath.endswith(".json"):
                 print(filepath)
-                match str.split(filepath, "\\")[-2]:
+                match str.split(filepath, os.sep)[-2]:
                     case "Items":
                         content["Items"][file] = getChecksum(filepath)
                     case "Entities":
@@ -167,5 +167,6 @@ def CreateContentPack(folder):
         f.write(json_object)
 
 
-CreateContentPack("..\\TA\\Assets\\Core")
+CreateContentPack("..\\TA\\Assets\\Core".replace("\\", os.sep))
+
 # Test
