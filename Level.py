@@ -58,8 +58,8 @@ class Level:
 
         self.name = name
         self.descr = descr
-        self.text = text
-        self.choices = choices
+        #self.text = text
+        self.choices = self.zip_choices(text, choices)
         self.inv = inv
         self.triggers = triggers
         self.ltype = ltype
@@ -180,13 +180,30 @@ class Level:
         """
         achoices = []
         for choice in self.choices:
-            if len(choice) == 1 and choice[0] != "":
+            # print(self.choices)
+            # print(choice)
+            # print(vars(choice))
+            # print(choice.choice)
+            if len(choice.choice) == 1 and choice[0] != "":
                 achoices.append(choice[0])
-            elif len(choice) > 1:
-                for cdict in self.triggers:
-                    if choice[1] == cdict:
-                        achoices.append(choice[0])
+            elif len(choice.choice) > 1:
+                """
+                The following part doesnt produce a working selection
+                of availible choices. While the error needs further 
+                diagnosis, the is, for a fact, a proglem with getting 
+                into the loop, as even debug prints dont get printed.
 
+                there isnt even a way of getting choices at all.T
+                """
+                for cdict in self.triggers:
+                    # if choice[1] == cdict:
+                    for sub_dict in choice.choice:
+                        print(f"sub: {sub_dict}")
+                        print(f"cdict {cdict}")
+                        if isinstance(sub_dict, dict):
+                            if sub_dict == cdict:
+                                achoices.append(choice[0])
+                
         return achoices
 
     def printChoices(self):
@@ -293,6 +310,16 @@ class Level:
         Logger.log(f"Entity:{entity} left Level: {self}", 0)
         return
 
+    def zip_choices(self, text, choices):
+
+        zipped_choices = []
+
+        for index, choice in enumerate(choices):
+            print(f"Index: {index}\n Choice: {choice}\n allow_trigger: {choice[1] if len(choice) > 1 else None}")
+            zipped_choices.append(Choice(text[index], choice, choice[1] if len(choice) > 1 else None))
+
+        return zipped_choices
+
 
 class LevelInit:
     """
@@ -353,3 +380,15 @@ class LevelInit:
                     return Level.from_json(data[lname], lname)
             Logger.log(f"Levelname: {name} not found!", 1)
         return False
+
+
+class Choice():
+
+    def __init__(self, text, choice, allow_trigger=None):
+        # self.choice = [choice, text]
+        # print(f"Choices: {choice}\n text: {text}")
+
+        self.choice = choice
+        self.text = text
+        self.allow_trigger = allow_trigger
+
