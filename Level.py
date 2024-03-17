@@ -180,12 +180,12 @@ class Level:
         """
         achoices = []
         for choice in self.choices:
-            """ The following part adds choices without trigger
-                to the availibleChoices.
-                Choices with trigger get added if 
-                Level.triggers[n] == Choice.allow_trigger
-            """
-            if choice.allow_trigger == None:
+            # The following part adds choices without trigger
+            #     to the availibleChoices.
+            #     Choices with trigger get added if 
+            #     Level.triggers[n] == Choice.allow_trigger
+            
+            if choice.allow_trigger is None:
                 achoices.append(choice)
             elif isinstance(choice.allow_trigger, dict):
                 for set_trigger in self.triggers:
@@ -301,6 +301,13 @@ class Level:
         return
 
     def zip_choices(self, text, choices):
+        """This is called whenever a level gets created and populates
+        its choices.
+
+        Args:
+            text (list[string, {action}]): Follow-up text and actions
+            choices (list): all hardcoded choices
+        """
 
         zipped_choices = []
 
@@ -381,4 +388,3 @@ class Choice():
         self.choice = choice
         self.text = text
         self.allow_trigger = allow_trigger
-
