@@ -42,8 +42,7 @@ def interact_with_level(player, level, level_list):
         print(f"{availableChoices.index(choice)+1}. {choice.choice}")
     printed = True
 
-    # TODO: substitute to working logger-func
-    #Logger.log(f"Current Choices: {level.choices}", -1)
+    Logger.log(f"Current Choices: {choice.choice for choice in level.zip_choices}", -1)
 
     if printed:
         action = int(Inp.inp(mPlayer)) - 1  # pylint: disable=E0601
