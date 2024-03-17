@@ -37,11 +37,13 @@ def interact_with_level(player, level, level_list):
 
     # Print Level Choices
     availableChoices = level.getAvailableChoices()
+    #print(f"availible choices {availableChoices}")
     for choice in availableChoices:
-        print(f"{availableChoices.index(choice)+1}. {choice}")
+        print(f"{availableChoices.index(choice)+1}. {choice.choice}")
     printed = True
 
-    Logger.log(f"Current Choices: {level.choices}", -1)
+    # TODO: substitute to working logger-func
+    #Logger.log(f"Current Choices: {level.choices}", -1)
 
     if printed:
         action = int(Inp.inp(mPlayer)) - 1  # pylint: disable=E0601
@@ -57,13 +59,16 @@ def interact_with_level(player, level, level_list):
     # Selecting index from available Actions
     Logger.log(f"Available Actions: {level.getAvailableChoices()}", -1)
 
+
     # Sehr falsch, Index Choice 2 wird text 1 zugeordnet
-    availableChoicesDict = dict(zip(availableChoices, level.text))
+    # availableChoicesDict = dict(zip(availableChoices, level.text))
 
     # Link Choices - result test
 
-    if action < len(availableChoicesDict.keys()):
-        actions = availableChoicesDict[availableChoices[action]]
+    if action < len(availableChoices):
+        actions = availableChoices[action].text
+        # TODO: cleanup
+        #print(f"actions: {actions}\n{actions.choice}\n{actions.text}")
         for i in actions:
             _currentAction = actions[actions.index(i)]
             if _currentAction != "":
@@ -263,7 +268,7 @@ if __name__ == "__main__":
         100,
         0,
         allItems,
-        location=allLevels[1],
+        location=allLevels[-2],
         attributes={"str": 8, "dex": 8, "int": 8, "ini": 80, "chr": 8},
         isPlayer=True,
     )
