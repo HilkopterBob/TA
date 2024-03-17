@@ -7,10 +7,27 @@ from pystyle import Colors, Write, Center, Box
 from Utils.pr import Pr
 from Utils.logger import Logger
 from config import dbg
+import readline
 
-# from Utils import Debug as Dbg
 
-# from Assethandler import AssetHandler
+class Completer(object):  # Custom completer
+
+    def __init__(self, options):
+        self.options = sorted(options)
+
+    def complete(self, text, state):
+        if state == 0:  # on first trigger, build possible matches
+            if text:  # cache matches (entries that start with entered text)
+                self.matches = [s for s in self.options 
+                                    if s and s.startswith(text)]
+            else:  # no text entered, all matches possible
+                self.matches = self.options[:]
+        
+        # Check if there are more matches
+        if state < len(self.matches):
+            return self.matches[state]
+        else:
+            return None
 
 
 class Inp:
@@ -43,6 +60,10 @@ class Inp:
         min_len = 0
         max_len = 150
         user_input = Write.Input(text + "\n >_ ", Colors.white, interval=0.0025)
+
+        completer = Completer(userbefehl)
+        readline.set_completer(completer.complete)
+        readline.parse_and_bind('tab: complete')
 
         try:
             if not user_input.strip():
