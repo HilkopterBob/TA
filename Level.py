@@ -191,11 +191,11 @@ class Level:
                 Level.triggers[n] == Choice.allow_trigger
             """
             if choice.allow_trigger == None:
-                achoices.append(choice.choice)
+                achoices.append(choice)
             elif isinstance(choice.allow_trigger, dict):
                 for set_trigger in self.triggers:
                     if set_trigger == choice.allow_trigger:
-                        achoices.append(choice.choice)
+                        achoices.append(choice)
             else:
                 Logger.log(f"Unsupported allow_trigger in Choice! {choice.allow_trigger}")
 
