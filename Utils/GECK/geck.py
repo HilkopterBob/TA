@@ -93,7 +93,7 @@ print(ASCII_ART)
 print("\n\nModules:")
 
 for index, module in enumerate(module_files):
-    print(f"[{index + 1}.] {module}")
+    print(f"[{index + 1}.] {module.replace('_', ' ')}")
 available_choices = []
 for index, thing in enumerate(module_files):
     available_choices.append(str(index + 1))
