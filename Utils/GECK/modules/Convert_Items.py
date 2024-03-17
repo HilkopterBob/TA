@@ -8,7 +8,7 @@ from hashlib import sha256
 
 # GECK Entry-Point
 def Convert_Items():
-    CreateContentPack("Assets")
+    CreateContentPack("../TA/Assets/Core")
 
 
 def cItems():
