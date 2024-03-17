@@ -9,24 +9,20 @@ Textadventure Utility Software.
 
 import os
 import platform
+from pathlib import Path
+import glob
 
 MODULE_FILES = []
 
 def get_python_files():
     """gets all files from the modules sub directory. 
     Returns a list of all paths as \" MODULE_FILES  \""""
+    working_dir = Path()
     folder_path = 'modules'
     python_files = []
     system = platform.system()
 
-    for root, _, files in os.walk(folder_path):
-        for file in files:
-            if file.endswith('.py'):
-                if system == 'Windows':
-                    file_path = os.path.join(root, file).replace('\\', '/')
-                else:
-                    file_path = os.path.join(root, file)
-                python_files.append(file_path)
+    python_files = [f for f in glob.glob("Utils/GECK/modules/*.py")]
 
     for pyfile in python_files:
         MODULE_FILES.append(pyfile)
@@ -71,7 +67,7 @@ def call_function(file_path, function_name, *args, **kwargs):
 
 # ████████████████████████████████████████ GUI ████████████████████████████████████████
 
-from rich import print
+#from rich import print
 from rich.prompt import Prompt
 
 module_file_paths = get_python_files()
@@ -90,6 +86,7 @@ _____/\\\\\\\\\\\\________/\\\\\\\\\\\\\\\______________/\\\\\\\\\________/\\\__
        _\//\\\\\\\\\\\\/___/\\\_\/\\\\\\\\\\\\\\\__/\\\____\////\\\\\\\\\__/\\\_\/\\\______\//\\\__/\\\_ 
         __\////////////____\///__\///////////////__\///________\/////////__\///__\///________\///__\///__
 
+                        --- G a r d e n   o f   E d e n   C r e a t i o n   K i t  --- 
 """
 
 print(ASCII_ART)
