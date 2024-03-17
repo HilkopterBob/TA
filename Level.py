@@ -58,8 +58,8 @@ class Level:
 
         self.name = name
         self.descr = descr
-        self.text = text
-        self.choices = choices
+        #self.text = text
+        self.choices = self.zip_choices(text, choices)
         self.inv = inv
         self.triggers = triggers
         self.ltype = ltype
@@ -180,12 +180,19 @@ class Level:
         """
         achoices = []
         for choice in self.choices:
-            if len(choice) == 1 and choice[0] != "":
-                achoices.append(choice[0])
-            elif len(choice) > 1:
-                for cdict in self.triggers:
-                    if choice[1] == cdict:
-                        achoices.append(choice[0])
+            # The following part adds choices without trigger
+            #     to the availibleChoices.
+            #     Choices with trigger get added if 
+            #     Level.triggers[n] == Choice.allow_trigger
+            
+            if choice.allow_trigger is None:
+                achoices.append(choice)
+            elif isinstance(choice.allow_trigger, dict):
+                for set_trigger in self.triggers:
+                    if set_trigger == choice.allow_trigger:
+                        achoices.append(choice)
+            else:
+                Logger.log(f"Unsupported allow_trigger in Choice! {choice.allow_trigger}")
 
         return achoices
 
@@ -293,6 +300,23 @@ class Level:
         Logger.log(f"Entity:{entity} left Level: {self}", 0)
         return
 
+    def zip_choices(self, text, choices):
+        """This is called whenever a level gets created and populates
+        its choices.
+
+        Args:
+            text (list[string, {action}]): Follow-up text and actions
+            choices (list): all hardcoded choices
+        """
+
+        zipped_choices = []
+
+        for index, choice in enumerate(choices):
+            print(f"Index: {index}\n Choice: {choice}\n allow_trigger: {choice[1] if len(choice) > 1 else None}")
+            zipped_choices.append(Choice(text[index], choice, choice[1] if len(choice) > 1 else None))
+
+        return zipped_choices
+
 
 class LevelInit:
     """
@@ -353,3 +377,14 @@ class LevelInit:
                     return Level.from_json(data[lname], lname)
             Logger.log(f"Levelname: {name} not found!", 1)
         return False
+
+
+class Choice():
+    """
+    Class witch defines Choices.
+    """
+
+    def __init__(self, text, choice, allow_trigger=None):
+        self.choice = choice
+        self.text = text
+        self.allow_trigger = allow_trigger

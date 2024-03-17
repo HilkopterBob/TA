@@ -104,8 +104,7 @@
           ["dich umsehen"],
           ["Den Kräuterhändler besuchen", { "umgesehen": true }],
           ["Den Schmied besuchen", { "umgesehen": true }],
-          ["Die Markthalle verlassen"],
-          []
+          ["Die Markthalle verlassen"]
         ],
         "inv": [],
         "ltype": "friedlich",
