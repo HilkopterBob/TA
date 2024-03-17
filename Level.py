@@ -180,11 +180,6 @@ class Level:
         """
         achoices = []
         for choice in self.choices:
-            # print(self.choices)
-            # print(choice)
-            # print(vars(choice))
-            # print(choice.choice)
-
             """ The following part adds choices without trigger
                 to the availibleChoices.
                 Choices with trigger get added if 
@@ -199,29 +194,6 @@ class Level:
             else:
                 Logger.log(f"Unsupported allow_trigger in Choice! {choice.allow_trigger}")
 
-
-
-
-            # if len(choice.choice) == 1 and choice[0] != "":
-            #     achoices.append(choice[0])
-            # elif len(choice.choice) > 1:
-            #     """
-            #     The following part doesnt produce a working selection
-            #     of availible choices. While the error needs further 
-            #     diagnosis, the is, for a fact, a proglem with getting 
-            #     into the loop, as even debug prints dont get printed.
-
-            #     there isnt even a way of getting choices at all.T
-            #     """
-            #     for cdict in self.triggers:
-            #         # if choice[1] == cdict:
-            #         for sub_dict in choice.choice:
-            #             print(f"sub: {sub_dict}")
-            #             print(f"cdict {cdict}")
-            #             if isinstance(sub_dict, dict):
-            #                 if sub_dict == cdict:
-            #                     achoices.append(choice[0])
-                
         return achoices
 
     def printChoices(self):
@@ -401,11 +373,11 @@ class LevelInit:
 
 
 class Choice():
+    """
+    Class witch defines Choices.
+    """
 
     def __init__(self, text, choice, allow_trigger=None):
-        # self.choice = [choice, text]
-        # print(f"Choices: {choice}\n text: {text}")
-
         self.choice = choice
         self.text = text
         self.allow_trigger = allow_trigger
