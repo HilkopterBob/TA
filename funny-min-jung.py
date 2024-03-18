@@ -37,7 +37,7 @@ def interact_with_level(player, level, level_list):
     # Print Level Choices
     availableChoices = level.getAvailableChoices()
     for choice in availableChoices:
-        print(f"{availableChoices.index(choice)+1}. {choice.choice}")
+        print(f"{availableChoices.index(choice)+1}. {choice.choice[0]}")
     printed = True
 
     Logger.log(f"Current Choices: {[vars(choice) for choice in availableChoices]}", -1)
