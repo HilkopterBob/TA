@@ -4,6 +4,11 @@
 
 Der Assethandler wird genutzt um jegliche Game Assets zu Initialisieren und Bereitzustellen
 
+## TOC
+
+- [Klassen](#klassen)
+- [Attribute](#attribute)
+
 ## Klassen
 
 ### - `AssetHandler`
@@ -52,8 +57,3 @@ Attribute werden aus dem jeweiligen Assetpack aus der `meta.conf` Datei geladen.
 #### Methoden
 
 `validate` : Methode zum abgleichen der aktuellen Dateihashes mit den im Assetpack definierten Dateihashes; Returns: True / False
-
-
-# [Verlinkungen LEL](#foo)
-
-# Foo
