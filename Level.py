@@ -312,7 +312,6 @@ class Level:
         zipped_choices = []
 
         for index, choice in enumerate(choices):
-            print(f"Index: {index}\n Choice: {choice}\n allow_trigger: {choice[1] if len(choice) > 1 else None}")
             zipped_choices.append(Choice(text[index], choice, choice[1] if len(choice) > 1 else None))
 
         return zipped_choices
