@@ -81,7 +81,7 @@
           "description": "Eine Liste aller Entitäten im Level"
         },
         "entityspawn": {
-          "type": "array",
+          "type": "object",
           "description": "Eine Liste aller möglichen Entitäten die Spawnen können mit deren Wahrscheinlichkeiten"
         },
         "triggers": {
