@@ -1,17 +1,9 @@
-# std imports:
-from time import sleep
+"""main gamestate for interaction with levels
+    and world aka. levelparser n shit
+"""
 
 # project imports:
-from pympler.asizeof import asizeof as getsize
-from Entities import Entity
-from Level import Level
-from Effect import Effect
-from Items import gitem
 from Utils import Pr, Inp, Logger, hud
-from actionparser import Actionparser
-from Assethandler import AssetHandler, load_game
-
-
 
 
 def interact_with_level(player, level, level_list):
@@ -46,7 +38,6 @@ def interact_with_level(player, level, level_list):
             return
 
     Logger.log(f"Available Actions: {level.getAvailableChoices()}", -1)
-
 
     if action < len(availableChoices):
         actions = availableChoices[action].text
@@ -97,7 +88,7 @@ def interact_with_level(player, level, level_list):
                     except Exception:
                         Logger.log(f"CurrentAction: {_currentAction}", 2)
     else:
-        Pr.n(
-            f"Bitte gebe eine Zahl kleiner gleich {len(availableChoicesDict.keys())} ein!"
-        )
-        sleep(2)
+        # this Problem gets solved by input parser. this section
+        # is kept alive for future development in minigames for
+        # example, where to big inputs may change the environment.
+        pass
