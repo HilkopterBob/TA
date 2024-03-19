@@ -3,6 +3,7 @@ Effects Module which holds 2 Classes
     Effect()
     EffectInit()
 """
+
 import json
 from Utils import Logger, tcolors
 

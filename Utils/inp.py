@@ -1,28 +1,31 @@
 """Defines Input Method for User - exact copy of Inputparser-Module
 """
 
+import readline
+
 import re
 from time import sleep
 from pystyle import Colors, Write, Center, Box
 from Utils.pr import Pr
 from Utils.logger import Logger
 from config import dbg
-import readline
 
 
 class Completer(object):  # Custom completer
+    """Completer for autocompletion"""
 
     def __init__(self, options):
         self.options = sorted(options)
+        self.matches = []
 
     def complete(self, text, state):
+        """tries to complete a text on <tab>"""
         if state == 0:  # on first trigger, build possible matches
             if text:  # cache matches (entries that start with entered text)
-                self.matches = [s for s in self.options 
-                                    if s and s.startswith(text)]
+                self.matches = [s for s in self.options if s and s.startswith(text)]
             else:  # no text entered, all matches possible
                 self.matches = self.options[:]
-        
+
         # Check if there are more matches
         if state < len(self.matches):
             return self.matches[state]
@@ -63,7 +66,7 @@ class Inp:
 
         completer = Completer(userbefehl)
         readline.set_completer(completer.complete)
-        readline.parse_and_bind('tab: complete')
+        readline.parse_and_bind("tab: complete")
 
         try:
             if not user_input.strip():

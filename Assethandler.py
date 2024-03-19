@@ -194,7 +194,9 @@ def load_game():
     """Function to init the whole Game"""
     rootdir = "..\\TA\\Assets".replace("\\", os.sep)
     Assetpacks = []
-    for subdir, dirs, files in os.walk(rootdir):
+
+    # the underscore representes dirs
+    for subdir, _, files in os.walk(rootdir):
         for file in files:
             filepath = subdir + os.sep + file
 
@@ -315,7 +317,8 @@ class Assetpack:
                 if self.content[ctype][_file] != checksum:
                     errors = True
                     Logger.log(
-                        f"Checksum wrong for file {_file} : <{checksum}> expected: <{self.content[ctype][_file]}>",
+                        f"""Checksum wrong for file {_file} : <{checksum}> 
+                        expected: <{self.content[ctype][_file]}>""",
                         2,
                     )
                 else:

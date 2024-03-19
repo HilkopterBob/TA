@@ -11,7 +11,6 @@ from Utils import Pr, Logger
 from config import entities_folder
 
 
-
 class Level:
     """
     Class which defines Levels
@@ -58,7 +57,7 @@ class Level:
 
         self.name = name
         self.descr = descr
-        #self.text = text
+        # self.text = text
         self.choices = self.zip_choices(text, choices)
         self.inv = inv
         self.triggers = triggers
@@ -182,9 +181,9 @@ class Level:
         for choice in self.choices:
             # The following part adds choices without trigger
             #     to the availibleChoices.
-            #     Choices with trigger get added if 
+            #     Choices with trigger get added if
             #     Level.triggers[n] == Choice.allow_trigger
-            
+
             if choice.allow_trigger is None:
                 achoices.append(choice)
             elif isinstance(choice.allow_trigger, dict):
@@ -192,7 +191,9 @@ class Level:
                     if set_trigger == choice.allow_trigger:
                         achoices.append(choice)
             else:
-                Logger.log(f"Unsupported allow_trigger in Choice! {choice.allow_trigger}")
+                Logger.log(
+                    f"Unsupported allow_trigger in Choice! {choice.allow_trigger}"
+                )
 
         return achoices
 
@@ -312,7 +313,9 @@ class Level:
         zipped_choices = []
 
         for index, choice in enumerate(choices):
-            zipped_choices.append(Choice(text[index], choice, choice[1] if len(choice) > 1 else None))
+            zipped_choices.append(
+                Choice(text[index], choice, choice[1] if len(choice) > 1 else None)
+            )
 
         return zipped_choices
 
@@ -378,7 +381,7 @@ class LevelInit:
         return False
 
 
-class Choice():
+class Choice:
     """
     Class witch defines Choices.
     """

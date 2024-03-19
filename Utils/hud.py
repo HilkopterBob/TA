@@ -1,3 +1,7 @@
+"""Hud creates the basic game output
+    like gold, health, location
+"""
+
 from Utils import Pr
 
 
