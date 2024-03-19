@@ -24,7 +24,7 @@ from config import (
 class Logger:
     """Logger Class"""
 
-    def log(text="", errlvl=DefaultLogLevel):
+    def log(text="", errlvl=DefaultLogLevel):  # pylint: disable=R1710
         """Logging function"""
 
         """
@@ -52,7 +52,7 @@ class Logger:
 
         if fileLogging:
             if logmessage.loglevel >= FileLogLevel:
-                if LogByModule:
+                if LogByModule:  # pylint: disable=R1705
                     _log_file = log_file.split("/")
                     _log_file.insert(1, f"/{module} - ")
                     _log_file = "".join(_log_file)

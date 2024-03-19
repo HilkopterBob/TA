@@ -230,7 +230,7 @@ class Level:
             Logger.log(f"ERR: {e}", 2)
             return None
 
-    def populate(self):
+    def populate(self):  # pylint: disable=R1710
         """Populates the Level with Entities from Spawnlist
 
         Returns:
@@ -270,7 +270,6 @@ class Level:
     def onLevelCreate(self):
         """This is called whenever an Level is created"""
         Logger.log(f"Created Instance of Level: {self}", 0)
-        return
 
     def onEntityJoin(self, entity):
         """This is called whenever an Entity joins a Level
@@ -290,7 +289,6 @@ class Level:
                 entity.actionstack.insert(  # pylint: disable=E1101
                     0, ["change_gamestate", ["combat"]]
                 )
-        return
 
     def onEntityLeave(self, entity):
         """This is called whenever an Entity Leaves a Level
@@ -299,7 +297,6 @@ class Level:
             entity (entity): Entity which is leaving the Level
         """
         Logger.log(f"Entity:{entity} left Level: {self}", 0)
-        return
 
     def zip_choices(self, text, choices):
         """This is called whenever a level gets created and populates

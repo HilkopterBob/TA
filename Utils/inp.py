@@ -11,7 +11,7 @@ from Utils.logger import Logger
 from config import dbg
 
 
-class Completer(object):  # Custom completer
+class Completer:  # Custom completer
     """Completer for autocompletion"""
 
     def __init__(self, options):
@@ -27,7 +27,7 @@ class Completer(object):  # Custom completer
                 self.matches = self.options[:]
 
         # Check if there are more matches
-        if state < len(self.matches):
+        if state < len(self.matches):  # pylint: disable=R1705
             return self.matches[state]
         else:
             return None

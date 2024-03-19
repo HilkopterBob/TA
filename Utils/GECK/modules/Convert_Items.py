@@ -6,8 +6,10 @@ import json
 import os
 from hashlib import sha256
 
+
 # GECK Entry-Point
 def Convert_Items():
+    """GECK entrypoint"""
     CreateContentPack("../TA/Assets/Core")
 
 
@@ -108,6 +110,7 @@ def cEntities():
 
 
 def getChecksum(file):
+    """get file checksum"""
     # Calculates SHA256 Checksum for given File
     sha256sum = sha256()
     with open(file, "rb") as f:
@@ -123,6 +126,7 @@ def getChecksum(file):
 
 
 def CreateContentPack(folder):
+    """creates content packs"""
 
     items = 0
     content = {}
@@ -134,7 +138,9 @@ def CreateContentPack(folder):
     content["AI"] = {}
 
     name = str.split(folder, os.sep)[-1]
-    for subdir, dirs, files in os.walk(folder):
+
+    # underscore represents dirs
+    for subdir, _, files in os.walk(folder):
         for file in files:
             filepath = subdir + os.sep + file
 
@@ -171,5 +177,4 @@ def CreateContentPack(folder):
         f.write(json_object)
 
 
-#CreateContentPack("..\\TA\\Assets\\Core")
-
+# CreateContentPack("..\\TA\\Assets\\Core")
