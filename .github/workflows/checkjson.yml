@@ -9,7 +9,7 @@ jobs:
   validate-jsons:
     strategy:
       matrix:
-          json: ['effects', 'entities', 'levels', 'items']
+          json: ['Effects', 'Entities', 'Levels', 'Items']
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -20,4 +20,4 @@ jobs:
         uses: docker://orrosenblatt/validate-json-action:latest
         env:
           INPUT_SCHEMA: /.github/workflows/${{matrix.json}}chema.json
-          INPUT_JSONS: /config/${{matrix.json}}.json
+          INPUT_JSONS: /Assets/Core/${{matrix.json}}/*.json
