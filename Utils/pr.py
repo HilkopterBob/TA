@@ -1,5 +1,6 @@
 """Module for all Print Statements
 """
+
 # pylint: disable=W,E
 import inspect
 from datetime import datetime, date
@@ -9,7 +10,6 @@ from config import dbg, log_file, dbg_level, logbymodule, exclude_dbg_lvl
 
 
 class Pr:
-
     """
     Utility Class for custom Prints, headlines, Inputs etc...
     """
@@ -157,7 +157,6 @@ class Pr:
             text (str): Text to be Displayed. Defaults to "".
             errlvl (int): Errorlevel -1=Dbg, 0=Inf, 1=Warn, 2=Err, 3=Highlight. Defaults to 0.
         """
-        # TODO: Rewrite Logging Module to have LOG Object which can be altered and gets Printed
 
         today = date.today().strftime("%d-%m-%Y")
 
