@@ -3,6 +3,8 @@
 
 import os
 import json
+import sys
+
 from hashlib import sha256
 from time import process_time
 from tqdm import tqdm
@@ -237,7 +239,7 @@ def load_game():
     ###Validation
     if not AssetHandler.Assetpacks:
         Logger.log("No Assetpacks found! Skipping Game init", 4)
-        quit()
+        sys.exit()
 
 
 class Assetpack:
@@ -341,7 +343,7 @@ class Assetpack:
                             self.ai.append(_file)
                         case _:
                             self.unknown.append(_file)
-        if errors:
+        if errors:  # pylint: disable=R1705
             self.valid = False
             return False
         else:
