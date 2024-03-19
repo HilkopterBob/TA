@@ -2,13 +2,14 @@
 """
 
 import readline
-
 import re
 from time import sleep
+from rich import print, markdown  # pylint: disable=W0622
+
+
 from pystyle import Colors, Write, Center, Box
 from Utils.pr import Pr
 from Utils.logger import Logger
-from config import dbg
 
 
 class Completer:  # Custom completer
@@ -48,7 +49,16 @@ class Inp:
             "men": "Öffnet das Menü",
             "save": "Speichert das Spiel",
             "exit": "Schließt das Spiel",
-            "help": "Öffnet das Hilfemenü",
+            "help": {
+                "": """Das ist der Hilfebefehl, gebe 'help <Befehl>' 
+                ein um mehr über einen Befehl zu erfahren.""",
+                "inv": {"open": "inv.md"},
+                "opt": {"open": "opt.md"},
+                "men": {"open": "men.md"},
+                "save": {"open": "save.md"},
+                "exit": {"open": "exit.md"},
+                "help": {"open": "help.md"},
+            },
         }
 
         devbefehl = {
@@ -127,14 +137,72 @@ class Inp:
                         return 34
 
                     case "help":
-                        Pr.headline("userbefehle")
-                        for einzelwert in userbefehl.keys():  # pylint: disable=C0201
-                            Pr.i(einzelwert + ": " + userbefehl.get(einzelwert))
-                        if dbg:
-                            Pr.n("")
-                            Pr.headline("devbefehle")
-                            for einzelwert in devbefehl:
-                                Pr.i(einzelwert + ": " + devbefehl.get(einzelwert))
+                        # Pr.headline("userbefehle")
+                        # for einzelwert in userbefehl.keys():  # pylint: disable=C0201
+                        #     Pr.i(einzelwert + ": " + userbefehl.get(einzelwert))
+                        # if dbg:
+                        #     Pr.n("")
+                        #     Pr.headline("devbefehle")
+                        #     for einzelwert in devbefehl:
+                        #         Pr.i(einzelwert + ": " + devbefehl.get(einzelwert))
+                        if len(input_list) > 1:
+                            match input_list[1]:
+                                case "inv":
+                                    # TODO: Help schreiben
+                                    with open(
+                                        "Utils/help/inv.md", "r", encoding="UTF-8"
+                                    ) as file:
+                                        # Read the entire content of the file into a string
+                                        file_contents = file.read()
+                                    print(markdown.Markdown(file_contents))
+
+                                case "opt":
+                                    # TODO: Help schreiben
+                                    with open(
+                                        "Utils/help/opt.md", "r", encoding="UTF-8"
+                                    ) as file:
+                                        # Read the entire content of the file into a string
+                                        file_contents = file.read()
+                                    print(markdown.Markdown(file_contents))
+
+                                case "men":
+                                    # TODO: Help schreiben
+                                    with open(
+                                        "Utils/help/men.md", "r", encoding="UTF-8"
+                                    ) as file:
+                                        # Read the entire content of the file into a string
+                                        file_contents = file.read()
+                                    print(markdown.Markdown(file_contents))
+
+                                case "save":
+                                    # TODO: Help schreiben
+                                    with open(
+                                        "Utils/help/save.md", "r", encoding="UTF-8"
+                                    ) as file:
+                                        # Read the entire content of the file into a string
+                                        file_contents = file.read()
+                                    print(markdown.Markdown(file_contents))
+
+                                case "exit":
+                                    # TODO: Help schreiben
+                                    with open(
+                                        "Utils/help/exit.md", "r", encoding="UTF-8"
+                                    ) as file:
+                                        # Read the entire content of the file into a string
+                                        file_contents = file.read()
+                                    print(markdown.Markdown(file_contents))
+
+                                case "help":
+                                    # TODO: Help schreiben
+                                    with open(
+                                        "Utils/help/help.md", "r", encoding="UTF-8"
+                                    ) as file:
+                                        # Read the entire content of the file into a string
+                                        file_contents = file.read()
+                                    print(markdown.Markdown(file_contents))
+
+                        # sleep 5 sec after help gets printed
+                        sleep(5)
                         return 34
 
                     case "opt":
