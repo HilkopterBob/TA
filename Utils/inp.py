@@ -150,7 +150,6 @@ class Inp:
                         return 34
 
                     case "inv":
-                        # TODO: Pylint fix
                         Logger.log(f"{player}", -1)
                         player.actionstack.insert(  # pylint: disable=E1101
                             0, ["change_gamestate", ["inv"]]
