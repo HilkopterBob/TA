@@ -1,25 +1,18 @@
 """Main Module for Textadventure
 """
 
-# std imports:
-from time import sleep
-
 # project imports:
 from pympler.asizeof import asizeof as getsize
 from Entities import Entity
 from Level import Level
 from Effect import Effect
 from Items import gitem
-from Utils import Pr, Inp, Logger
+from Utils import Pr, Logger
 from Utils.gamestates.inventorystate import inventorystate
 from Utils.gamestates.combatstate import combatstate
 from Utils.gamestates.mainstate import interact_with_level
 from actionparser import Actionparser
 from Assethandler import AssetHandler, load_game
-
-
-
-
 
 
 def gameloop(player, level_list=None):
@@ -65,9 +58,9 @@ def gameloop(player, level_list=None):
                 Actionparser.gamestate = "game"
             case "game":
                 Logger.log(f"Gamestate is now {Actionparser.gamestate}")
-                """
-                Hier muss die interact_with_level() func ausgelagert werden.
-                """
+
+                # Hier muss die interact_with_level() func ausgelagert werden.
+
                 interact_with_level(player, current_level, level_list)
                 Actionparser.gamestate = Actionparser.gamestate
             case "inv":
@@ -77,14 +70,12 @@ def gameloop(player, level_list=None):
                     Actionparser.gamestate = "game"
                 else:
                     Logger.log(f"Gamestate is now {Actionparser.gamestate}")
-                    inventorystate(mPlayer)
+                    inventorystate(player)
                     Actionparser.gamestate = "game"
             case "combat":
                 Logger.log(f"Gamestate is now {Actionparser.gamestate}")
-                Logger.log(f"{mPlayer} Entering Combatstate")
-                combatstate(
-                    mPlayer, mPlayer.location.entitylist
-                )  # pylint: disable=E0601
+                Logger.log(f"{player} Entering Combatstate")
+                combatstate(player, player.location.entitylist)  # pylint: disable=E0601
                 Actionparser.gamestate = "game"
             case _:
                 Pr.yellow(
