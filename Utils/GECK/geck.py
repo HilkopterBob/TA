@@ -20,8 +20,8 @@ def get_python_files():
     Returns a list of all paths as \" MODULE_FILES  \" """
     python_files = []
 
-    python_files = [
-        f for f in glob.glob("Utils/GECK/modules/*.py")
+    python_files = [  # pylint: disable=R1721
+        f for f in glob.glob("Utils/GECK/modules/*.py")  # pylint: disable=R1721
     ]  # pylint: disable=R1721
 
     for pyfile in python_files:
@@ -55,7 +55,7 @@ def get_filenames(file_paths: list):
 import importlib.util
 
 
-def call_function(file_path, function_name, *args, **kwargs):
+def call_function(file_path, function_name, *args, **kwargs):  # pylint: disable=R1710
     """calls functions with filepaths and functionnames (filename)"""
     try:
         spec = importlib.util.spec_from_file_location("module_name", file_path)
