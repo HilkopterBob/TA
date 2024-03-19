@@ -11,7 +11,7 @@ from Utils import Logger, Pr, Inp, loot, AI
 from config import aitablepath
 
 
-class Entity:
+class Entity:  # pylint: disable=R0904
     """
     Class which defines Entities
     Contains Functions:
