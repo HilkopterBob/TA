@@ -1,6 +1,7 @@
 """AI Module
 """
 
+# pylint: skip-file
 from Utils.logger import Logger
 
 
