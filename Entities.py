@@ -327,6 +327,8 @@ class Entity:  # pylint: disable=R0904
 
         Logger.log(f"{self.name} is about to take {value} damage from {inflicter}", 1)
 
+        # TODO: Fix order in which damage is inflicted / actionstack is worked
+
         for i in range(0, 8):
             try:
                 if self.slots[i].itype != "armor":  # pylint: disable=E1101
@@ -361,6 +363,7 @@ class Entity:  # pylint: disable=R0904
             _ret = self.change_health(i * -1)
             if _ret:
                 Logger.log(f"{self.name} is destroyed!")
+                # TODO: remove Entity from Entitylist so it doesn't get counted in action parsing
                 self.actionstack = []
                 try:
                     _loot = loot.roll_loot(self.loottable, 1)
@@ -514,31 +517,34 @@ class Entity:  # pylint: disable=R0904
         except:
             return False
 
-    def change_stat(self, effect):
+    def change_stat(self, effect, value):
         """
-        changes stat (effect.infl) by effect.value
+        changes stat (effect.infl) by value
 
-        :effect(obj): effect object
+        :effect(string): effect name
+
+        :value(int/double): effect value
 
         =return= true if sucessfull, else false
         """
-        match effect.infl:
+
+        match effect:
             case "hp":
                 try:
-                    self.hp += effect.value
+                    self.hp += value
                     return True
                 except:
                     return False
             case "xp":
                 try:
-                    self.xp += effect.value
+                    self.xp += value
                     return True
                 except:
                     return False
             case _:
                 Logger.log("change_stat: WILDCARD AUSGELÖST! debuginfo:", 2)
-                print(vars(self))
-                print(vars(effect))
+                Logger.log(vars(self))
+                Logger.log(vars(effect))
                 return False
 
     def take_effects(self):
