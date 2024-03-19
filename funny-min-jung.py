@@ -13,116 +13,13 @@ from Items import gitem
 from Utils import Pr, Inp, Logger
 from Utils.gamestates.inventorystate import inventorystate
 from Utils.gamestates.combatstate import combatstate
+from Utils.gamestates.mainstate import interact_with_level
 from actionparser import Actionparser
 from Assethandler import AssetHandler, load_game
 
 
-def interact_with_level(player, level, level_list):
-    """Current Game Interaction Function"""
-    ##### ##### prints out choices and gets user input if choices got printed ##### #####
-    printed = False
-    i = 1
-    Logger.log(f"Player: {player.name}, in Level: {level.name}")
-    if level.name == "Menu":
-        Pr.n("\n" * 5)
-        Pr.headline(level.descr)
-        Pr.n("\n" * 2)
-    else:
-        Logger.log("HUD")
-        hud(player)
-
-        # Level Headers and Description
-        level.printDesc()
-
-    # Print Level Choices
-    availableChoices = level.getAvailableChoices()
-    for choice in availableChoices:
-        print(f"{availableChoices.index(choice)+1}. {choice.choice[0]}")
-    printed = True
-
-    Logger.log(f"Current Choices: {[vars(choice) for choice in availableChoices]}", -1)
-
-    if printed:
-        action = int(Inp.inp(mPlayer)) - 1  # pylint: disable=E0601
-        if action == 33:
-            Logger.log("Break!")
-            return
-
-    Logger.log(f"Available Actions: {level.getAvailableChoices()}", -1)
 
 
-    if action < len(availableChoices):
-        actions = availableChoices[action].text
-        for i in actions:
-            _currentAction = actions[actions.index(i)]
-            if _currentAction != "":
-                if isinstance(_currentAction, str):
-                    Pr.n(_currentAction)
-                else:
-                    try:
-                        try:
-                            if "action" in _currentAction.keys():
-                                if _currentAction.get("action") == "change_location":
-                                    for _level in level_list:
-                                        if (
-                                            _level.name
-                                            == list(_currentAction.values())[1]
-                                        ):
-                                            actiontoadd = [
-                                                _currentAction.get("action"),
-                                                [mPlayer, mPlayer.location, _level],
-                                            ]
-                                else:
-                                    actiontoadd = [
-                                        _currentAction.get("action"),
-                                        [
-                                            mPlayer,
-                                            list(_currentAction.values())[1],
-                                        ],
-                                    ]
-                            else:
-                                Logger.log(f"No Action in Keys: {_currentAction}", 1)
-                                # Do Trigger Stuff
-                                # Letzter eintrag aus actions = immer Trigger.
-                                # Supported nur einen Trigger!!!
-                                touched_trigger = actions[-1]
-                                level_triggers_list = level.triggers
-                                Logger.log(level_triggers_list, 2)
-                                for index, l_trigger in enumerate(level_triggers_list):
-                                    if l_trigger.keys() == touched_trigger.keys():
-                                        level_triggers_list[index] = touched_trigger
-                            Logger.log(
-                                f"Add {actiontoadd} to Actionstack for entity: {mPlayer}"
-                            )
-                            mPlayer.actionstack.append(actiontoadd)
-                        except Exception as e:
-                            Logger.log(f"ERR: {e}", 2)
-                    except Exception:
-                        Logger.log(f"CurrentAction: {_currentAction}", 2)
-    else:
-        Pr.n(
-            f"Bitte gebe eine Zahl kleiner gleich {len(availableChoicesDict.keys())} ein!"
-        )
-        sleep(2)
-
-
-def hud(player):
-    """Player Hud
-
-    Args:
-        player (Entity): The Player to which the Hud should be displayed
-    """
-
-    if player.location.name not in ("Menu", "Options"):
-        Pr.n("+" * 12 + " " + "+" * 12)
-        Pr.n(f"Du befindest dich in: {player.location.name}")
-
-        if player.hp > 25:
-            Pr.g(f"HP: {player.hp}")
-        else:
-            Pr.b(f"HP: {player.hp}")
-        Pr.n(f"Gold: {player.wealth}")
-        Pr.n(f"Level: {player.level} XP: {player.xp}")
 
 
 def gameloop(player, level_list=None):
@@ -168,6 +65,9 @@ def gameloop(player, level_list=None):
                 Actionparser.gamestate = "game"
             case "game":
                 Logger.log(f"Gamestate is now {Actionparser.gamestate}")
+                """
+                Hier muss die interact_with_level() func ausgelagert werden.
+                """
                 interact_with_level(player, current_level, level_list)
                 Actionparser.gamestate = Actionparser.gamestate
             case "inv":
