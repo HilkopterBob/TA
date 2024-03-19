@@ -203,12 +203,14 @@ class Inp:
 
                                 case "_":
                                     # TODO: Help schreiben
-                                    print(
-                                        """Das ist der help-Befehl.
-                                    Schreibe 'help <Befehl>' um mehr über einen Befehl
-                                    zu erfahren.
-                                    """
-                                    )
+                                    pass
+                        else:
+                            print(
+                                """Das ist der help-Befehl.
+                                Schreibe 'help <Befehl>' um mehr über einen Befehl
+                                zu erfahren.
+                                """
+                            )
 
                         # sleep 5 sec after help gets printed
                         sleep(5)
