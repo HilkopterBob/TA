@@ -201,6 +201,15 @@ class Inp:
                                         file_contents = file.read()
                                     print(markdown.Markdown(file_contents))
 
+                                case "_":
+                                    # TODO: Help schreiben
+                                    print(
+                                        """Das ist der help-Befehl.
+                                    Schreibe 'help <Befehl>' um mehr über einen Befehl
+                                    zu erfahren.
+                                    """
+                                    )
+
                         # sleep 5 sec after help gets printed
                         sleep(5)
                         return 34
