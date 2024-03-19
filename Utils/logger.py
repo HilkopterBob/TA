@@ -24,7 +24,7 @@ from config import (
 class Logger:
     """Logger Class"""
 
-    def log(text="", errlvl=DefaultLogLevel):
+    def log(text="", errlvl=DefaultLogLevel):  # pylint: disable=R1710
         """Logging function"""
 
         """
