@@ -1,8 +1,9 @@
-# this is the Helpfile you've just red.
+""" this is the Helpfile you've just red. """
 
 
 # Entry-Point = function with same name as File
 def Help():
+    """Help funktion & GECK entrypoint"""
     help_message = """
     
     This is the G.E.C.K. !
@@ -35,8 +36,10 @@ def Help():
     print(f"here {name}, this is your helpfile!")
     print(help_message)
 
-    #call other functions from file!
+    # call other functions from file!
     say_bye(name)
 
+
 def say_bye(name):
+    """Helper function to show GECK functions"""
     print(f"Thats all the help i can give {name}, c u!")
