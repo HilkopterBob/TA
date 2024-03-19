@@ -1,0 +1,29 @@
+{
+  "$schema": "../../../.github/workflows/entitieschema.json",
+  "FeenKing": {
+    "name": "FeenKing",
+    "hp": 100,
+    "wealth": 0,
+    "inv": [],
+    "xp": 0,
+    "ptype": [10, 17],
+    "geffects": [],
+    "beffects": [],
+    "eeffects": [],
+    "location": "",
+    "level": 0,
+    "allowdamage": true,
+    "slots": [],
+    "attributes": {
+      "str": 9,
+      "dex": 8,
+      "int": 12,
+      "ini": 10,
+      "chr": 18
+    },
+    "loottable": "Trial",
+    "ai": "Trial",
+    "isPlayer": false,
+    "Team": 1
+  }
+}

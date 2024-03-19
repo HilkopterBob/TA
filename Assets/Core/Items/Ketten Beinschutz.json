@@ -1,0 +1,21 @@
+{
+    "$schema": "../../../.github/workflows/itemschema.json",
+    "Ketten Beinschutz": {
+        "type": "armor",
+        "description": "",
+        "ad": "0w0+0",
+        "ap": "0w0+0",
+        "hp": 2,
+        "ar": 3,
+        "mr": 0,
+        "effects": [],
+        "useable": false,
+        "equipable": true,
+        "slots": [
+            "left_leg",
+            "right_leg"
+        ],
+        "questitem": false,
+        "rarity": "uncommon"
+    }
+}

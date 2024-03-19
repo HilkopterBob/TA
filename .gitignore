@@ -1,4 +1,38 @@
 __pycache__/**
 .vscode/**
 **/__pycache__/**
+*.log
 test.py
+Utils/createChecksums.py
+
+# Python compiled files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Development stuff
+*.pyc
+*.pyo
+*.pyd
+*.db
+*.sqlite3
+*.log
+*.pot
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual environment
+venv/
+
+bin/**
+lib/**
+lib64/**
+pyvenv.cfg
+
+####
+#   GECK-OUTPUT-FILES
+####
+
+Utils/GECK/generated_items/**

@@ -27,7 +27,7 @@ Open the Docs.md
     - Trading
     - loot
     - bosskampf
-
+    - Wettbüro (Entity Teamfight)
 
 
 ### Support
@@ -35,4 +35,5 @@ Open the Docs.md
 For support, email 
 #### fake@fake.com 
 or join:
+
 

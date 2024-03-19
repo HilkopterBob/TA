@@ -1,0 +1,29 @@
+{
+  "$schema": "../../../.github/workflows/entitieschema.json",
+  "Oger": {
+    "name": "Oger",
+    "hp": 150,
+    "wealth": 0,
+    "inv": [],
+    "xp": 0,
+    "ptype": [6],
+    "geffects": [],
+    "beffects": [],
+    "eeffects": [],
+    "location": "",
+    "level": 0,
+    "allowdamage": true,
+    "slots": [],
+    "attributes": {
+      "str": 14,
+      "dex": 4,
+      "int": 3,
+      "ini": 6,
+      "chr": 1
+    },
+    "loottable": "Trial",
+    "ai": "Trial",
+    "isPlayer": false,
+    "Team": 1
+  }
+}

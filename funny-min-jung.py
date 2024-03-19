@@ -1,182 +1,177 @@
 """Main Module for Textadventure
 """
-from Entities import Entity, EntityInit, gitem
-from Level import LevelInit
-from Effect import Effect, EffectInit
-from Utils import pr, Debug, Inp
+
+# project imports:
+from pympler.asizeof import asizeof as getsize
+from Entities import Entity
+from Level import Level
+from Effect import Effect
+from Items import gitem
+from Utils import Pr, Logger
+from Utils.gamestates.inventorystate import inventorystate
+from Utils.gamestates.combatstate import combatstate
+from Utils.gamestates.mainstate import interact_with_level
 from actionparser import Actionparser
-from config import levels_file,entity_file,effects_file
+from Assethandler import AssetHandler, load_game
 
-
-
-
-def interact_with_level(player, level, level_list):
-    """Current Game Interaction Function
-    """
-    ##### ##### prints out choices and gets user input if choices got printed ##### #####
-    printed = False
-    i = 1
-    if level.name == "Menu":
-        pr.n("\n"*5)
-        pr.headline(level.descr)
-        pr.n("\n"*2)
-    else:
-        hud(player)
-        #pr.n(level.descr)
-        for entry in level.descr:
-            if len(entry) > 1:
-                if isinstance(entry,str):
-                    pr.n(f"{str(entry)}")
-                    continue
-                if entry[1] in level.triggers:
-                    pr.n(f"{str(entry[0])}")
-                continue
-
-    for llist in level.choices:
-        if len(llist) == 1 and llist[0] != "":
-            pr.n(f"{i}. {llist[0]}")
-            printed = True
-            i = i + 1
-        elif len(llist) > 1:
-            for ddict in level.triggers:
-                if llist[1] == ddict:
-                    pr.n(f"{i}. {llist[0]}")
-                    printed = True
-                    i = i + 1
-    if printed:
-        action = int(Inp.inp()) - 1
-
-    ##### ##### Reads triggers and action calls in level.text[dicts] ##### #####
-
-    pr.n(level.text[action][0])
-    if len(level.text[action]) > 1:
-        i = 1
-        while i < len(level.text[action]):
-            key = list(level.text[action][i].keys())
-
-
-
-
-            if "action" not in str(key[0]):
-                for ddict in level.triggers:
-                    if ddict.keys() == level.text[action][1].keys():
-                        try:
-                            #Enumerate als refactor nutzen
-                            triggered_dict = list(filter(lambda dict: dict.keys()
-                                                        != level.text[action][1][key[0]],
-                                                        level.triggers))
-                            triggered_dict_index = level.triggers.index(triggered_dict[0])
-                            level.triggers[triggered_dict_index] = level.text[action][1]
-                        except IndexError as e:
-                            pr.dbg(e)
-                        pr.dbg(level.text[action][1])
-                        pr.dbg(level.triggers)
-            elif "action" in str(key[0]):
-                ##### ##### reads and uses action calls (action parser)##### #####
-                try:
-                    pr.dbg(key)
-                    pr.dbg(level.text[action][i][key[0]])
-                    pr.dbg(level.text[action][i][key[1]])
-                except Exception as e:
-                    pr.dbg(Exception)
-                match level.text[action][i][key[0]]:
-                    case "remove_effect_by_name":
-                        player.remove_effect_by_name(str(level.text[action][i][key[1]]))
-                    case "change_location":
-                        for llevel in level_list:
-                            if llevel.name == str(level.text[action][i][key[1]]):
-                                new_level = llevel
-                                player.change_location(level, new_level)
-                    case "add_effect":
-                        effect = EffectInit.load_effect_by_name_from_json(effects_file,
-                                                        str(level.text[action][i]["effect_name"]))
-                        player.add_effect(effect)
-                    case _:
-                        pr.dbg(f"{level.text[action][i][key[0]]} is not defined ")
-            i = i + 1
-
-
-def hud(player):
-    """Player Hud
-
-    Args:
-        player (Entity): The Player to which the Hud should be displayed
-    """
-    if player.location not in ("Menu","Options"):
-        pr.n("+"*12+" "+"+"*12)
-        pr.n(f"Du befindest dich in: {player.location}")
-        if player.hp > 25:
-            pr.g(f"HP: {player.hp}")
-        else:
-            pr.b(f"HP: {player.hp}")
-        pr.n(f"Gold: {player.wealth}")
-        pr.n(F"Level: {player.level} XP: {player.xp}")
 
 def gameloop(player, level_list=None):
     """
-        The Main Game Loop
+    The Main Game Loop
     """
+    current_level = Level
     if level_list is None:
         level_list = []
 
     lap = 0
+
+    # Entering Gameloop
     while True:
         for level in level_list:
-            if level.name == player.location:
+            if str(level.name) == str(player.location):
+                Logger.log(
+                    f"Player location ({player.location}) "
+                    f"is equal to Level ({level.name}), "
+                )
+                if not player in level.entitylist:
+                    Logger.log(
+                        f"{player.name} not in {level.name} "
+                        f"- adding {player.name} to {level.name} entitylist",
+                        1,
+                    )
+                    level.change_entity_list("+", player)
+                Logger.log(f"Setting CurrentLevel to Level: {level}")
                 current_level = level
 
-        #Loop through all Entities in CurrentLevel and Apply Actionstack
-        for e in current_level.entitylist:
-            #Work through actionstack of Entity and process actions
-            for action in e.actionstack:
-                pr.dbg(action)
-                Actionparser.callfunction(action)
-                e.actionstack.remove(action)
+        # Loop through all Entities in CurrentLevel and Apply Actionstack
+        if Actionparser.gamestate == "game":
+            for e in current_level.entitylist:
+                for action in e.actionstack:
+                    Logger.log(action)
+                    Actionparser.callfunction(action)
+                    e.actionstack.remove(action)
+
+        match Actionparser.gamestate:
+            case "loading":
+                Logger.log(f"Gamestate is now {Actionparser.gamestate}")
+                # loding steps
+                Actionparser.gamestate = "game"
+            case "game":
+                Logger.log(f"Gamestate is now {Actionparser.gamestate}")
+
+                # Hier muss die interact_with_level() func ausgelagert werden.
+
+                interact_with_level(player, current_level, level_list)
+                Actionparser.gamestate = Actionparser.gamestate
+            case "inv":
+                if Actionparser.gamestate == "game" or player.location.name == "Menu":
+                    Logger.log('Gamestate "inv" not available from here!', 1)
+                    Pr.yellow('Gamestate "inv" kann hier nicht geöffnet werden!')
+                    Actionparser.gamestate = "game"
+                else:
+                    Logger.log(f"Gamestate is now {Actionparser.gamestate}")
+                    inventorystate(player)
+                    Actionparser.gamestate = "game"
+            case "combat":
+                Logger.log(f"Gamestate is now {Actionparser.gamestate}")
+                Logger.log(f"{player} Entering Combatstate")
+                combatstate(player, player.location.entitylist)  # pylint: disable=E0601
+                Actionparser.gamestate = "game"
+            case _:
+                Pr.yellow(
+                    f'Der Gamestate "{Actionparser.gamestate}" ist nicht bekannt.'
+                )
+                Logger.log(f"Gamestate {Actionparser.gamestate} unknown", 1)
+                Actionparser.gamestate = "game"
 
         player.check_level_up()
-        interact_with_level(player, current_level, level_list)
-        #changes the entity location, deletes entity from old level and adds to the new one
 
+        # changes the entity location, deletes entity from old level and adds to the new one
 
-        #Increase Lap Counter by i
+        # Increase Lap Counter by i
         lap = lap + 1
 
-        #Wait for Player Input
-        Debug.pause()
+        # Loop through all Entities in CurrentLevel and Apply Actionstack
+        Logger.log(f"Entitylist: {[str(x) for x in current_level.entitylist]}", -1)
+        for e in current_level.entitylist:
+            Logger.log(f"Working Actionstack for {e}", 1)
+            Logger.log(f"Actionstack: {e.actionstack}")
+            # Work through actionstack of Entity and process actions
+            for i in range(0, len(e.actionstack)):
+                Logger.log("#" * 50, -1)
+                Logger.log(f"Length of Actionstack: {len(e.actionstack)}", -1)
+                Logger.log(f"Current Actionstack: {e.actionstack}", -1)
+                Logger.log(f"Current Index: {i}", -1)
+                cur_action = e.actionstack.pop(0)
+                Actionparser.callfunction(cur_action)
+                Logger.log(f"Cur_Action: {cur_action}", -1)
+                Logger.log(
+                    f"Length of Actionstack after Action: {len(e.actionstack)}", -1
+                )
+                Logger.log(f"Current Actionstack after Action: {e.actionstack}", -1)
+                Logger.log("#" * 50, -1)
 
 
 if __name__ == "__main__":
-    mPlayer = Entity("Player", 100,100,0,
-                    [gitem("Item1","weapon"),gitem("item2","misc")], location="Menu")
-    hurensohn = Entity("Hurensohn", 100,100,0,
-                    [gitem("Item1","weapon"),gitem("item2","misc")], location="Wiese")
-    #mPlayer.set_name()
-    kopfschmerz = Effect("Kopfschmerz","Kopfschmerzen halt.","bad", -1, "hp")
-    heilung = Effect("heilung","Nö","good", 5, "hp")
-    heilung2 = Effect("heilung2","Nö","good", 5, "hp")
-    heilung3 = Effect("heilung 3","Nö","good", 5, "hp")
-    terror = Effect("Terror","Nö","evil", -100, "xp")
 
-    #Load all existing Levels
-    print(levels_file)
-    allLevels = LevelInit.load_all_levels_from_json(levels_file)
-    Debug.objlist(allLevels, "Levels")
+    # Test loadgame Function
+    load_game()
 
-    #Load all existing Entities
-    allEntities = EntityInit.load_entities_fromjson(entity_file)
-    Debug.objlist(allEntities,"Entities")
+    # Checking Game File Integrity
+    # AssetHandler.CheckGameIntegrity()
 
-    ###########################################
-    #######___HOW TO USE ACTIONSTACK___########
-    ###########################################
-    ####Add actions to Player Actionstack
-    # mPlayer.actionstack.put("Some Action from Actionstack")
-    # mPlayer.actionstack.put("Another Action from Actionstack")
-    # mPlayer.actionstack.put("And Another Action from Actionstack")
-    # mPlayer.actionstack.put("let_effects_take_effect")
+    # Importing Level Assets
+    # AssetHandler.importLevels()
+    allLevels = AssetHandler.allLevels
 
-    #put Kopfschmerz Effect in Actionstack
-    mPlayer.actionstack.append(["add_effect",[mPlayer,"Kopfschmerz"]])
-    mPlayer.actionstack.append(["take_effects",[mPlayer,True]])
+    # Importing Entity Assets
+    # AssetHandler.importEntities()
+    allEntities = AssetHandler.allEntities
 
+    # importing Item Assets
+    # AssetHandler.importItems()
+    allItems = AssetHandler.allItems
+
+    # Importing Effect Assets
+    # AssetHandler.importEffects()
+    allEffect = AssetHandler.allEffects
+
+    # Creating seperate Player Entitiies
+    mPlayer = Entity(
+        "Player",
+        100,
+        100,
+        0,
+        allItems,
+        location=allLevels[-2],
+        attributes={"str": 8, "dex": 8, "int": 8, "ini": 80, "chr": 8},
+        isPlayer=True,
+    )
+    # Creating seperate Effects
+    kopfschmerz = Effect("Kopfschmerz", "Kopfschmerzen halt.", "bad", -1, "hp")
+    heilung = Effect("heilung", "Nö", "good", 5, "hp")
+    heilung2 = Effect("heilung2", "Nö", "good", 5, "hp")
+    heilung3 = Effect("heilung 3", "Nö", "good", 5, "hp")
+    terror = Effect("Terror", "Nö", "evil", -100, "xp")
+
+    # put Kopfschmerz Effect in Actionstack
+    mPlayer.actionstack.append(["add_effect", [mPlayer, "Kopfschmerz"]])
+    mPlayer.actionstack.append(["take_effects", [mPlayer, True]])
+    mPlayer.actionstack.insert(0, ["change_gamestate", ["game"]])
+
+    # List all Loaded Levels and Entities
+    # Debug.objlist(allLevels, "Levels")
+    # Debug.objlist(allEntities, "Entities")
+    # Debug.objlist(allItems, "Items")
+
+    Logger.log(f"Speicherbedarf Levels: {getsize(Level())} B", 3)
+    Logger.log(f"Speicherbedarf Items: {getsize(gitem())} B", 3)
+    Logger.log(f"Speicherbedarf Entities: {getsize(Entity())} B", 3)
+    Logger.log(f"Speicherbedarf Effects: {getsize(Effect())} B", 3)
+
+    # Fill Player iventory with Placeholder Items
+    while len(mPlayer.slots) < 11:
+        mPlayer.slots.append("placeholder")
+
+    # Run Game
     gameloop(mPlayer, allLevels)

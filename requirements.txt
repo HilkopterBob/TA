@@ -1,3 +1,5 @@
 huepy==1.2.1
 pystyle==2.9
 hunter==3.5.1
+progress==1.6
+questionary==1.10.0

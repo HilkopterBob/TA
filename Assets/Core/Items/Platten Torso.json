@@ -1,0 +1,20 @@
+{
+    "$schema": "../../../.github/workflows/itemschema.json",
+    "Platten Torso": {
+        "type": "armor",
+        "description": "",
+        "ad": "0w0+0",
+        "ap": "0w0+0",
+        "hp": 10,
+        "ar": 10,
+        "mr": 1,
+        "effects": [],
+        "useable": false,
+        "equipable": true,
+        "slots": [
+            "torso"
+        ],
+        "questitem": false,
+        "rarity": "rare"
+    }
+}

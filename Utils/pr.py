@@ -1,20 +1,31 @@
 """Module for all Print Statements
 """
+
 # pylint: disable=W,E
 import inspect
-from pystyle import  Colors, Colorate, Box, Center, Write
+from datetime import datetime, date
+from pystyle import Colors, Colorate, Box, Center, Write
 from huepy import *
-from config import dbg
+from config import dbg, log_file, dbg_level, logbymodule, exclude_dbg_lvl
 
 
-class pr():
-
+class Pr:
     """
     Utility Class for custom Prints, headlines, Inputs etc...
     """
 
-
     # ===== Color Definitions ===== #
+    def purple(text):
+        """Prints Green Text
+
+        Args:
+            text (String): Text to be Printed
+
+        Returns:
+            Print: String
+        """
+        return print(Colorate.Color(Colors.purple, f"{text}", True))
+
     def green(text):
         """Prints Green Text
 
@@ -69,8 +80,8 @@ class pr():
             Print: String
         """
         return print(Colorate.Color(Colors.cyan, f"{text}", True))
-    # =====                  ===== #
 
+    # =====                  ===== #
 
     # ===== Print Definitions ===== #
     def n(text=""):
@@ -144,22 +155,80 @@ class pr():
             Prints Debug Information into Console
         Args:
             text (str): Text to be Displayed. Defaults to "".
-            errlvl (int): Errorlevel 0=Inf, 1=Err. Defaults to 0.
+            errlvl (int): Errorlevel -1=Dbg, 0=Inf, 1=Warn, 2=Err, 3=Highlight. Defaults to 0.
         """
 
-        if not dbg:
-            return
+        today = date.today().strftime("%d-%m-%Y")
 
-        module = inspect.currentframe().f_back.f_globals['__name__']
+        module = inspect.currentframe().f_back.f_globals["__name__"]
         function = inspect.stack()[1].function
         line_number = inspect.stack()[1].lineno
 
-        if errlvl == 0:
-            print(f'{info("")} {good("")} \
-                  {str(yellow(f"[{line_number}] DBG - {module} - {function}: "))} {str(text)}')
-        else:
-            print(f'{info("")} {bad("")} \
-                  {str(yellow(f"[{line_number}] DBG - {module} - {function}: "))} {str(text)}')
+        stack_1 = f"[{line_number}] DBG - {module} - {function}: "
+        stack0 = f"[{line_number}] INFO - {module} - {function}: "
+        stack1 = f"[{line_number}] WARN - {module} - {function}: "
+        stack2 = f"[{line_number}] ERR - {module} - {function}: "
+
+        message = str(text)
+        timestamp = datetime.now().strftime("%H:%M:%S")
+
+        match errlvl:
+            case -1:  # Debug
+                logstr = f"{stack_1}{message}"
+                if exclude_dbg_lvl:
+                    logstr = None
+                if dbg_level >= 3:
+                    if dbg:
+                        print(
+                            f'{info("")} {good("")} \
+                                    {str(purple(stack_1))} {message}'
+                        )
+            case 0:  # Informational
+                logstr = f"{stack0}{message}"
+                if dbg_level >= 2:
+                    if dbg:
+                        print(
+                            f'{info("")} {good("")} \
+                                    {str(green(stack0))} {message}'
+                        )
+
+            case 1:  # Warning
+                logstr = f"{stack1}{message}"
+                if dbg_level >= 1:
+                    if dbg:
+                        print(
+                            f'{info("")} {info("")} \
+                                    {str(yellow(stack1))} {message}'
+                        )
+
+            case 2:  # Err
+                logstr = f"{stack2}{message}"
+                if dbg_level >= 0:
+                    if dbg:
+                        print(
+                            f'{info("")} {bad("")} \
+                                    {str(red(stack2))} {message}'
+                        )
+
+            case 3:  # Highlight
+                logstr = f"{stack2}{message}"
+                if dbg_level >= 0:
+                    if dbg:
+                        print(
+                            f'{info("")} {cyan("")} \
+                                    {str(yellow(stack2))} {message}'
+                        )
+
+        with open(log_file, "a") as log:
+            if logstr:
+                log.write(f"{timestamp} - {logstr}\n")
+
+        if logbymodule:
+            _log_file = log_file.split("/")
+            _log_file.insert(1, f"/{module} - ")
+            _log_file = "".join(_log_file)
+            with open(_log_file, "a") as log:
+                log.write(f"{timestamp} - {logstr}\n")
 
     def headline(text=""):
         """Prints Headlines
@@ -171,26 +240,3 @@ class pr():
             Print: String
         """
         print(Center.XCenter(Box.Lines(text)))
-
-    def showcase():
-        """Prints all the print functions
-
-        Args:
-            text (String): Text to be Printed
-
-        Returns:
-            Print: String
-        """
-        pr.n("Das ist die standard Printanweisung")
-        pr.a("Allerts!")
-        pr.b("Bad shit")
-        pr.i("Information")
-        pr.g("Good")
-        pr.q("Quest(ion)")
-        pr.dbg("InfoLevel Debug")
-        pr.dbg("ErrorLevel Debug", 1)
-        pr.green("Green Text")
-        pr.yellow("Yellow Text")
-        pr.red("Red Text")
-        pr.blue("Blue Text")
-        pr.cyan("Cyan Text")

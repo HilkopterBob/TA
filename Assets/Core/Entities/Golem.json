@@ -1,0 +1,29 @@
+{
+  "$schema": "../../../.github/workflows/entitieschema.json",
+  "Golem": {
+    "name": "Golem",
+    "hp": 150,
+    "wealth": 0,
+    "inv": [],
+    "xp": 0,
+    "ptype": [9],
+    "geffects": [],
+    "beffects": [],
+    "eeffects": [],
+    "location": "",
+    "level": 0,
+    "allowdamage": true,
+    "slots": [],
+    "attributes": {
+      "str": 12,
+      "dex": 4,
+      "int": 3,
+      "ini": 2,
+      "chr": 2
+    },
+    "loottable": "Trial",
+    "ai": "Trial",
+    "isPlayer": false,
+    "Team": 1
+  }
+}

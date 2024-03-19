@@ -18,6 +18,6 @@ jobs:
           fetch-depth: 0
       - name: Validate JSON
         uses: nhalstead/validate-json-action@0.1.3
-        env:
-          INPUT_SCHEMA: /.github/workflows/${{matrix.json}}chema.json
-          INPUT_JSONS: /Assets/Core/${{matrix.json}}/**.json
+        with:
+          schema: /.github/workflows/${{matrix.json}}chema.json
+          jsons: /Assets/Core/${{matrix.json}}/**.json

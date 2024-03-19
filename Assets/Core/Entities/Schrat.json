@@ -1,0 +1,29 @@
+{
+  "$schema": "../../../.github/workflows/entitieschema.json",
+  "Schrat": {
+    "name": "Schrat",
+    "hp": 120,
+    "wealth": 0,
+    "inv": [],
+    "xp": 0,
+    "ptype": [13],
+    "geffects": [],
+    "beffects": [],
+    "eeffects": [],
+    "location": "",
+    "level": 0,
+    "allowdamage": true,
+    "slots": [],
+    "attributes": {
+      "str": 0,
+      "dex": 6,
+      "int": 6,
+      "ini": 7,
+      "chr": 1
+    },
+    "loottable": "Trial",
+    "ai": "Trial",
+    "isPlayer": false,
+    "Team": 1
+  }
+}

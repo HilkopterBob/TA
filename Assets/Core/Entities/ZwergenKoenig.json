@@ -1,0 +1,29 @@
+{
+  "$schema": "../../../.github/workflows/entitieschema.json",
+  "ZwergenKoenig": {
+    "name": "ZwergenKoenig",
+    "hp": 80,
+    "wealth": 0,
+    "inv": [],
+    "xp": 0,
+    "ptype": [8, 1],
+    "geffects": [],
+    "beffects": [],
+    "eeffects": [],
+    "location": "",
+    "level": 0,
+    "allowdamage": true,
+    "slots": [],
+    "attributes": {
+      "str": 10,
+      "dex": 14,
+      "int": 10,
+      "ini": 12,
+      "chr": 8
+    },
+    "loottable": "Trial",
+    "ai": "Trial",
+    "isPlayer": false,
+    "Team": 1
+  }
+}

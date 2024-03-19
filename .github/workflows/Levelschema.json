@@ -1,0 +1,112 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "type": "object",
+  "properties": {
+    "Menu": {
+      "type": "object",
+      "required": [
+        "text",
+        "choices",
+        "inv",
+        "ltype",
+        "descr",
+        "entitylist",
+        "triggers"
+      ],
+      "description": "Hauptmenülevel",
+      "$ref": "#/definitions/Level"
+    },
+    "Options": {
+      "type": "object",
+      "required": [
+        "text",
+        "choices",
+        "inv",
+        "ltype",
+        "descr",
+        "entitylist",
+        "triggers"
+      ],
+      "description": "Optionsmenülevel",
+      "$ref": "#/definitions/Level"
+    }
+  },
+  "patternProperties": {
+    "^[A-Z].[a-z]{1,}": {
+      "$ref": "#/definitions/Level"
+    }
+  },
+  "definitions": {
+    "Level": {
+      "type": "object",
+      "description": "Levelname",
+      "properties": {
+        "text": {
+          "type": "array",
+          "description": "Eine Liste der angezeigten Texte im Level",
+          "items": {
+            "type": "array",
+            "items": {
+              "anyOf": [{ "type": "string" }, { "type": "object" }]
+            }
+          }
+        },
+        "choices": {
+          "type": "array",
+          "description": "Die Auswahlmöglichkeiten die dem Spieler angezeigt werden",
+          "items": {
+            "type": "array",
+            "items": {
+              "anyOf": [{ "type": "string" }, { "type": "object" }]
+            }
+          }
+        },
+        "inv": {
+          "type": "array",
+          "description": "Das Levelinventar"
+        },
+        "ltype": {
+          "type": "string",
+          "description": "Der Umgebungstyp des Levels",
+          "enum": ["friedlich", "neutral", "harmful", "Testlevel"]
+        },
+        "descr": {
+          "anyOf": [{ "type": "string" }, { "type": "array" }],
+          "description": "Die Beschreibung des Levels",
+          "minLength": 0,
+          "maxLength": 200
+        },
+        "entitylist": {
+          "type": "array",
+          "description": "Eine Liste aller Entitäten im Level"
+        },
+        "entityspawn": {
+          "type": "object",
+          "description": "Eine Liste aller möglichen Entitäten die Spawnen können mit deren Wahrscheinlichkeiten"
+        },
+        "triggers": {
+          "type": "array",
+          "description": "Definierte Bedingungen um Actions auszuführen"
+        },
+        "child_levels": {
+          "type": "object",
+          "description": "Eine Liste aller Level die sich innerhalb eines Levels befinden können",
+          "patternProperties": {
+            "^[A-Z].[a-z]{1,}": {
+              "$ref": "#/definitions/Level"
+            }
+          }
+        }
+      },
+      "required": [
+        "text",
+        "choices",
+        "inv",
+        "ltype",
+        "descr",
+        "entitylist",
+        "triggers"
+      ]
+    }
+  }
+}
