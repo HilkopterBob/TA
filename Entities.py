@@ -327,8 +327,6 @@ class Entity:  # pylint: disable=R0904
 
         Logger.log(f"{self.name} is about to take {value} damage from {inflicter}", 1)
 
-        # TODO: Fix order in which damage is inflicted / actionstack is worked
-
         for i in range(0, 8):
             try:
                 if self.slots[i].itype != "armor":  # pylint: disable=E1101
@@ -363,7 +361,6 @@ class Entity:  # pylint: disable=R0904
             _ret = self.change_health(i * -1)
             if _ret:
                 Logger.log(f"{self.name} is destroyed!")
-                # TODO: remove Entity from Entitylist so it doesn't get counted in action parsing
                 self.actionstack = []
                 try:
                     _loot = loot.roll_loot(self.loottable, 1)
