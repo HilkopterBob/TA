@@ -219,9 +219,7 @@ def get_triggers(choices):
     edit_triggers_bool = Confirm.ask("welche Defaultwerte sollen ?")
 
     create_choices_bool = Confirm.ask("Möchtest du weitere Choices erstellen?")
-        if create_choices_bool is False:
-            print(created_choices)
-            return created_choices
+
 
 def edit_level():
     """edit existing level"""
