@@ -2,7 +2,7 @@
 """
 
 import questionary
-from rich.prompt import Prompt
+from rich.prompt import Prompt, Confirm
 
 
 class Level:
@@ -15,7 +15,7 @@ class Level:
     __slots__ = (
         "name",
         "descr",
-        "text",
+        # "text",
         "choices",
         "inv",
         "triggers",
@@ -26,7 +26,7 @@ class Level:
 
     def __init__(
         self,
-        text=None,
+        # text=None,
         choices=None,
         name="Levelnameplatzhalter",
         inv=None,
@@ -36,8 +36,8 @@ class Level:
         entityspawn=None,
         triggers=None,
     ):
-        if text is None:
-            text = []
+        # if text is None:
+        #     text = []
         if choices is None:
             choices = []
         if inv is None:
@@ -109,50 +109,64 @@ __/\\\__________________________________________________________/\\\\\\_________
             - 1
         )
         print(f"{choice} + {editor_choices[choice]}")
-        if editor_choices[choice] == "Create new Level":
+        module_to_load = editor_choices[choice]
+        print(module_to_load)
+        print(type(module_to_load))
+        if module_to_load == "Create new Level":
             create_new_Level()
-        if editor_choices[choice] == "Edit existing Level":
-            edit_level()
-        else:
-            print("Wrong Input. restarting...\n\n\n\n\n\n\n\n\n")
+        # if choice == 0:
+        #     create_new_Level()
+        # elif choice == 1:
+        #     edit_level()
+        # else:
+        #     print("Wrong Input. restarting...\n\n\n\n\n\n\n\n\n")
 
 
 def create_new_Level():
     """create new level"""
     new_level = Level(
-        name=questionary.text("Wie willst du das Level nennen?"),
-        descr=questionary.text("Welche Beschreibung soll das Level haben?"),
-        ltype=questionary.select(
+        name=Prompt.ask("Wie willst du das Level nennen?"),
+        descr=Prompt.ask("Welche Beschreibung soll das Level haben?"),
+        ltype=Prompt.ask(
             "Welchen Typus soll das Level haben?",
             choices=["friedlich", "neutral", "feindlich", "böse"],
         ),
         choices=create_choices(),
-        triggers=get_triggers(),
+        triggers=get_triggers(choices),
     )
-
-    print("Dein neues level!")
-    print(vars(new_level))
+    print("\n".join([f"{attr}: {getattr(new_level, attr)}" for attr in dir(new_level)]))
+    for choice in new_level.choices:
+        print("\n".join([f"{attr}: {getattr(choice, attr)}" for attr in dir(choice)]))
 
 
 def create_choices():
     """create choices, texts and allow_triggers"""
-    create_choices_bool = True
+    create_choices_bool = Confirm.ask("Möchtest du eine Choice erstellen?")
+    created_choices = []
 
     while create_choices_bool is True:
         new_choice = Choice(
-            choice=questionary.text("Welchen Text soll die Choice anzeigen?"),
-            text=questionary.text("Welchen Ausgabetext soll die Choice zeigen?"),
+            choice=Prompt.ask("Welchen Text soll die Choice anzeigen?"),
+            text=Prompt.ask("Welchen Ausgabetext soll die Choice zeigen?"),
         )
 
-        if questionary.confirm("Soll die Choice einen Allow_trigger haben?") is True:
+        if (
+            Confirm.ask(
+                "Soll die Choice einen Allow_trigger haben?", choices=["yes", "no"]
+            )
+            is True
+        ):
             new_choice.allow_trigger = {
-                questionary.text(
-                    "Bitte gebe den Trigger-Dict-Key ein:\n"
-                ): questionary.text("Biite gebe das Trigger-Dict-Value ein:\n")
+                Prompt.ask("Bitte gebe den Trigger-Dict-Key ein:\n"): Prompt.ask(
+                    "Biite gebe das Trigger-Dict-Value ein:\n"
+                )
             }
 
-        if questionary.confirm("Soll die Choice eine Action haben?") is True:
-            new_choice_action = questionary.select(
+        if (
+            Confirm.ask("Soll die Choice eine Action haben?", choices=["yes", "no"])
+            is True
+        ):
+            new_choice_action = Prompt.ask(
                 "Welche Action soll die Choice haben?",
                 choices=[
                     "close_game",
@@ -169,19 +183,45 @@ def create_choices():
                     "show_wip",
                 ],
             )
+            new_choice_action_attr_bool = Confirm.ask(
+                "Soll die Action ein zusätzliches Datenattribut bekommen?",
+                choices=["yes", "no"],
+            )
+            new_choice_action_attr = []
+            while new_choice_action_attr_bool is True:
+                new_choice_action_attr.append(
+                    Prompt.ask("Gebe das Choice-Action-Datenattribut als Dict an:\n")
+                )
+                new_choice_action_attr_bool = Confirm.ask(
+                    "Soll die Action ein zusätzliches Datenattribut bekommen?",
+                    choices=["yes", "no"],
+                )
+                if new_choice_action_attr_bool is not True:
+                    break
 
         # TODO: further develop Actions
 
-        create_choices_bool = questionary.confirm(
-            "Möchtest du weitere Choices erstellen?"
-        )
+        created_choices.append(new_choice)
+
+        create_choices_bool = Confirm.ask("Möchtest du weitere Choices erstellen?")
         if create_choices_bool is False:
-            return []
+            print(created_choices)
+            return created_choices
 
 
-def get_triggers():
+def get_triggers(choices):
     """somehow get the level default triggers"""
+    list_created_choice_triggers = []
+    for choice in choices:
+        for trigger in choice:
+            list_created_choice_triggers.append(trigger)
 
+    edit_triggers_bool = Confirm.ask("welche Defaultwerte sollen ?")
+
+    create_choices_bool = Confirm.ask("Möchtest du weitere Choices erstellen?")
+        if create_choices_bool is False:
+            print(created_choices)
+            return created_choices
 
 def edit_level():
     """edit existing level"""
