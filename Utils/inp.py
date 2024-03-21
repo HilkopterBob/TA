@@ -53,6 +53,7 @@ class Inp:
         min_len = 0
         max_len = 150
 
+        # TODO: add dev-completer, because more easy now
         usercompleter = WordCompleter(userbefehl.keys())
         user_input = prompt(">_ ", completer=usercompleter)
 
