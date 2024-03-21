@@ -62,6 +62,11 @@ def call_function(file_path, function_name, *args, **kwargs):  # pylint: disable
         module = importlib.util.module_from_spec(spec)
         spec.loader.exec_module(module)
 
+        # TODO: Implement Return-To-Geck function
+        # a proposed implementatation could be:
+        # try: exec function
+        # except BackToGeck: run GUI-Function
+
         function = getattr(module, function_name)
         return function(*args, **kwargs)
     except (ImportError, AttributeError) as e_error:
