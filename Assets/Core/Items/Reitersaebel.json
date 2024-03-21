@@ -1,18 +1,26 @@
 {
-  "$schema": "../../../.github/workflows/itemschema.json",
-  "Reitersaebel": {
-    "type": "weapon",
-    "description": "",
-    "ad": "1w6+3",
-    "ap": "0w0+0",
-    "hp": 0,
-    "ar": 0,
-    "mr": 0,
-    "effects": [],
-    "useable": false,
-    "equipable": true,
-    "slots": ["melee"],
-    "questitem": false,
-    "rarity": "uncommon"
-  }
+    "$schema": "../../.github/workflows/Itemschema.json",
+    "Reitersaebel": {
+        "name": "Reitersaebel",
+        "type": "weapon",
+        "desc": "",
+        "ad": "1w6+3",
+        "ap": "0w0+0",
+        "hp": 0,
+        "ar": 0,
+        "mr": 0,
+        "useable": false,
+        "equipable": true,
+        "slots": [
+            "melee"
+        ],
+        "blocking": [
+            ""
+        ],
+        "questitem": false,
+        "rarity": "uncommon",
+        "effects": [
+            ""
+        ]
+    }
 }

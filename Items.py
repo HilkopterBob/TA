@@ -30,6 +30,7 @@ class gitem:
         "useable",
         "equipable",
         "slots",
+        "blocking",
         "questitem",
     )
 
@@ -48,12 +49,15 @@ class gitem:
         useable=False,
         equipable=False,
         slots=None,
+        blocking=None,
         questitem=False,
     ):
         if effects is None:
             effects = []
         if slots is None:
             slots = []
+        if blocking is None:
+            blocking = []
 
         self.name = name
         """Name of Item as String"""
@@ -81,6 +85,8 @@ class gitem:
         """If the Item is equipable as Boolean"""
         self.slots = slots
         """The Slots where the Item can be Equipped as Array of Slots"""
+        self.blocking = blocking
+        """The Slots that get blocked by that Item"""
         self.questitem = questitem
         """If the Item as a Questrelatet Item as Boolean"""
 
@@ -146,7 +152,7 @@ class gitem:
         return gitem(
             iname,
             json_dct["type"],
-            json_dct["description"],
+            json_dct["desc"],
             json_dct["ad"],
             json_dct["ap"],
             json_dct["hp"],
@@ -157,6 +163,7 @@ class gitem:
             json_dct["useable"],
             json_dct["equipable"],
             json_dct["slots"],
+            json_dct["blocking"],
             json_dct["questitem"],
         )
 

@@ -10,12 +10,12 @@ from hashlib import sha256
 # GECK Entry-Point
 def Convert_Items():
     """GECK entrypoint"""
-    CreateContentPack("../TA/Assets/Core")
+    CreateContentPack("..\\TA\\Assets\\Core")
 
 
 def cItems():
     """Creates Items from CSV"""
-    table = "../TA/table.csv"
+    table = "..\\TA\\table.csv".replace("\\", os.sep)
 
     with open(table, encoding="UTF-8") as csvfile:
         csv_reader = csv.reader(csvfile)
@@ -26,10 +26,10 @@ def cItems():
                     ad = "0w0+0"
                 else:
                     ad = row[6]
-                if row[9] == "0":
+                if row[10] == "0":
                     ap = "0w0+0"
                 else:
-                    ap = row[9]
+                    ap = row[10]
                 data = {
                     "$schema": "../../../.github/workflows/itemschema.json",
                     row[0]: {
@@ -37,15 +37,16 @@ def cItems():
                         "description": row[1],
                         "ad": ad,
                         "ap": ap,
-                        "hp": int(row[7]),
-                        "ar": int(row[8]),
-                        "mr": int(row[10]),
+                        "hp": int(row[8]),
+                        "ar": int(row[9]),
+                        "mr": int(row[11]),
                         "effects": [],
-                        "useable": bool(row[11]),
-                        "equipable": bool(row[12]),
+                        "useable": bool(row[12]),
+                        "equipable": bool(row[13]),
                         "slots": [x.strip() for x in row[5].lower().split(",")],
-                        "questitem": bool(row[14]),
-                        "rarity": row[13].lower(),
+                        "blocking": [x.strip() for x in row[6].lower().split(",")],
+                        "questitem": bool(row[15]),
+                        "rarity": row[14].lower(),
                     },
                 }
 

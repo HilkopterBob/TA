@@ -49,47 +49,50 @@ def items_csv_to_jsons():
 
     with open(csv_file, "r", encoding="utf-8") as file:
         reader = csv.DictReader(file, delimiter=delimiter)
+        line = 0
         for row in reader:
+            if line > 1:
+                ap = row.get("AP", "")
+                ad = row.get("AD", "")
 
-            ap = row.get("AP", "")
-            ad = row.get("AD", "")
+                # Wert für AP und AD anpassen, falls 0 in der CSV
+                if ap == "0":
+                    ap = "0w0+0"
+                if ad == "0":
+                    ad = "0w0+0"
 
-            # Wert für AP und AD anpassen, falls 0 in der CSV
-            if ap == "0":
-                ap = "0w0+0"
-            if ad == "0":
-                ad = "0w0+0"
+                json_data = {
+                    "name": replace_umlauts(row.get("Name", "")),
+                    "type": replace_umlauts(row.get("Category", "")).lower(),
+                    "desc": replace_umlauts(row.get("Description", "")),
+                    "ad": ad,
+                    "ap": ap,
+                    "hp": int(row.get("HP", 0)),
+                    "ar": int(row.get("AR", 0)),
+                    "mr": int(row.get("MR", 0)),
+                    "useable": bool(row.get("Useable", False)),
+                    "equipable": bool(row.get("Equipable", False)),
+                    "slots": row.get("Slot", "").lower().split(","),
+                    "blocking": row.get("Blocking", "").lower().split(","),
+                    "questitem": bool(row.get("QuestItem", False)),
+                    "rarity": replace_umlauts(row.get("BaseRarity", "common")).lower(),
+                    "effects": row.get("Effects", "").split(","),
+                }
 
-            json_data = {
-                "name": replace_umlauts(row.get("Name", "")),
-                "type": replace_umlauts(row.get("Category", "")),
-                "desc": replace_umlauts(row.get("Description", "")),
-                "ad": ad,
-                "ap": ap,
-                "hp": int(row.get("HP", 0)),
-                "ar": int(row.get("AR", 0)),
-                "mr": int(row.get("MR", 0)),
-                "useable": bool(row.get("Useable", False)),
-                "equipable": bool(row.get("Equipable", False)),
-                "slots": row.get("Slot", "").split(","),
-                "questitem": bool(row.get("QuestItem", False)),
-                "rarity": replace_umlauts(row.get("BaseRarity", "common")),
-                "effects": row.get("Effects", "").split(","),
-            }
-
-            # JSON-Datei schreiben
-            json_file = f"{replace_umlauts(row['Name'])}.json"
-            json_path = os.path.join(json_folder, json_file)
-            with open(json_path, "w", encoding="utf-8") as json_file:
-                json.dump(
-                    {
-                        "$schema": "../../.github/workflows/itemschema.json",
-                        replace_umlauts(row["Name"]): json_data,
-                    },
-                    json_file,
-                    indent=4,
-                    ensure_ascii=True,
-                )
+                # JSON-Datei schreiben
+                json_file = f"{replace_umlauts(row['Name'])}.json"
+                json_path = os.path.join(json_folder, json_file)
+                with open(json_path, "w", encoding="utf-8") as json_file:
+                    json.dump(
+                        {
+                            "$schema": "../../.github/workflows/Itemschema.json",
+                            replace_umlauts(row["Name"]): json_data,
+                        },
+                        json_file,
+                        indent=4,
+                        ensure_ascii=True,
+                    )
+            line += 1
 
     print(
         f"Konvertierung abgeschlossen! Die JSON-Dateien wurden im Ordner '{json_folder}' erstellt."

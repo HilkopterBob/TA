@@ -1,5 +1,5 @@
 {
-  "$schema": "../../../.github/workflows/itemschema.json",
+  "$schema": "../../../.github/workflows/Itemschema.json",
   "GodlySword": {
     "type": "weapon",
     "description": "",
@@ -12,6 +12,7 @@
     "useable": false,
     "equipable": true,
     "slots": ["melee"],
+    "blocking": [""],
     "questitem": false,
     "rarity": "legendary"
   }

@@ -685,6 +685,10 @@ class Entity:  # pylint: disable=R0904
         if slot == "":
             slot = cur_item.slots[0]
 
+        Logger.log(f"Length of Slots: {len(cur_item.slots)}", 4)
+        if len(cur_item.slots) > 1:  #
+            Logger.log("Item is Multislot use", 4)
+
         Logger.log(f"Equipping {item_name} in {slot}", -1)
         match slot:
             case "head":

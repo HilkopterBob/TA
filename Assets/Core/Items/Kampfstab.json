@@ -1,20 +1,26 @@
 {
-    "$schema": "../../../.github/workflows/itemschema.json",
+    "$schema": "../../.github/workflows/Itemschema.json",
     "Kampfstab": {
+        "name": "Kampfstab",
         "type": "weapon",
-        "description": "",
+        "desc": "",
         "ad": "1w10+2",
         "ap": "0w0+0",
         "hp": 0,
         "ar": 0,
         "mr": 0,
-        "effects": [],
         "useable": false,
         "equipable": true,
         "slots": [
             "melee"
         ],
+        "blocking": [
+            ""
+        ],
         "questitem": false,
-        "rarity": "uncommon"
+        "rarity": "uncommon",
+        "effects": [
+            ""
+        ]
     }
 }
