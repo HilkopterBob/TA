@@ -10,7 +10,7 @@ from hashlib import sha256
 # GECK Entry-Point
 def Convert_Items():
     """GECK entrypoint"""
-    CreateContentPack("..\\TA\\Assets\\Core")
+    CreateContentPack("..\\TA\\Assets\\Core".replace("\\", os.sep))
 
 
 def cItems():
