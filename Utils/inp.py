@@ -1,37 +1,40 @@
 """Defines Input Method for User - exact copy of Inputparser-Module
 """
 
-import readline
 import re
 from time import sleep
-from rich import print, markdown  # pylint: disable=W0622
 
+# import pyreadline as readline
+from rich import print, markdown  # pylint: disable=W0622
 
 from pystyle import Colors, Write, Center, Box
 from Utils.pr import Pr
 from Utils.logger import Logger
 
+from prompt_toolkit import prompt
+from prompt_toolkit.completion import WordCompleter
 
-class Completer:  # Custom completer
-    """Completer for autocompletion"""
 
-    def __init__(self, options):
-        self.options = sorted(options)
-        self.matches = []
+# class Completer:  # Custom completer
+#     """Completer for autocompletion"""
 
-    def complete(self, text, state):
-        """tries to complete a text on <tab>"""
-        if state == 0:  # on first trigger, build possible matches
-            if text:  # cache matches (entries that start with entered text)
-                self.matches = [s for s in self.options if s and s.startswith(text)]
-            else:  # no text entered, all matches possible
-                self.matches = self.options[:]
+#     def __init__(self, options):
+#         self.options = sorted(options)
+#         self.matches = []
 
-        # Check if there are more matches
-        if state < len(self.matches):  # pylint: disable=R1705
-            return self.matches[state]
-        else:
-            return None
+#     def complete(self, text, state):
+#         """tries to complete a text on <tab>"""
+#         if state == 0:  # on first trigger, build possible matches
+#             if text:  # cache matches (entries that start with entered text)
+#                 self.matches = [s for s in self.options if s and s.startswith(text)]
+#             else:  # no text entered, all matches possible
+#                 self.matches = self.options[:]
+
+#         # Check if there are more matches
+#         if state < len(self.matches):  # pylint: disable=R1705
+#             return self.matches[state]
+#         else:
+#             return None
 
 
 class Inp:
@@ -72,11 +75,17 @@ class Inp:
 
         min_len = 0
         max_len = 150
-        user_input = Write.Input(text + "\n >_ ", Colors.white, interval=0.0025)
+        # user_input = Write.Input(text + "\n >_ ", Colors.white, interval=0.0025)
 
-        completer = Completer(userbefehl)
-        readline.set_completer(completer.complete)
-        readline.parse_and_bind("tab: complete")
+        usercompleter = WordCompleter(userbefehl.keys())
+
+        user_input = prompt(">_ ", completer=usercompleter)
+
+        # completer = Completer(userbefehl)
+        # readline.set_completer(completer.complete)
+        # readline.parse_and_bind("tab: complete")
+
+        # readline.co
 
         try:
             if not user_input.strip():
