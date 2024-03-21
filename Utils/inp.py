@@ -1,36 +1,17 @@
 """Defines Input Method for User - exact copy of Inputparser-Module
 """
 
-import readline
-
 import re
 from time import sleep
+
+# import pyreadline as readline
+from rich import print, markdown  # pylint: disable=W0622
+from prompt_toolkit import prompt
+from prompt_toolkit.completion import WordCompleter
 from pystyle import Colors, Write, Center, Box
+
 from Utils.pr import Pr
 from Utils.logger import Logger
-from config import dbg
-
-
-class Completer:  # Custom completer
-    """Completer for autocompletion"""
-
-    def __init__(self, options):
-        self.options = sorted(options)
-        self.matches = []
-
-    def complete(self, text, state):
-        """tries to complete a text on <tab>"""
-        if state == 0:  # on first trigger, build possible matches
-            if text:  # cache matches (entries that start with entered text)
-                self.matches = [s for s in self.options if s and s.startswith(text)]
-            else:  # no text entered, all matches possible
-                self.matches = self.options[:]
-
-        # Check if there are more matches
-        if state < len(self.matches):  # pylint: disable=R1705
-            return self.matches[state]
-        else:
-            return None
 
 
 class Inp:
@@ -48,7 +29,16 @@ class Inp:
             "men": "Öffnet das Menü",
             "save": "Speichert das Spiel",
             "exit": "Schließt das Spiel",
-            "help": "Öffnet das Hilfemenü",
+            "help": {
+                "": """Das ist der Hilfebefehl, gebe 'help <Befehl>' 
+                ein um mehr über einen Befehl zu erfahren.""",
+                "inv": {"open": "inv.md"},
+                "opt": {"open": "opt.md"},
+                "men": {"open": "men.md"},
+                "save": {"open": "save.md"},
+                "exit": {"open": "exit.md"},
+                "help": {"open": "help.md"},
+            },
         }
 
         devbefehl = {
@@ -62,11 +52,10 @@ class Inp:
 
         min_len = 0
         max_len = 150
-        user_input = Write.Input(text + "\n >_ ", Colors.white, interval=0.0025)
 
-        completer = Completer(userbefehl)
-        readline.set_completer(completer.complete)
-        readline.parse_and_bind("tab: complete")
+        # TODO: add dev-completer, because more easy now
+        usercompleter = WordCompleter(userbefehl.keys())
+        user_input = prompt(">_ ", completer=usercompleter)
 
         try:
             if not user_input.strip():
@@ -127,14 +116,83 @@ class Inp:
                         return 34
 
                     case "help":
-                        Pr.headline("userbefehle")
-                        for einzelwert in userbefehl.keys():  # pylint: disable=C0201
-                            Pr.i(einzelwert + ": " + userbefehl.get(einzelwert))
-                        if dbg:
-                            Pr.n("")
-                            Pr.headline("devbefehle")
-                            for einzelwert in devbefehl:
-                                Pr.i(einzelwert + ": " + devbefehl.get(einzelwert))
+                        # Pr.headline("userbefehle")
+                        # for einzelwert in userbefehl.keys():  # pylint: disable=C0201
+                        #     Pr.i(einzelwert + ": " + userbefehl.get(einzelwert))
+                        # if dbg:
+                        #     Pr.n("")
+                        #     Pr.headline("devbefehle")
+                        #     for einzelwert in devbefehl:
+                        #         Pr.i(einzelwert + ": " + devbefehl.get(einzelwert))
+                        if len(input_list) > 1:
+                            match input_list[1]:
+                                case "inv":
+                                    # TODO: Help schreiben
+                                    with open(
+                                        "Utils/help/inv.md", "r", encoding="UTF-8"
+                                    ) as file:
+                                        # Read the entire content of the file into a string
+                                        file_contents = file.read()
+                                    print(markdown.Markdown(file_contents))
+
+                                case "opt":
+                                    # TODO: Help schreiben
+                                    with open(
+                                        "Utils/help/opt.md", "r", encoding="UTF-8"
+                                    ) as file:
+                                        # Read the entire content of the file into a string
+                                        file_contents = file.read()
+                                    print(markdown.Markdown(file_contents))
+
+                                case "men":
+                                    # TODO: Help schreiben
+                                    with open(
+                                        "Utils/help/men.md", "r", encoding="UTF-8"
+                                    ) as file:
+                                        # Read the entire content of the file into a string
+                                        file_contents = file.read()
+                                    print(markdown.Markdown(file_contents))
+
+                                case "save":
+                                    # TODO: Help schreiben
+                                    with open(
+                                        "Utils/help/save.md", "r", encoding="UTF-8"
+                                    ) as file:
+                                        # Read the entire content of the file into a string
+                                        file_contents = file.read()
+                                    print(markdown.Markdown(file_contents))
+
+                                case "exit":
+                                    # TODO: Help schreiben
+                                    with open(
+                                        "Utils/help/exit.md", "r", encoding="UTF-8"
+                                    ) as file:
+                                        # Read the entire content of the file into a string
+                                        file_contents = file.read()
+                                    print(markdown.Markdown(file_contents))
+
+                                case "help":
+                                    # TODO: Help schreiben
+                                    with open(
+                                        "Utils/help/help.md", "r", encoding="UTF-8"
+                                    ) as file:
+                                        # Read the entire content of the file into a string
+                                        file_contents = file.read()
+                                    print(markdown.Markdown(file_contents))
+
+                                case "_":
+                                    # TODO: Help schreiben
+                                    pass
+                        else:
+                            print(
+                                """Das ist der help-Befehl.
+                                Schreibe 'help <Befehl>' um mehr über einen Befehl
+                                zu erfahren.
+                                """
+                            )
+
+                        # sleep 5 sec after help gets printed
+                        sleep(5)
                         return 34
 
                     case "opt":
