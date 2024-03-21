@@ -1,20 +1,29 @@
 {
-    "$schema": "../../../.github/workflows/itemschema.json",
-    "Schuppenr\u00fcstung": {
+    "$schema": "../../.github/workflows/Itemschema.json",
+    "Schuppenruestung": {
+        "name": "Schuppenruestung",
         "type": "armor",
-        "description": "",
+        "desc": "",
         "ad": "0w0+0",
         "ap": "0w0+0",
         "hp": 50,
-        "ar": 30,
+        "ar": 0,
         "mr": 30,
-        "effects": [],
         "useable": false,
         "equipable": true,
         "slots": [
             "torso"
         ],
+        "blocking": [
+            "left_arm",
+            "right_arm",
+            "left_leg",
+            "right_leg"
+        ],
         "questitem": false,
-        "rarity": "legendary"
+        "rarity": "legendary",
+        "effects": [
+            ""
+        ]
     }
 }

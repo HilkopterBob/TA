@@ -1,21 +1,27 @@
 {
-    "$schema": "../../../.github/workflows/itemschema.json",
+    "$schema": "../../.github/workflows/Itemschema.json",
     "Ketten Armschutz": {
+        "name": "Ketten Armschutz",
         "type": "armor",
-        "description": "",
+        "desc": "",
         "ad": "0w0+0",
         "ap": "0w0+0",
         "hp": 2,
-        "ar": 3,
+        "ar": 0,
         "mr": 0,
-        "effects": [],
         "useable": false,
         "equipable": true,
         "slots": [
             "left_arm",
-            "right_arm"
+            " right_arm"
+        ],
+        "blocking": [
+            ""
         ],
         "questitem": false,
-        "rarity": "uncommon"
+        "rarity": "uncommon",
+        "effects": [
+            ""
+        ]
     }
 }

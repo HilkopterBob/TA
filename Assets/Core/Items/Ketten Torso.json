@@ -1,20 +1,26 @@
 {
-    "$schema": "../../../.github/workflows/itemschema.json",
+    "$schema": "../../.github/workflows/Itemschema.json",
     "Ketten Torso": {
+        "name": "Ketten Torso",
         "type": "armor",
-        "description": "",
+        "desc": "",
         "ad": "0w0+0",
         "ap": "0w0+0",
         "hp": 5,
-        "ar": 5,
+        "ar": 0,
         "mr": 0,
-        "effects": [],
         "useable": false,
         "equipable": true,
         "slots": [
             "torso"
         ],
+        "blocking": [
+            ""
+        ],
         "questitem": false,
-        "rarity": "uncommon"
+        "rarity": "uncommon",
+        "effects": [
+            ""
+        ]
     }
 }

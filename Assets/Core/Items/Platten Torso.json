@@ -1,20 +1,27 @@
 {
-    "$schema": "../../../.github/workflows/itemschema.json",
+    "$schema": "../../.github/workflows/Itemschema.json",
     "Platten Torso": {
+        "name": "Platten Torso",
         "type": "armor",
-        "description": "",
+        "desc": "",
         "ad": "0w0+0",
         "ap": "0w0+0",
         "hp": 10,
-        "ar": 10,
+        "ar": 0,
         "mr": 1,
-        "effects": [],
         "useable": false,
         "equipable": true,
         "slots": [
             "torso"
         ],
+        "blocking": [
+            "left_arm",
+            "right_arm"
+        ],
         "questitem": false,
-        "rarity": "rare"
+        "rarity": "rare",
+        "effects": [
+            ""
+        ]
     }
 }

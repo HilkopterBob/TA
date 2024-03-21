@@ -1,20 +1,26 @@
 {
-    "$schema": "../../../.github/workflows/itemschema.json",
+    "$schema": "../../.github/workflows/Itemschema.json",
     "Leder Torso": {
+        "name": "Leder Torso",
         "type": "armor",
-        "description": "",
+        "desc": "",
         "ad": "0w0+0",
         "ap": "0w0+0",
         "hp": 4,
-        "ar": 4,
+        "ar": 0,
         "mr": 0,
-        "effects": [],
         "useable": false,
         "equipable": true,
         "slots": [
             "torso"
         ],
+        "blocking": [
+            ""
+        ],
         "questitem": false,
-        "rarity": "common"
+        "rarity": "common",
+        "effects": [
+            ""
+        ]
     }
 }

@@ -1,18 +1,26 @@
 {
-  "$schema": "../../../.github/workflows/itemschema.json",
-  "Zweihaender": {
-    "type": "weapon",
-    "description": "",
-    "ad": "1w10+5",
-    "ap": "0w0+0",
-    "hp": 0,
-    "ar": 0,
-    "mr": 0,
-    "effects": [],
-    "useable": false,
-    "equipable": true,
-    "slots": ["melee"],
-    "questitem": false,
-    "rarity": "rare"
-  }
+    "$schema": "../../.github/workflows/Itemschema.json",
+    "Zweihaender": {
+        "name": "Zweihaender",
+        "type": "weapon",
+        "desc": "",
+        "ad": "1w10+5",
+        "ap": "0w0+0",
+        "hp": 0,
+        "ar": 0,
+        "mr": 0,
+        "useable": false,
+        "equipable": true,
+        "slots": [
+            "melee"
+        ],
+        "blocking": [
+            ""
+        ],
+        "questitem": false,
+        "rarity": "rare",
+        "effects": [
+            ""
+        ]
+    }
 }

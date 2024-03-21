@@ -58,7 +58,7 @@ logLevels = {
 DefaultLogLevel = -1
 
 consoleLogLevel = (
-    -1  # Choose Log Level shown in Console (Higher Levels are always included)
+    1  # Choose Log Level shown in Console (Higher Levels are always included)
 )
 
 FileLogLevel = (

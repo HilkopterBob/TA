@@ -63,6 +63,10 @@
           "type": "array",
           "description": "Mögliche Slots an denen das Item ausgerüstet werden kann"
         },
+        "blocking": {
+          "type": "array",
+          "description": "Slots die von diesem Item geblockt werden"
+        },
         "questitem": {
           "type": "boolean",
           "description": "Ist das Item ein Questitem"
