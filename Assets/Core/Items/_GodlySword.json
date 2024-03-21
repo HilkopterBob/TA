@@ -2,7 +2,7 @@
   "$schema": "../../../.github/workflows/Itemschema.json",
   "GodlySword": {
     "type": "weapon",
-    "description": "",
+    "desc": "",
     "ad": "10w100+100",
     "ap": "10w100+100",
     "hp": 0,
