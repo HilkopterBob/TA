@@ -13,8 +13,10 @@ from Utils.gamestates.combatstate import combatstate
 from Utils.gamestates.mainstate import interact_with_level
 from actionparser import Actionparser
 from Assethandler import AssetHandler, load_game
+from errorhandler import error
 
 
+@error
 def gameloop(player, level_list=None):
     """
     The Main Game Loop
