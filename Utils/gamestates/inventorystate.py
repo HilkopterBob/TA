@@ -153,6 +153,17 @@ def inventorystate(Player):
                 for item in Player.slots:
                     if item == "placeholder":
                         continue
+                    if item.name == "blocking":
+                        Logger.log("Item is Blocked by Some other Item", 4)
+                        _choice = questionary.select(
+                            f"Dieser Slot ist durch {item.by} blockiert. Möchtest du {item.by} ausziehen?",
+                            choices=["ausziehen", "zurück"],
+                        ).unsafe_ask()
+                        match _choice:
+                            case "ausziehen":  # TODO: Implement
+                                pass
+                            case "zurück":
+                                break
                     try:
                         if item.name != "placeholder":
                             equip.append(item.name)

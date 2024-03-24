@@ -9,6 +9,7 @@ import random
 from Level import Level
 from Utils import Logger, Pr, Inp, loot, AI
 from config import aitablepath
+from types import SimpleNamespace
 
 
 class Entity:  # pylint: disable=R0904
@@ -685,9 +686,13 @@ class Entity:  # pylint: disable=R0904
         if slot == "":
             slot = cur_item.slots[0]
 
-        Logger.log(f"Length of Slots: {len(cur_item.slots)}", 4)
-        if len(cur_item.slots) > 1:  #
+        _multislot = len(cur_item.blocking) > 1
+        _blocking = cur_item.blocking
+
+        if _multislot:
             Logger.log("Item is Multislot use", 4)
+            Logger.log(f"Blocking: {_blocking}", 4)
+            _blockitem = SimpleNamespace(name="blocking", itype="armor", by=cur_item)
 
         Logger.log(f"Equipping {item_name} in {slot}", -1)
         match slot:
@@ -759,6 +764,44 @@ class Entity:  # pylint: disable=R0904
                 self.inv.remove(cur_item)
             case _:
                 Logger.log("Item has no equipment slot assigned", 1)
+        if _multislot:
+            Logger.log(f"Blocking Slots({_blocking}) by Multislot", 4)
+            for _blocking_slot in _blocking:
+                match _blocking_slot:
+                    case "head":
+                        self.slots[0] = _blockitem
+                        Logger.log("Blocking head", 4)
+                    case "torso":
+                        self.slots[1] = _blockitem
+                        Logger.log("Blocking torso", 4)
+                    case "underwear":
+                        self.slots[2] = _blockitem
+                        Logger.log("Blocking unwerwear", 4)
+                    case "left_arm":
+                        self.slots[3] = _blockitem
+                        Logger.log("Blocking left_arm", 4)
+                    case "right_arm":
+                        self.slots[4] = _blockitem
+                        Logger.log("Blocking right_arm", 4)
+                    case "left_leg":
+                        self.slots[5] = _blockitem
+                        Logger.log("Blocking left_leg", 4)
+                    case "right_leg":
+                        self.slots[6] = _blockitem
+                        Logger.log("Blocking right_leg", 4)
+                    case "gloves":
+                        self.slots[7] = _blockitem
+                        Logger.log("Blocking gloves", 4)
+                    case "melee":
+                        self.slots[8] = _blockitem
+                        Logger.log("Blocking melee", 4)
+                    case "ranged":
+                        self.slots[9] = _blockitem
+                        Logger.log("Blocking ranged", 4)
+                    case "quick_draw_potion":
+                        self.slots[10] = _blockitem
+                    case _:
+                        Logger.log("Item has no blocking slot assigned", 1)
 
     def unequip_item(self, item_name):
         """enable unequiping equiped items
