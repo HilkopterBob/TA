@@ -1,0 +1,15 @@
+Screen {
+    layout: vertical;
+    overflow-y: auto;
+}
+
+#title {
+    text-style: bold;
+    text-align: center;
+}
+
+
+.buttons {
+    align: center middle;
+    width: 80;
+}
