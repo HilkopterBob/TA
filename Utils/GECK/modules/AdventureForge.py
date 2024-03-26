@@ -46,7 +46,7 @@ class AdventureForge(App):
 
     def compose(self) -> ComposeResult:
         yield Markdown(TITLE, id="title")
-        yield Button("Level Editor!", variant="primary", classes="box").styles()
+        yield Button("Level Editor!", variant="primary", classes="box")
         yield Button("Item Editor!", variant="primary", classes="box")
         yield Button("Entity Editor!", variant="primary", classes="box")
         yield Button("Effect Editor!", variant="primary", classes="box")
