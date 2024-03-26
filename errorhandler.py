@@ -36,7 +36,7 @@ def error(function=None, errortype=None):
             try:
                 return f(*args, **kwargs)
             except Exception as e:
-                Logger.log(e, -2)
+                Logger.log(e, 4)
             finally:
                 print(markdown.Markdown(default_error_message))
                 time.sleep(5)
