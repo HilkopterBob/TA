@@ -6,3 +6,4 @@ questionary==1.10.0
 rich===13.6.0
 pyreadline==2.1
 tqdm==4.66.2
+pre-commit==3.7.0

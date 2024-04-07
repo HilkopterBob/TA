@@ -1,8 +1,8 @@
-# Effekte 
+# Effekte
 
 ---
 
-### Beschreibung 
+### Beschreibung
 
 Die Effekt Klasse wird genutzt um Effekte zu definieren die Entitäten beeinflussen.
 Objekte können mit
@@ -27,7 +27,7 @@ Lädt alle vorhanden Effekte aus der gegeben JSON Datei aus und gibt eine Liste 
 ### Expected Inputs:
     json_file <FILE>    Json Datei welche alle Objekte beinhaltet
 
-### Expected Outputs: 
+### Expected Outputs:
     List <Array>        Liste mit Effekt Objekten
 
 
@@ -41,5 +41,5 @@ Lädt den benannten Effekt aus der gegeben JSON Datei
     json_file <FILE>    Json Datei welche das Objekt beinhaltet
     name      <STRING>  Name des Effektes der gesucht wird
 
-### Expected Outputs: 
+### Expected Outputs:
     Object <Effect>        Das Effekt Objekt welches erstellt wurde

@@ -30,7 +30,7 @@ class Inp:
             "save": "Speichert das Spiel",
             "exit": "Schließt das Spiel",
             "help": {
-                "": """Das ist der Hilfebefehl, gebe 'help <Befehl>' 
+                "": """Das ist der Hilfebefehl, gebe 'help <Befehl>'
                 ein um mehr über einen Befehl zu erfahren.""",
                 "inv": {"open": "inv.md"},
                 "opt": {"open": "opt.md"},

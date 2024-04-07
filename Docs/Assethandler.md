@@ -44,7 +44,7 @@ Attribute werden aus dem jeweiligen Assetpack aus der `meta.conf` Datei geladen.
 - `version` -> INT : Die Aktuelle Version des Assetpacks
 - `description` -> STR : Die Beschreibung des Assetpacks
 - `root` -> PATH : Der Basispfad des Assetpacks
-- `content` -> DICT : Enthält Alle Levels, Entities, Items, Effect, Loottables und AiTables  
+- `content` -> DICT : Enthält Alle Levels, Entities, Items, Effect, Loottables und AiTables
 - `levels` -> DICT : Enthält alle Leveldateien & Dateihashes im Format `'Levelname' : 'Dateihash'`
 - `entities` -> DICT : Enthält alle Entitiedateien & Dateihashes im Format `'Entityname' : 'Dateihash'`
 - `items` -> DICT : Enthält alle Itemdateien & Dateihashes im Format `'Itemname' : 'Dateihash'`
