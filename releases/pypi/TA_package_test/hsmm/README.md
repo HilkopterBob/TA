@@ -30,7 +30,6 @@ Open the Docs.md
 
 ### Support
 
-For support, email 
-#### fake@fake.com 
+For support, email
+#### fake@fake.com
 or join:
-

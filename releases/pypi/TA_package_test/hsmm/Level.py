@@ -13,7 +13,7 @@ class Level():
         self.triggers = triggers        #stores dicts in form: {searched_room?:True} → show new options
         self.ltype = ltype              #zivilisiert, Wald, Wild, feindlich, höllisch, idyllisch etc. → leveleffekte (zivilisiert: human race atk+, wald: elben atk+, wild: animal spawn rate+ etc.)
         self.entitylist = entitylist    #List of child entities in level
-    
+
     @staticmethod   #Generate Level from Json
     def from_json(json_dct, lname):
         return Level(json_dct['text'], json_dct['choices'], lname, json_dct['inv'], json_dct['ltype'], json_dct['descr'], json_dct['entitylist'], json_dct['triggers'])
@@ -40,7 +40,7 @@ class Level():
                     self.entitylist.append(entity)
                     return True
                 except Exception as e:
-                    if dbg == True: 
+                    if dbg == True:
                         dbg(e, 1)
                     else:
                         stop_game_on_exception(e)
@@ -60,7 +60,7 @@ class LevelInit():
     def load_all_levels_from_json(json_file, _curLevels = []):
         """
             Return alls Levels from Json file
-            
+
             :json_file (File): Json file to load Levels from
             :_curLevels (List): Internally used for recursion
 
@@ -68,7 +68,7 @@ class LevelInit():
         """
         #Populate curLevels for recursion
         curLevels = _curLevels
-        
+
         #if json_file is not empty
         if json_file:
             #and if json file is actually a file
@@ -102,7 +102,7 @@ class LevelInit():
     def load_level_by_name_from_json(json_file, name):
         """
             Return a single Level Object from Json/File by given Name
-            
+
             :json_file (File): Json File to load Level from
 
             =return= Level object

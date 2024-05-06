@@ -19,7 +19,7 @@ class gitem:
     __slots__ = (
         "name",
         "itype",
-        "description",
+        "desc",
         "ad",
         "ap",
         "hp",
@@ -38,7 +38,7 @@ class gitem:
         self,
         name="placeholder",
         itype="misc",
-        description="",
+        desc="",
         ad=0,
         ap=0,
         hp=0,
@@ -63,7 +63,7 @@ class gitem:
         """Name of Item as String"""
         self.itype = itype
         """Type of Item as String"""
-        self.description = description
+        self.desc = desc
         """Description of the Items as String"""
         self.ad = ad
         """The Physical Attack Damage of the Item as String"""

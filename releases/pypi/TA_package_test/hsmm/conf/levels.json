@@ -3,24 +3,24 @@
     "Menu":{
         "text": [
             [
-                "",   
+                "",
                 {"action":"change_location","new_level_name":"Wiese"},
                 {"action":"add_effect","effect_name":"Kopfschmerz"}
             ],
             [
                 ""
-            ],   
+            ],
             [
-                "",    
+                "",
                 {"action":"change_location","new_level_name":"Options"}
             ],
             [
-                "",    
+                "",
                 {"action":"close_game"}],
             [
-                "",    
-                {"action":"dbg_true"}, 
-                {"action":"change_location","new_level_name":"Wiese"}, 
+                "",
+                {"action":"dbg_true"},
+                {"action":"change_location","new_level_name":"Wiese"},
                 {"action": "add_effect", "effect_name":"Kopfschmerz"}
             ]
         ],
@@ -80,7 +80,7 @@
                                     "new_level_name":"Wald"}],
         ["Du gehst in die Miene.", {"action":"change_location",
                                     "new_level_name":"Miene"}],
-        ["Du gehst zur Wiese", {"action":"change_location", 
+        ["Du gehst zur Wiese", {"action":"change_location",
                                 "new_level_name":"Wiese"}]
     ],
     "choices": [
@@ -114,17 +114,17 @@
         "descr": "Du Folgst den Weg bis zu einer großen Stadt",
         "entitylist":[],
         "triggers":[{"umgesehen":false}],
-        "child_levels":{   
+        "child_levels":{
             "Pub":{
                 "text": [
                     ["Du setzt dich an einen Tisch eine Bedihnung kommt zu dir.", {"action":"change_location", "new_level_name":"Tisch"}],
                     ["Du nimmst dir ein Zimmer und betritst dieses.", {"action":"change_location", "new_level_name":"Zimmer"}],
                     ["Du verlässt den Pub", {"action":"change_location", "new_level_name":"Stadt"}]
-                    
+
                 ],
                 "choices": [
                     ["An einen Tisch setzen"],
-                    ["Ein Zimmer nehmen"],          
+                    ["Ein Zimmer nehmen"],
                     ["Den Pub verlassen"]
                 ],
                 "inv": [],
@@ -167,7 +167,7 @@
                     ["Du gehst an den Marktstand des Kreuterhändlers", {"action":"change_location", "new_level_name":"Kräuterhändler"}],
                     ["Du gehst an den Marktstand des Schmieds", {"action":"change_location", "new_level_name":"Schmied"}],
                     ["Du verlässt die Markthalle", {"action":"change_location", "new_level_name":"Stadt"}]
-        
+
                 ],
                 "choices": [
                     ["dich umsehen"],

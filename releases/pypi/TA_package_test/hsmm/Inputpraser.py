@@ -11,13 +11,13 @@ def inputphraser(user_input, min_len=5, max_len=50):
 
         if not user_input.strip():
             raise ValueError("Leere Eingabe")
-        
+
         if len(user_input) < min_len:
             raise ValueError(f"Der Input muss mindestens {min_len} Zeichen lang sein")
-        
+
         if len(user_input.strip()) > max_len:
             raise ValueError(f"Der Input darf nicht länger als {max_len} Zeichen sein")
-        
+
         #Wenn Eingabe == Zahl dann
         if (user_input.isdigit()):
             user_input = int(user_input)
@@ -26,9 +26,9 @@ def inputphraser(user_input, min_len=5, max_len=50):
         else:
             user_input = str(user_input)
             user_input = user_input.lower() #alles kleinbuchstaben
-            
+
             #befehlserkennung
-            if (user_input[0]==befehlszeichen): 
+            if (user_input[0]==befehlszeichen):
                 input_command = user_input[1:]
                 for command in data['commands']:
                     if input_command == command['name']:
@@ -38,15 +38,15 @@ def inputphraser(user_input, min_len=5, max_len=50):
                         return None
                 else:
                    raise ValueError("Ungültiger Befehl")
-                    
-                
-                
-                
-            
+
+
+
+
+
             print(f"Ich bin ein Text: {user_input}")
 
         return user_input
-    
+
     except ValueError as e:
         print ("Fehler bei Eingabe:", e)
         return None
@@ -61,11 +61,3 @@ if processed_input is not None:
     print(processed_input)
    # print(type(user_input))
    # print(type(processed_input))
-
-
-
-
-
-
-
-

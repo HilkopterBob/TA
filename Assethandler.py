@@ -319,7 +319,7 @@ class Assetpack:
                 if self.content[ctype][_file] != checksum:
                     errors = True
                     Logger.log(
-                        f"""Checksum wrong for file {_file} : <{checksum}> 
+                        f"""Checksum wrong for file {_file} : <{checksum}>
                         expected: <{self.content[ctype][_file]}>""",
                         2,
                     )

@@ -7,7 +7,7 @@ def n(text=""):
 
 def a(text=""):
     Write.Print(text + "\n", Colors.red, interval=0.0025)
-    
+
 def inp(text=""):
     Input = Write.Input(text + "\n → ", Colors.white, interval=0.0025)
     return Input
@@ -31,10 +31,10 @@ def dbg(text="", errlvl=0):
         text (str): Text to be Displayed. Defaults to "".
         errlvl (int): Errorlevel 0=Inf, 1=Err. Defaults to 0.
     """
-    
+
     module = inspect.currentframe().f_back.f_globals['__name__']
     function = inspect.stack()[1].function
-    
+
     if errlvl == 0:
         print(f'{info("")} {good("")} {str(yellow(f"DBG - {module} - {function}: "))} {str(text)}')
     else:
@@ -103,9 +103,9 @@ def objlist(listOfObjects, definition="Objects"):
 
         :listOfObjects: List of Objects to be parsed
         :definition: Naming scheme in Output like (Loaded {definition}: {listOfObjectNames})
-            
+
         =return= Returns DBG Print
-    """ 
+    """
     _curObjects = []
     for _object in listOfObjects:
         _curObjects.append(_object.name)

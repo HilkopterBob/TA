@@ -1,4 +1,4 @@
-# Documentation 
+# Documentation
 
 ## Table of contents
 - [Main Game](#main-game)
@@ -34,20 +34,20 @@ Used to create entities like the player and npcs.
 </br>
 
 ####  set_name
-Starts promt to set the player.name by the player  
-reads: self   
+Starts promt to set the player.name by the player
+reads: self
 writes: self.name
 
 ##### usage:
 ```py
 Hero = Entity()
 Hero.set_name()
-```    
+```
 </br>
 </br>
 
 #### change_health
-Changes the Player.health by adding "value"  
+Changes the Player.health by adding "value"
 reads: self
 writes: self.health
 
@@ -63,8 +63,8 @@ Hero.change_health(-10)
 #### add_item
 Adds item to inventory by using the item class.
 
-reads: self, iname, itype  
-writes: self.inv  
+reads: self, iname, itype
+writes: self.inv
 ##### usage:
 ```py
 Hero = Entity()
@@ -75,9 +75,9 @@ Hero.add_item("item name","item type")
 
 
 #### remove_item_by_name
-Removes item from entity inventory by given name     
-reads: self, iname  
-writes: self.inv  
+Removes item from entity inventory by given name
+reads: self, iname
+writes: self.inv
 ##### usage:
 ```py
 Hero = Entity()
@@ -88,9 +88,9 @@ Hero.remove_item_by_name("Sword")
 
 
 #### remove_item_by_index
-Removes item from entity inventory by given index   
-reads: self, iname  
-writes: self.inv  
+Removes item from entity inventory by given index
+reads: self, iname
+writes: self.inv
 ##### usage:
 ```py
 Hero = Entity()
@@ -102,10 +102,10 @@ Hero.remove_item_by_index(0)    #removes first item from inventory
 
 
 #### add_effect
-Appends effect to corresponding list of effects.  
-reads: self(obj), effect(obj)  
-writes: entity(oby) → {geffects, beffects, eeffects} → obj.effects  
-##### usage:  
+Appends effect to corresponding list of effects.
+reads: self(obj), effect(obj)
+writes: entity(oby) → {geffects, beffects, eeffects} → obj.effects
+##### usage:
 ```py
 Hero = Entity()
 poisoning = Effect()
@@ -117,9 +117,9 @@ Hero.add_effect(poisoning)
 
 
 #### show_effects
-Prints element.name of entity.effects[]  
-reads: self(obj), names(bool → default True)  
-writes: self(obj)  
+Prints element.name of entity.effects[]
+reads: self(obj), names(bool → default True)
+writes: self(obj)
 ##### usage:
 ```py
 Hero = Entity()
@@ -133,9 +133,9 @@ Hero.show_effects(False)    #shows vars(effect) for every effect
 
 
 #### remove_effect_by_name
-Removes effect from entity by given name.  
-reads: self(obj), ename(str)  
-writes: self(obj)  
+Removes effect from entity by given name.
+reads: self(obj), ename(str)
+writes: self(obj)
 ##### usage:
 ```py
 Hero = Entity()
@@ -147,20 +147,20 @@ Hero.remove_effect_by_name(poisoning.name)
 #### remove_effect_by_index
 
 ##### usage:
-</br>  
-</br>  
+</br>
+</br>
 
 #### change_stat
 
 ##### usage:
-</br>  
-</br>  
+</br>
+</br>
 
 #### let_effects_take_effect
 
 ##### usage:
-</br>  
-</br>  
+</br>
+</br>
 
 
 ## Levels
