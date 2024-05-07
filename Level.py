@@ -4,11 +4,18 @@ Levels Module which holds 2 Classes
     Levelinit()
 """
 
+from __future__ import annotations
+from typing import TYPE_CHECKING
 import json
 import random
 import os
 from Utils import Pr, Logger
 from config import entities_folder
+
+# Type Checking Imports
+if TYPE_CHECKING:
+    from Entities import Entity
+    from Items import gitem
 
 
 class Level:
@@ -32,16 +39,18 @@ class Level:
 
     def __init__(
         self,
-        text=None,
-        choices=None,
-        name="Levelnameplatzhalter",
-        inv=None,
-        ltype="Testtype",
-        descr="Standartdescription du Sohn einer Dirne",
-        entitylist=None,
-        entityspawn=None,
-        triggers=None,
-    ):
+        text: str = None,
+        choices: list[Choice] = None,
+        name: str = "Levelnameplatzhalter",
+        inv: list[gitem] = None,
+        ltype: str = "Testtype",
+        descr: (
+            str | list[str | dict[str:bool]]
+        ) = "Standartdescription du Sohn einer Dirne",
+        entitylist: list[Entity] = None,
+        entityspawn: list[Entity] = None,
+        triggers=list[dict[str:bool]],
+    ) -> None:
         if text is None:
             text = []
         if choices is None:
@@ -68,7 +77,7 @@ class Level:
         self.onLevelCreate()
         self.populate()
 
-    def __str__(self):
+    def __str__(self) -> str:
         return f"{self.name}"
 
     # Commented out for readability in Logfile - need to find a workaround
@@ -76,7 +85,7 @@ class Level:
     #    return f"[{self.__class__.__module__}.{self.__class__.__name__}([{self.text}],[{self.choices}],'{self.name}',[{self.inv}],'{self.ltype}','{self.descr}',[{self.entitylist}],[{self.entityspawn}],[{self.triggers}]) at <{hex(id(self))}>]"  # pylint:disable=C0301
 
     @staticmethod
-    def from_json(json_dct, lname):
+    def from_json(json_dct: dict, lname: str) -> Level:
         """Creates a Level from JSON
 
         Args:
@@ -98,7 +107,9 @@ class Level:
             json_dct["triggers"],
         )
 
-    def change_entity_list(self, ctype, entity):
+    def change_entity_list(
+        self, ctype: str, entity: Entity
+    ) -> bool:  # TODO: Change Ctype to Integer or Bool
         """
         Changes the list of entities for specific level
 
@@ -160,7 +171,7 @@ class Level:
             case _:
                 return Logger.log("got no right ctype. choose between + and -", 1)
 
-    def printDesc(self):
+    def printDesc(self) -> None:
         """Prints Level Description to User"""
         for entry in self.descr:
             if len(entry) > 1:
@@ -171,7 +182,7 @@ class Level:
                     Pr.n(f"{str(entry[0])}")
                 continue
 
-    def getAvailableChoices(self):
+    def getAvailableChoices(self) -> list[Choice]:
         """Returns the Choices currently available to the User
 
         Returns:
@@ -197,7 +208,7 @@ class Level:
 
         return achoices
 
-    def printChoices(self):
+    def printChoices(self) -> bool:
         """Prints the Available Choices to the User
 
         Returns:
@@ -215,7 +226,7 @@ class Level:
                         i = i + 1
         return True
 
-    def levelname(lobject):
+    def levelname(lobject: Level) -> str | None:
         """Return the Name of an Levelobject
 
         Args:
@@ -230,7 +241,7 @@ class Level:
             Logger.log(f"ERR: {e}", 2)
             return None
 
-    def populate(self):  # pylint: disable=R1710
+    def populate(self) -> int | None:  # pylint: disable=R1710
         """Populates the Level with Entities from Spawnlist
 
         Returns:
@@ -267,11 +278,11 @@ class Level:
             self.change_entity_list("+", e)
         return
 
-    def onLevelCreate(self):
+    def onLevelCreate(self) -> None:
         """This is called whenever an Level is created"""
         Logger.log(f"Created Instance of Level: {self}", 0)
 
-    def onEntityJoin(self, entity):
+    def onEntityJoin(self, entity: Entity) -> None:
         """This is called whenever an Entity joins a Level
 
         Args:
@@ -290,7 +301,7 @@ class Level:
                     0, ["change_gamestate", ["combat"]]
                 )
 
-    def onEntityLeave(self, entity):
+    def onEntityLeave(self, entity: Entity) -> None:
         """This is called whenever an Entity Leaves a Level
 
         Args:
@@ -298,7 +309,7 @@ class Level:
         """
         Logger.log(f"Entity:{entity} left Level: {self}", 0)
 
-    def zip_choices(self, text, choices):
+    def zip_choices(self, text: list[str | dict], choices: list[Choice]) -> dict:
         """This is called whenever a level gets created and populates
         its choices.
 
@@ -326,7 +337,9 @@ class LevelInit:
 
     """
 
-    def load_all_levels_from_json(json_file, _curLevels=None):
+    def load_all_levels_from_json(
+        json_file, _curLevels: list[Level] = None
+    ) -> list[Level]:
         """
         Return alls Levels from Json file
 
@@ -356,7 +369,7 @@ class LevelInit:
                 curLevels.append(Level.from_json(data[lname], lname))
         return curLevels
 
-    def load_level_by_name_from_json(json_file, name):
+    def load_level_by_name_from_json(json_file, name: str) -> Level:
         """
         Return a single Level Object from Json/File by given Name
 
@@ -383,7 +396,12 @@ class Choice:
     Class witch defines Choices.
     """
 
-    def __init__(self, text, choice, allow_trigger=None):
+    def __init__(
+        self,
+        text: list[str | dict[str:bool]],
+        choice: list[str | dict[str:bool]],
+        allow_trigger: dict[str:bool] = None,
+    ) -> None:
         self.choice = choice
         self.text = text
         self.allow_trigger = allow_trigger
