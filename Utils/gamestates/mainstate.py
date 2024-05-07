@@ -34,7 +34,12 @@ def interact_with_level(player, level, level_list):
     if printed:
         action = int(Inp.inp(player)) - 1  # pylint: disable=E0601
         if action == 33:
-            Logger.log("Break!")
+            Logger.log("Break!")  # this is bs
+            """
+            This breaks the Mainstate early in execution, 
+            which is used with changing a new gamestate from
+            commands recieved by the input parser.
+            """
             return
 
     Logger.log(f"Available Actions: {level.getAvailableChoices()}", -1)
