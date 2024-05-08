@@ -11,7 +11,9 @@ class Debug:
     Utility class for custom debuging
     """
 
-    def objlist(listOfObjects=None, definition="Objects"):
+    def objlist(
+        listOfObjects: list[object] = None, definition: str = "Objects"
+    ) -> None:
         """
         Returns List of Object Names from List of Objects
 
@@ -24,7 +26,7 @@ class Debug:
 
         return Logger.log(f"Loaded {definition}: {Debug.getNames(listOfObjects)}", -1)
 
-    def getNames(listOfObjects=None):
+    def getNames(listOfObjects: list[object] = None) -> list[str]:
         """Returns a List of Objectnames from list of Objects
 
         Args:
@@ -39,7 +41,7 @@ class Debug:
             _curObjects.append(_object.name)
         return _curObjects
 
-    def stop_game():
+    def stop_game() -> None:
         """Pauses the Game and Asks for Continue or Stop"""
         Pr.q("Do you want to continue the game?")
         action = Inp.inp("y/n")
@@ -49,7 +51,7 @@ class Debug:
             case "n":
                 sys.exit()
 
-    def stop_game_on_exception(exception):
+    def stop_game_on_exception(exception: str) -> None:
         """Halts the Game on Exception"""
         Pr.b((Colorate.Color(Colors.red, "\nThe following error occured:", True)))
         Pr.b((Colorate.Color(Colors.red, f"{exception}", True)))
@@ -64,6 +66,6 @@ class Debug:
             case "n":
                 sys.exit()
 
-    def pause():
+    def pause() -> None:
         """Pauses the Game for User Input"""
         input("Press the <ENTER> key to continue...")
