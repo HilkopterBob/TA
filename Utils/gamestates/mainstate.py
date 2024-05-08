@@ -3,10 +3,16 @@
 """
 
 # project imports:
+from __future__ import annotations
+from typing import TYPE_CHECKING
 from Utils import Pr, Inp, Logger, hud
 
+if TYPE_CHECKING:
+    from Entities import Entity
+    from Level import Level
 
-def interact_with_level(player, level, level_list):
+
+def interact_with_level(player: Entity, level: Level, level_list: list[Level]) -> None:
     """Current Game Interaction Function"""
     ##### ##### prints out choices and gets user input if choices got printed ##### #####
     printed = False
