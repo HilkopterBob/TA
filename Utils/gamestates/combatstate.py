@@ -1,12 +1,17 @@
 """Combatstate
 """
 
+from __future__ import annotations
+from typing import TYPE_CHECKING
 import questionary
 from Utils import Pr, dice, Debug, Logger
 from actionparser import Actionparser
 
+if TYPE_CHECKING:
+    from Entities import Entity
 
-def combatstate(player, entities=None):
+
+def combatstate(player: Entity, entities: list[Entity] = None) -> None:
     """
     Args:
         Player (obj:entity): the player obj.
