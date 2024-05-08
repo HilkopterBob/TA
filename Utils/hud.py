@@ -2,10 +2,15 @@
     like gold, health, location
 """
 
+from __future__ import annotations
+from typing import TYPE_CHECKING
 from Utils import Pr
 
+if TYPE_CHECKING:
+    from Entities import Entity
 
-def hud(player):
+
+def hud(player: Entity) -> None:
     """Player Hud
 
     Args:
