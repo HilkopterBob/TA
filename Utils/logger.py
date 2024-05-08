@@ -1,6 +1,7 @@
 """Logger for Logging Stuff"""
 
 # pylint: disable=W,E,C0301
+import os
 import inspect
 import time
 from datetime import datetime
@@ -24,7 +25,9 @@ from config import (
 class Logger:
     """Logger Class"""
 
-    def log(text="", errlvl=DefaultLogLevel):  # pylint: disable=R1710
+    def log(
+        text: str = "", errlvl: int = DefaultLogLevel
+    ) -> int:  # pylint: disable=R1710
         """Logging function"""
 
         """
@@ -53,8 +56,8 @@ class Logger:
         if fileLogging:
             if logmessage.loglevel >= FileLogLevel:
                 if LogByModule:  # pylint: disable=R1705
-                    _log_file = log_file.split("/")
-                    _log_file.insert(1, f"/{module} - ")
+                    _log_file = log_file.split("/".replace(os.sep))
+                    _log_file.insert(1, f"/{module} - ".replace(os.sep))
                     _log_file = "".join(_log_file)
                     with open(_log_file, "a") as log:
                         log.write(logmessage.raw)
@@ -65,14 +68,14 @@ class Logger:
                     return 0
         return 1
 
-    def time(func):
+    def time(func: function) -> function:
         """Timing Decorator Function
 
         Args:
             func (function): Function which should be timed
         """
 
-        def wrapper(*args, **kwargs):
+        def wrapper(*args, **kwargs) -> function:
             start = time.time()
             val = func(*args, **kwargs)
             _time = time.time() - start
@@ -101,14 +104,14 @@ class Log:
 
     def __init__(
         self,
-        logstr="",
-        loglevel=-1,
-        module=None,
-        function=None,
-        line_number=None,
-        raw=None,
-        stronly="",
-    ):
+        logstr: str = "",
+        loglevel: int = -1,
+        module: str = None,
+        function: str = None,
+        line_number: int = None,
+        raw: str = None,
+        stronly: str = "",
+    ) -> None:
         if module is None:
             module = ""
         if function is None:
