@@ -5,7 +5,7 @@ import random
 from Utils import Logger
 
 
-def roll(dice=None):
+def roll(dice: str = None) -> int:
     """Rolls Dice when given as Dice String in Format like 1w6+5
 
     Args:
