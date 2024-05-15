@@ -194,9 +194,7 @@ class AssetHandler:
 
 def load_game() -> None:
     """Function to init the whole Game"""
-    rootdir = "C:\\Users\\Maximilian Bonk\\Documents\\Projekte\\Private\\Textadventure\\TA\\Assets".replace(
-        "\\", os.sep
-    )
+    rootdir = "..\\Textadventure\\TA\\Assets".replace("\\", os.sep)
     Assetpacks = []
 
     # the underscore representes dirs
@@ -293,7 +291,6 @@ class Assetpack:
 
         if not self.validate():
             Logger.log(f"Assetpack {self} could not be verified!", 2)
-            return
 
     def __str__(self) -> str:
         return f"{self.name}"

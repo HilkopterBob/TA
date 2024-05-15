@@ -354,6 +354,8 @@ class LevelInit:
 
         Logger.log(f"Loading Levels from: {json_file}")
 
+        data = {}
+
         if json_file:
             if not isinstance(json_file, dict):
                 with open(json_file, encoding="UTF-8") as json_data:

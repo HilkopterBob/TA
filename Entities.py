@@ -673,6 +673,7 @@ class Entity:  # pylint: disable=R0904
 
     def consume_item(self, item_name: str) -> None:
         """enables consumption of consumables."""
+        consumable = None
         for item in self.inv:
             if item.name == item_name:
                 consumable = item
@@ -690,6 +691,7 @@ class Entity:  # pylint: disable=R0904
 
     def equip_item(self, item_name: str, slot: str = "") -> None:
         """enables equiping of eqipment"""
+        cur_item = None
         for item in self.inv:
             if item.name == item_name:
                 cur_item = item
