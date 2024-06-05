@@ -2,6 +2,7 @@
 """
 
 # project imports:
+from __future__ import annotations
 from pympler.asizeof import asizeof as getsize
 from Entities import Entity
 from Level import Level
@@ -17,7 +18,7 @@ from errorhandler import error
 
 
 @error
-def gameloop(player, level_list=None):
+def gameloop(player: Entity, level_list: list[Level] = None) -> None:
     """
     The Main Game Loop
     """

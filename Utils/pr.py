@@ -15,7 +15,7 @@ class Pr:
     """
 
     # ===== Color Definitions ===== #
-    def purple(text):
+    def purple(text: str) -> None:
         """Prints Green Text
 
         Args:
@@ -26,7 +26,7 @@ class Pr:
         """
         return print(Colorate.Color(Colors.purple, f"{text}", True))
 
-    def green(text):
+    def green(text: str) -> None:
         """Prints Green Text
 
         Args:
@@ -37,7 +37,7 @@ class Pr:
         """
         return print(Colorate.Color(Colors.green, f"{text}", True))
 
-    def yellow(text):
+    def yellow(text: str) -> None:
         """Prints Yello Text
 
         Args:
@@ -48,7 +48,7 @@ class Pr:
         """
         return print(Colorate.Color(Colors.yellow, f"{text}", True))
 
-    def red(text):
+    def red(text: str) -> None:
         """Prints Red Text
 
         Args:
@@ -59,7 +59,7 @@ class Pr:
         """
         return print(Colorate.Color(Colors.red, f"{text}", True))
 
-    def blue(text):
+    def blue(text: str) -> None:
         """Prints Blue Text
 
         Args:
@@ -70,7 +70,7 @@ class Pr:
         """
         return print(Colorate.Color(Colors.blue, f"{text}", True))
 
-    def cyan(text):
+    def cyan(text: str) -> None:
         """Prints Cyan Text
 
         Args:
@@ -84,7 +84,7 @@ class Pr:
     # =====                  ===== #
 
     # ===== Print Definitions ===== #
-    def n(text=""):
+    def n(text: str = "") -> None:
         """Prints White Text with new Line
 
         Args:
@@ -95,7 +95,7 @@ class Pr:
         """
         Write.Print(text + "\n", Colors.white, interval=0.0025)
 
-    def a(text=""):
+    def a(text: str = "") -> None:
         """Prints Red Text with new Line
 
         Args:
@@ -106,7 +106,7 @@ class Pr:
         """
         Write.Print(text + "\n", Colors.red, interval=0.0025)
 
-    def b(text=""):
+    def b(text: str = "") -> None:
         """Prints Text with negative Indicator
 
         Args:
@@ -117,7 +117,7 @@ class Pr:
         """
         print(bad(text))
 
-    def i(text=""):
+    def i(text: str = "") -> None:
         """Prints Text with neutral Indicator
 
         Args:
@@ -128,7 +128,7 @@ class Pr:
         """
         print(info(text))
 
-    def g(text=""):
+    def g(text: str = "") -> None:
         """Prints Text with positive Indicator
 
         Args:
@@ -139,7 +139,7 @@ class Pr:
         """
         print(good(text))
 
-    def q(text=""):
+    def q(text: str = "") -> None:
         """Prints Text with Question Mark
 
         Args:
@@ -150,7 +150,7 @@ class Pr:
         """
         print(que(text))
 
-    def dbg(text="", errlvl=0):
+    def dbg(text: str = "", errlvl: int = 0) -> None:
         """
             Prints Debug Information into Console
         Args:
@@ -230,7 +230,7 @@ class Pr:
             with open(_log_file, "a") as log:
                 log.write(f"{timestamp} - {logstr}\n")
 
-    def headline(text=""):
+    def headline(text: str = "") -> None:
         """Prints Headlines
 
         Args:

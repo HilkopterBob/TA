@@ -4,11 +4,18 @@ Entities Module which holds 2 Classes
     Entityinit()
 """
 
+from __future__ import annotations
+from typing import TYPE_CHECKING
 import json
 import random
 from Level import Level
 from Utils import Logger, Pr, Inp, loot, AI
 from config import aitablepath
+
+# Type Checking Stuff
+if TYPE_CHECKING:
+    from Effect import Effect
+    from Items import gitem
 
 
 class Entity:  # pylint: disable=R0904
@@ -45,26 +52,28 @@ class Entity:  # pylint: disable=R0904
 
     def __init__(
         self,
-        name="Blanko",
-        health=100,
-        wealth=100,
-        xp=0,
-        inv=None,
-        ptype=None,
-        geffects=None,
-        beffects=None,
-        eeffects=None,
-        location="Nirvana",
-        level=1,
-        allowdamage=True,
-        slots=None,
-        attributes=None,
-        loottable=None,
-        ai=None,
-        spd=0,
-        isPlayer=None,
-        Team=0,
-        maxHealth=None,
+        name: str = "Blanko",
+        health: int = 100,
+        wealth: int = 100,
+        xp: int = 0,
+        inv: list[gitem] = None,
+        ptype: list = None,
+        geffects: list = None,
+        beffects: list = None,
+        eeffects: list = None,
+        location: Level = None,
+        level: int = 1,
+        allowdamage: bool = True,
+        slots: list[
+            gitem | str
+        ] = None,  # TODO: Remove str and replace Placeholder with real Placeholder Item
+        attributes: dict[str:int] = None,
+        loottable: dict[str:int] = None,
+        ai: dict[str:int] = None,
+        spd: int = 0,
+        isPlayer: bool = None,
+        Team: int = 0,
+        maxHealth: int = None,
     ):
         if inv is None:
             inv = []
@@ -134,7 +143,7 @@ class Entity:  # pylint: disable=R0904
         self.Team = Team
         """Defines the Team this Entity is on"""
 
-    def __str__(self):
+    def __str__(self) -> str:
         return f"{self.name}"
 
     # Commented out for readability in Logfile - need to find a workaround
@@ -142,7 +151,7 @@ class Entity:  # pylint: disable=R0904
     #    return f"[{self.__class__.__module__}.{self.__class__.__name__}('{self.name}',{self.hp},{self.wealth},{self.xp},[{self.inv}],[{self.ptype}],[{self.geffects}],[{self.beffects}],[{self.eeffects}],'{self.location}',{self.level},{self.allowdamage},[{self.slots}],{self.attributes},{self.loottable},{self.ai},{self.spd},{self.isPlayer},{self.Team},{self.maxHealth}) at <{hex(id(self))}>]"  # pylint:disable=C0301
 
     @staticmethod
-    def from_json(json_dct):
+    def from_json(json_dct: dict) -> Entity:
         """Creates an Entiy from given JSON
 
         Args:
@@ -174,7 +183,7 @@ class Entity:  # pylint: disable=R0904
             json_dct["Team"],
         )
 
-    def get_ai(self, table):
+    def get_ai(self, table: str) -> dict | None:
         """Returns Content of Loottable given by Name
 
         Args:
@@ -196,7 +205,7 @@ class Entity:  # pylint: disable=R0904
             data = json.load(json_data)
         return data
 
-    def set_name(self):
+    def set_name(self) -> None:
         """
         Sets the Name of an Entity Object
         """
@@ -209,7 +218,7 @@ class Entity:  # pylint: disable=R0904
             if action == "y":
                 break
 
-    def change_health(self, value=0):
+    def change_health(self, value: int = 0) -> bool:
         """
         Changes the Player Health
 
@@ -235,7 +244,7 @@ class Entity:  # pylint: disable=R0904
         except:
             return False
 
-    def getTarget(self, entitylist):
+    def getTarget(self, entitylist: list[Entity]) -> Entity:
         """Selects a Target Entity from List of Entities
 
         Args:
@@ -251,7 +260,7 @@ class Entity:  # pylint: disable=R0904
         _target = random.choice(_entitylist)
         return _target
 
-    def act(self):
+    def act(self) -> None:
         """Function for Entity Intelligence"""
         if not self.location:
             Logger.log(
@@ -304,7 +313,9 @@ class Entity:  # pylint: disable=R0904
 
         # if there are more than 1 enemys attack the one with lowest hp
 
-    def take_damage(self, value=None, inflicter=None):
+    def take_damage(
+        self, value: dict[str:int] = None, inflicter: Entity = None
+    ) -> dict[str:int]:
         """Adds Damage to the Entity and Calculates health loss based on Armor and Resistance
 
         Args:
@@ -380,7 +391,7 @@ class Entity:  # pylint: disable=R0904
             return _ret
         return damage
 
-    def add_item(self, item):
+    def add_item(self, item: gitem) -> bool:
         """
         Adds Item to Inventory
 
@@ -396,7 +407,7 @@ class Entity:  # pylint: disable=R0904
         except:
             return False
 
-    def remove_item_by_name(self, iname=""):
+    def remove_item_by_name(self, iname: str = "") -> bool:
         """
         Removes Item by given Itemname, if no Name is given no Item will be removed.
 
@@ -410,7 +421,7 @@ class Entity:  # pylint: disable=R0904
         except:
             return False
 
-    def remove_item_by_index(self, index=-1, quest=False):
+    def remove_item_by_index(self, index: int = -1, quest: bool = False) -> bool:
         """
         Removes Item by given Index,
         if no Index is given the last Item in Inventory will be removed.
@@ -429,7 +440,7 @@ class Entity:  # pylint: disable=R0904
         except:
             return False
 
-    def add_effect(self, effect):
+    def add_effect(self, effect: Effect) -> bool:
         """
         appends effect to coresponding list
 
@@ -457,7 +468,7 @@ class Entity:  # pylint: disable=R0904
                 except:
                     return False
 
-    def show_effects(self, names=False):
+    def show_effects(self, names: bool = False) -> bool:
         """
         prints element.name of effects[]
 
@@ -488,7 +499,7 @@ class Entity:  # pylint: disable=R0904
         except:
             return False
 
-    def remove_effect_by_name(self, ename=""):
+    def remove_effect_by_name(self, ename: str = "") -> bool:
         """
         removes effect from entity by given name
         :ename: effect.name as string
@@ -503,7 +514,7 @@ class Entity:  # pylint: disable=R0904
         except:
             return False
 
-    def remove_effect_by_index(self, index=-1):
+    def remove_effect_by_index(self, index: int = -1) -> bool:
         """
         removes effect by given index
 
@@ -517,7 +528,7 @@ class Entity:  # pylint: disable=R0904
         except:
             return False
 
-    def change_stat(self, effect, value):
+    def change_stat(self, effect: str, value: int | float = 0) -> bool:
         """
         changes stat (effect.infl) by value
 
@@ -547,7 +558,7 @@ class Entity:  # pylint: disable=R0904
                 Logger.log(vars(effect))
                 return False
 
-    def take_effects(self):
+    def take_effects(self) -> bool:
         """
         used in gameloop to let effects take effect onto entety
 
@@ -587,7 +598,7 @@ class Entity:  # pylint: disable=R0904
         except:
             return False
 
-    def change_location(self, old_level, new_level):
+    def change_location(self, old_level: Level, new_level: Level) -> None:
         """
         changes entty location by edditing onwn location,
         deletes itself from old and adds to new entity.list
@@ -613,7 +624,7 @@ class Entity:  # pylint: disable=R0904
         if not errstate:
             old_level.change_entity_list("-", self)
 
-    def check_level_up(self):
+    def check_level_up(self) -> bool:
         """
         checks if entity has enough xp to level up,
         will level up the entity UNTIL there are not enough xp
@@ -660,8 +671,9 @@ class Entity:  # pylint: disable=R0904
             break
         return True
 
-    def consume_item(self, item_name):
+    def consume_item(self, item_name: str) -> None:
         """enables consumption of consumables."""
+        consumable = None
         for item in self.inv:
             if item.name == item_name:
                 consumable = item
@@ -677,8 +689,9 @@ class Entity:  # pylint: disable=R0904
         if consumable.itype == "Food":
             self.change_health(consumable.dmg)
 
-    def equip_item(self, item_name, slot=""):
+    def equip_item(self, item_name: str, slot: str = "") -> None:
         """enables equiping of eqipment"""
+        cur_item = None
         for item in self.inv:
             if item.name == item_name:
                 cur_item = item
@@ -760,7 +773,7 @@ class Entity:  # pylint: disable=R0904
             case _:
                 Logger.log("Item has no equipment slot assigned", 1)
 
-    def unequip_item(self, item_name):
+    def unequip_item(self, item_name: str) -> None:
         """enable unequiping equiped items
 
         Args:
@@ -783,7 +796,7 @@ class EntityInit:
 
     """
 
-    def load_entities_fromjson(json_file):
+    def load_entities_fromjson(json_file: str) -> list[Entity]:
         """
         Return alls Entities from Json file
 
@@ -803,7 +816,7 @@ class EntityInit:
                 curEntities.append(Entity.from_json(data[ename]))
         return curEntities
 
-    def load_entities_by_name_from_json(json_file, name):
+    def load_entities_by_name_from_json(json_file: str, name: str) -> Entity:
         """
         Return a single Entitiy Object from Json by given Name
 

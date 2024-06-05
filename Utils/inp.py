@@ -2,16 +2,23 @@
 """
 
 import re
+from __future__ import annotations
+from typing import TYPE_CHECKING
 from time import sleep
 
 # import pyreadline as readline
 from rich import print, markdown  # pylint: disable=W0622
 from prompt_toolkit import prompt
 from prompt_toolkit.completion import WordCompleter
-from pystyle import Colors, Write, Center, Box
+from pystyle import Center, Box
 
 from Utils.pr import Pr
 from Utils.logger import Logger
+
+if TYPE_CHECKING:
+    from Entities import Entity
+    from Effect import Effect
+    from Items import gitem
 
 
 class Inp:
@@ -20,8 +27,8 @@ class Inp:
     """
 
     def inp(
-        player="", text="", yes_no_flag=False
-    ):  # pylint: disable=too-many-return-statements
+        player: Entity = "", text: str = "", yes_no_flag: bool = False
+    ) -> int:  # pylint: disable=too-many-return-statements
         """Method to get User Input"""
         userbefehl = {
             "inv": "Öffnet das Inventar",

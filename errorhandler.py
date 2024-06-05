@@ -7,7 +7,7 @@ from rich import markdown, print  # pylint: disable=W0622
 
 from Utils.logger import Logger
 
-default_error_message = """
+default_error_message: str = """
 \n\n\n\n\n
 # You've found a bug!
 
@@ -22,12 +22,14 @@ _The Dev's_
 """
 
 
-def error(function=None, errortype=None):
+def error(
+    function: callable = None, errortype=None
+) -> callable:  # FIXME: Use errortype or remove arg
     """@error decorator"""
 
-    def errorhandler(f):
+    def errorhandler(f: callable) -> callable:
         @wraps(f)
-        def wrapper(*args, **kwargs):
+        def wrapper(*args, **kwargs) -> None:
 
             # TODO: add sensible errors
 

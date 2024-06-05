@@ -2,7 +2,12 @@
 """
 
 # pylint: skip-file
+from __future__ import annotations
+from typing import TYPE_CHECKING
 from Utils.logger import Logger
+
+if TYPE_CHECKING:
+    from Entities import Entity
 
 
 class AI:
@@ -10,7 +15,7 @@ class AI:
     Utility Class AI Decisions
     """
 
-    def calcbehaviour(_entity):
+    def calcbehaviour(_entity: Entity) -> int:
         """Function to calculate AI Behaviour
 
         Args:

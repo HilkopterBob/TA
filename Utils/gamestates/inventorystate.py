@@ -1,11 +1,16 @@
 """implementation of inventory
 """
 
+from __future__ import annotations
+from typing import TYPE_CHECKING
 import questionary
 from Utils import Logger
 
+if TYPE_CHECKING:
+    from Entities import Entity
 
-def inventorystate(Player):
+
+def inventorystate(Player: Entity) -> None:
     """implementation of inventory
 
     Args:

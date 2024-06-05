@@ -28,7 +28,7 @@ class AssetHandler:
     allItems = []
     Assetpacks = []
 
-    def getFiles(folder):
+    def getFiles(folder: str) -> list:
         """Gets all Json Files from a Folder
 
         Args:
@@ -60,7 +60,7 @@ class AssetHandler:
         Logger.log(f"Gathering {_folder_name} took: {importtime*1000}ms", dbglevel)
         return _file_list
 
-    def importLevels(_levels_folder):
+    def importLevels(_levels_folder: str) -> None:
         """Imports Levels from Assets
 
         Returns:
@@ -92,7 +92,7 @@ class AssetHandler:
         Logger.log(f"Importing Levels took: {importtime*1000}ms", dbglevel)
         return None
 
-    def importEntities(_entities_folder):
+    def importEntities(_entities_folder: str) -> None:
         """Imports Entities from Assets
 
         Returns:
@@ -125,7 +125,7 @@ class AssetHandler:
         Logger.log(f"Importing Entities took: {importtime*1000}ms", dbglevel)
         return None
 
-    def importItems(_items_folder):
+    def importItems(_items_folder: str) -> None:
         """Imports Items from Assets
 
         Returns:
@@ -157,7 +157,7 @@ class AssetHandler:
         Logger.log(f"Importing Items took: {importtime*1000}ms", dbglevel)
         return None
 
-    def importEffects(_effects_folder):
+    def importEffects(_effects_folder: str) -> None:
         """Imports Effects from Assets
 
         Returns:
@@ -192,9 +192,9 @@ class AssetHandler:
         return None
 
 
-def load_game():
+def load_game() -> None:
     """Function to init the whole Game"""
-    rootdir = "..\\TA\\Assets".replace("\\", os.sep)
+    rootdir = "..\\Textadventure\\TA\\Assets".replace("\\", os.sep)
     Assetpacks = []
 
     # the underscore representes dirs
@@ -263,8 +263,14 @@ class Assetpack:
     )
 
     def __init__(
-        self, name="", creator="", version=0, description="", root="", content=None
-    ):
+        self,
+        name: str = "",
+        creator: str = "",
+        version: int = 0,
+        description: str = "",
+        root: str = "",
+        content: dict = None,
+    ) -> None:
         if content is None:
             content = {}
 
@@ -285,13 +291,12 @@ class Assetpack:
 
         if not self.validate():
             Logger.log(f"Assetpack {self} could not be verified!", 2)
-            return
 
-    def __str__(self):
+    def __str__(self) -> str:
         return f"{self.name}"
 
     @Logger.time
-    def validate(self):
+    def validate(self) -> bool:
         """Checks File SHA256 Sum
         Returns:
             Bool: True if integrity is Verified, otherwise False

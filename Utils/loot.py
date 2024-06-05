@@ -1,14 +1,20 @@
 """Util for Dice Rolling
 """
 
+from __future__ import annotations
+from typing import TYPE_CHECKING
 import random
 import json
 from Utils import Logger
 from config import loottablepath, items_folder
 from Items import itemInit
 
+if TYPE_CHECKING:
+    from Effect import Effect
+    from Items import gitem
 
-def roll_loot(loottable=None, amount=1):
+
+def roll_loot(loottable: dict[str:int] = None, amount: int = 1) -> list[gitem] | int:
     """Function to return an Array of Loot from Loottable
 
     Args:
@@ -40,7 +46,7 @@ def roll_loot(loottable=None, amount=1):
     return _lootret
 
 
-def getLootTable(name):
+def getLootTable(name: str) -> dict[str:int]:
     """Returns Content of Loottable given by Name
 
     Args:
@@ -61,7 +67,7 @@ def getLootTable(name):
     return data
 
 
-def importAi(name):
+def importAi(name: str) -> dict[str:int]:
     """Returns Content of Loottable given by Name
 
     Args:

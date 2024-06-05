@@ -32,7 +32,7 @@ class Actionparser:
 
     gamestate = "loading"
 
-    def callfunction(attr=None):
+    def callfunction(attr: list = None) -> callable:
         """Calls an internal function by it's String Name
 
         Args:
@@ -49,16 +49,12 @@ class Actionparser:
         _call = getattr(Actionparser, attr[0])
         return _call(attr[1])
 
-    def close_game(attributes=None):
-        """Calls the close_game function with arguments
-
-        Args:
-            attributes (None, optional):
-        """
+    def close_game() -> None:
+        """Calls the close_game function with arguments"""
         Logger.log("Closing game")
         sys.exit()
 
-    def add_effect(attributes=None):
+    def add_effect(attributes: list = None) -> int:
         """Calls the add_effect Function with arguments
 
         Args:
@@ -83,7 +79,7 @@ class Actionparser:
         except:
             return 1
 
-    def take_effects(attributes=None):
+    def take_effects(attributes: list = None) -> int:
         """Calls the take_effects Function with arguments
 
         Args:
@@ -105,7 +101,7 @@ class Actionparser:
         except:
             return 1
 
-    def change_location(attributes=None):
+    def change_location(attributes: list = None) -> int:
         """Calls the change_location Function with arguments
 
         Args:
@@ -132,7 +128,7 @@ class Actionparser:
             Logger.log(f"ERR: {e}", 1)
             return 1
 
-    def set_name(attributes=None):
+    def set_name(attributes: list = None) -> int:
         """Calls the set_name Function with arguments
 
         Args:
@@ -153,7 +149,7 @@ class Actionparser:
         except:
             return 1
 
-    def change_health(attributes=None):
+    def change_health(attributes: list = None) -> int:
         """Calls the change_health Function with arguments
 
         Args:
@@ -175,7 +171,7 @@ class Actionparser:
         except:
             return 1
 
-    def add_item(attributes=None):
+    def add_item(attributes: list = None) -> int:
         """Calls the add_item Function with arguments
 
         Args:
@@ -197,7 +193,7 @@ class Actionparser:
         except:
             return 1
 
-    def remove_item_by_name(attributes=None):
+    def remove_item_by_name(attributes: list = None) -> int:
         """Calls the remove_item_by_name Function with arguments
 
         Args:
@@ -219,7 +215,7 @@ class Actionparser:
         except:
             return 1
 
-    def remove_item_by_index(attributes=None):
+    def remove_item_by_index(attributes: list = None) -> int:
         """Calls the remove_item_by_index Function with arguments
 
         Args:
@@ -242,7 +238,7 @@ class Actionparser:
         except:
             return 1
 
-    def show_effects(attributes=None):
+    def show_effects(attributes: list = None) -> int:
         """Calls the show_effects Function with arguments
 
         Args:
@@ -263,7 +259,7 @@ class Actionparser:
         except:
             return 1
 
-    def remove_effect_by_name(attributes=None):
+    def remove_effect_by_name(attributes: list = None) -> int:
         """Calls the remove_effect_by_name Function with arguments
 
         Args:
@@ -285,7 +281,7 @@ class Actionparser:
         except:
             return 1
 
-    def change_stat(attributes=None):
+    def change_stat(attributes: list = None) -> int:
         """Calls the change_stat Function with arguments
 
         Args:
@@ -307,7 +303,7 @@ class Actionparser:
         except:
             return 1
 
-    def take_damage(attributes=None):
+    def take_damage(attributes: list = None) -> dict[str:int]:
         """Calls the take_damage Function with arguments
 
         Args:
@@ -331,7 +327,7 @@ class Actionparser:
         except:
             return 1
 
-    def check_level_up(attributes=None):
+    def check_level_up(attributes: list = None) -> None:
         """Calls the check_level_up Function with arguments
 
         Args:
@@ -352,7 +348,7 @@ class Actionparser:
         except:
             return 1
 
-    def change_gamestate(attributes=None):
+    def change_gamestate(attributes: list = None) -> None:
         """Changes the Current Game State"""
 
         if attributes is None:
@@ -368,7 +364,7 @@ class Actionparser:
         except:
             return 1
 
-    def show_wip(*args):
+    def show_wip(*args) -> None:
         """shows wip message"""
         Pr.headline(
             "Work In Progress.\nCheck this feature in a later update.\n-the Devs ♥"

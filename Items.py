@@ -4,6 +4,7 @@ Entities Module which holds 2 Classes
     Entityinit()
 """
 
+from __future__ import annotations
 import json
 import random
 from Utils import Logger, tcolors
@@ -35,23 +36,23 @@ class gitem:
     )
 
     def __init__(
-        self,
-        name="placeholder",
-        itype="misc",
-        desc="",
-        ad=0,
-        ap=0,
-        hp=0,
-        ar=0,
-        mr=0,
-        rarity="common",
-        effects=None,
-        useable=False,
-        equipable=False,
-        slots=None,
-        blocking=None,
-        questitem=False,
-    ):
+        self: gitem,
+        name: str = "placeholder",
+        itype: str = "misc",
+        desc: str = "",
+        ad: int = 0,
+        ap: int = 0,
+        hp: int = 0,
+        ar: int = 0,
+        mr: int = 0,
+        rarity: str = "common",
+        effects=None,  # TODO: What are Effects
+        useable: bool = False,
+        equipable: bool = False,
+        slots: list = None,
+        blocking: list[str] = None,
+        questitem: bool = False,
+    ) -> None:
         if effects is None:
             effects = []
         if slots is None:
@@ -90,11 +91,11 @@ class gitem:
         self.questitem = questitem
         """If the Item as a Questrelatet Item as Boolean"""
 
-    def get(self, thing: str, *args):  # pylint: disable=W0613
+    def get(self: gitem, thing: str, *args) -> str:  # pylint: disable=W0613
         """compatibility function for questify"""
         return self.name
 
-    def getDamage(self):
+    def getDamage(self: gitem) -> dict[str:int]:
         """Return Damage Dict for Item in Format
         {
             "AD":ADDamage,
@@ -132,7 +133,7 @@ class gitem:
 
         return {"AD": ADdmg, "AP": APdmg}
 
-    def __str__(self):
+    def __str__(self: gitem) -> str:
         return f"{self.name}"
 
     # Commented out for readability in Logfile - need to find a workaround
@@ -140,7 +141,7 @@ class gitem:
     #    return f"[{self.__class__.__module__}.{self.__class__.__name__}('{self.name}','{self.itype}','{self.description}',{self.ad},{self.ap},{self.hp},{self.ar},{self.mr},'{self.rarity}',[{self.effects}],{self.useable},{self.equipable},[{self.slots}],{self.questitem}) at <{hex(id(self))}>]"  # pylint:disable=C0301
 
     @staticmethod
-    def from_json(json_dct, iname):
+    def from_json(json_dct: dict, iname: str) -> gitem:
         """Creates an Item from given JSON
 
         Args:
@@ -177,7 +178,7 @@ class itemInit:
 
     """
 
-    def load_all_items_from_json(json_file):
+    def load_all_items_from_json(json_file: str) -> list[gitem]:
         """
         Return alls Items from Json file
 
@@ -200,7 +201,7 @@ class itemInit:
                 curItems.append(gitem.from_json(data[iname], iname))
         return curItems
 
-    def load_item_by_name_from_json(json_file, name):
+    def load_item_by_name_from_json(json_file: str, name: str) -> gitem:
         """
         Return a single item Object from Json by given Name
 
