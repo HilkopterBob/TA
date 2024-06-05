@@ -528,7 +528,7 @@ class Entity:  # pylint: disable=R0904
         except:
             return False
 
-    def change_stat(self, effect: str, value: int | float) -> bool:
+    def change_stat(self, effect: str, value: int | float = 0) -> bool:
         """
         changes stat (effect.infl) by value
 
