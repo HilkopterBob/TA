@@ -68,14 +68,14 @@ class Logger:
                     return 0
         return 1
 
-    def time(func: function) -> function:
+    def time(func: callable) -> callable:
         """Timing Decorator Function
 
         Args:
-            func (function): Function which should be timed
+            func (callable): Function which should be timed
         """
 
-        def wrapper(*args, **kwargs) -> function:
+        def wrapper(*args, **kwargs) -> callable:
             start = time.time()
             val = func(*args, **kwargs)
             _time = time.time() - start

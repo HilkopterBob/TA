@@ -1,8 +1,9 @@
 """Defines Input Method for User - exact copy of Inputparser-Module
 """
 
-import re
 from __future__ import annotations
+
+import re
 from typing import TYPE_CHECKING
 from time import sleep
 
