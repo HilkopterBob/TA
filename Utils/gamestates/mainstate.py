@@ -38,7 +38,13 @@ def interact_with_level(player: Entity, level: Level, level_list: list[Level]) -
     Logger.log(f"Current Choices: {[vars(choice) for choice in availableChoices]}", -1)
 
     if printed:
-        action = int(Inp.inp(player)) - 1  # pylint: disable=E0601
+        while True:
+            action = int(Inp.inp(player)) - 1  # pylint: disable=E0601
+            if action <= len(availableChoices) - 1:
+                break
+            print(
+                f"Wrong Input! Input must be same or less than: {len(availableChoices)}"
+            )
         if action == 33:
             Logger.log("Break!")  # this is bs
             """
