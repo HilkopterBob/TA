@@ -334,7 +334,7 @@ class Assetpack:
                         choice = input()
                         if choice == "y":
                             ignore_errors = True
-                    if ignore_errors == False:
+                    if ignore_errors is False:
                         errors = True
                         Logger.log(
                             f"""wrong checksum for file {_file} : <{checksum}>
