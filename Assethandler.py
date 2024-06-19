@@ -13,6 +13,7 @@ from Entities import EntityInit
 from Effect import EffectInit
 from Items import itemInit
 from Utils import Logger
+from config import dbg
 
 
 class AssetHandler:
@@ -302,6 +303,7 @@ class Assetpack:
             Bool: True if integrity is Verified, otherwise False
         """
         errors = False
+        ignore_errors = False
 
         for ctype in self.content.keys():
             for _file in self.content[ctype].keys():
@@ -321,13 +323,24 @@ class Assetpack:
                         sha256sum.update(data_chunk)
                         data_chunk = f.read(1024)
                 checksum = sha256sum.hexdigest()
-                if self.content[ctype][_file] != checksum:
-                    errors = True
-                    Logger.log(
-                        f"""wrong checksum for file {_file} : <{checksum}>
-                        expected: <{self.content[ctype][_file]}>""",
-                        2,
-                    )
+                if self.content[ctype][_file] != checksum and ignore_errors is False:
+                    # add choice to ignore file checking
+                    if dbg:
+                        print(
+                            """One of your Game-Files has a wrong Hash. It may be broken!\n
+                        Do you want to ignore this and further File errors? (y/n)
+                        """
+                        )
+                        choice = input()
+                        if choice == "y":
+                            ignore_errors = True
+                    if ignore_errors == False:
+                        errors = True
+                        Logger.log(
+                            f"""wrong checksum for file {_file} : <{checksum}>
+                            expected: <{self.content[ctype][_file]}>""",
+                            2,
+                        )
                 else:
                     Logger.log(
                         f"Asset verified: {_file} : {checksum} = {self.content[ctype][_file]}",

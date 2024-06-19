@@ -29,7 +29,7 @@ def get_project_root() -> Path:
 
 ##################
 ##Debug Variable##
-dbg = True
+dbg = True  # if false: force file-checking
 dbg_level = (
     0  # 0 ERR only | #1 WARN + ERR | #2 INFO + WARN + ERR | #3 DBG + INFO + WARN + ERR
 )
