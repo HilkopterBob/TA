@@ -194,7 +194,7 @@ class AssetHandler:
 
 def load_game() -> None:
     """Function to init the whole Game"""
-    rootdir = "..\\Textadventure\\TA\\Assets".replace("\\", os.sep)
+    rootdir = "..\\TA\\Assets".replace("\\", os.sep)
     Assetpacks = []
 
     # the underscore representes dirs
