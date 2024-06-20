@@ -4,6 +4,7 @@ Actionparser Module which holds 1 Class
 """
 
 import sys
+import shelve
 from Effect import EffectInit
 from config import config
 from Level import Level
@@ -369,3 +370,21 @@ class Actionparser:
         Pr.headline(
             "Work In Progress.\nCheck this feature in a later update.\n-the Devs ♥"
         )
+
+    def load_game(attributes: list = None) -> None:
+        """loads previous state from shelved env.
+        populates globals().
+        """
+        if attributes is None:
+            attributes = []
+
+        try:
+            print(attributes[0])
+            my_shelf = shelve.open("shelve.out")
+            for key in my_shelf:
+                globals()[key] = my_shelf[key]
+            my_shelf.close()
+            return 33
+        except Exception as e:
+            Logger.log(f"ERR: {e}", 1)
+            return 1

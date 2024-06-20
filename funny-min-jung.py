@@ -4,6 +4,7 @@
 # project imports:
 from __future__ import annotations
 from pympler.asizeof import asizeof as getsize
+import shelve
 from Entities import Entity
 from Level import Level
 from Effect import Effect
@@ -80,6 +81,26 @@ def gameloop(player: Entity, level_list: list[Level] = None) -> None:
                 Logger.log(f"{player} Entering Combatstate")
                 combatstate(player, player.location.entitylist)  # pylint: disable=E0601
                 Actionparser.gamestate = "game"
+            case "save":
+                Logger.log(f"Gamestate is now {Actionparser.gamestate}")
+                Logger.log(f"{player} Entering Savestate")
+
+                import pprint
+
+                pprint.pprint(locals())
+                pprint.pprint(dir())
+                filename = "shelve.out"
+                my_shelf = shelve.open(filename, "n")
+                for key in dir():
+                    try:
+                        my_shelf[key] = globals()[key]
+                    except TypeError:
+                        #
+                        # __builtins__, my_shelf, and imported modules can not be shelved.
+                        #
+                        print("ERROR shelving: {0}".format(key))
+                exit()
+
             case _:
                 Pr.yellow(
                     f'Der Gamestate "{Actionparser.gamestate}" ist nicht bekannt.'

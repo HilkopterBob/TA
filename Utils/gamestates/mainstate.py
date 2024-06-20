@@ -40,6 +40,8 @@ def interact_with_level(player: Entity, level: Level, level_list: list[Level]) -
     if printed:
         while True:
             action = int(Inp.inp(player)) - 1  # pylint: disable=E0601
+            if action == 33:
+                return 33
             if action <= len(availableChoices) - 1:
                 break
             print(
